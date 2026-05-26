@@ -21,6 +21,27 @@ For each step:
 
 Each step is intended to leave the project in a working, deployable state. If a step starts feeling too large mid-implementation, split it — the goal is "small enough to plan in one sitting."
 
+## Progress
+
+Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done, `[~]` for partial (with a short note), `[ ]` for not started.
+
+- [x] Step 0 — Project scaffold
+- [x] Step 1 — Design tokens and global chrome
+- [ ] Step 1.5 — Best practices research & audit
+- [ ] Step 2 — Hub page "Johnny og jeg" (hardcoded)
+- [ ] Step 3 — Music player (Cash Radio) shell
+- [ ] Step 4 — Sanity schema (foundations)
+- [ ] Step 5 — Migrate hub page content to Sanity
+- [ ] Step 6 — Music player content from Sanity
+- [ ] Step 7 — Landscape page template
+- [ ] Step 8 — Remaining 7 landscape pages
+- [ ] Step 9 — Supporting pages
+- [ ] Step 10 — Accessibility & performance pass
+- [ ] Step 11 — SEO & metadata
+- [ ] Step 12 — Production launch
+
+Step 0 note: Vercel link + first deploy deferred to a follow-up session (acceptance criterion #4 of Step 0).
+
 ---
 
 ## Phase A — Visible prototype (front page)
@@ -64,6 +85,37 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 - All four fonts load without layout shift.
 - Nav highlights the current page.
 - Colors and typography visually match the design within ~5% tolerance.
+
+### Step 1.5 — Best practices research & audit
+
+**Outcome:** a written, project-specific best-practices reference distilled from current docs for our exact stack (Next.js 16 App Router + Sanity v3 embedded + Tailwind v4 + editorial/CMS-driven content). Subsequent steps follow it. No retroactive rewrite of Step 0–1 unless something is clearly broken.
+
+**Includes:**
+- Research current best practices for:
+  - **Next.js 16 App Router** — server vs. client components, async `params`/`searchParams`, `headers()`/`cookies()` rules, route handlers, `revalidateTag`/`revalidatePath`, streaming, partial prerendering, image optimization, font optimization.
+  - **Sanity v3 embedded Studio** — schema authoring patterns, GROQ query organization, draft mode + Presentation tool, live preview, `next-sanity` client conventions, `sanity typegen` workflow, CORS hardening, dataset visibility, webhook revalidation pattern, image pipeline + `next/image`.
+  - **Tailwind v4** — CSS-first `@theme`, when to reach for utilities vs. CSS Modules, dark-mode strategy (we have none planned but doc the choice), content/scanning config.
+  - **Editorial / CMS-driven sites** — Portable Text serializer patterns, content model granularity (singletons vs. references), URL design, slug strategy, draft/published separation, image alt-text enforcement.
+  - **Accessibility & performance baselines** — semantic landmarks, keyboard nav patterns for dropdowns, Lighthouse targets, LCP/CLS strategy with custom fonts.
+  - **SEO & metadata** — App Router `metadata` exports, dynamic OG image patterns, sitemap/robots.
+- Distill findings into **`BestPractices.md`** at the repo root. Keep it concrete and project-specific — checklists and rules, not encyclopedia entries. Each rule has a one-line "why" and (where useful) a reference link.
+- Update **`CLAUDE.md`** to reference `BestPractices.md` so future Claude sessions load these rules.
+- Add **a "Best practices applied" sub-section to each subsequent step's plan-mode session** — Step 2+ plans must explicitly check the practices that apply.
+- Add a **Decision log** entry in `Metaplan.md` summarising any choices that emerged (e.g. "draft mode via Sanity Presentation, not custom preview routes").
+
+**Out of scope:**
+- Refactoring code that's already shipped in Step 0 or Step 1 — only do that if something is provably wrong or unsafe. Otherwise the rules apply *forward*.
+
+**Reference files:**
+- Official docs (Next.js, Sanity, Tailwind, MDN) — fetch via WebFetch/WebSearch as needed.
+- The Sanity MCP server's `get_sanity_rules` / `search_docs` / `read_docs` tools (see `CLAUDE.md`).
+- `TechStack.md` for stack decisions already locked in.
+
+**Acceptance criteria:**
+- `BestPractices.md` exists and is concrete (not generic). At minimum it covers the six topics listed above with project-specific rules.
+- `CLAUDE.md` references it.
+- A short Decision log entry is added to `Metaplan.md` for any new architectural choices.
+- A skim of the doc by a fresh Claude session is enough to know "the way we build here" without re-deriving it.
 
 ### Step 2 — Hub page "Johnny og jeg" (hardcoded)
 

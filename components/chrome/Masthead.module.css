@@ -1,0 +1,78 @@
+.masthead {
+  padding: 28px 0 18px;
+  border-bottom: 3px double var(--ink);
+  position: relative;
+  z-index: 5;
+  background: var(--paper);
+}
+
+.mastGrid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.mastSide {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.mastSideRight {
+  text-align: right;
+}
+
+.mastSide b,
+.mastSideRight b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.wordmark {
+  text-align: center;
+  line-height: 0.9;
+}
+
+.nameLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--barn);
+  margin-bottom: 8px;
+}
+
+.name {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 52px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.sub {
+  margin-top: 6px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.sub::before,
+.sub::after {
+  content: "✶";
+  margin: 0 12px;
+  color: var(--brass);
+}

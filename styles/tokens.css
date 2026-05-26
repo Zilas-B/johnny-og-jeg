@@ -1,0 +1,73 @@
+/* ================================================================
+   tokens.css — global design variables + paper grain background
+   Lifted from claude-design-template/assets/cash-shared.css
+   ================================================================ */
+
+:root {
+  /* Paper / ink palette */
+  --paper:        #efe4cf;
+  --paper-2:      #e6d8bb;
+  --paper-3:      #d8c69e;
+  --ink:          #0e0d0c;
+  --ink-2:        #1a1714;
+  --ink-soft:     #2b2620;
+
+  /* Saturated accents */
+  --barn:         #a4282b;
+  --barn-deep:    #76181b;
+  --denim:        #2c3e58;
+  --denim-deep:   #1c2a3e;
+  --brass:        #c89b3c;
+  --brass-deep:   #8e6a1f;
+
+  /* Rules / dividers */
+  --rule:         rgba(14, 13, 12, 0.16);
+  --rule-strong:  rgba(14, 13, 12, 0.45);
+
+  /* Per-page accent — pages override these */
+  --accent:       var(--barn);
+  --accent-deep:  var(--barn-deep);
+
+  /* Font stacks — compose next/font CSS variables with fallbacks */
+  --f-display:    var(--font-playfair), "Hoefler Text", Georgia, serif;
+  --f-poster:     var(--font-bebas), "Oswald", "Impact", sans-serif;
+  --f-mono:       var(--font-plex-mono), "Courier New", monospace;
+  --f-body:       var(--font-crimson), "Georgia", serif;
+}
+
+/* Paper grain — speckled overlay across the viewport */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1.4px),
+    radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1.2px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1.5px 1.5px;
+}
+
+/* Vignette top + bottom */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0) 60%, rgba(20, 12, 4, 0.18) 100%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0) 60%, rgba(20, 12, 4, 0.22) 100%);
+}
+
+/* Generic horizontal container used throughout the template */
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 56px;
+  position: relative;
+  z-index: 2;
+}
