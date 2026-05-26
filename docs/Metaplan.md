@@ -29,7 +29,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 
 - [x] Step 0 — Project scaffold
 - [x] Step 1 — Design tokens and global chrome (hardcoded; migrated in Step 2)
-- [ ] Step 1.5 — Best practices research & audit
+- [x] Step 1.5 — Best practices research & audit
 - [ ] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
 - [ ] Step 3 — Hub page "Johnny og jeg" (Sanity-first)
 - [ ] Step 4 — Music player (Cash Radio) shell (Sanity-first)
@@ -131,6 +131,14 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 - Refactor `components/chrome/{Masthead,Nav,Footer}.tsx` to read from `siteSettings` via GROQ (server-side fetch in `app/(site)/layout.tsx`, pass as props).
 - Set up `sanity typegen` so types regenerate when schema changes; chrome components import the generated types.
 - Add a Sanity webhook → Next.js revalidation route for `siteSettings`.
+- **Best-practices retrofit** (gaps in Step 0 + 1 vs. `docs/best-practices.md`, audited 2026-05-26 — all minor, folded in here):
+  - Add skip-link as first focusable element in `app/(site)/layout.tsx`; verify/add `:focus-visible` styles in `tokens.css` (§10).
+  - Create a `/styleguide` route stub at `app/(site)/styleguide/page.tsx` rendering tokens + (once Sanity has them) accent swatches and editorial primitives (§4).
+  - Extend `sanity.cli.ts` with typegen config + `overloadClientMethods: true` (§2).
+  - Add `types`, `predev`, `prebuild` scripts to `package.json` (§2).
+  - Gate `<SanityLive />` to Draft Mode only; disable Stega in the base client; add `app/api/revalidate/route.ts` with webhook secret verification (§1).
+  - Confirm or remove `styled-components` from `package.json` (TechStack.md "no CSS-in-JS" rule — likely an unused `create-next-app` default).
+  - Extend `sanity/env.ts` to validate `SANITY_API_READ_TOKEN` and `SANITY_WEBHOOK_SECRET` (§9) when they're first used.
 
 **Reference files:** current `components/chrome/*` source (the literal text + `NAV_ITEMS` array become the singleton's initial values).
 

@@ -8,8 +8,9 @@ Danish editorial website about Johnny Cash, planned as a Next.js 15 + Sanity v3 
 
 ## Authoritative documents — read first
 
-- **`TechStack.md`** — Source of truth for stack decisions (Next.js 15 App Router, TypeScript, Tailwind v4 + CSS Modules, Sanity v3 Studio embedded at `/studio`, Vercel, pnpm), target folder layout, env vars, and explicit out-of-scope items. If any other doc conflicts with this one, this one wins until amended.
-- **`Metaplan.md`** — Implementation roadmap as Steps 0–12 across Phases A–F. Each numbered step is intentionally sized to be **one plan-mode session**.
+- **`docs/TechStack.md`** — Source of truth for stack decisions (Next.js 15 App Router, TypeScript, Tailwind v4 + CSS Modules, Sanity v3 Studio embedded at `/studio`, Vercel, pnpm), target folder layout, env vars, and explicit out-of-scope items. If any other doc conflicts with this one, this one wins until amended.
+- **`docs/Metaplan.md`** — Implementation roadmap as Steps 0–12 across Phases A–F. Each numbered step is intentionally sized to be **one plan-mode session**.
+- **`docs/best-practices.md`** — Stack-specific decisions for *how* we use Next.js + Sanity well: data-layer rules (pinned `next-sanity@^13`, tag-based revalidation, gated `<SanityLive>`), `defineQuery` + typegen, persistent music player without poisoning the tree with `'use client'`, design tokens + per-page accents + `/styleguide`, schema-for-editor patterns, one Portable Text component map, image pipeline with asset metadata, SEO from Sanity fields, env validation, and an a11y baseline. Numbered sections §1–§10.
 
 Do not propose building the whole site at once. Work through the Metaplan one step at a time.
 
@@ -22,6 +23,8 @@ This repo is built **step-by-step via repeated plan-mode sessions**. The expecte
 3. Approve the plan, exit plan mode, implement.
 4. Verify against the step's **Acceptance criteria** in `Metaplan.md`.
 5. Repeat with the next step.
+
+**In plan mode, Claude must read `docs/best-practices.md` in full before producing any plan**, and the plan must explicitly reference which numbered sections (§1–§10) apply to the step and how. Any deviation from a rule there must be called out in the plan with a reason — silent deviation is not allowed.
 
 Steps should leave the repo in a working, deployable state. If a step starts feeling too large mid-implementation, stop and split it.
 
