@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Johnny Cash — Manden i sort</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/cash-shared.css" />
+
+<style>
+  :root {
+    --accent: var(--ink);
+    --accent-deep: var(--ink-2);
+  }
+
+  /* ============== HERO — the portrait ============== */
+  .portrait-hero {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    border-bottom: 4px solid var(--barn);
+  }
+  .portrait-hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    opacity: 0.45;
+    background-image:
+      radial-gradient(ellipse at 30% 50%, rgba(164,40,43,0.35) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(ellipse at 100% 100%, rgba(200,155,60,0.18) 0%, rgba(0,0,0,0) 60%);
+  }
+  .portrait-hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02) 0,
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 3px);
+    opacity: 0.7;
+  }
+
+  .portrait-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 88px 0 96px;
+  }
+  .portrait-grid .left { position: relative; }
+  .portrait-grid .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 26px;
+    display: inline-flex; align-items: center; gap: 14px;
+  }
+  .portrait-grid .eyebrow .bar {
+    width: 48px; height: 2px; background: var(--brass);
+  }
+  .portrait-grid h1 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 132px;
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    margin: 0 0 10px;
+    color: var(--paper);
+  }
+  .portrait-grid h1 .sm {
+    display: block;
+    font-style: normal;
+    font-family: var(--f-poster);
+    font-size: 24px;
+    letter-spacing: 0.32em;
+    color: var(--barn);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+  .portrait-grid .dates {
+    display: flex; gap: 22px; align-items: baseline;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(239,228,207,0.75);
+    margin: 18px 0 26px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(239,228,207,0.18);
+    border-bottom: 1px solid rgba(239,228,207,0.18);
+  }
+  .portrait-grid .dates b {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0;
+    color: var(--paper);
+  }
+  .portrait-grid .dates .star { color: var(--barn); }
+  .portrait-grid .lede {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: rgba(239,228,207,0.88);
+    max-width: 540px;
+    text-wrap: pretty;
+  }
+  .portrait-grid .lede .drop {
+    float: left;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 84px;
+    line-height: 0.85;
+    padding: 6px 14px 0 0;
+    color: var(--barn);
+  }
+
+  /* The portrait card (placeholder for a real photograph) */
+  .portrait-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    max-width: 440px;
+    margin: 0 auto;
+    background: var(--paper-2);
+    border: 1px solid var(--paper);
+    box-shadow: 14px 16px 0 rgba(0,0,0,0.4);
+    transform: rotate(-1.5deg);
+    padding: 18px 18px 84px;
+  }
+  .portrait-card::before {
+    content: "";
+    position: absolute; inset: 18px 18px 84px;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(14,13,12,0.08) 0,
+        rgba(14,13,12,0.08) 1px,
+        transparent 1px,
+        transparent 8px),
+      linear-gradient(180deg, #2a2520 0%, #1a1714 100%);
+  }
+  .portrait-card::after {
+    content: "[ portræt · drop in dit foto ]";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: rgba(239,228,207,0.42);
+    text-transform: uppercase;
+  }
+  .portrait-card .cap {
+    position: absolute;
+    left: 18px; right: 18px; bottom: 18px;
+    height: 50px;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .portrait-card .cap .sub {
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    font-weight: 400;
+  }
+
+  .portrait-card .tape {
+    position: absolute;
+    top: -14px; right: 40px;
+    width: 90px; height: 22px;
+    background: rgba(232, 219, 188, 0.78);
+    transform: rotate(7deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  }
+  .portrait-card .tape.left { right: auto; left: 32px; top: -10px; transform: rotate(-9deg); }
+
+  .portrait-card .stamp-corner {
+    position: absolute;
+    bottom: -22px; right: -22px;
+    width: 92px; height: 92px;
+    border: 2px solid var(--barn);
+    border-radius: 50%;
+    background: rgba(239,228,207,0.92);
+    color: var(--barn);
+    display: grid; place-items: center;
+    text-align: center;
+    font-family: var(--f-mono);
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    transform: rotate(12deg);
+  }
+  .portrait-card .stamp-corner b {
+    display: block;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0;
+    margin: 2px 0;
+  }
+
+  /* ============== KEY FACTS BAR ============== */
+  .keyfacts {
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--rule);
+    padding: 30px 0;
+  }
+  .keyfacts-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+  .keyfacts-cell {
+    padding: 0 22px;
+    border-right: 1px dashed var(--rule-strong);
+    text-align: center;
+  }
+  .keyfacts-cell:last-child { border-right: none; }
+  .keyfacts-cell .num {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .keyfacts-cell .num .sm {
+    font-size: 18px;
+    color: var(--barn);
+    margin-left: 4px;
+  }
+  .keyfacts-cell .lbl {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ============== ESSAY / BROADSHEET ============== */
+  .broadsheet {
+    padding: 80px 0;
+  }
+  .broadsheet h2.kicker-h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 1;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .broadsheet .kicker-mono {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .broadsheet .deck {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 36px;
+    text-wrap: pretty;
+  }
+  .columns {
+    column-count: 2;
+    column-gap: 48px;
+    column-rule: 1px solid var(--rule);
+  }
+  .columns p {
+    margin: 0 0 14px;
+    font-family: var(--f-body);
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .columns p:first-child::first-letter {
+    float: left;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+    color: var(--barn);
+  }
+  .columns p a { color: var(--barn-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .columns p a:hover { color: var(--barn); }
+  .columns .small-head {
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin: 18px 0 6px;
+  }
+
+  /* ============== THREE SIDES — index cards ============== */
+  .three-sides {
+    padding: 60px 0 96px;
+    background: var(--paper-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .three-sides .heading {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .three-sides .heading .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .three-sides .heading h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 58px;
+    line-height: 1;
+    margin: 0;
+    color: var(--ink);
+  }
+  .three-sides .heading .deck {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 14px auto 0;
+  }
+
+  .sides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .side {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 9px 11px 0 rgba(14,13,12,0.18);
+    padding: 32px 30px 30px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex; flex-direction: column;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    position: relative;
+    --c: var(--barn);
+  }
+  .side.musikeren { --c: #a4282b; }
+  .side.kristen    { --c: #2c3e58; }
+  .side.amerika    { --c: #c89b3c; }
+  .side:hover {
+    transform: translate(-3px, -4px);
+    box-shadow: 12px 14px 0 rgba(14,13,12,0.22);
+  }
+  .side .num {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 92px;
+    line-height: 0.85;
+    color: var(--c);
+    margin-bottom: 4px;
+  }
+  .side .side-tag {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .side h3 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1;
+    margin: 0 0 12px;
+  }
+  .side p {
+    font-family: var(--f-body);
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    flex: 1;
+  }
+  .side .anchor {
+    margin-top: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .side .anchor .ar { color: var(--c); }
+  .side .keyword {
+    margin-top: 14px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .side .keyword span {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 0 4px 4px 0;
+    border: 1px solid var(--rule-strong);
+  }
+
+  /* ============== LIFE LINE ============== */
+  .lifeline {
+    padding: 80px 0;
+    background: var(--paper);
+  }
+  .lifeline h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 1;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .lifeline .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .lifeline .deck {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 44px;
+  }
+
+  .ll-rail {
+    position: relative;
+    padding: 16px 0 8px;
+  }
+  .ll-rail::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 60px;
+    height: 1px; background: var(--ink);
+  }
+  .ll-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .ll-cell {
+    padding: 0 14px;
+    text-align: left;
+    border-right: 1px dashed var(--rule);
+  }
+  .ll-cell:last-child { border-right: none; }
+  .ll-cell .yr {
+    font-family: var(--f-poster);
+    font-size: 34px;
+    color: var(--barn);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .ll-cell .dot {
+    width: 12px; height: 12px;
+    background: var(--ink);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--ink);
+    border-radius: 50%;
+    margin: 6px 0 18px;
+    transform: translateX(-1px);
+  }
+  .ll-cell h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    color: var(--ink);
+    min-height: 46px;
+  }
+  .ll-cell p {
+    font-family: var(--f-body);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ============== PULL QUOTE ============== */
+  .hymn-quote {
+    padding: 90px 0;
+    background: var(--ink);
+    color: var(--paper);
+    border-top: 4px solid var(--barn);
+    border-bottom: 4px solid var(--barn);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hymn-quote::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(164,40,43,0.10) 0,
+      rgba(164,40,43,0.10) 12px,
+      transparent 12px,
+      transparent 24px);
+  }
+  .hymn-quote .wrap { position: relative; z-index: 2; }
+  .hymn-quote .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hymn-quote blockquote {
+    margin: 0 auto;
+    max-width: 940px;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.2;
+    color: var(--paper);
+    text-wrap: balance;
+  }
+  .hymn-quote blockquote .o,
+  .hymn-quote blockquote .c {
+    color: var(--barn);
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 0;
+    vertical-align: -22px;
+  }
+  .hymn-quote .attrib {
+    margin-top: 28px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(239,228,207,0.6);
+  }
+  .hymn-quote .attrib .star { color: var(--barn); margin: 0 10px; }
+
+  /* ============== DEEPER — external reading row ============== */
+  .deeper {
+    padding: 60px 0 80px;
+    background: var(--paper);
+  }
+  .deeper h3 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .deeper .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .deeper .deck {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 30px;
+  }
+  .deeper-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .deep-card {
+    background: var(--paper-2);
+    border: 1px solid var(--ink);
+    padding: 18px 18px 16px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex; flex-direction: column;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+    box-shadow: 4px 5px 0 rgba(14,13,12,0.16);
+  }
+  .deep-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 7px 0 rgba(14,13,12,0.22);
+  }
+  .deep-card .src {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .deep-card h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .deep-card p {
+    font-family: var(--f-body);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    flex: 1;
+  }
+  .deep-card .arrow {
+    font-family: var(--f-poster);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="topstrip">
+  <div class="wrap topstrip-inner">
+    <div>Etb. <b>2024</b><span class="dot"></span>Aarhus &nbsp;·&nbsp; København</div>
+    <div>En personlig hyldest til <b>Cash, troen og Amerika</b></div>
+    <div>“The Man in Black” <span class="dot"></span> 1932 — 2003</div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <div class="mast-side">
+        Vol. II &nbsp;·&nbsp; Nr. 15<br>
+        Forår <b>MMXXVI</b>
+      </div>
+      <div class="wordmark">
+        <div class="kicker">— Portræt —</div>
+        <a class="name-link" href="Johnny og jeg.html"><div class="name">Johnny &amp; jeg</div></a>
+        <div class="sub">Musikken · Troen · Amerika</div>
+      </div>
+      <div class="mast-side right">
+        Aarhus, Danmark<br>
+        <b>Anno MMXXVI</b>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="primary">
+  <div class="wrap">
+    <div class="nav-row">
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html">Hjem</a></div>
+      <div class="nav-item">
+        <a class="nav-link active" href="Johnny Cash.html">Johnny Cash <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="Johnny Cash.html"><span class="num">○</span>Portræt</a>
+          <a href="Musikeren.html"><span class="num">I</span>Musikeren</a>
+          <a href="Cash og Jesus.html"><span class="num">II</span>Cash og Jesus</a>
+          <a href="Cash og Amerika.html"><span class="num">III</span>Cash og Amerika</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="Historien.html">USA <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="Historien.html"><span class="num">A</span>Historien</a>
+          <a href="Kulturen.html"><span class="num">B</span>Kulturen</a>
+        </div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="Bøger, spil, film.html">Bøger, spil, film</a></div>
+      <div class="nav-item"><a class="nav-link" href="Foredrag.html">Foredrag</a></div>
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html#kontakt">Kontakt</a></div>
+      <div class="nav-cta"><a href="Foredrag.html">Bestil foredrag →</a></div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO PORTRAIT -->
+<section class="portrait-hero">
+  <div class="wrap">
+    <div class="portrait-grid">
+      <div class="left">
+        <div class="eyebrow"><span class="bar"></span> Portræt &nbsp;·&nbsp; Manden i sort</div>
+        <h1><span class="sm">JOHN R.</span>Johnny<br>Cash.</h1>
+        <div class="dates">
+          <div><b>26. feb. 1932</b><br>Kingsland, Arkansas</div>
+          <span class="star">✶</span>
+          <div><b>12. sep. 2003</b><br>Nashville, Tennessee</div>
+        </div>
+        <p class="lede">
+          <span class="drop">H</span>an blev født på en bomuldsmark, opdraget af en mor der sang salmer ved arbejdet, og en far der ikke vidste, han havde fået en sanger. Han endte som en af det tyvende århundredes største amerikanske stemmer — ikke fordi han sang smukt, men fordi han sang sandt.
+        </p>
+      </div>
+      <div class="right">
+        <figure class="portrait-card">
+          <span class="tape left"></span>
+          <span class="tape"></span>
+          <figcaption class="cap">
+            <span class="sub">Foto · ca. 1969</span>
+            J.R. Cash &nbsp;·&nbsp; Folsom State Prison
+          </figcaption>
+          <div class="stamp-corner">
+            Sign.<b>JR Cash</b>1932<br>—2003
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FACTS -->
+<section class="keyfacts">
+  <div class="wrap">
+    <div class="keyfacts-grid">
+      <div class="keyfacts-cell">
+        <div class="num">96<span class="sm">M</span></div>
+        <div class="lbl">Solgte plader</div>
+      </div>
+      <div class="keyfacts-cell">
+        <div class="num">5<span class="sm">×</span></div>
+        <div class="lbl">Hall of Fame *</div>
+      </div>
+      <div class="keyfacts-cell">
+        <div class="num">13</div>
+        <div class="lbl">Grammy Awards</div>
+      </div>
+      <div class="keyfacts-cell">
+        <div class="num">48</div>
+        <div class="lbl">År som musiker</div>
+      </div>
+      <div class="keyfacts-cell">
+        <div class="num">35</div>
+        <div class="lbl">År med June Carter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BROADSHEET ESSAY -->
+<section class="broadsheet">
+  <div class="wrap">
+    <div class="kicker-mono">— Forord · Side et —</div>
+    <h2 class="kicker-h2">Et liv i sort.</h2>
+    <p class="deck">
+      Han kaldte sig selv “Manden i sort”, men sandheden er, at han bar mange dragter. Synder, hellig, fange, præst. Sangskriver, opmuntringsbrev, salmebog. Han var hele Amerika i én rygsøjle — og han nægtede at vælge mellem dets dyder og dets dæmoner.
+    </p>
+
+    <div class="columns">
+      <p>
+        J. R. Cash — bogstaverne stod ikke for noget; hans forældre kunne ikke blive enige om et navn — blev født ind i den store depression. Familien arbejdede sig gennem 1930’erne på en bomuldsmark i Dyess, en <a href="https://en.wikipedia.org/wiki/Dyess,_Arkansas" target="_blank" rel="noopener">koloni Roosevelt byggede til fattige hvide</a> efter Wall Street-krakket. Han plukkede sin første bomuld som femårig. Han hørte sin første radio som syvårig. Den ene erfaring formede hans hænder. Den anden formede hans sjæl.
+      </p>
+      <p>
+        I 1944, da han var tolv, døde hans storebror Jack i en savsmølle. Det var ulykken, der bandt ham til Jesus for resten af hans liv — for det var Jack, der havde villet være præst, og det var Jack, der havde fortalt John, at han hørte engle synge på sin sidste dag. Cash skrev senere, at han aldrig blev fri af denne dag, og at den var grunden til, at hans stemme altid bar en sorg, selv når han sang i dur.
+        <span class="small-head">— En sanger fra Air Force —</span>
+      </p>
+      <p>
+        Han meldte sig til flyvevåbnet i 1950 og tilbragte fire år i Tyskland, hvor han som radiotelegrafist aflyttede sovjetiske beskeder — og hvor han, mellem skift, skrev sine første sange. <em>Folsom Prison Blues</em>, en af de mest amerikanske sange nogensinde, blev til på et tysk natbord. Det er ikke en lille pointe: Cashs Amerika blev født i eksil.
+      </p>
+      <p>
+        Da han kom hjem til Memphis i 1954, gik han ind hos <a href="https://en.wikipedia.org/wiki/Sun_Records" target="_blank" rel="noopener">Sam Phillips på Sun Records</a> og spurgte, om han måtte synge gospel. Phillips, som lige havde sluppet Elvis ind ad samme dør, sagde nej til gospel — men ja til Cash. Et år senere udgav han sine første singler. To år senere var <em>I Walk the Line</em> nummer ét.
+        <span class="small-head">— Faldet og opstandelsen —</span>
+      </p>
+      <p>
+        I 1960’erne ramte amfetaminerne ham hårdt. Han slog kone, hjem og turnéplaner i stykker. En aften i Nickajack Cave, sønden for Chattanooga, lagde han sig ned i mørket for at dø. Han stod op igen — og han fortalte historien som en omvendelse: Gud havde mødt ham i hulen, og han var krøbet ud i lyset. June Carter, hans senere kone, hjalp ham resten af vejen ud. Hun spillede tæt på ham i årevis, indtil han ikke længere kunne være alene.
+      </p>
+      <p>
+        I januar 1968 stod han på en scene i <a href="https://en.wikipedia.org/wiki/Folsom_State_Prison" target="_blank" rel="noopener">Folsom State Prison</a> i Californien. Albummet, der kom ud af koncerten, gjorde ham om fra en faldet sanger til en folkehelt. I bag-koblingen hørte man fanger juble. I forgrunden stod en mand, der havde besluttet, hvor hans loyaliteter lå: hos den faldne. Han havde aldrig selv siddet i fængsel mere end en nat ad gangen. Men han forstod opbruddet.
+        <span class="small-head">— Den sidste optagelse —</span>
+      </p>
+      <p>
+        I 1990’erne var han glemt af radioen. Men en ung rap-producer ved navn <a href="https://en.wikipedia.org/wiki/Rick_Rubin" target="_blank" rel="noopener">Rick Rubin</a> ringede ham op og bad ham komme til Californien og synge alene med en guitar. Det blev til <em>American Recordings</em> — fire albummer af kunstnerisk genfødsel. Den sidste, <em>The Man Comes Around</em>, indeholdt hans version af <em>Hurt</em>: en sang om at miste alt, sunget af en mand der havde mistet det meste. Musikvideoen vandt en MTV-pris uger før hans død.
+      </p>
+      <p>
+        Han mistede June den 15. maj 2003. Han fulgte efter hende fire måneder senere. Han var 71. Hans efterladenskab er ikke kun de 96 millioner plader; det er en stemme, der gjorde det muligt at være troende og knust på samme tid — og som mindede et splittet land om, at det havde været splittet før, og overlevet.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- THREE SIDES -->
+<section class="three-sides" id="sider">
+  <div class="wrap">
+    <div class="heading">
+      <div class="kicker">— Tre dybere spor —</div>
+      <h2>Manden i tre vinkler.</h2>
+      <p class="deck">
+        Hvert spor følger ét tema gennem hans liv. Hver side bærer sin egen lydside — læg pladen på derunder, og læs videre.
+      </p>
+    </div>
+
+    <div class="sides-grid">
+      <a class="side musikeren" href="Musikeren.html">
+        <div class="num">I</div>
+        <div class="side-tag">Side A &nbsp;·&nbsp; Lyden</div>
+        <h3>Musikeren</h3>
+        <p>
+          Boom-chicka-boom. Den rytme der løb fra en defekt bas igennem fyrre års sange. Fra Sun Records til American Recordings — sangskriveren, der opfandt et lydlandskab og tog det med fra Memphis til Nickajack.
+        </p>
+        <div class="keyword">
+          <span>Sun Records</span><span>Folsom</span><span>San Quentin</span><span>Highwaymen</span><span>Rick Rubin</span>
+        </div>
+        <div class="anchor">Læg pladen på <span class="ar">→</span></div>
+      </a>
+
+      <a class="side kristen" href="Cash og Jesus.html">
+        <div class="num">II</div>
+        <div class="side-tag">Side B &nbsp;·&nbsp; Troen</div>
+        <h3>Cash og Jesus</h3>
+        <p>
+          Han faldt og rejste sig — og faldt igen. Salmer fra Dyess Baptist, hulen ved Nickajack, hans egen Jesus-film, og en sidste linje fra Trent Reznor. En tro, der aldrig var pyntet.
+        </p>
+        <div class="keyword">
+          <span>Dyess Baptist</span><span>Nickajack Cave</span><span>Gospel Road</span><span>Personal Jesus</span><span>Salmer</span>
+        </div>
+        <div class="anchor">Læs om troen <span class="ar">→</span></div>
+      </a>
+
+      <a class="side amerika" href="Cash og Amerika.html">
+        <div class="num">III</div>
+        <div class="side-tag">Side C &nbsp;·&nbsp; Nationen</div>
+        <h3>Cash og Amerika</h3>
+        <p>
+          Han syntes om landet nok til at synge om dets fanger, dets indianere, og dets soldater — uden at gøre sig fin. Republikken set fra en cellevindue, en kirkebænk og et togvindue.
+        </p>
+        <div class="keyword">
+          <span>Ira Hayes</span><span>Nixon</span><span>Ragged Flag</span><span>Vietnam</span><span>Native Rights</span>
+        </div>
+        <div class="anchor">Læs om Amerika <span class="ar">→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LIFELINE -->
+<section class="lifeline">
+  <div class="wrap">
+    <div class="kicker">— Et liv i tolv punkter —</div>
+    <h2>Linjen, han gik.</h2>
+    <p class="deck">Tolv fixpunkter, der trækker en linje fra en bomuldsmark i Arkansas til en kiste i Tennessee. Tag dem som spor på et album: lyt i rækkefølge.</p>
+
+    <div class="ll-rail">
+      <div class="ll-row">
+        <div class="ll-cell">
+          <div class="yr">1932</div>
+          <div class="dot"></div>
+          <h4>J. R. Cash fødes</h4>
+          <p>Kingsland, Arkansas. Den fjerde af syv. Familien er hjemløs efter Wall Street.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1935</div>
+          <div class="dot"></div>
+          <h4>Familien til Dyess</h4>
+          <p>Roosevelt giver dem fyrre acres og et hus. Cash plukker bomuld som femårig.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1944</div>
+          <div class="dot"></div>
+          <h4>Broren Jack dør</h4>
+          <p>Han bliver dræbt i en savsmølle. Cash mener resten af livet, at han hørte engle.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1950</div>
+          <div class="dot"></div>
+          <h4>Air Force, Tyskland</h4>
+          <p>Aflytter sovjetiske beskeder. Skriver <em>Folsom Prison Blues</em> på et natbord.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1955</div>
+          <div class="dot"></div>
+          <h4>Sun Records, Memphis</h4>
+          <p>Første singler udgives. Samme uge som Rosa Parks i Montgomery.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1956</div>
+          <div class="dot"></div>
+          <h4>“I Walk the Line”</h4>
+          <p>Et nummer ét-hit, et løfte til hans første kone. Et løfte han ikke holdt.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ll-rail" style="margin-top: 12px;">
+      <div class="ll-row">
+        <div class="ll-cell">
+          <div class="yr">1965</div>
+          <div class="dot"></div>
+          <h4>Pillemisbrug topper</h4>
+          <p>Arresteret i El Paso for amfetamin. Skilsmisse. Ind i hulen ved Nickajack.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1968</div>
+          <div class="dot"></div>
+          <h4>Folsom Prison</h4>
+          <p>Live-albummet redder hans karriere. Han gifter sig med June otte dage senere.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1970</div>
+          <div class="dot"></div>
+          <h4>Nixon, Det Hvide Hus</h4>
+          <p>Synger “What Is Truth” mod Vietnam — fra Det Hvide Hus’ podium.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1973</div>
+          <div class="dot"></div>
+          <h4>Gospel Road</h4>
+          <p>Hans Jesus-film, optaget i Israel sammen med June. En aktivisthandling.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">1994</div>
+          <div class="dot"></div>
+          <h4>American Recordings</h4>
+          <p>Rick Rubin tager ham med tilbage til guitar og stemme. En genfødsel.</p>
+        </div>
+        <div class="ll-cell">
+          <div class="yr">2003</div>
+          <div class="dot"></div>
+          <h4>“Hurt” — et farvel</h4>
+          <p>June dør i maj. Cash i september. To kister, fire måneder.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HYMN QUOTE -->
+<section class="hymn-quote">
+  <div class="wrap">
+    <div class="kicker">— Hans egne ord —</div>
+    <blockquote>
+      <span class="o">“</span>
+      Jeg bærer det sorte for de fattige og forslåede, for fangen i hans celle og soldaten, der aldrig kom hjem.
+      <span class="c">”</span>
+    </blockquote>
+    <div class="attrib">
+      Johnny Cash <span class="star">✶</span> “Man in Black” <span class="star">✶</span> 1971
+    </div>
+  </div>
+</section>
+
+<!-- DEEPER READING -->
+<section class="deeper">
+  <div class="wrap">
+    <div class="kicker">— Læs videre online —</div>
+    <h3>Tag stemmen med.</h3>
+    <p class="deck">Pladen kører nederst. Her er nogle steder du kan gå hen, mens den spiller — kilder og rabbit holes der har formet det her arkiv.</p>
+
+    <div class="deeper-grid">
+      <a class="deep-card" href="https://en.wikipedia.org/wiki/Johnny_Cash" target="_blank" rel="noopener">
+        <div class="src">Wikipedia</div>
+        <h4>Biografien, fra A til Å</h4>
+        <p>Den lange udgave. Tidslinjer, diskografi, citater, kilder.</p>
+        <span class="arrow">Læs →</span>
+      </a>
+      <a class="deep-card" href="https://www.johnnycash.com/" target="_blank" rel="noopener">
+        <div class="src">Officielt arkiv</div>
+        <h4>JohnnyCash.com</h4>
+        <p>Familiens officielle side. Sange, billeder og arkivet.</p>
+        <span class="arrow">Besøg →</span>
+      </a>
+      <a class="deep-card" href="https://www.npr.org/series/15709335/johnny-cash" target="_blank" rel="noopener">
+        <div class="src">NPR</div>
+        <h4>Radio-essays om Cash</h4>
+        <p>Lange amerikanske portrætter, lydoptagelser fra studiet, samtaler med June.</p>
+        <span class="arrow">Lyt →</span>
+      </a>
+      <a class="deep-card" href="https://www.youtube.com/results?search_query=johnny+cash+full+album" target="_blank" rel="noopener">
+        <div class="src">YouTube</div>
+        <h4>Hele albummer</h4>
+        <p>Folsom Prison, San Quentin, American IV — hele plader, ende til ende.</p>
+        <span class="arrow">Se og hør →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="colophon">
+  <div class="wrap">
+    <div class="colophon-grid">
+      <div>
+        <div class="mark">Johnny <span class="amp">&amp;</span> jeg</div>
+        <p class="blurb">En personlig hyldest til Johnny Cash, til kristendommen i hans liv, og til det Amerika, der formede ham. Drevet af én lytter i Aarhus.</p>
+        <p class="blurb" style="font-style:italic;color:rgba(239,228,207,0.5)">“I wear the black for the poor and the beaten down, livin’ in the hopeless, hungry side of town.” — JR Cash</p>
+      </div>
+      <div>
+        <h5>Johnny Cash</h5>
+        <ul>
+          <li><a href="Johnny Cash.html">Portræt</a></li>
+          <li><a href="Musikeren.html">Musikeren</a></li>
+          <li><a href="Cash og Jesus.html">Cash og Jesus</a></li>
+          <li><a href="Cash og Amerika.html">Cash og Amerika</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>USA</h5>
+        <ul>
+          <li><a href="Historien.html">Historien</a></li>
+          <li><a href="Kulturen.html">Kulturen</a></li>
+          <li><a href="Bøger, spil, film.html">Bøger, spil, film</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sidens hjørne</h5>
+        <ul>
+          <li><a href="Foredrag.html">Foredrag</a></li>
+          <li><a href="#">Om siden</a></li>
+          <li><a href="Johnny og jeg.html#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colo-bottom">
+      <div>© MMXXVI · Johnny &amp; jeg <span class="star">✶</span> Aarhus · Danmark</div>
+      <div>Et privat, ikke-kommercielt arkiv <span class="star">✶</span> Set fra denne side af Atlanten</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============== CASH RADIO ============== -->
+<div class="cash-radio" id="cash-radio">
+  <div class="progress"><div class="bar"></div></div>
+  <button class="radio-tab" aria-label="Toggle player">
+    <span class="live"></span> Cash Radio &nbsp;·&nbsp; Greatest Hits <span class="chev">▾</span>
+  </button>
+  <div class="radio-rail">
+    <div class="vinyl-mini"></div>
+    <div class="nowplay">
+      <div class="station">— Side A · The Greatest Hits —</div>
+      <div class="title">—</div>
+      <div class="meta"></div>
+    </div>
+    <div class="tracks"></div>
+    <div class="controls">
+      <button class="ctl-btn prev skip" aria-label="Forrige">⏮</button>
+      <button class="ctl-btn play" aria-label="Afspil">▶</button>
+      <button class="ctl-btn next skip" aria-label="Næste">⏭</button>
+      <div class="listen-on">
+        <a class="yt" target="_blank" rel="noopener" title="Lyt på YouTube">YT</a>
+        <a class="sp" target="_blank" rel="noopener" title="Lyt på Spotify">SP</a>
+        <a class="wk" target="_blank" rel="noopener" title="Læs på Wikipedia">WK</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.CASH_PLAYLIST = [
+    { n: "A1", title: "Folsom Prison Blues", year: "1968", album: "At Folsom Prison" },
+    { n: "A2", title: "I Walk the Line",     year: "1956", album: "Sun Records" },
+    { n: "A3", title: "Ring of Fire",        year: "1963", album: "Ring of Fire" },
+    { n: "A4", title: "Man in Black",        year: "1971", album: "Man in Black" },
+    { n: "A5", title: "Hurt",                year: "2002", album: "American IV" }
+  ];
+</script>
+<script src="assets/cash-radio.js"></script>
+
+</body>
+</html>

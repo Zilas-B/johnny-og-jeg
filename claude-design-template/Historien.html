@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Historien — USA · Johnny og jeg</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:        #efe4cf;
+    --paper-2:      #e6d8bb;
+    --paper-3:      #d8c69e;
+    --ink:          #0e0d0c;
+    --ink-2:        #1a1714;
+    --ink-soft:     #2b2620;
+    --barn:         #a4282b;
+    --barn-deep:    #76181b;
+    --denim:        #2c3e58;
+    --denim-deep:   #1c2a3e;
+    --brass:        #c89b3c;
+    --brass-deep:   #8e6a1f;
+    --rule:         rgba(14, 13, 12, 0.16);
+    --rule-strong:  rgba(14, 13, 12, 0.45);
+
+    --f-display: "Playfair Display", "Hoefler Text", Georgia, serif;
+    --f-poster:  "Bebas Neue", "Oswald", "Impact", sans-serif;
+    --f-mono:    "IBM Plex Mono", "Courier New", monospace;
+    --f-body:    "Crimson Pro", "Georgia", serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.55; mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1.4px),
+      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1.2px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1.5px 1.5px;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0) 60%, rgba(20,12,4,0.18) 100%),
+      radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0) 60%, rgba(20,12,4,0.22) 100%);
+  }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 56px; position: relative; z-index: 2; }
+  a { color: var(--barn-deep); }
+
+  /* ============== TOP STRIP ============== */
+  .topstrip {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-soft);
+    position: relative; z-index: 5;
+  }
+  .topstrip-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+  }
+  .topstrip .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--barn); margin: 0 10px; vertical-align: middle;
+  }
+
+  /* ============== MASTHEAD ============== */
+  .masthead {
+    padding: 28px 0 18px;
+    border-bottom: 3px double var(--ink);
+    position: relative; z-index: 5;
+    background: var(--paper);
+  }
+  .mast-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+  .mast-side {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .mast-side.right { text-align: right; }
+  .mast-side b { color: var(--ink); font-weight: 500; }
+  .wordmark { text-align: center; line-height: 0.9; }
+  .wordmark a { text-decoration: none; color: inherit; display: block; }
+  .wordmark .kicker {
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--barn); margin-bottom: 8px;
+  }
+  .wordmark .name {
+    font-family: var(--f-display);
+    font-weight: 900; font-style: italic;
+    font-size: 52px; letter-spacing: -0.01em;
+    color: var(--ink); white-space: nowrap;
+  }
+  .wordmark .sub {
+    margin-top: 6px; font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .wordmark .sub::before, .wordmark .sub::after {
+    content: "✶"; margin: 0 12px; color: var(--brass);
+  }
+
+  /* ============== NAV ============== */
+  nav.primary {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--ink); color: var(--paper);
+    border-bottom: 4px solid var(--barn);
+  }
+  nav.primary .wrap { padding: 0 56px; }
+  .nav-row {
+    display: flex; align-items: stretch; gap: 0;
+    font-family: var(--f-poster); letter-spacing: 0.1em; font-size: 16px;
+  }
+  .nav-link {
+    display: block; padding: 16px 22px;
+    color: var(--paper); text-decoration: none;
+    text-transform: uppercase; cursor: pointer;
+    border-right: 1px solid rgba(239,228,207,0.08);
+    transition: background 120ms ease;
+  }
+  .nav-item:first-child .nav-link { border-left: 1px solid rgba(239,228,207,0.08); }
+  .nav-link.active, .nav-link:hover { background: var(--barn); color: var(--paper); }
+  .nav-link .caret {
+    display: inline-block; margin-left: 8px; font-size: 10px;
+    transform: translateY(-2px); color: var(--brass);
+  }
+  .nav-cta { margin-left: auto; align-self: center; padding: 0 8px; }
+  .nav-cta a {
+    display: inline-block; padding: 9px 16px;
+    border: 1px solid var(--paper); color: var(--paper);
+    text-decoration: none; font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .nav-cta a:hover { background: var(--barn); border-color: var(--barn); }
+
+  /* ============== HERO ============== */
+  .hhero {
+    position: relative;
+    padding: 84px 0 64px;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .hhero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 56px;
+    align-items: end;
+  }
+  .hhero .eyebrow {
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--barn);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .hhero .eyebrow .bar { display: inline-block; width: 36px; height: 1px; background: var(--barn); }
+  .hhero h1 {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 900;
+    font-size: 132px; line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
+    color: var(--ink); text-wrap: balance;
+  }
+  .hhero h1 .sub {
+    display: block;
+    font-family: var(--f-poster);
+    font-style: normal; font-weight: 400;
+    font-size: 28px;
+    letter-spacing: 0.18em; color: var(--barn);
+    text-transform: uppercase;
+    margin-top: 14px;
+  }
+  .hhero .deck {
+    font-size: 21px; line-height: 1.55;
+    color: var(--ink-soft); max-width: 600px;
+    text-wrap: pretty; margin: 0;
+  }
+  .hhero .deck em { color: var(--ink); font-style: italic; }
+
+  /* Stamped era list */
+  .hhero-side {
+    background: var(--paper-2);
+    border: 1.5px solid var(--ink);
+    padding: 24px 28px;
+    box-shadow: 10px 12px 0 rgba(14,13,12,0.16);
+    transform: rotate(-0.6deg);
+    position: relative;
+  }
+  .hhero-side::before {
+    content: ""; position: absolute;
+    inset: 8px;
+    border: 1px dashed var(--rule-strong);
+    pointer-events: none;
+  }
+  .hhero-side .label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 12px;
+  }
+  .hhero-side h3 {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 700;
+    font-size: 24px; line-height: 1.1;
+    margin: 0 0 14px;
+  }
+  .hhero-side ol {
+    list-style: none; padding: 0; margin: 0;
+    font-family: var(--f-body);
+    font-size: 15px;
+    counter-reset: era;
+  }
+  .hhero-side ol li {
+    counter-increment: era;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--rule-strong);
+    align-items: baseline;
+  }
+  .hhero-side ol li:last-child { border-bottom: none; }
+  .hhero-side ol li::before {
+    content: counter(era, upper-roman);
+    font-family: var(--f-display);
+    font-style: italic;
+    color: var(--barn);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .hhero-side ol li a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+  }
+  .hhero-side ol li a:hover { border-bottom-color: var(--barn); color: var(--barn-deep); }
+  .hhero-side ol li .yr {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* ============== TIMELINE STRIP ============== */
+  .tline {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 26px 0;
+    overflow: hidden;
+    border-bottom: 4px solid var(--barn);
+  }
+  .tline-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .tline-grid::before {
+    /* horizontal rail */
+    content: "";
+    position: absolute;
+    left: 4%; right: 4%;
+    top: 22px;
+    height: 2px;
+    background: var(--brass);
+    z-index: 1;
+  }
+  .tcell {
+    padding: 0 12px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .tcell .dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--barn);
+    border: 2px solid var(--paper);
+    margin: 14px auto 14px;
+    position: relative;
+    z-index: 3;
+  }
+  .tcell .yr {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    color: var(--brass);
+    margin-bottom: 4px;
+  }
+  .tcell .name {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--paper);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .tcell a { text-decoration: none; color: inherit; display: block; }
+  .tcell a:hover .dot { background: var(--brass); transform: scale(1.18); transition: transform 140ms; }
+  .tcell a:hover .name { color: var(--brass); }
+
+  /* ============== ERA SECTION (generic) ============== */
+  .era {
+    padding: 96px 0 80px;
+    position: relative;
+    border-bottom: 1px solid var(--rule);
+  }
+  .era.dark {
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: none;
+  }
+  .era-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .era-row.reverse > .era-photo { order: 2; }
+  .era-row.reverse > .era-text { order: 1; }
+
+  .era-photo {
+    position: relative;
+  }
+  .era-photo .pframe {
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid var(--ink);
+    box-shadow: 12px 14px 0 rgba(14,13,12,0.18);
+    background: var(--paper-2);
+  }
+  .era.dark .era-photo .pframe {
+    border-color: rgba(239,228,207,0.18);
+    box-shadow: 12px 14px 0 rgba(239,228,207,0.06);
+  }
+  .era-photo .pframe::after {
+    content: "";
+    position: absolute; inset: 8px;
+    border: 1px solid rgba(255,255,255,0.18);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .era-photo .pframe img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 240ms ease;
+  }
+  .era-photo .pframe.tall img { aspect-ratio: 3/4; }
+  .era-photo .pframe.wide img { aspect-ratio: 16/10; }
+  .era-photo .pframe.sq img { aspect-ratio: 1/1; }
+
+  .era-photo .stamp {
+    position: absolute;
+    top: -14px; left: -14px;
+    background: var(--barn);
+    color: var(--paper);
+    padding: 8px 14px;
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    z-index: 3;
+    box-shadow: 4px 4px 0 rgba(14,13,12,0.18);
+  }
+  .era.dark .era-photo .stamp { box-shadow: 4px 4px 0 rgba(0,0,0,0.5); }
+  .era-photo .credit {
+    margin-top: 14px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+  .era.dark .era-photo .credit { color: rgba(239,228,207,0.55); }
+  .era-photo .credit .star { color: var(--barn); margin: 0 6px; }
+
+  /* Two-photo collage for era 4 */
+  .era-photo .collage {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 14px;
+    align-items: end;
+  }
+  .era-photo .collage .pframe.t1 {
+    transform: rotate(-1.2deg);
+  }
+  .era-photo .collage .pframe.t2 {
+    transform: rotate(1.4deg);
+    margin-bottom: 28px;
+  }
+  .era-photo .collage .pframe img { aspect-ratio: 4/5; }
+  .era-photo .collage .pframe.t2 img { aspect-ratio: 5/4; }
+
+  /* TEXT COL */
+  .era-text .roman {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--barn);
+    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+  }
+  .era.dark .era-text .roman { color: var(--brass); }
+
+  .era-text .yr-chip {
+    display: inline-block;
+    padding: 5px 12px 5px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .era.dark .era-text .yr-chip {
+    background: var(--paper); color: var(--ink);
+  }
+
+  .era-text h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 0.96;
+    margin: 0 0 12px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .era.dark .era-text h2 { color: var(--paper); }
+  .era-text h2 em { color: var(--barn); font-style: italic; }
+  .era.dark .era-text h2 em { color: var(--brass); }
+
+  .era-text .deck {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    text-wrap: pretty;
+    max-width: 540px;
+  }
+  .era.dark .era-text .deck { color: rgba(239,228,207,0.75); }
+
+  .era-text p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0 0 14px;
+    max-width: 560px;
+  }
+  .era.dark .era-text p { color: rgba(239,228,207,0.78); }
+  .era-text p b { color: var(--ink); font-weight: 500; }
+  .era.dark .era-text p b { color: var(--paper); }
+
+  /* CASH-NOTE: a sidebar tying era to Cash song */
+  .cashnote {
+    margin-top: 28px;
+    padding: 22px 24px 20px;
+    background: var(--paper-2);
+    border-left: 4px solid var(--barn);
+    position: relative;
+    box-shadow: 6px 8px 0 rgba(14,13,12,0.12);
+  }
+  .era.dark .cashnote {
+    background: rgba(239,228,207,0.05);
+    border-left-color: var(--brass);
+    box-shadow: 6px 8px 0 rgba(0,0,0,0.3);
+    color: var(--paper);
+  }
+  .cashnote .label {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 6px;
+  }
+  .era.dark .cashnote .label { color: var(--brass); }
+  .cashnote h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .era.dark .cashnote h4 { color: var(--paper); }
+  .cashnote .song {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .era.dark .cashnote .song { color: rgba(239,228,207,0.6); }
+  .cashnote .song b { color: var(--ink); font-weight: 500; }
+  .era.dark .cashnote .song b { color: var(--paper); }
+  .cashnote p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-family: var(--f-body);
+    font-style: italic;
+  }
+  .era.dark .cashnote p { color: rgba(239,228,207,0.78); }
+
+  /* POSTS row — placeholder blog entries per era */
+  .era-posts {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .era-post {
+    display: block;
+    padding: 14px 16px 14px;
+    border: 1px solid var(--rule-strong);
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--paper);
+    transition: background 140ms, border-color 140ms;
+    position: relative;
+  }
+  .era.dark .era-post {
+    background: transparent;
+    color: var(--paper);
+    border-color: rgba(239,228,207,0.22);
+  }
+  .era-post:hover { background: var(--paper-2); border-color: var(--ink); }
+  .era.dark .era-post:hover { background: rgba(239,228,207,0.08); border-color: var(--paper); }
+  .era-post .pkind {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 4px;
+  }
+  .era.dark .era-post .pkind { color: var(--brass); }
+  .era-post .ptitle {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .era-post .pdate {
+    margin-top: 4px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+  }
+  .era.dark .era-post .pdate { color: rgba(239,228,207,0.55); }
+  .era-post.empty { border-style: dashed; opacity: 0.7; }
+  .era-post.empty .ptitle {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+  .era.dark .era-post.empty .ptitle { color: rgba(239,228,207,0.6); }
+  .era-post .arrow {
+    position: absolute;
+    right: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--barn);
+    font-family: var(--f-poster);
+    font-size: 22px;
+  }
+
+  /* ============== OUTRO ============== */
+  .outro {
+    background: var(--paper-2);
+    padding: 96px 0;
+    border-top: 4px solid var(--barn);
+  }
+  .outro-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .outro h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 1;
+    margin: 0 0 18px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .outro h2 em { color: var(--barn); font-style: italic; }
+  .outro .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 14px;
+  }
+  .outro p {
+    font-size: 17.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+  .outro .actions { display: flex; gap: 12px; margin-top: 22px; }
+  .outro .actions a {
+    display: inline-block;
+    padding: 11px 20px;
+    text-decoration: none;
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .outro .actions .primary { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
+  .outro .actions .primary:hover { background: var(--barn); border-color: var(--barn); }
+  .outro .actions .secondary { border: 1px solid var(--ink); color: var(--ink); }
+  .outro .actions .secondary:hover { background: var(--ink); color: var(--paper); }
+
+  .outro-card {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    padding: 28px;
+    box-shadow: 10px 12px 0 rgba(14,13,12,0.18);
+  }
+  .outro-card h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0 0 12px;
+  }
+  .outro-card ul {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .outro-card li {
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--rule-strong);
+    display: flex; justify-content: space-between;
+    font-family: var(--f-body);
+    font-size: 16px;
+  }
+  .outro-card li:last-child { border-bottom: none; }
+  .outro-card li b { color: var(--ink); }
+  .outro-card li .yr {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--barn);
+  }
+
+  /* ============== FOOTER ============== */
+  .colophon {
+    background: var(--ink); color: var(--paper);
+    padding: 64px 0 28px; font-family: var(--f-body);
+  }
+  .colophon-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 36px;
+  }
+  .colophon .mark {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 900;
+    font-size: 36px; margin-bottom: 16px;
+  }
+  .colophon .mark .amp { color: var(--barn); }
+  .colophon .blurb {
+    font-size: 15px;
+    color: rgba(239,228,207,0.78);
+    line-height: 1.55;
+    max-width: 480px;
+    margin: 0 0 14px;
+  }
+  .colophon h5 {
+    font-family: var(--f-poster);
+    letter-spacing: 0.18em;
+    font-size: 14px;
+    color: var(--brass);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .colophon ul { list-style: none; padding: 0; margin: 0; }
+  .colophon li { padding: 6px 0; }
+  .colophon a {
+    color: rgba(239,228,207,0.85); text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px dotted rgba(239,228,207,0.25);
+  }
+  .colophon a:hover { color: var(--barn); border-bottom-color: var(--barn); }
+  .colo-bottom {
+    border-top: 1px solid rgba(239,228,207,0.18);
+    padding-top: 22px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(239,228,207,0.6);
+  }
+  .colo-bottom .star { color: var(--barn); margin: 0 6px; }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="topstrip">
+  <div class="wrap topstrip-inner">
+    <div>USA <span class="dot"></span> <b style="color:var(--ink)">Historien</b></div>
+    <div>Seks epoker af en republik, der <b style="color:var(--ink)">aldrig holdt op med at definere sig selv</b></div>
+    <div>1776 <span class="dot"></span> nutid</div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <div class="mast-side">
+        Vol. II <span style="color:var(--barn)">·</span> No. 031<br>
+        Anno MMXXVI
+      </div>
+      <div class="wordmark">
+        <a href="Johnny og jeg.html">
+          <div class="kicker">— en personlig hyldest —</div>
+          <div class="name">Johnny &amp; jeg</div>
+          <div class="sub">Musikken · Troen · Amerika</div>
+        </a>
+      </div>
+      <div class="mast-side right">
+        USA · Historien<br>
+        <b>Seks epoker</b>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="primary">
+  <div class="wrap">
+    <div class="nav-row">
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html">Hjem</a></div>
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html#musikeren">Johnny Cash <span class="caret">▾</span></a></div>
+      <div class="nav-item"><a class="nav-link active" href="Historien.html">USA <span class="caret">▾</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="Bøger, spil, film.html">Bøger, spil, film</a></div>
+      <div class="nav-item"><a class="nav-link" href="Foredrag.html">Foredrag</a></div>
+      <div class="nav-item"><a class="nav-link" href="#">Om siden</a></div>
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html#kontakt">Kontakt</a></div>
+      <div class="nav-cta"><a href="Foredrag.html">Bestil foredrag →</a></div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hhero">
+  <div class="wrap">
+    <div class="hhero-grid">
+      <div>
+        <div class="eyebrow"><span class="bar"></span>USA · Historien · Anno 1776 — nutid</div>
+        <h1>Historien<span class="sub">en republik i seks akter</span></h1>
+        <p class="deck">
+          Amerika er ikke et land — det er en <em>strid</em> om, hvad et land kan være. Her er et forsøg på at fortælle den strid i seks epoker: fra de uafhængige koloniers oprør, gennem borgerkrigens åbne sår, ind i den industrielle hvirvelvind, ud over Atlanten og hjem igen, ned i Den Kolde Krigs skygge, og frem til vores egen tid.
+        </p>
+        <p class="deck" style="font-size:19px; margin-top:8px;">
+          Hver epoke har sit eget billede — og sin egen Cash-sang, hvis han skrev en. Stridens lyd, fra det syngende sydstats-bælte.
+        </p>
+      </div>
+
+      <aside class="hhero-side">
+        <div class="label">— Bladre i —</div>
+        <h3>Seks epoker.</h3>
+        <ol>
+          <li><a href="#era-1">Den unge republik<span class="yr">1776 — 1830</span></a></li>
+          <li><a href="#era-2">Kløften og krigen<span class="yr">1830 — 1870</span></a></li>
+          <li><a href="#era-3">Damp, stål og strejker<span class="yr">1870 — 1914</span></a></li>
+          <li><a href="#era-4">Verdenskrig &amp; depression<span class="yr">1914 — 1945</span></a></li>
+          <li><a href="#era-5">Det amerikanske århundrede<span class="yr">1945 — 1989</span></a></li>
+          <li><a href="#era-6">Republikken i dag<span class="yr">1989 — nu</span></a></li>
+        </ol>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE STRIP -->
+<div class="tline">
+  <div class="wrap">
+    <div class="tline-grid">
+      <div class="tcell"><a href="#era-1"><div class="dot"></div><div class="yr">1776 — 1830</div><div class="name">Den unge republik</div></a></div>
+      <div class="tcell"><a href="#era-2"><div class="dot"></div><div class="yr">1830 — 1870</div><div class="name">Kløften &amp; krigen</div></a></div>
+      <div class="tcell"><a href="#era-3"><div class="dot"></div><div class="yr">1870 — 1914</div><div class="name">Damp, stål, strejker</div></a></div>
+      <div class="tcell"><a href="#era-4"><div class="dot"></div><div class="yr">1914 — 1945</div><div class="name">Krig &amp; depression</div></a></div>
+      <div class="tcell"><a href="#era-5"><div class="dot"></div><div class="yr">1945 — 1989</div><div class="name">Det amerikanske århundrede</div></a></div>
+      <div class="tcell"><a href="#era-6"><div class="dot"></div><div class="yr">1989 — nu</div><div class="name">Republikken i dag</div></a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== ERA I ============== -->
+<section class="era" id="era-1">
+  <div class="wrap">
+    <div class="era-row">
+      <div class="era-photo">
+        <div class="stamp">Akt I · 1776 — 1830</div>
+        <div class="pframe wide">
+          <img src="assets/era-1-we-the-people.png" alt="“We the People” — Forfatningen mod stars and stripes" />
+        </div>
+        <div class="credit">— Forfatningens fortale, 1787 <span class="star">✶</span> Public domain —</div>
+      </div>
+      <div class="era-text">
+        <div class="roman">— Akt I —</div>
+        <span class="yr-chip">1776 — 1830</span>
+        <h2>Den unge <em>republik</em>.</h2>
+        <p class="deck">
+          Et land, der blev til på papir — og prøvede at leve sig op til det.
+        </p>
+        <p>
+          Da delegationerne forsamlede sig i Philadelphia i juli 1776, var der ingen, der vidste om eksperimentet ville holde et årti. Tretten kolonier, fire millioner mennesker, en ny verden, en gammel kong George — og en erklæring om at <b>alle mennesker er skabt lige</b>, skrevet af en mand, der ejede slaver.
+        </p>
+        <p>
+          Forfatningen kom elleve år senere, i 1787 — et kompromis sammensyet af gæld, geografi og generationsmod. Washington trådte ind som første præsident i 1789, Jefferson købte Louisiana i 1803, Madison stred sig gennem 1812-krigen, og i 1820'erne begyndte de første spændinger om slaveriet at vise sig som revner i et stadig nyt gulv. Republikken var <b>skabt af det sublime, men holdt sammen af det praktiske</b>.
+        </p>
+
+        <div class="cashnote">
+          <div class="label">— Cash om denne tid —</div>
+          <h4>Et tomt sted i pladekataloget.</h4>
+          <div class="song"><b>Cash skrev ikke om stiftelsen.</b> Hans Amerika begynder længere nede.</div>
+          <p>
+            Han greb ikke tilbage til Founding Fathers. Cash var bjerg, ikke marmor — sangenes Amerika begynder med bomuldsmarken, ikke med blæk på pergament. Men idéen om at en republik må forsvare sit eget løfte mod sig selv — den findes overalt i hans senere sange.
+          </p>
+        </div>
+
+        <div class="era-posts">
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Jefferson, slaveriet og den selvindlysende sandhed</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Louisianakøbet — da Amerika fordobledes på et papir</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ERA II — DARK ============== -->
+<section class="era dark" id="era-2">
+  <div class="wrap">
+    <div class="era-row reverse">
+      <div class="era-photo">
+        <div class="stamp">Akt II · 1830 — 1870</div>
+        <div class="pframe tall">
+          <img src="assets/era-2-lincoln.png" alt="Abraham Lincoln, ca. 1864" />
+        </div>
+        <div class="credit">— Abraham Lincoln, ca. 1864 <span class="star">✶</span> Library of Congress —</div>
+      </div>
+      <div class="era-text">
+        <div class="roman">— Akt II —</div>
+        <span class="yr-chip">1830 — 1870</span>
+        <h2>Kløften, og <em>krigen</em>.</h2>
+        <p class="deck">
+          Et land, der ikke kunne tale sig ud af sin egen synd — og betalte for den med sin egen ungdoms blod.
+        </p>
+        <p>
+          1830'erne åbnede med Indian Removal Act, Jackson på podiet og bomuld som ny konges kappe over Syden. Abolitionister i Boston, opstande i Virginia, Underground Railroad gennem skovene. Hver kompromis — Missouri 1820, Compromise 1850, Kansas-Nebraska 1854 — flyttede bare den uundgåelige time længere ned ad vejen.
+        </p>
+        <p>
+          <b>Borgerkrigen 1861-65 kostede 750.000 mænd</b>. Lincoln blev mere end en præsident — han blev en epoke. Gettysburg-talen tog republikkens løfte og gjorde det moralsk igen: <em>that this nation, under God, shall have a new birth of freedom</em>. Han nåede ikke at se Reconstruction. Den sluttede dårligt; vi lever stadig i dens efterklang.
+        </p>
+
+        <div class="cashnote">
+          <div class="label">— Cash om denne tid —</div>
+          <h4>“God Bless Robert E. Lee” &amp; “John Henry” — fra to sider af en kløft.</h4>
+          <div class="song"><b>“God Bless Robert E. Lee”</b> · 1983 <span style="opacity:0.5">·</span> <b>“The Legend of John Henry's Hammer”</b> · 1962</div>
+          <p>
+            Cash holdt aldrig op med at synge om Syden, og han holdt aldrig op med at synge om dem, Syden tabte. John Henry-balladen er sangen om den frigjorte slave, der kæmpede mod maskinen og vandt — og døde. Robert E. Lee-sangen er ærligheden om hvor han kom fra. Det er ikke samme ærinde, men det er samme mand.
+          </p>
+        </div>
+
+        <div class="era-posts">
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Gettysburg-talen, læst i Aarhus</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Hvorfor Reconstruction mislykkedes — og hvad vi arvede</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ERA III ============== -->
+<section class="era" id="era-3">
+  <div class="wrap">
+    <div class="era-row">
+      <div class="era-photo">
+        <div class="stamp">Akt III · 1870 — 1914</div>
+        <div class="pframe wide">
+          <img src="assets/era-3-newspaper.png" alt="“Strike Called — All Unions To Go Out” · Seattle Union Record, 1919" />
+        </div>
+        <div class="credit">— Avisforside, Seattle Union Record · 1919 <span class="star">✶</span> Public domain —</div>
+      </div>
+      <div class="era-text">
+        <div class="roman">— Akt III —</div>
+        <span class="yr-chip">1870 — 1914</span>
+        <h2>Damp, stål <em>og strejker</em>.</h2>
+        <p class="deck">
+          Den industrielle revolution kom som en jernbane — og kørte tværs over alt, hvad Amerika havde været.
+        </p>
+        <p>
+          På fire årtier omskabte jernbanen, telegrafen og fabrikken landet. Carnegie smedede stål, Rockefeller raffinerede olie, Vanderbilt byggede skinner — og dagen, hvor det første tog krydsede kontinentet (Promontory Summit, 1869), kortsluttede en hel epoke. Indianerkrigene endte ved Wounded Knee i 1890. Skellet mellem rige og fattige blev så voldsomt, at Mark Twain gav årtiet et navn: <em>The Gilded Age</em>.
+        </p>
+        <p>
+          Det var også fagforeningernes første store opvågnen: <b>Haymarket 1886, Pullman 1894, Triangle Shirtwaist 1911</b>. Avisen ovenfor — Seattle, februar 1919 — er en efterskrift, men også arvtager. Det moderne Amerika begynder her, ikke i 1776.
+        </p>
+
+        <div class="cashnote">
+          <div class="label">— Cash om denne tid —</div>
+          <h4>“The Legend of John Henry's Hammer” &amp; “The L &amp; N Don't Stop Here Anymore”.</h4>
+          <div class="song"><b>John Henry</b> · 1962 <span style="opacity:0.5">·</span> <b>The L &amp; N Don't Stop Here Anymore</b> · 1972</div>
+          <p>
+            Hammer mod damp; arbejderen mod maskinen. Cash's John Henry er den enkelte mand mod hele den industrielle alder — og han vinder, og taber. “The L&amp;N” er den anden ende af samme jernbane: byen, hvor toget ikke længere standser. To sange, halvtreds år imellem, men samme tematik: den lille mand klemt mellem skinner og kvartalsregnskab.
+          </p>
+        </div>
+
+        <div class="era-posts">
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Wounded Knee 1890 — og hvad Cash gjorde 75 år senere</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Mark Twain &amp; The Gilded Age — en ironisk diagnose</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ERA IV — DARK ============== -->
+<section class="era dark" id="era-4">
+  <div class="wrap">
+    <div class="era-row reverse">
+      <div class="era-photo">
+        <div class="stamp">Akt IV · 1914 — 1945</div>
+        <div class="collage">
+          <div class="pframe t1">
+            <img src="assets/era-4-migrant-mother.png" alt="Migrant Mother · Dorothea Lange, 1936" />
+          </div>
+          <div class="pframe t2">
+            <img src="assets/era-4-iwo-jima.png" alt="Raising the Flag on Iwo Jima · Joe Rosenthal, 1945" />
+          </div>
+        </div>
+        <div class="credit">— Lange · 1936 <span class="star">✶</span> Rosenthal · 1945 —</div>
+      </div>
+      <div class="era-text">
+        <div class="roman">— Akt IV —</div>
+        <span class="yr-chip">1914 — 1945</span>
+        <h2>Verdenskrig &amp; <em>depression</em>.</h2>
+        <p class="deck">
+          Et halvt århundrede på tredive år. To verdenskrige med en støvbølge imellem.
+        </p>
+        <p>
+          USA gik ind i den første krig i 1917 — sent, men afgørende. Wilson håbede at gøre verden “safe for democracy” og kom hjem til en kongres, der ikke ville ratificere fredspagten. <b>1920'ernes Jazz Age</b> sluttede med <b>Wall Street-krakket i oktober 1929</b>. Dust Bowl tørrede Sydens og Midtvestens marker ud; Dorothea Langes <em>Migrant Mother</em> blev epokens ansigt. Roosevelt kom i 1933 med New Deal, og i Dyess, Arkansas, blev en lille bomuldsbonde ved navn Ray Cash tildelt en 40-acres koloni — og fik en søn, der hed J.R.
+        </p>
+        <p>
+          Anden Verdenskrig ramte den 7. december 1941. Fire års amerikansk industri på krigsfod producerede flere fly, skibe og jeeps end resten af verden tilsammen. Joe Rosenthals foto fra Iwo Jima i februar 1945 blev republikkens nye selvbillede — fem marinesoldater og en sygehjælper, der rejser et flag på et bjerg, som lige har kostet 7.000 amerikanske liv.
+        </p>
+
+        <div class="cashnote">
+          <div class="label">— Cash om denne tid —</div>
+          <h4>“Five Feet High and Rising” &amp; “The Ballad of Ira Hayes”.</h4>
+          <div class="song"><b>Five Feet High and Rising</b> · 1959 <span style="opacity:0.5">·</span> <b>The Ballad of Ira Hayes</b> · 1964</div>
+          <p>
+            Cash sang om Dyess-oversvømmelsen i 1937 — sin egen barndoms vand. Og han sang om Ira Hayes, Pima-indianeren, der hjalp med at rejse flaget på Iwo Jima og kom hjem til et land, der ikke kunne huske ham. To sange fra denne periode, set indefra. <em>“Whiskey-drinkin' Indian, Marine that went to war,”</em> synger Cash. Det er ikke patriotisme. Det er regnskab.
+          </p>
+        </div>
+
+        <div class="era-posts">
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Dyess Colony og New Deal — hvor Cash kom fra</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Iwo Jima og Ira Hayes — flaget der løftede sig to gange</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ERA V ============== -->
+<section class="era" id="era-5">
+  <div class="wrap">
+    <div class="era-row">
+      <div class="era-photo">
+        <div class="stamp">Akt V · 1945 — 1989</div>
+        <div class="pframe tall">
+          <img src="assets/era-5-reagan.png" alt="Ronald Reagan, officielt portræt, 1981" />
+        </div>
+        <div class="credit">— Ronald Reagan, præsidentielt portræt · 1981 <span class="star">✶</span> White House Photo —</div>
+      </div>
+      <div class="era-text">
+        <div class="roman">— Akt V —</div>
+        <span class="yr-chip">1945 — 1989</span>
+        <h2>Det amerikanske <em>århundrede</em>.</h2>
+        <p class="deck">
+          Den længste fest og den hårdeste kamp om sjælen — alt på samme gade.
+        </p>
+        <p>
+          Krigen sluttede. Bilen kom. Forstadsstrukturen voksede. Levittown blev tegnet, jernbanen blev erstattet af motorvejen, og Eisenhower-årenes <em>Pax Americana</em> så fra afstand ud som en sejr. Tæt på var det noget andet: <b>McCarthy-tribunalerne, Korea, Vietnam</b>, mordet på Kennedy i 1963, Selma og Civil Rights Act i 1964, Watergate i 1974, hvor en præsident trådte tilbage før han blev fjernet.
+        </p>
+        <p>
+          Reagan kom i 1981 og fortalte et land, der havde mistet selvtilliden, at <em>"morning in America"</em> var lige om hjørnet. Han skar i skatten, byggede missilarsenaler, talte med Gorbatjov, og hans tid blev senere både kanoniseret og kritiseret. Den endte symbolsk i november 1989, da Berlin-muren faldt — og USA var det eneste, der stod tilbage.
+        </p>
+
+        <div class="cashnote">
+          <div class="label">— Cash om denne tid —</div>
+          <h4>“Man in Black” &amp; “Ragged Old Flag”.</h4>
+          <div class="song"><b>Man in Black</b> · 1971 <span style="opacity:0.5">·</span> <b>Ragged Old Flag</b> · 1974 <span style="opacity:0.5">·</span> <b>Highwayman</b> · 1985</div>
+          <p>
+            Cash blev manden i sort “for the poor and the beaten down” i 1971 — midt under Vietnam. Tre år senere, året Nixon trådte tilbage, udgav han “Ragged Old Flag” — ikke som propaganda, men som lap-på-lap-poesi om en republik, der har overlevet sin egen ydmygelse. Og i 1985 dannede han <em>Highwaymen</em> med Willie, Waylon og Kristofferson: outlaw-country som modtræk til Reagans glansbillede.
+          </p>
+        </div>
+
+        <div class="era-posts">
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Cash i Det Hvide Hus, 1970 — sangen Nixon ikke fik</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Watergate, Reagan og republikkens selvbillede</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ERA VI — DARK ============== -->
+<section class="era dark" id="era-6">
+  <div class="wrap">
+    <div class="era-row reverse">
+      <div class="era-photo">
+        <div class="stamp">Akt VI · 1989 — nutid</div>
+        <div class="pframe wide">
+          <img src="assets/era-6-stars-and-stripes.png" alt="Stars and Stripes — bølgende flag, samtid" />
+        </div>
+        <div class="credit">— Stars &amp; Stripes <span class="star">✶</span> samtid —</div>
+      </div>
+      <div class="era-text">
+        <div class="roman">— Akt VI —</div>
+        <span class="yr-chip">1989 — nutid</span>
+        <h2>Republikken <em>i dag</em>.</h2>
+        <p class="deck">
+          Den eneste supermagt — og den dybeste tvivl. Vi lever stadig inde i denne akt.
+        </p>
+        <p>
+          Den korte 1990'er-eufori — Clintons år, internettet, balancerede budgetter — endte i røg den 11. september 2001. <b>Krigene i Afghanistan og Irak</b>. Finanskrisen i 2008. Den første sorte præsident, valgt på et løfte om “hope”, fulgt af et land, der valgte næsten det modsatte i 2016. Pandemi. Storming af Kongressen den 6. januar 2021. Og videre.
+        </p>
+        <p>
+          Det er en epoke uden tydeligt navn endnu. Det er måske <em>det sene Amerika</em>, eller måske bare det Amerika, hvor splittelsen blev synlig nok til at man ikke længere kunne lade som om den ikke var der. Hvad det vil ende i, ved ingen — men det er værd at huske at republikken er ældre end de fleste, og dens vante manøvre er at fejle sig selv frem.
+        </p>
+
+        <div class="cashnote">
+          <div class="label">— Cash om denne tid —</div>
+          <h4>“Hurt” &amp; “The Man Comes Around”.</h4>
+          <div class="song"><b>The Man Comes Around</b> · 2002 <span style="opacity:0.5">·</span> <b>Hurt</b> (Nine Inch Nails-cover) · 2002</div>
+          <p>
+            Cash's sidste album udkom i et land der lige havde mistet sin uskyld igen. <em>“There's a man going around, taking names...”</em> — Johannes Åbenbaring sat til guitar, en uge før Irak-krigen. Og <em>“Hurt”</em>: et helt liv pakket ind i fire minutter, og hans egen krop som republikkens spejlbillede. Han døde i 2003. Vi lever stadig i hans efterskrift.
+          </p>
+        </div>
+
+        <div class="era-posts">
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">11. september og Cash's “The Man Comes Around”</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="era-post empty" href="#">
+            <div class="pkind">— Indlæg · Kommer —</div>
+            <div class="ptitle">Hvad “Hurt” fortæller om det sene Amerika</div>
+            <div class="pdate">Skitse · 2026</div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <div class="wrap">
+    <div class="outro-grid">
+      <div>
+        <div class="kicker">— Hvor man kan læse videre —</div>
+        <h2>Seks epoker. <em>Én</em> samtale, der ikke slutter.</h2>
+        <p>
+          Denne side er ikke historieskrivning. Den er en lytters notesbog — en, der prøver at høre Amerika gennem Cash, og Cash gennem Amerika. Hvis noget her får dig til at læse videre eller skrive til mig, har den gjort sit job.
+        </p>
+        <p>
+          For dem, der vil dybere ned i de seks epoker, har jeg samlet en læseliste — tre bøger jeg har læst og kan stå inde for, og en længere hylde med titler på vej.
+        </p>
+        <div class="actions">
+          <a class="primary" href="Bøger, spil, film.html">Til læselisten →</a>
+          <a class="secondary" href="Foredrag.html">Hør foredraget</a>
+        </div>
+      </div>
+
+      <aside class="outro-card">
+        <h4>Hvor Cash møder historien.</h4>
+        <ul>
+          <li><span><b>Five Feet High and Rising</b> — depressionens vand</span><span class="yr">1959</span></li>
+          <li><span><b>The Ballad of Ira Hayes</b> — Iwo Jima og hjemkomsten</span><span class="yr">1964</span></li>
+          <li><span><b>Folsom Prison Blues</b> — Vietnam-årets fængsel</span><span class="yr">1968</span></li>
+          <li><span><b>Man in Black</b> — sort for de glemte</span><span class="yr">1971</span></li>
+          <li><span><b>Ragged Old Flag</b> — Watergate-årets epitaf</span><span class="yr">1974</span></li>
+          <li><span><b>Highwayman</b> — Reagan-årenes outlaw</span><span class="yr">1985</span></li>
+          <li><span><b>The Man Comes Around</b> — Åbenbaringen</span><span class="yr">2002</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="colophon">
+  <div class="wrap">
+    <div class="colophon-grid">
+      <div>
+        <div class="mark">Johnny <span class="amp">&amp;</span> jeg</div>
+        <p class="blurb">
+          En personlig hyldest til Johnny Cash, til kristendommen i hans liv, og til det Amerika, der formede ham. Drevet af én lytter i Aarhus.
+        </p>
+        <p class="blurb" style="font-style:italic;color:rgba(239,228,207,0.5)">
+          “I wear the black for the poor and the beaten down, livin’ in the hopeless, hungry side of town.” — JR Cash
+        </p>
+      </div>
+      <div>
+        <h5>Johnny Cash</h5>
+        <ul>
+          <li><a href="Johnny og jeg.html#musikeren">Musikeren</a></li>
+          <li><a href="Johnny og jeg.html#kristendommen">Cash og Jesus</a></li>
+          <li><a href="Johnny og jeg.html#amerika">Cash og Amerika</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>USA</h5>
+        <ul>
+          <li><a href="Historien.html">Historien</a></li>
+          <li><a href="Kulturen.html">Kulturen</a></li>
+          <li><a href="Bøger, spil, film.html">Bøger, spil, film</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sidens hjørne</h5>
+        <ul>
+          <li><a href="Foredrag.html">Foredrag</a></li>
+          <li><a href="#">Om siden</a></li>
+          <li><a href="Johnny og jeg.html#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colo-bottom">
+      <div>© MMXXVI · Johnny &amp; jeg <span class="star">✶</span> Aarhus · Danmark</div>
+      <div>Et privat, ikke-kommercielt arkiv <span class="star">✶</span> Set fra denne side af Atlanten</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

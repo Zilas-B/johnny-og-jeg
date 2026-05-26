@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Musikeren — Johnny Cash</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/cash-shared.css" />
+
+<style>
+  :root { --accent: #a4282b; --accent-deep: #76181b; }
+
+  .vinyl-hero { position: relative; background: var(--ink); color: var(--paper); border-bottom: 4px solid var(--accent); overflow: hidden; }
+  .vinyl-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 75% 50%, rgba(164,40,43,0.35) 0%, rgba(0,0,0,0) 55%),
+      radial-gradient(ellipse at 10% 100%, rgba(200,155,60,0.10) 0%, rgba(0,0,0,0) 50%);
+  }
+  .vinyl-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+  }
+  .vh-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; padding: 80px 0 96px; }
+  .vh-grid .eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--brass); margin-bottom: 24px; display: inline-flex; align-items: center; gap: 14px; }
+  .vh-grid .eyebrow .bar { width: 48px; height: 2px; background: var(--accent); }
+  .vh-grid .roman { font-family: var(--f-poster); font-size: 22px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 8px; }
+  .vh-grid h1 { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 152px; line-height: 0.88; letter-spacing: -0.025em; margin: 0 0 18px; color: var(--paper); }
+  .vh-grid h1 em { color: var(--accent); font-style: italic; }
+  .vh-grid .lede { font-family: var(--f-body); font-style: italic; font-size: 22px; line-height: 1.5; color: rgba(239,228,207,0.85); max-width: 540px; text-wrap: pretty; }
+  .vh-grid .lede .drop { float: left; font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 86px; line-height: 0.85; padding: 6px 14px 0 0; color: var(--accent); }
+  .vh-grid .meta { margin-top: 30px; display: flex; gap: 26px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(239,228,207,0.65); }
+  .vh-grid .meta b { color: var(--paper); font-weight: 500; }
+  .vh-grid .meta .pipe { width: 1px; background: rgba(239,228,207,0.2); }
+
+  .big-vinyl { position: relative; width: 460px; height: 460px; margin-left: auto; animation: bvspin 12s linear infinite; }
+  @keyframes bvspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+  .big-vinyl-disc {
+    position: absolute; inset: 0; border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%,
+        var(--accent) 0%, var(--accent) 18%,
+        #1a1714 18.4%, #0a0908 24%,
+        #1a1714 24.4%, #0a0908 32%,
+        #1a1714 32.4%, #0a0908 40%,
+        #1a1714 40.4%, #0a0908 48%,
+        #1a1714 48.4%, #0a0908 56%,
+        #1a1714 56.4%, #0a0908 64%,
+        #1a1714 64.4%, #0a0908 72%,
+        #1a1714 72.4%, #0a0908 80%,
+        #1a1714 80.4%, #0a0908 88%,
+        #1a1714 88.4%, #0a0908 100%);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.5), inset 0 0 50px rgba(0,0,0,0.5), 0 30px 60px rgba(0,0,0,0.55);
+  }
+  .big-vinyl-disc::after { content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; border-radius: 50%; background: var(--paper); transform: translate(-50%, -50%); box-shadow: 0 0 0 1px var(--ink); }
+  .big-vinyl-label {
+    position: absolute; left: 50%; top: 50%; width: 38%; height: 38%;
+    transform: translate(-50%, -50%); border-radius: 50%;
+    background: var(--accent); color: var(--paper);
+    display: grid; place-items: center; text-align: center; padding: 18px;
+    box-shadow: inset 0 0 0 6px var(--accent-deep), inset 0 0 0 7px rgba(255,255,255,0.15);
+  }
+  .big-vinyl-label .top { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.8; margin-bottom: 6px; }
+  .big-vinyl-label .ttl { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 28px; line-height: 1; }
+  .big-vinyl-label .bot { font-family: var(--f-mono); font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.8; margin-top: 6px; }
+
+  .sound-ticker { background: var(--accent); color: var(--paper); padding: 14px 0; overflow: hidden; font-family: var(--f-poster); letter-spacing: 0.18em; font-size: 22px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .sound-ticker .tk { display: flex; gap: 36px; white-space: nowrap; animation: tkscroll 50s linear infinite; }
+  .sound-ticker .tk span { display: inline-flex; align-items: center; gap: 18px; }
+  .sound-ticker .tk .x { color: var(--ink); font-family: var(--f-mono); font-size: 14px; }
+  @keyframes tkscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .eras { padding: 80px 0 40px; }
+  .eras h2 { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 60px; line-height: 1; margin: 0 0 8px; color: var(--ink); }
+  .eras .kicker { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.32em; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+  .eras .deck { font-family: var(--f-body); font-style: italic; font-size: 19px; color: var(--ink-soft); max-width: 720px; margin-bottom: 48px; text-wrap: pretty; }
+  .era { display: grid; grid-template-columns: 280px 1fr; gap: 48px; padding: 36px 0; border-top: 1px solid var(--rule); position: relative; }
+  .era:last-of-type { border-bottom: 1px solid var(--rule); }
+  .era .left .yrs { font-family: var(--f-poster); font-size: 56px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .era .left .label { font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: 30px; color: var(--ink); line-height: 1.05; margin-bottom: 14px; }
+  .era .left .tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.28em; color: var(--ink-soft); text-transform: uppercase; line-height: 1.6; }
+  .era .left .tag b { color: var(--ink); }
+  .era .right p { font-family: var(--f-body); font-size: 17px; line-height: 1.6; color: var(--ink-2); margin: 0 0 14px; max-width: 720px; text-wrap: pretty; }
+  .era .right p a { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+  .era-cuts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .cut { border: 1px solid var(--ink); padding: 12px 14px; background: var(--paper-2); text-decoration: none; color: var(--ink); transition: background 140ms ease, color 140ms ease; box-shadow: 3px 4px 0 rgba(14,13,12,0.14); }
+  .cut:hover { background: var(--ink); color: var(--paper); }
+  .cut .lbl { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.28em; color: var(--accent); text-transform: uppercase; }
+  .cut:hover .lbl { color: var(--brass); }
+  .cut .t { font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: 17px; margin-top: 4px; line-height: 1.1; }
+  .cut .d { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; margin-top: 6px; color: var(--ink-soft); }
+  .cut:hover .d { color: rgba(239,228,207,0.6); }
+
+  .anatomy { background: var(--paper-2); padding: 80px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .anatomy h2 { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 52px; margin: 0 0 8px; color: var(--ink); line-height: 1; }
+  .anatomy .kicker { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.32em; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+  .anatomy .deck { font-family: var(--f-body); font-style: italic; font-size: 19px; color: var(--ink-soft); max-width: 720px; margin-bottom: 40px; }
+  .ana-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .ana-card { border: 1px solid var(--ink); background: var(--paper); padding: 22px 22px 24px; box-shadow: 6px 8px 0 rgba(14,13,12,0.16); position: relative; }
+  .ana-card .roman { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 56px; line-height: 0.85; color: var(--accent); margin-bottom: 4px; }
+  .ana-card .tag { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.28em; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 14px; }
+  .ana-card h4 { font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: 22px; margin: 0 0 8px; line-height: 1.1; color: var(--ink); }
+  .ana-card p { font-family: var(--f-body); font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+  .lyric { padding: 80px 0; text-align: center; background: var(--ink); color: var(--paper); border-top: 4px solid var(--accent); border-bottom: 4px solid var(--accent); position: relative; overflow: hidden; }
+  .lyric::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(to bottom, rgba(164,40,43,0.10) 0, rgba(164,40,43,0.10) 12px, transparent 12px, transparent 24px); }
+  .lyric .wrap { position: relative; z-index: 2; }
+  .lyric .kicker { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.36em; color: var(--brass); text-transform: uppercase; margin-bottom: 24px; }
+  .lyric blockquote { margin: 0 auto; max-width: 940px; font-family: var(--f-display); font-style: italic; font-size: 44px; line-height: 1.2; color: var(--paper); text-wrap: balance; }
+  .lyric blockquote .h { color: var(--accent); }
+  .lyric .attrib { margin-top: 24px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.28em; color: rgba(239,228,207,0.65); text-transform: uppercase; }
+  .lyric .attrib .star { color: var(--accent); margin: 0 10px; }
+
+  .next-side { padding: 60px 0 80px; background: var(--paper); }
+  .next-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .next-card { border: 1px solid var(--ink); background: var(--paper-2); padding: 28px 30px; text-decoration: none; color: var(--ink); display: grid; grid-template-columns: 86px 1fr; gap: 22px; align-items: center; box-shadow: 7px 9px 0 rgba(14,13,12,0.18); transition: transform 160ms ease; --c: #2c3e58; }
+  .next-card.amerika { --c: #c89b3c; }
+  .next-card:hover { transform: translate(-2px, -3px); }
+  .next-card .ro { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 70px; color: var(--c); line-height: 1; }
+  .next-card .tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.28em; color: var(--ink-soft); text-transform: uppercase; }
+  .next-card h4 { font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 32px; line-height: 1; margin: 6px 0; }
+  .next-card .ar { font-family: var(--f-poster); font-size: 13px; letter-spacing: 0.2em; color: var(--c); text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  <div class="wrap topstrip-inner">
+    <div>Etb. <b>2024</b><span class="dot"></span>Aarhus &nbsp;·&nbsp; København</div>
+    <div>Side A &nbsp;·&nbsp; <b>Musikeren</b> &nbsp;·&nbsp; en lydhistorie</div>
+    <div>33⅓ RPM <span class="dot"></span> Long Play</div>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <div class="mast-side">Vol. II &nbsp;·&nbsp; Nr. 16<br>Forår <b>MMXXVI</b></div>
+      <div class="wordmark">
+        <div class="kicker">— Side A &nbsp;·&nbsp; lyden —</div>
+        <a class="name-link" href="Johnny og jeg.html"><div class="name">Johnny &amp; jeg</div></a>
+        <div class="sub">Musikken · Troen · Amerika</div>
+      </div>
+      <div class="mast-side right">Aarhus, Danmark<br><b>Anno MMXXVI</b></div>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <div class="nav-row">
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html">Hjem</a></div>
+      <div class="nav-item">
+        <a class="nav-link active" href="Johnny Cash.html">Johnny Cash <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="Johnny Cash.html"><span class="num">○</span>Portræt</a>
+          <a href="Musikeren.html"><span class="num">I</span>Musikeren</a>
+          <a href="Cash og Jesus.html"><span class="num">II</span>Cash og Jesus</a>
+          <a href="Cash og Amerika.html"><span class="num">III</span>Cash og Amerika</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="Historien.html">USA <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="Historien.html"><span class="num">A</span>Historien</a>
+          <a href="Kulturen.html"><span class="num">B</span>Kulturen</a>
+        </div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="Bøger, spil, film.html">Bøger, spil, film</a></div>
+      <div class="nav-item"><a class="nav-link" href="Foredrag.html">Foredrag</a></div>
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html#kontakt">Kontakt</a></div>
+      <div class="nav-cta"><a href="Foredrag.html">Bestil foredrag →</a></div>
+    </div>
+  </div>
+</nav>
+
+<section class="vinyl-hero">
+  <div class="wrap">
+    <div class="vh-grid">
+      <div>
+        <div class="eyebrow"><span class="bar"></span> Side A &nbsp;·&nbsp; 33⅓ RPM</div>
+        <div class="roman">I.</div>
+        <h1><em>Musik</em>eren.</h1>
+        <p class="lede">
+          <span class="drop">B</span>oom-chicka-boom. Den rytme begyndte i en defekt bas, blev til en lyd, og endte med at flytte fyrre års amerikansk musik. Cash stillede sig op med en akustisk guitar, en kontrabas og en trommeløs trio — og opfandt et sound der lød som en jernbane, der kom over præriet.
+        </p>
+        <div class="meta">
+          <div>Hør med <b>nedenunder</b></div>
+          <div class="pipe"></div>
+          <div>Læsetid <b>~ 9 min.</b></div>
+          <div class="pipe"></div>
+          <div>5 spor i pladespilleren</div>
+        </div>
+      </div>
+      <div>
+        <div class="big-vinyl">
+          <div class="big-vinyl-disc"></div>
+          <div class="big-vinyl-label">
+            <div class="top">— Sun Records —</div>
+            <div class="ttl">Musikeren</div>
+            <div class="bot">Memphis · TN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sound-ticker" aria-hidden="true">
+  <div class="tk">
+    <span>BOOM-CHICKA-BOOM</span><span class="x">✶</span>
+    <span>LUTHER PERKINS · GUITAR</span><span class="x">✶</span>
+    <span>MARSHALL GRANT · BASS</span><span class="x">✶</span>
+    <span>W. S. HOLLAND · DRUMS</span><span class="x">✶</span>
+    <span>BOB JOHNSTON · PRODUCER</span><span class="x">✶</span>
+    <span>RICK RUBIN · 1993</span><span class="x">✶</span>
+    <span>SAM PHILLIPS · SUN</span><span class="x">✶</span>
+    <span>BOOM-CHICKA-BOOM</span><span class="x">✶</span>
+    <span>LUTHER PERKINS · GUITAR</span><span class="x">✶</span>
+    <span>MARSHALL GRANT · BASS</span><span class="x">✶</span>
+    <span>W. S. HOLLAND · DRUMS</span><span class="x">✶</span>
+    <span>BOB JOHNSTON · PRODUCER</span><span class="x">✶</span>
+    <span>RICK RUBIN · 1993</span><span class="x">✶</span>
+    <span>SAM PHILLIPS · SUN</span><span class="x">✶</span>
+  </div>
+</div>
+
+<section class="eras">
+  <div class="wrap">
+    <div class="kicker">— Fire epoker, én stemme —</div>
+    <h2>Karrieren i fire plader.</h2>
+    <p class="deck">
+      Cash spillede ikke én genre — han gik gennem fire. Hver epoke har sit eget studie, sin egen producent og sin egen lydtekstur. Læg pladen på nedenunder, og læs videre.
+    </p>
+
+    <div class="era">
+      <div class="left">
+        <div class="yrs">1955—58</div>
+        <div class="label">Sun Records, Memphis</div>
+        <div class="tag">Producer · <b>Sam Phillips</b><br>Lyden · <b>rockabilly · gospel · rå</b></div>
+      </div>
+      <div class="right">
+        <p>
+          Han gik ind hos Sam Phillips med en gospel-prøveoptagelse og fik at vide, at gospel var død. Et år senere stod han ved siden af Elvis, Jerry Lee Lewis og Carl Perkins som Sun’s fjerde stjerne. Phillips lærte ham at indspille hurtigt, billigt og småt — én mikrofon, ingen efterproduktion. Det er <a href="https://en.wikipedia.org/wiki/Sun_Records" target="_blank" rel="noopener">Sun-årene</a> der opfinder boom-chicka-boom: Luther Perkins anslag på guitaren, en kontrabas, og et stykke papir stukket ind under bas-strengene for at få den til at klikke.
+        </p>
+        <p>
+          <em>I Walk the Line</em> blev skrevet som et løfte til hans første kone og spillet ind i én takt — den modulerer fem gange ned i fem vers. Det er en form, ingen i Nashville ville have vovet. Phillips holdt fanen højt.
+        </p>
+        <div class="era-cuts">
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+I+Walk+the+Line+1956" target="_blank" rel="noopener">
+            <div class="lbl">Single · Sun 241</div>
+            <div class="t">I Walk the Line</div>
+            <div class="d">1956 · 2:45</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Folsom+Prison+Blues+1955" target="_blank" rel="noopener">
+            <div class="lbl">Single · Sun 232</div>
+            <div class="t">Folsom Prison Blues</div>
+            <div class="d">1955 · 2:42</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Cry+Cry+Cry" target="_blank" rel="noopener">
+            <div class="lbl">Debut single</div>
+            <div class="t">Cry! Cry! Cry!</div>
+            <div class="d">1955 · 2:25</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="era">
+      <div class="left">
+        <div class="yrs">1958—68</div>
+        <div class="label">Columbia &amp; konceptet</div>
+        <div class="tag">Producere · <b>Don Law · Bob Johnston</b><br>Lyden · <b>cinematisk · ambitiøs</b></div>
+      </div>
+      <div class="right">
+        <p>
+          Cash skiftede til Columbia og opdagede pladen som et hele. <em>Ride This Train</em> (1960) var en konceptplade om amerikansk arbejde, lyttetænkt som en rejse. <em>Blood, Sweat and Tears</em> (1963) handlede om manuelt arbejde. <em>Bitter Tears</em> (1964) handlede om de oprindelige amerikanere — og blev forbudt på country-radioen. Han betalte en helsides-annonce i <em>Billboard</em> for at råbe ad dem.
+        </p>
+        <p>
+          Bob Johnston, som også producerede Bob Dylan, blev hans makker. Det er Johnston, der lærer ham, at en plade kan bære en holdning. Det er også Johnston, der får ham ind i Folsom State Prison.
+        </p>
+        <div class="era-cuts">
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Ring+of+Fire+1963" target="_blank" rel="noopener">
+            <div class="lbl">Single · Columbia</div>
+            <div class="t">Ring of Fire</div>
+            <div class="d">1963 · 2:37</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Ballad+of+Ira+Hayes" target="_blank" rel="noopener">
+            <div class="lbl">Bitter Tears</div>
+            <div class="t">Ballad of Ira Hayes</div>
+            <div class="d">1964 · 4:08</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Big+River" target="_blank" rel="noopener">
+            <div class="lbl">Concept · Columbia</div>
+            <div class="t">Big River</div>
+            <div class="d">1958 · 2:31</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="era">
+      <div class="left">
+        <div class="yrs">1968—86</div>
+        <div class="label">Live &amp; legenden</div>
+        <div class="tag">Producere · <b>Bob Johnston · Larry Butler</b><br>Lyden · <b>fængsler · TV · Highwaymen</b></div>
+      </div>
+      <div class="right">
+        <p>
+          Den 13. januar 1968 stod han på en scene i <a href="https://en.wikipedia.org/wiki/At_Folsom_Prison" target="_blank" rel="noopener">Folsom State Prison</a>. Det resulterende live-album blev et fænomen — og en blueprint for det 70’erne kaldte “outlaw country”. Han fik sit eget tv-show på ABC fra 1969 til 1971, med Dylan, Mitchell og Marley som gæster. I 1985 dannede han, sammen med Willie Nelson, Waylon Jennings og Kris Kristofferson, <a href="https://en.wikipedia.org/wiki/The_Highwaymen_(country_supergroup)" target="_blank" rel="noopener">The Highwaymen</a>: en supergruppe af outlaws, der nægtede at gå i pension.
+        </p>
+        <div class="era-cuts">
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+A+Boy+Named+Sue+San+Quentin" target="_blank" rel="noopener">
+            <div class="lbl">At San Quentin</div>
+            <div class="t">A Boy Named Sue</div>
+            <div class="d">1969 · 3:46</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Man+in+Black+1971" target="_blank" rel="noopener">
+            <div class="lbl">Manifest · 1971</div>
+            <div class="t">Man in Black</div>
+            <div class="d">1971 · 2:52</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Highwaymen+1985+Johnny+Cash" target="_blank" rel="noopener">
+            <div class="lbl">Highwaymen</div>
+            <div class="t">Highwayman</div>
+            <div class="d">1985 · 3:03</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="era">
+      <div class="left">
+        <div class="yrs">1994—03</div>
+        <div class="label">American Recordings</div>
+        <div class="tag">Producer · <b>Rick Rubin</b><br>Lyden · <b>guitar &amp; stemme · død</b></div>
+      </div>
+      <div class="right">
+        <p>
+          Country-radioen havde glemt ham. Så ringede en ung rap- og rock-producer ved navn <a href="https://en.wikipedia.org/wiki/Rick_Rubin" target="_blank" rel="noopener">Rick Rubin</a> og inviterede ham hjem i sin stue i Hollywood Hills. Cash sad ned med sin guitar, og Rubin optog ham. Det blev til seks albummer, fire i hans levetid og to posthumt. Den tredje, <em>Solitary Man</em>, og den fjerde, <em>The Man Comes Around</em>, indeholdt fortolkninger af Depeche Mode, U2, Soundgarden og Nine Inch Nails — og forvandlede dem alle til Cash-sange.
+        </p>
+        <p>
+          Hans version af <em>Hurt</em> blev hans afsked. Trent Reznor, der skrev den, sagde bagefter at sangen ikke længere tilhørte ham — den tilhørte Cash. Musikvideoen, lavet to måneder før hans død, er stadig det mest gennemtænkte farvel i amerikansk musikhistorie.
+        </p>
+        <div class="era-cuts">
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Hurt+2002" target="_blank" rel="noopener">
+            <div class="lbl">American IV</div>
+            <div class="t">Hurt</div>
+            <div class="d">2002 · 3:38</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+The+Man+Comes+Around" target="_blank" rel="noopener">
+            <div class="lbl">American IV</div>
+            <div class="t">The Man Comes Around</div>
+            <div class="d">2002 · 4:26</div>
+          </a>
+          <a class="cut" href="https://www.youtube.com/results?search_query=Johnny+Cash+Personal+Jesus" target="_blank" rel="noopener">
+            <div class="lbl">American IV</div>
+            <div class="t">Personal Jesus</div>
+            <div class="d">2002 · 3:21</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="anatomy">
+  <div class="wrap">
+    <div class="kicker">— Anatomien af et sound —</div>
+    <h2>Hvordan boom-chicka-boom blev til.</h2>
+    <p class="deck">Fire elementer, en sang. Det er ikke kompliceret — det er bare aldrig gjort før. Læg næste spor i pladespilleren og hør efter:</p>
+    <div class="ana-grid">
+      <div class="ana-card">
+        <div class="roman">I</div>
+        <div class="tag">— guitaren —</div>
+        <h4>Luther Perkins’ enkelthed</h4>
+        <p>Han kunne ikke spille hurtigt. Det var pointen. Tre toner, en pause, tre toner. Det blev kaldt “the boom”.</p>
+      </div>
+      <div class="ana-card">
+        <div class="roman">II</div>
+        <div class="tag">— bassen —</div>
+        <h4>Marshall Grants papir</h4>
+        <p>Han stak et papir under bas-strengene for at få et “klik” — den manglende lilletromme. Det blev kaldt “the chicka”.</p>
+      </div>
+      <div class="ana-card">
+        <div class="roman">III</div>
+        <div class="tag">— stemmen —</div>
+        <h4>Cashs baryton</h4>
+        <p>En halv oktav lavere end alle andre. Han lavede aldrig pyntede toner. Han talte sangene mere end han sang dem.</p>
+      </div>
+      <div class="ana-card">
+        <div class="roman">IV</div>
+        <div class="tag">— togene —</div>
+        <h4>Jernbanens rytme</h4>
+        <p>Han voksede op femten meter fra et togspor. Det er ikke en metafor — det er kilometeret per minut, han bygger sangene på.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lyric">
+  <div class="wrap">
+    <div class="kicker">— Et hørestykke —</div>
+    <blockquote>
+      <span class="h">“</span>
+      I hear that <em>train a-comin’</em> — it’s rollin’ round the bend. <br>
+      And I ain’t seen the sunshine since I don’t know when.
+      <span class="h">”</span>
+    </blockquote>
+    <div class="attrib">Folsom Prison Blues <span class="star">✶</span> 1955 <span class="star">✶</span> skrevet i Tyskland, sunget i Californien</div>
+  </div>
+</section>
+
+<section class="next-side">
+  <div class="wrap">
+    <div class="kicker" style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.32em;color:var(--accent);text-transform:uppercase;margin-bottom:14px;">— Vend pladen —</div>
+    <h2 style="font-family:var(--f-display);font-style:italic;font-weight:900;font-size:48px;line-height:1;margin:0 0 36px;">Lyt videre.</h2>
+    <div class="next-grid">
+      <a class="next-card" href="Cash og Jesus.html">
+        <div class="ro">II</div>
+        <div>
+          <div class="tag">Side B &nbsp;·&nbsp; troen</div>
+          <h4>Cash og Jesus</h4>
+          <div class="ar">Hør salmerne <span>→</span></div>
+        </div>
+      </a>
+      <a class="next-card amerika" href="Cash og Amerika.html">
+        <div class="ro">III</div>
+        <div>
+          <div class="tag">Side C &nbsp;·&nbsp; nationen</div>
+          <h4>Cash og Amerika</h4>
+          <div class="ar">Hør republikken <span>→</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="colophon">
+  <div class="wrap">
+    <div class="colophon-grid">
+      <div>
+        <div class="mark">Johnny <span class="amp">&amp;</span> jeg</div>
+        <p class="blurb">En personlig hyldest til Johnny Cash, til kristendommen i hans liv, og til det Amerika, der formede ham.</p>
+        <p class="blurb" style="font-style:italic;color:rgba(239,228,207,0.5)">“I keep a close watch on this heart of mine.” — JR Cash</p>
+      </div>
+      <div>
+        <h5>Johnny Cash</h5>
+        <ul>
+          <li><a href="Johnny Cash.html">Portræt</a></li>
+          <li><a href="Musikeren.html">Musikeren</a></li>
+          <li><a href="Cash og Jesus.html">Cash og Jesus</a></li>
+          <li><a href="Cash og Amerika.html">Cash og Amerika</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>USA</h5>
+        <ul>
+          <li><a href="Historien.html">Historien</a></li>
+          <li><a href="Kulturen.html">Kulturen</a></li>
+          <li><a href="Bøger, spil, film.html">Bøger, spil, film</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sidens hjørne</h5>
+        <ul>
+          <li><a href="Foredrag.html">Foredrag</a></li>
+          <li><a href="Johnny og jeg.html#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colo-bottom">
+      <div>© MMXXVI · Johnny &amp; jeg <span class="star">✶</span> Aarhus · Danmark</div>
+      <div>Side A &nbsp;·&nbsp; Musikeren <span class="star">✶</span> 33⅓ RPM</div>
+    </div>
+  </div>
+</footer>
+
+<div class="cash-radio" id="cash-radio">
+  <div class="progress"><div class="bar"></div></div>
+  <button class="radio-tab" aria-label="Toggle player">
+    <span class="live"></span> Cash Radio &nbsp;·&nbsp; Side A · Studiet <span class="chev">▾</span>
+  </button>
+  <div class="radio-rail">
+    <div class="vinyl-mini"></div>
+    <div class="nowplay">
+      <div class="station">— Side A · Studio Cuts —</div>
+      <div class="title">—</div>
+      <div class="meta"></div>
+    </div>
+    <div class="tracks"></div>
+    <div class="controls">
+      <button class="ctl-btn prev skip" aria-label="Forrige">⏮</button>
+      <button class="ctl-btn play" aria-label="Afspil">▶</button>
+      <button class="ctl-btn next skip" aria-label="Næste">⏭</button>
+      <div class="listen-on">
+        <a class="yt" target="_blank" rel="noopener" title="Lyt på YouTube">YT</a>
+        <a class="sp" target="_blank" rel="noopener" title="Lyt på Spotify">SP</a>
+        <a class="wk" target="_blank" rel="noopener" title="Læs på Wikipedia">WK</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.CASH_PLAYLIST = [
+    { n: "A1", title: "Cry! Cry! Cry!",        year: "1955", album: "Sun" },
+    { n: "A2", title: "I Walk the Line",       year: "1956", album: "Sun" },
+    { n: "A3", title: "Big River",             year: "1958", album: "Columbia" },
+    { n: "A4", title: "Ring of Fire",          year: "1963", album: "Ring of Fire" },
+    { n: "A5", title: "A Boy Named Sue",       year: "1969", album: "At San Quentin" },
+    { n: "A6", title: "Highwayman",            year: "1985", album: "Highwaymen" },
+    { n: "A7", title: "The Man Comes Around",  year: "2002", album: "American IV" }
+  ];
+</script>
+<script src="assets/cash-radio.js"></script>
+
+</body>
+</html>

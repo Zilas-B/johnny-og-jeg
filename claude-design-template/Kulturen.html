@@ -1,0 +1,1786 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Kulturen — Republikken og dens billeder · Johnny og jeg</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:        #efe4cf;
+    --paper-2:      #e6d8bb;
+    --paper-3:      #d8c69e;
+    --ink:          #0e0d0c;
+    --ink-2:        #1a1714;
+    --ink-soft:     #2b2620;
+    --barn:         #a4282b;
+    --barn-deep:    #76181b;
+    --denim:        #2c3e58;
+    --denim-deep:   #1c2a3e;
+    --brass:        #c89b3c;
+    --brass-deep:   #8e6a1f;
+    --moss:         #4f6b3a;
+    --rule:         rgba(14, 13, 12, 0.16);
+    --rule-strong:  rgba(14, 13, 12, 0.45);
+
+    --f-display: "Playfair Display", "Hoefler Text", Georgia, serif;
+    --f-poster:  "Bebas Neue", "Oswald", "Impact", sans-serif;
+    --f-mono:    "IBM Plex Mono", "Courier New", monospace;
+    --f-body:    "Crimson Pro", "Georgia", serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 132px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.55; mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1.4px),
+      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1.2px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1.5px 1.5px;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0) 60%, rgba(20,12,4,0.18) 100%),
+      radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0) 60%, rgba(20,12,4,0.22) 100%);
+  }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 56px; position: relative; z-index: 2; }
+  a { color: var(--barn-deep); }
+
+  /* ============== TOP STRIP ============== */
+  .topstrip {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-soft);
+    position: relative; z-index: 5;
+  }
+  .topstrip-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+  }
+  .topstrip .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--barn); margin: 0 10px; vertical-align: middle;
+  }
+
+  /* ============== MASTHEAD ============== */
+  .masthead {
+    padding: 28px 0 18px;
+    border-bottom: 3px double var(--ink);
+    position: relative; z-index: 5;
+    background: var(--paper);
+  }
+  .mast-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+  .mast-side {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .mast-side.right { text-align: right; }
+  .mast-side b { color: var(--ink); font-weight: 500; }
+  .wordmark { text-align: center; line-height: 0.9; }
+  .wordmark a { text-decoration: none; color: inherit; display: block; }
+  .wordmark .kicker {
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--barn); margin-bottom: 8px;
+  }
+  .wordmark .name {
+    font-family: var(--f-display);
+    font-weight: 900; font-style: italic;
+    font-size: 52px; letter-spacing: -0.01em;
+    color: var(--ink); white-space: nowrap;
+  }
+  .wordmark .sub {
+    margin-top: 6px; font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .wordmark .sub::before, .wordmark .sub::after {
+    content: "✶"; margin: 0 12px; color: var(--brass);
+  }
+
+  /* ============== NAV ============== */
+  nav.primary {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--ink); color: var(--paper);
+    border-bottom: 4px solid var(--barn);
+  }
+  nav.primary .wrap { padding: 0 56px; }
+  .nav-row {
+    display: flex; align-items: stretch; gap: 0;
+    font-family: var(--f-poster); letter-spacing: 0.1em; font-size: 16px;
+  }
+  .nav-link {
+    display: block; padding: 16px 22px;
+    color: var(--paper); text-decoration: none;
+    text-transform: uppercase; cursor: pointer;
+    border-right: 1px solid rgba(239,228,207,0.08);
+    transition: background 120ms ease;
+  }
+  .nav-item:first-child .nav-link { border-left: 1px solid rgba(239,228,207,0.08); }
+  .nav-link.active, .nav-link:hover { background: var(--barn); color: var(--paper); }
+  .nav-link .caret {
+    display: inline-block; margin-left: 8px; font-size: 10px;
+    transform: translateY(-2px); color: var(--brass);
+  }
+  .nav-cta { margin-left: auto; align-self: center; padding: 0 8px; }
+  .nav-cta a {
+    display: inline-block; padding: 9px 16px;
+    border: 1px solid var(--paper); color: var(--paper);
+    text-decoration: none; font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .nav-cta a:hover { background: var(--barn); border-color: var(--barn); }
+
+  /* ============== STICKY SUB-NAV (TOC) ============== */
+  .subnav {
+    position: sticky;
+    top: 56px;
+    z-index: 40;
+    background: var(--ink-2);
+    color: var(--paper);
+    border-bottom: 1px solid rgba(239,228,207,0.12);
+    transform: translateY(-100%);
+    transition: transform 220ms ease, opacity 220ms ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .subnav.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .subnav .wrap {
+    display: flex; align-items: center; gap: 0;
+    padding: 0 56px;
+  }
+  .subnav .label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--brass);
+    padding: 11px 18px 11px 0;
+    border-right: 1px solid rgba(239,228,207,0.14);
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .subnav ol {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex: 1; min-width: 0;
+  }
+  .subnav ol li { flex: 1; min-width: 0; }
+  .subnav ol li a {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 11px 8px;
+    text-decoration: none;
+    color: rgba(239,228,207,0.7);
+    font-family: var(--f-poster);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(239,228,207,0.07);
+    transition: background 120ms, color 120ms;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .subnav ol li:last-child a { border-right: none; }
+  .subnav ol li a .rn {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--brass);
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .subnav ol li a:hover {
+    background: rgba(239,228,207,0.06);
+    color: var(--paper);
+  }
+  .subnav ol li a.active {
+    color: var(--paper);
+    background: var(--barn);
+  }
+  .subnav ol li a.active .rn { color: var(--paper); }
+
+  /* ============== HERO ============== */
+  .khero {
+    position: relative;
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .khero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: end;
+  }
+  .khero .eyebrow {
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--barn);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 22px;
+  }
+  .khero .eyebrow .bar { display: inline-block; width: 36px; height: 1px; background: var(--barn); }
+  .khero h1 {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 900;
+    font-size: 124px; line-height: 0.88;
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+    color: var(--ink); text-wrap: balance;
+    max-width: 1080px;
+  }
+  .khero h1 em { color: var(--barn); font-style: italic; }
+  .khero .subhead {
+    font-family: var(--f-poster);
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: 0.16em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin: 0 0 28px;
+  }
+  .khero .deck {
+    font-size: 21px; line-height: 1.55;
+    color: var(--ink-soft); max-width: 760px;
+    text-wrap: pretty; margin: 0;
+  }
+  .khero .deck em { color: var(--ink); font-style: italic; }
+  .khero .deck + .deck { margin-top: 12px; font-size: 19px; }
+
+  /* ============== CHIP GRID — eight landscapes ============== */
+  .chips {
+    padding: 56px 0 72px;
+    background: var(--paper);
+    border-bottom: 4px solid var(--ink);
+  }
+  .chips-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--rule-strong);
+    padding-bottom: 14px;
+  }
+  .chips-head .lab {
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--barn);
+  }
+  .chips-head .lab b { color: var(--ink); font-weight: 500; }
+  .chips-head .count {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .chips-head .count em { color: var(--barn); font-style: italic; }
+
+  .chips-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .chip {
+    display: block;
+    position: relative;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    padding: 22px 22px 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+    box-shadow: 4px 5px 0 rgba(14,13,12,0.14);
+  }
+  .chip:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 9px 0 rgba(14,13,12,0.22);
+  }
+  .chip::before {
+    content: ""; position: absolute;
+    inset: 6px;
+    border: 1px dashed var(--rule-strong);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .chip .ck-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--f-mono); font-size: 9.5px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    position: relative; z-index: 2;
+  }
+  .chip .ck-top .rn {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    color: var(--barn);
+    font-size: 22px;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1;
+  }
+  .chip .ck-name {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 0.96;
+    color: var(--ink);
+    margin: 0 0 6px;
+    text-wrap: balance;
+    position: relative; z-index: 2;
+  }
+  .chip .ck-name em { color: var(--barn); font-style: italic; }
+  .chip .ck-motto {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--barn-deep);
+    margin: 0 0 12px;
+    position: relative; z-index: 2;
+    line-height: 1.35;
+  }
+  .chip .ck-period {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-top: 1px dotted var(--rule-strong);
+    padding-top: 10px;
+    position: relative; z-index: 2;
+  }
+  .chip .ck-arrow {
+    position: absolute;
+    bottom: 18px; right: 22px;
+    font-family: var(--f-mono);
+    font-size: 14px;
+    color: var(--barn);
+    z-index: 2;
+    transition: transform 140ms ease;
+  }
+  .chip:hover .ck-arrow { transform: translateX(3px); }
+
+  /* ============== INTRO ESSAY ============== */
+  .kintro {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 96px 0 88px;
+    border-bottom: 4px solid var(--barn);
+    position: relative;
+  }
+  .kintro-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .kintro .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .kintro h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 0.96;
+    margin: 0 0 4px;
+    color: var(--paper);
+    text-wrap: balance;
+  }
+  .kintro h2 em { color: var(--brass); font-style: italic; }
+  .kintro .signature {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(239,228,207,0.6);
+    margin-top: 20px;
+  }
+  .kintro p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(239,228,207,0.85);
+    margin: 0 0 16px;
+    text-wrap: pretty;
+  }
+  .kintro p:last-child { margin-bottom: 0; }
+  .kintro p b { color: var(--paper); font-weight: 500; }
+  .kintro p em { color: var(--brass); font-style: italic; }
+
+  /* ============== LANDSCAPE SECTION ============== */
+  .land {
+    padding: 96px 0 88px;
+    border-bottom: 1px solid var(--rule-strong);
+    background: var(--paper);
+    scroll-margin-top: 120px;
+  }
+  .land.paper-2 { background: var(--paper-2); }
+  .land.paper-3 { background: var(--paper-3); }
+  .land.dark { background: var(--ink); color: var(--paper); }
+
+  .land-head {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 56px;
+    align-items: end;
+    margin-bottom: 56px;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 28px;
+  }
+  .land.dark .land-head { border-bottom-color: rgba(239,228,207,0.4); }
+
+  .land-rn {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 200px;
+    line-height: 0.78;
+    letter-spacing: -0.04em;
+    color: var(--barn);
+    margin: 0;
+  }
+  .land.dark .land-rn { color: var(--brass); }
+
+  .land-titles {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .land-eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+  }
+  .land.dark .land-eyebrow { color: var(--brass); }
+  .land-eyebrow .sep { color: currentColor; opacity: 0.5; margin: 0 6px; }
+
+  .land-name {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 84px;
+    line-height: 0.92;
+    margin: 4px 0 8px;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  .land-name em { color: var(--barn); font-style: italic; }
+  .land.dark .land-name em { color: var(--brass); }
+
+  .land-motto {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--ink-soft);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .land.dark .land-motto { color: rgba(239,228,207,0.75); }
+
+  .land-body {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .land-essay { font-size: 18.5px; line-height: 1.65; }
+  .land-essay > p {
+    margin: 0 0 18px;
+    text-wrap: pretty;
+  }
+  .land-essay > p:last-child { margin-bottom: 0; }
+  .land-essay p b { font-weight: 600; color: var(--ink); }
+  .land.dark .land-essay p b { color: var(--paper); }
+  .land-essay p em { font-style: italic; color: var(--barn-deep); }
+  .land.dark .land-essay p em { color: var(--brass); }
+
+  .land-essay .dropcap::first-letter {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 86px;
+    line-height: 0.85;
+    float: left;
+    margin: 6px 12px 0 -2px;
+    color: var(--barn);
+  }
+  .land.dark .land-essay .dropcap::first-letter { color: var(--brass); }
+
+  .land-essay h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 28px 0 6px;
+    color: var(--ink);
+  }
+  .land.dark .land-essay h4 { color: var(--paper); }
+
+  .land-pull {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--barn-deep);
+    padding: 4px 0 4px 22px;
+    margin: 18px 0;
+    border-left: 3px solid var(--barn);
+  }
+  .land.dark .land-pull {
+    color: var(--brass);
+    border-left-color: var(--brass);
+  }
+
+  /* sidebar */
+  .land-side {
+    display: flex; flex-direction: column;
+    gap: 22px;
+  }
+  .lside {
+    background: rgba(14,13,12,0.04);
+    border: 1px solid var(--rule-strong);
+    padding: 18px 20px 16px;
+    position: relative;
+  }
+  .land.paper-2 .lside { background: rgba(14,13,12,0.06); }
+  .land.paper-3 .lside { background: rgba(14,13,12,0.08); }
+  .land.dark .lside {
+    background: rgba(239,228,207,0.04);
+    border-color: rgba(239,228,207,0.22);
+  }
+  .lside.cash {
+    border-style: solid;
+    border-color: var(--barn);
+    border-width: 1.5px;
+    background: rgba(164,40,43,0.05);
+  }
+  .land.dark .lside.cash {
+    background: rgba(200,155,60,0.08);
+    border-color: var(--brass);
+  }
+
+  .lside .lab {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 8px;
+  }
+  .land.dark .lside .lab { color: var(--brass); }
+  .lside.cash .lab { color: var(--barn); }
+  .land.dark .lside.cash .lab { color: var(--brass); }
+
+  .lside .val {
+    font-family: var(--f-body);
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .land.dark .lside .val { color: rgba(239,228,207,0.82); }
+  .lside .val b { color: var(--ink); font-weight: 600; }
+  .land.dark .lside .val b { color: var(--paper); }
+  .lside .val em { color: var(--barn-deep); font-style: italic; }
+  .land.dark .lside .val em { color: var(--brass); }
+
+  .lside ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .lside ul li {
+    font-family: var(--f-body);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 10px;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--rule-strong);
+  }
+  .lside ul li:last-child { border-bottom: none; }
+  .land.dark .lside ul li { color: rgba(239,228,207,0.82); border-bottom-color: rgba(239,228,207,0.16); }
+  .lside ul li .yr {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--barn);
+    letter-spacing: 0.06em;
+  }
+  .land.dark .lside ul li .yr { color: var(--brass); }
+  .lside ul li b { color: var(--ink); font-weight: 600; }
+  .land.dark .lside ul li b { color: var(--paper); }
+
+  .lside.deep-link {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 18px 20px;
+  }
+  .land.dark .lside.deep-link {
+    background: var(--barn);
+    border-color: var(--barn);
+  }
+  .lside.deep-link a {
+    display: block;
+    text-decoration: none;
+    color: var(--paper);
+    font-family: var(--f-poster);
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .lside.deep-link a .sm {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.3em;
+    color: var(--brass);
+    margin-bottom: 4px;
+  }
+  .lside.deep-link a:hover { color: var(--brass); }
+  .land.dark .lside.deep-link a:hover { color: var(--paper); text-decoration: underline; }
+
+  /* divider tag between sections */
+  .land-tail {
+    margin-top: 56px;
+    display: flex; justify-content: center;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+  .land.dark .land-tail { color: rgba(239,228,207,0.5); }
+  .land-tail .st { color: var(--barn); margin: 0 12px; }
+  .land.dark .land-tail .st { color: var(--brass); }
+
+  /* ============== OUTRO ============== */
+  .outro {
+    background: var(--paper);
+    padding: 96px 0 80px;
+    border-top: 4px solid var(--barn);
+  }
+  .outro-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .outro h2 {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 900;
+    font-size: 56px;
+    line-height: 1;
+    margin: 0 0 16px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .outro h2 em { color: var(--barn); font-style: italic; }
+  .outro .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .outro p {
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0 0 14px;
+    text-wrap: pretty;
+  }
+  .outro p b { color: var(--ink); font-weight: 600; }
+  .outro p em { color: var(--barn-deep); font-style: italic; }
+  .outro .actions { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+  .outro .actions a {
+    display: inline-block;
+    padding: 11px 20px;
+    text-decoration: none;
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .outro .actions .primary { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
+  .outro .actions .primary:hover { background: var(--barn); border-color: var(--barn); }
+  .outro .actions .secondary { border: 1px solid var(--ink); color: var(--ink); }
+  .outro .actions .secondary:hover { background: var(--ink); color: var(--paper); }
+
+  .outro-card {
+    background: var(--paper-2);
+    border: 1.5px solid var(--ink);
+    padding: 26px 28px;
+    box-shadow: 10px 12px 0 rgba(14,13,12,0.18);
+  }
+  .outro-card h4 {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 700;
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  .outro-card .lead {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--barn);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .outro-card ul { list-style: none; padding: 0; margin: 0; }
+  .outro-card li {
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--rule-strong);
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    font-family: var(--f-body);
+    font-size: 15.5px;
+  }
+  .outro-card li:last-child { border-bottom: none; }
+  .outro-card li .rn {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--barn);
+    font-size: 15px;
+  }
+  .outro-card li a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+  }
+  .outro-card li a:hover { border-bottom-color: var(--barn); color: var(--barn-deep); }
+  .outro-card li .kind {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  /* ============== FOOTER ============== */
+  .colophon {
+    background: var(--ink); color: var(--paper);
+    padding: 64px 0 28px; font-family: var(--f-body);
+  }
+  .colophon-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 36px;
+  }
+  .colophon .mark {
+    font-family: var(--f-display);
+    font-style: italic; font-weight: 900;
+    font-size: 36px; margin-bottom: 16px;
+  }
+  .colophon .mark .amp { color: var(--barn); }
+  .colophon .blurb {
+    font-size: 15px;
+    color: rgba(239,228,207,0.78);
+    line-height: 1.55;
+    max-width: 480px;
+    margin: 0 0 14px;
+  }
+  .colophon h5 {
+    font-family: var(--f-poster);
+    letter-spacing: 0.18em;
+    font-size: 14px;
+    color: var(--brass);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .colophon ul { list-style: none; padding: 0; margin: 0; }
+  .colophon li { padding: 6px 0; }
+  .colophon a {
+    color: rgba(239,228,207,0.85); text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px dotted rgba(239,228,207,0.25);
+  }
+  .colophon a:hover { color: var(--barn); border-bottom-color: var(--barn); }
+  .colo-bottom {
+    border-top: 1px solid rgba(239,228,207,0.18);
+    padding-top: 22px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(239,228,207,0.6);
+  }
+  .colo-bottom .star { color: var(--barn); margin: 0 6px; }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="topstrip">
+  <div class="wrap topstrip-inner">
+    <div>USA <span class="dot"></span> <b style="color:var(--ink)">Kulturen</b></div>
+    <div>Otte landskaber over <b style="color:var(--ink)">republikken og dens billeder</b></div>
+    <div>Et essay i otte dele <span class="dot"></span> set fra Aarhus</div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <div class="mast-side">
+        Vol. II <span style="color:var(--barn)">·</span> No. 033<br>
+        Anno MMXXVI
+      </div>
+      <div class="wordmark">
+        <a href="Johnny og jeg.html">
+          <div class="kicker">— en personlig hyldest —</div>
+          <div class="name">Johnny &amp; jeg</div>
+          <div class="sub">Musikken · Troen · Amerika</div>
+        </a>
+      </div>
+      <div class="mast-side right">
+        USA · Kulturen<br>
+        <b>Otte landskaber</b>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="primary">
+  <div class="wrap">
+    <div class="nav-row">
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html">Hjem</a></div>
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html#musikeren">Johnny Cash <span class="caret">▾</span></a></div>
+      <div class="nav-item"><a class="nav-link active" href="Kulturen.html">USA <span class="caret">▾</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="Bøger, spil, film.html">Bøger, spil, film</a></div>
+      <div class="nav-item"><a class="nav-link" href="Foredrag.html">Foredrag</a></div>
+      <div class="nav-item"><a class="nav-link" href="#">Om siden</a></div>
+      <div class="nav-item"><a class="nav-link" href="Johnny og jeg.html#kontakt">Kontakt</a></div>
+      <div class="nav-cta"><a href="Foredrag.html">Bestil foredrag →</a></div>
+    </div>
+  </div>
+</nav>
+
+<!-- STICKY SUB-NAV (TOC) -->
+<div class="subnav" id="subnav" aria-label="Landskaberne">
+  <div class="wrap">
+    <div class="label">— Landskaberne —</div>
+    <ol>
+      <li><a href="#naturen" data-section="naturen"><span class="rn">I</span>Naturen</a></li>
+      <li><a href="#vesten" data-section="vesten"><span class="rn">II</span>Vesten</a></li>
+      <li><a href="#forgyldte" data-section="forgyldte"><span class="rn">III</span>Den forgyldte</a></li>
+      <li><a href="#syd-nord" data-section="syd-nord"><span class="rn">IV</span>Syd &amp; Nord</a></li>
+      <li><a href="#vaekkelsen" data-section="vaekkelsen"><span class="rn">V</span>Vækkelsen</a></li>
+      <li><a href="#mindretallene" data-section="mindretallene"><span class="rn">VI</span>Mindretallene</a></li>
+      <li><a href="#smeltedigelen" data-section="smeltedigelen"><span class="rn">VII</span>Smeltedigelen</a></li>
+      <li><a href="#drommefabrikken" data-section="drommefabrikken"><span class="rn">VIII</span>Drømmefabrikken</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="khero" id="top">
+  <div class="wrap">
+    <div class="khero-grid">
+      <div>
+        <div class="eyebrow"><span class="bar"></span>USA · Kulturen · Et essay i otte landskaber</div>
+        <h1>Republikken<br>og dens <em>billeder</em>.</h1>
+        <p class="subhead">Forskellige amerikanske kulturer, før og nu.</p>
+        <p class="deck">
+          Amerika kan ikke fortælles som <em>ét</em> sted. Det er heller ikke én kultur — det er en samling af <em>landskaber</em>, der ligger oven på hinanden, taler i munden på hinanden og strides om hvilken af dem, der er den rigtige. Hvert landskab har sin egen tidsregning, sit eget gospel og sit eget sæt af helte.
+        </p>
+        <p class="deck">
+          Det her er otte forsøg på at tegne dem op. Ikke som en facitliste, men som en lytters notesbog — én, der har siddet med USA i tre årtier og fortsat finder nye lag at vende.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIP GRID -->
+<section class="chips">
+  <div class="wrap">
+    <div class="chips-head">
+      <div class="lab">— Landskaberne · <b>klik for at hoppe ned</b> —</div>
+      <div class="count">otte felter, <em>én republik</em></div>
+    </div>
+    <div class="chips-grid">
+
+      <a class="chip" href="#naturen">
+        <div class="ck-top"><span class="rn">I</span><span>Kontinentet</span></div>
+        <h3 class="ck-name"><em>Naturen</em>.</h3>
+        <p class="ck-motto">Kontinentet og vildmarken.</p>
+        <div class="ck-period">1607 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#vesten">
+        <div class="ck-top"><span class="rn">II</span><span>Grænselandet</span></div>
+        <h3 class="ck-name"><em>Vesten</em>.</h3>
+        <p class="ck-motto">Grænselandets myte.</p>
+        <div class="ck-period">1620 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#forgyldte">
+        <div class="ck-top"><span class="rn">III</span><span>Kapitalen</span></div>
+        <h3 class="ck-name">Den <em>forgyldte</em> republik.</h3>
+        <p class="ck-motto">Industri, kapital, Østkystens gospel.</p>
+        <div class="ck-period">1870 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#syd-nord">
+        <div class="ck-top"><span class="rn">IV</span><span>Splittelsen</span></div>
+        <h3 class="ck-name">Syd vs. <em>Nord</em>.</h3>
+        <p class="ck-motto">Det uhelede sår.</p>
+        <div class="ck-period">1619 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#vaekkelsen">
+        <div class="ck-top"><span class="rn">V</span><span>Troen</span></div>
+        <h3 class="ck-name"><em>Vækkelsen</em>.</h3>
+        <p class="ck-motto">Det amerikanske gospel.</p>
+        <div class="ck-period">1730 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#mindretallene">
+        <div class="ck-top"><span class="rn">VI</span><span>De andre</span></div>
+        <h3 class="ck-name"><em>Mindretallene</em>.</h3>
+        <p class="ck-motto">Udelukkelsen og bidragene.</p>
+        <div class="ck-period">1607 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#smeltedigelen">
+        <div class="ck-top"><span class="rn">VII</span><span>Vitaliteten</span></div>
+        <h3 class="ck-name"><em>Smeltedigelen</em>.</h3>
+        <p class="ck-motto">Den uophørlige nyfortolkning.</p>
+        <div class="ck-period">1880 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+      <a class="chip" href="#drommefabrikken">
+        <div class="ck-top"><span class="rn">VIII</span><span>Spejlet</span></div>
+        <h3 class="ck-name"><em>Drømmefabrikken</em>.</h3>
+        <p class="ck-motto">Hvad er det "rigtige" Amerika?</p>
+        <div class="ck-period">1893 — nu</div>
+        <div class="ck-arrow">↓</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTRO ESSAY -->
+<section class="kintro">
+  <div class="wrap">
+    <div class="kintro-grid">
+      <div>
+        <div class="kicker">— Hvorfor otte landskaber? —</div>
+        <h2>Et land <em>fortalt</em> som overlappende rum.</h2>
+        <div class="signature">— en lytters notesbog —</div>
+      </div>
+      <div>
+        <p>
+          Amerika er ikke ét sted. Det er <b>otte landskaber</b>, der ligger over hinanden som lag i en geologisk profil — kontinentet under fødderne, grænsemyten over det, industrien over det igen, religionen, splittelsen, mindretallene, smeltedigelen, og spejlet på toppen, hvor landet betragter sig selv og sender billedet videre til os.
+        </p>
+        <p>
+          Hvor det forrige essay tegnede figurer — cowboyen, prædikanten, fangen — handler dette om de <em>kulturlandskaber</em>, figurerne lever indenfor. Det er en præcisere måde at læse landet på, fordi figurerne kun giver mening på deres rette baggrund. <b>Cowboyen og outlawen hører til Vesten</b>; <b>arbejderen og kapitalisten til Den forgyldte republik</b>; <b>prædikanten til Vækkelsen</b>. At blande dem giver det Amerika, vi importerer her — en kunst-tegning uden landkort under sig.
+        </p>
+        <p>
+          De fleste af landskaberne er ældre, end de virker. Vækkelsen begynder i 1730'erne, ikke i 1980'erne. Den forgyldte republik begynder i 1870'erne, ikke under Reagan. Syd vs. Nord begynder i 1619, ikke i 1861. Det er en del af pointen: <b>landskaberne forsvinder ikke; de forskubbes.</b> Cowboyen i 2026 er en politisk position, ikke en kvæghyrder. Den forgyldte republik er kommet tilbage som tech-økonomi. Vækkelsen er kommet tilbage som politisk parti.
+        </p>
+        <p>
+          Otte essays følger. Ingen af dem færdige, ingen af dem dækkende. <em>Læs dem som en notesbog</em> — en lytters forsøg på at give billedet af USA dybde, set herfra Aarhus, hvor vi kun har set landet gennem dets eget spejl.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE I · NATUREN -->
+<!-- =========================================================== -->
+<section class="land" id="naturen">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">I</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab I <span class="sep">·</span> Kontinentet <span class="sep">·</span> 1607 — nu</div>
+        <h2 class="land-name"><em>Naturen</em>.</h2>
+        <p class="land-motto">Kontinentet og vildmarken.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Et kontinent fire gange Europas størrelse, med ørkener, der sluger byer, og floder, der flytter delstater. Amerikansk kultur har måttet udvikle et ordforråd for skala og tomhed, som vi i Europa simpelthen ikke har brug for. Fra Thoreau ved Walden Pond i 1854 til Yellowstone — verdens første nationalpark, 1872 — løber en strøm gennem landet af tro på, at <b>jorden selv er moralsk betydningsfuld</b>. Vildmarken som katedral. Vildmarken som terapi. Vildmarken som bevis på, at eksperimentet var berettiget.
+        </p>
+        <p>
+          Modsætningen ligger lige ved siden af tilbedelsen. Det samme århundrede, der opfandt nationalparkerne, jagede bisonen tæt på udryddelse, pløjede prærien op og producerede Dust Bowl. <em>Jorden er hellig og udvindelig på samme tid</em>, ofte i samme politiske program. Theodore Roosevelt — manden bag nationalparkstjenesten — var samtidig den store cheerleader for imperial ekspansion. Det er Amerika i et nøddeskal: bevarelse og udnyttelse, i samme håndtryk.
+        </p>
+
+        <p class="land-pull">
+          Vildmarken er Amerikas <em>første</em> myte. Den ligger under alle de andre, bogstaveligt talt.
+        </p>
+
+        <p>
+          I amerikansk litteratur dukker landet op som karakter — ikke baggrund. Steinbecks Californien, Cormac McCarthys grænseland, Marilynne Robinsons Idaho, Annie Proulx' Wyoming, Faulkners Mississippi. <b>Dust Bowl er en krig ført på jorden, ikke om den.</b> De skovbrande, der nu raser fra juni til november, er måske den langsomste krig i amerikansk historie — endelig en, jorden vinder.
+        </p>
+        <p>
+          Også her ligger Indianerkrigene gemt: kampen om kontinentet var en kamp om hvem der ejede jorden, og den blev løst med fordrivelse. Det er et lag, vi får mere af i Mindretallene længere nede. Men det er værd at huske her, hvor landskabet etableres: <b>tom blev ikke fundet — tom blev produceret.</b>
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Thoreau · John Muir · Theodore Roosevelt · Ansel Adams · Rachel Carson · <b>Aldo Leopold</b> · park-rangeren · cowboy-som-naturbevarer · oliebaronen · Dust-Bowl Okie'en</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1804</span><span>Lewis &amp; Clark</span></li>
+            <li><span class="yr">1854</span><span>Thoreau · <em>Walden</em></span></li>
+            <li><span class="yr">1872</span><span><b>Yellowstone</b> — verdens første nationalpark</span></li>
+            <li><span class="yr">1934</span><span>Dust Bowl kulminerer</span></li>
+            <li><span class="yr">1962</span><span>Rachel Carson · <em>Silent Spring</em></span></li>
+            <li><span class="yr">2020+</span><span>Wildfires som klima-norm</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">Indianerkrigene blev udkæmpet om dette landskab — og <b>Dust Bowl</b> er på sin egen måde en krig ført på jorden, ikke om den.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Danmark har ingen vildmark, og derfor ingen Thoreau. Den danske reaktion på de amerikanske nationalparker er ærefrygt over skalaen; den amerikanske reaktion ligner snarere <em>andagt</em>. Naturen i Danmark er bøgeskoven; i Amerika er den noget mere religiøst.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Naturen.html"><span class="sm">— Læs mere —</span>Til Naturen-arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab I <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE II · VESTEN -->
+<!-- =========================================================== -->
+<section class="land paper-2" id="vesten">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">II</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab II <span class="sep">·</span> Grænselandet <span class="sep">·</span> 1620 — nu</div>
+        <h2 class="land-name"><em>Vesten</em>.</h2>
+        <p class="land-motto">Grænselandets myte.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Den største historie Amerika fortæller om sig selv, og den, vi i Europa har købt mest helhjertet. Idéen om at landet blev <em>bygget ved at flytte sig</em> — at dyd ligger længere mod vest, at civilisationen ligger bag dig, at friheden altid bor én dal længere ude. Historikeren Frederick Jackson Turner gav myten dens akademiske ramme i 1893; Hollywood gav den dens visuelle grammatik fra 1903 og frem; vi har modtaget cowboyen lige siden.
+        </p>
+        <p>
+          Den faktiske grænse lukkede i 1890, ved folketællingens dekret. Men <b>idéen</b> om grænsen lukkede aldrig. Den vandrede bare. Ind i rummet: Kennedy's "New Frontier"-tale i 1960 er ord-for-ord lånt fra Turner. Ind i politikken: hvert amerikansk valg udkæmpes delvis i sproget om en rastløs ny begyndelse. Ind i våbnet: open-carry-lovgivningen i Texas i 2025 er nedstigning fra grænselandets retsorden i Kansas 1875.
+        </p>
+
+        <p class="land-pull">
+          Cowboyen, outlawen, pioneren og sheriffen er ikke fire myter — de er fire roller i den samme.
+        </p>
+
+        <p>
+          Indianerkrigene ligger inde i dette landskab og ikke uden for det. Det samme gør den mexicansk-amerikanske krig i 1846–48, der skænkede landet en tredjedel af dets nuværende areal og en omstridt sydgrænse, det har genforhandlet lige siden. <em>Outlawen</em> er cowboyens skygge; <em>sheriffen</em> er cowboyen med stjerne; <em>pioneren</em> er cowboyen med hustru. Samme familie, forskellige funktioner i den samme fortælling.
+        </p>
+        <p>
+          Det er også her, den amerikanske våbenkultur har sin rod. Anden Forfatningsændring læses i 2026 stadig gennem grænselandets logik: borgeren skal selv kunne forsvare sig, fordi staten er langt væk og loven kan svigte. Det er en konkret arv fra 1875 — og den er stadig politisk levende, otte generationer senere.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Pioneren · <b>Cowboyen</b> · Outlawen · Sheriffen · Indianeren-som-Anden · saloonpigen · sporvejsbygmesteren · guldgraveren · Marlboro-manden</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1620</span><span>Mayflower lander</span></li>
+            <li><span class="yr">1803</span><span>Louisiana-købet</span></li>
+            <li><span class="yr">1846</span><span>Mexicansk-amerikansk krig</span></li>
+            <li><span class="yr">1849</span><span>Guldfeber i Californien</span></li>
+            <li><span class="yr">1890</span><span><b>Grænsen "lukker"</b> ved folketælling</span></li>
+            <li><span class="yr">1903</span><span>Hollywoods første western (<em>The Great Train Robbery</em>)</span></li>
+            <li><span class="yr">1960</span><span>JFK: "New Frontier"</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">Indianerkrigene · Den mexicansk-amerikanske krig · den moderne <b>våbenkultur</b> som grænselandsarv.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Han bar Vesten som <em>kostume</em> — pistolballader, kvægdrivertempo, sort hat — men også med tvivl. <em>Don't Take Your Guns to Town</em> er en cowboy-ballade, der vender mytens vold mod sig selv.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Det Amerika, vi fik først og tydeligst — Marlboro-manden, John Wayne, <em>Red Dead Redemption</em>, cowboyhatten ved Tønder Festival. Vi forveksler det jævnligt med <b>hele</b> landet.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Vesten.html"><span class="sm">— Læs mere —</span>Til Vesten-arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab II <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE III · DEN FORGYLDTE REPUBLIK -->
+<!-- =========================================================== -->
+<section class="land dark" id="forgyldte">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">III</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab III <span class="sep">·</span> Kapitalen <span class="sep">·</span> 1870 — nu</div>
+        <h2 class="land-name">Den <em>forgyldte</em> republik.</h2>
+        <p class="land-motto">Industri, kapital og Østkystens gospel.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Modmyten. Hvor Vesten sælger <em>bevægelse</em> som frihed, sælger Østkysten <em>akkumulation</em>. Fabrikken, jernbanen, skyskraberen, Wall Street, bestyrelseslokalet. Fra Borgerkrigens afslutning frem til krakket i 1929 — og igen fra Reagan til nu — har Amerika produceret sin rigeste og mest ulige version af sig selv ud af de samme kystbyer.
+        </p>
+        <p>
+          Mark Twain opfandt begrebet "the Gilded Age" som skældsord i 1873 — <em>forgyldt</em>, ikke <em>gylden</em>. Tynd bladguld over rå metal. Sprogbrugen sad fast, fordi landet kunne genkende sig selv i den. Carnegie, Rockefeller, Morgan, Ford — navne, der både betød <b>byggede Amerika</b> og <b>brød Amerika</b>, og skolerne kunne aldrig helt blive enige om hvilken af de to historier, de skulle undervise i. Frihedsgudinden (1886) blev rejst ved Ellis Island, mens den samme havn ekspederede de millioner af immigranter, der skulle bygge resten.
+        </p>
+
+        <p class="land-pull">
+          Den amerikanske grundsætning er, at <em>rigdom er fortjent</em>. Hele resten følger af den.
+        </p>
+
+        <p>
+          Periodens teologi er læren om at rigdom er moralsk bevis. Andrew Carnegie skrev den ned i <em>The Gospel of Wealth</em> (1889), næsten ordret. Det evangelium forsvandt aldrig; det ligger under store dele af amerikansk politisk liv lige nu. <b>Den anden Gilded Age</b> — med dens tech-grundlæggere og dens billion-dollar-firmaer — rimer langt klarere på den første, end nogen i 1995 ville have gættet på.
+        </p>
+        <p>
+          Borgerkrigen er katalysatoren. Krigsøkonomien 1861–65 byggede jernbanerne, stålværkerne og telegrafnettet. Anden Verdenskrig gentog tricket på global skala (Roosevelts "arsenal of democracy"). Det <b>militær-industrielle kompleks</b>, som Eisenhower advarede om i sin afgangstale i 1961, er dette landskabs moderne form: en permanent økonomi af våben, der ikke længere kan adskilles fra økonomien som sådan.
+        </p>
+        <p>
+          Den anden side af mønten er <em>fagforeningen</em> — den amerikanske arbejder, der byggede landet og så det glemme ham. Strejker, Pinkerton-bøller, fagforeningsbusting, lukkede stålbyer. Her er Amerika ironisk nok tættest på Europa — sproget er det samme — men udfaldene er forskellige. Hos os blev det velfærdsstat; hos dem blev det Rust Belt.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Industrimanden (Carnegie, Rockefeller) · <b>Selfmade-manden</b> · immigrantarbejderen · fagforeningsmanden · "robber baronen" · nutidens tech-grundlægger · Wall Street-handleren · Mad Men's reklamefolk</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1869</span><span>Transkontinentaljernbane færdig</span></li>
+            <li><span class="yr">1873</span><span>Twain mønter "the Gilded Age"</span></li>
+            <li><span class="yr">1886</span><span>Frihedsgudinden rejses</span></li>
+            <li><span class="yr">1889</span><span>Carnegie · <em>The Gospel of Wealth</em></span></li>
+            <li><span class="yr">1929</span><span>Wall Street-krakket</span></li>
+            <li><span class="yr">1961</span><span>Eisenhower advarer om <b>military-industrial complex</b></span></li>
+            <li><span class="yr">1981</span><span>Reagan tiltræder</span></li>
+            <li><span class="yr">2010+</span><span>Den anden Gilded Age</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">Borgerkrigen som motor for industrialisering · WWII som produktionsmirakel · det militær-industrielle kompleks som permanent økonomi.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Han var selfmade — Dyess-bomuldssøn til Madison Square Garden — men han købte aldrig fortællingen om at <em>alle</em> kunne det samme. <em>Man in Black</em> var et standpunkt om hvem evangeliet faktisk omfattede.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Janteloven er ikke et tilfælde. Den amerikanske præmis om, at <b>de rige er rige af moralske grunde</b>, er usynlig herfra — og forklarer en startling andel af amerikansk politik, vi ellers ikke kan følge med i.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Den forgyldte republik.html"><span class="sm">— Læs mere —</span>Til arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab III <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE IV · SYD vs. NORD -->
+<!-- =========================================================== -->
+<section class="land" id="syd-nord">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">IV</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab IV <span class="sep">·</span> Splittelsen <span class="sep">·</span> 1619 — nu</div>
+        <h2 class="land-name">Syd vs. <em>Nord</em>.</h2>
+        <p class="land-motto">Det uhelede sår.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Ikke to landskaber, men én <em>spænding</em>. Dixie og Yankee har defineret hinanden ved modsætning siden før uafhængigheden. Plantage mod fabrik. Bomuld mod stål. Gospel mod salme. Den tabte sag mod den manifeste skæbne i en anden toneart. Og under det hele: <b>race-spørgsmålet</b>, som landet har kæmpet i fire hundrede år for at undgå, og endnu ikke kan lægge fra sig.
+        </p>
+        <p>
+          Datoerne er velkendte, men holdbarheden er pointen. 1619: de første slavegjorte afrikanere ankommer til Jamestown — et år før Mayflower. 1861–65: borgerkrig, med over 600.000 døde. 1877: Reconstruction opgives som led i et politisk forlig. 1896: <em>Plessy v. Ferguson</em> skriver Jim Crow ind i forfatningen. 1954: <em>Brown v. Board</em> forsøger at skrive det ud igen. 1964–65: Civil Rights Act og Voting Rights Act. 2017: Charlottesville. 2020: George Floyd. <b>Valgkortet fra 2024 rimer foruroligende klart på det fra 1860.</b>
+        </p>
+
+        <p class="land-pull">
+          Såret heles ikke, fordi det aldrig blev lukket. Reconstruction blev opgivet i et baglokaleforlig — ikke afsluttet.
+        </p>
+
+        <p>
+          Den kulturelle produktion er svimlende. Faulkner er utænkelig uden sårret. Det samme er blues, country, sydstats-gospel og Den Sorte Kirke. <em>De fleste ting, udlændinge tænker på som "amerikansk kultur"</em>, er i virkeligheden sydstats-kultur — ofte sort sydstats-kultur — ofte filtreret gennem nordlig industri inden den når os. Nashville solgte Memphis videre til verden, og glemte at fortælle hvem der lavede lyden.
+        </p>
+        <p>
+          Yankee-Amerika har sin egen mytologi: town-meeting-demokratiet, abolitionismen, Harvard, det hvide bræddetag på den lille kirke i New England, Transcendentalisterne, fagforeningen som moralsk projekt. Det er det Amerika, vi i Danmark forstår nemmest — fordi det <em>ligner</em> noget af det, vi selv har. Det er en del af problemet: vi læser hele Amerika gennem den halvdel, der ligner os.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val"><b>Sydsiden:</b> plantageejeren · den fattige hvide bonde · sharecropperen · Klansmanden · den frigjorte slave · Civil-Rights-prædikanten · den "new South"-industrimand.<br><br><b>Nordsiden:</b> abolitionisten · town-meeting-borgeren · Harvard-manden · fagforeningsorganisatoren · transcendentalisten · carpetbaggeren.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1619</span><span>Første slavegjorte til Jamestown</span></li>
+            <li><span class="yr">1831</span><span>Nat Turners oprør</span></li>
+            <li><span class="yr">1861</span><span><b>Borgerkrigen</b> begynder</span></li>
+            <li><span class="yr">1865</span><span>Lee overgiver sig · 13. tillæg</span></li>
+            <li><span class="yr">1877</span><span>Reconstruction opgives</span></li>
+            <li><span class="yr">1896</span><span>Jim Crow legaliseres</span></li>
+            <li><span class="yr">1955</span><span>Montgomery-busboykotten</span></li>
+            <li><span class="yr">1964</span><span>Civil Rights Act</span></li>
+            <li><span class="yr">2017</span><span>Charlottesville</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val"><b>Selve krigen.</b> Borgerkrigen er ikke en hændelse i dette landskab — den er dets rygsøjle. Alt bagefter er forhandling om dens udfald.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Arkansas-født, opvokset i Dyess-kolonien under New Deal. Sydlænding af fødsel, Memphis-mand af karriere (Sun Records — en nordlig-organiseret virksomhed bygget på sort sydlig lyd). Han forhandlede mellem de to halvdele hele livet og talte tidligt åbent imod Vietnamkrigen og for indianernes rettigheder.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Danmark tabte sine territorier i 1864 og holdt op med at ekspandere. Amerika tabte sin borgerkrig — eller rettere: <em>Syden tabte og blev ved at forhandle</em> — og har genforhandlet udfaldet i 160 år. Vi har intet sammenligneligt sår.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Syd og Nord.html"><span class="sm">— Læs mere —</span>Til Syd &amp; Nord-arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab IV <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE V · VÆKKELSEN -->
+<!-- =========================================================== -->
+<section class="land paper-2" id="vaekkelsen">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">V</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab V <span class="sep">·</span> Troen <span class="sep">·</span> 1730 — nu</div>
+        <h2 class="land-name"><em>Vækkelsen</em>.</h2>
+        <p class="land-motto">Det amerikanske gospel.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Amerikansk kristendom ligner ikke europæisk kristendom, og har aldrig gjort det. Den er <b>teatralsk, decentraliseret, kommerciel, politisk aktiv</b> — og — enestående blandt vestlige demokratier — <em>voksende</em> i realpolitisk forstand i det 21. århundrede, ikke svindende. For at forstå halvdelen af det amerikanske vælgerkorps må man forstå opvækkelsesteltet.
+        </p>
+        <p>
+          Historien begynder med Jonathan Edwards i Northampton, Massachusetts, i 1730'erne — ild-og-svovl-prædiken, der voksede til den Første Store Opvækkelse. Den Anden Opvækkelse i begyndelsen af 1800-tallet producerede camp meeting'et: tusinder af mennesker, flere prædikanter på én gang, koreograferet omvendelse. Mønstret, der blev sat dengang, har dybest set ikke ændret sig: en bærbar, ekstatisk, <em>karismatisk</em> form for kristendom, der ikke har brug for et sogn, en statskirke eller endda en bygning. Pinsekirkebevægelsen fødes i Los Angeles i 1906. Billy Graham fylder stadioner fra 1949. Televangelisterne ankommer med kabel-TV i 1970'erne. Megakirken er formen for 2000-tallet. Kristen nationalisme er formen for nu.
+        </p>
+
+        <p class="land-pull">
+          Amerikansk kristendom har optaget showbusiness uden at miste alvoren — eller i det mindste ikke stemmerne.
+        </p>
+
+        <p>
+          Genialiteten ved den amerikanske religiøse form er, at den fusionerede frelse med underholdning uden at noget af det knækkede. Aimee Semple McPherson prædikede med scenelys i 1925. <em>Elmer Gantry</em> var satire i 1927 og dokumentar i 1980. Joel Osteens auditorium var en basketball-arena. Den fusion af <b>show business og frelse</b> ryster europæere, men i Amerika er det bare <em>sådan det virker</em> — og altid har virket.
+        </p>
+        <p>
+          Den moderne politiske side er det, der er sværest at læse herfra. Den hvide evangelikale stemme er blevet et af amerikansk politiks mest stabile blokke — over 80% støtter konsekvent én bestemt politisk linje, valg efter valg, på tværs af kandidater. Det er ikke en kirkelig position; det er en stammeposition, hvis sprog er kirkeligt. Den slags forskel klæder sig som kirke og opfører sig som parti.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Vækkelsesprædikanten · <b>televangelisten</b> · megakirkens pastor · slangehåndtereren · den omvendte synder · gospel-kvartetten · Christian Contemporary-industrien · den kristne nationalist</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1730s</span><span>Første Store Opvækkelse · Jonathan Edwards</span></li>
+            <li><span class="yr">1801</span><span>Cane Ridge camp meeting · <b>Anden Opvækkelse</b></span></li>
+            <li><span class="yr">1906</span><span>Azusa Street · Pinsekirken fødes</span></li>
+            <li><span class="yr">1925</span><span>Aimee Semple McPherson</span></li>
+            <li><span class="yr">1949</span><span>Billy Graham fylder Los Angeles</span></li>
+            <li><span class="yr">1979</span><span>Moral Majority dannes</span></li>
+            <li><span class="yr">1980s</span><span>Televangelist-æraen</span></li>
+            <li><span class="yr">2010+</span><span>Kristen nationalisme</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">"City upon a Hill"-retorikken har siden Puritanerne fulgt enhver amerikansk krig — fra Revolutionen til Irak. Krigen som <em>mission</em>.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Hans fætter Jimmy Lee Swaggart var televangelist-royalty. Cash blev aldrig prædikant selv, men han var et <em>vidne</em> — og hans sene gospelplader er et menneske, der tager prædikestolen alvorligt uden at bestige den.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Folkekirken er ikke et telt. Kombinationen af <b>show business, frelse og partipolitik</b> har ingen dansk pendant, og er den manglende variabel i de fleste danske forsøg på at forstå amerikansk politik.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Vækkelsen.html"><span class="sm">— Læs mere —</span>Til Vækkelses-arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab V <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE VI · MINDRETALLENE -->
+<!-- =========================================================== -->
+<section class="land dark" id="mindretallene">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">VI</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab VI <span class="sep">·</span> De andre <span class="sep">·</span> 1607 — nu</div>
+        <h2 class="land-name"><em>Mindretallene</em>.</h2>
+        <p class="land-motto">Udelukkelsen og bidragene.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Republikken blev bygget på <em>assimilation og udelukkelse</em> samtidig — og det samme århundrede kunne klare begge dele: Frihedsgudinden rejstes i 1886, mens Chinese Exclusion Act af 1882 stadig var i kraft. At behandle Amerikas mindretal som ét landskab er ikke at flade dem ud; det er at lægge mærke til, at mønstrene rimer.
+        </p>
+
+        <h4>Native America</h4>
+        <p>
+          Den længste historie og den mindst synlige fra Europa. Kontinentet var beboet — visse steder tæt beboet — da Columbus ankom. <em>Trail of Tears</em> (1838–39) tvang hele nationer fra Georgia til Oklahoma, så bomulden kunne vokse uforstyrret. Reservationssystemet er en 19. århundredes opfindelse, der stadig er den retlige ramme i dag. Suverænitetsspørgsmål er stadig politisk aktive — pipeline-protester, jurisdiktion, kasinodrift.
+        </p>
+
+        <h4>Sort Amerika</h4>
+        <p>
+          Den fundamentale historie. Slaveskibe ankom i 1619, et år før Mayflower. Emancipation (1865), Den Store Migration nordpå (1916–70), Civil Rights-bevægelsen, masseinternering fra 1980'erne, Black Lives Matter i 2020 — linjen er ubrudt. <b>Amerikansk musik, som verden kender den</b> — blues, jazz, gospel, soul, rock, hiphop — er overvældende en sort amerikansk opfindelse.
+        </p>
+
+        <h4>Asiatisk Amerika</h4>
+        <p>
+          Kinesiske arbejdere byggede den vestlige halvdel af transkontinentalbanen (færdig 1869) og blev derefter eksplicit udelukket fra landet i 1882. Japanske amerikanere på vestkysten blev interneret under WWII (1942–46) — 120.000 mennesker, to tredjedele af dem amerikanske borgere. Vietnamesiske flygtninge kom i bølger efter 1975. <em>"Model minority"</em>-narrativet er en 1960'er-opfindelse, der overdækker tidligere udelukkelse.
+        </p>
+
+        <h4>Latinamerika</h4>
+        <p>
+          Latinamerikanere har dybest set ikke været et separat land fra USA i to århundreder. Den mexicansk-amerikanske krig (1846–48) overdrog en tredjedel af Mexico til amerikansk suverænitet; folkene på det land blev. Bracero-programmet (1942–64) hentede millioner flere. <b>Den moderne grænsedebat</b> er nedstigning af alt dette — den er ikke ny, den er en fortsættelse af noget meget gammelt.
+        </p>
+
+        <h4>De europæiske bølger</h4>
+        <p>
+          Irere (1840'erne), italienere (fra 1880'erne), jøder (1880'erne–1924), polakker — alle blev behandlet som <em>racemæssige outsidere</em> i deres egen samtid og blev først eftergivende foldet ind i "hvidt" Amerika i midten af det 20. århundrede. Den historie er glemt i dag fordi udfaldet blev assimilation. Hvis udfaldet havde været anderledes, ville den have lignet de andre.
+        </p>
+
+        <p class="land-pull">
+          Landet skylder sin kultur overvældende meget til mennesker, det brugte århundreder på at udelukke.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Sitting Bull · <b>Frederick Douglass</b> · W.E.B. Du Bois · Martin Luther King · Cesar Chavez · de internerede japanske amerikanere fra Manzanar · Wong Kim Ark · enhver irsk politichef i Chicago 1880</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1607</span><span>Powhatan møder Jamestown</span></li>
+            <li><span class="yr">1619</span><span>Første slavegjorte afrikanere</span></li>
+            <li><span class="yr">1838</span><span><b>Trail of Tears</b></span></li>
+            <li><span class="yr">1865</span><span>Emancipation</span></li>
+            <li><span class="yr">1882</span><span>Chinese Exclusion Act</span></li>
+            <li><span class="yr">1916</span><span>Den Store Migration begynder</span></li>
+            <li><span class="yr">1942</span><span>Japansk internering (E.O. 9066)</span></li>
+            <li><span class="yr">1965</span><span>Hart-Celler Act ophæver kvoter</span></li>
+            <li><span class="yr">1975</span><span>Vietnamesisk flygtningebølge</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">Stort set <em>enhver</em> minoritets-historie er også en krigshistorie. Indianerkrigene, Borgerkrigen, japansk internering, Vietnam-flygtningebølgerne, Mexicansk-amerikansk krig.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Folsom- og San Quentin-koncerterne (1968, 1969) hører til her. Den amerikanske fængselsbefolkning har altid været uforholdsmæssigt ikke-hvid; at spille for de indsatte var at spille for <em>den</em> befolkning, specifikt. <em>The Ballad of Ira Hayes</em> (1964) gjorde det samme for indianernes side.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Dissonansen er svær at overdrive: landet skylder kulturelt enormt meget til de mennesker, det udelukkede fra <b>fuldt medborgerskab</b> i flere generationer. Det er den lap af amerikansk historie, vi i Europa har dårligst kort over.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Mindretallene.html"><span class="sm">— Læs mere —</span>Til Mindretals-arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab VI <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE VII · SMELTEDIGELEN -->
+<!-- =========================================================== -->
+<section class="land" id="smeltedigelen">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">VII</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab VII <span class="sep">·</span> Vitaliteten <span class="sep">·</span> 1880 — nu</div>
+        <h2 class="land-name"><em>Smeltedigelen</em>.</h2>
+        <p class="land-motto">Den uophørlige nyfortolkning.</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Den kinetiske modpol til Mindretallene: hvad der sker <em>fordi</em> al den blanding finder sted, og <em>på trods</em> af udelukkelserne. Amerika som det anti-statiske land, det land der ikke kan holde op med at remixe sig selv. <em>Melting pot</em> er metaforen, der satte sig fast (Israel Zangwills skuespil, 1908), og den er for ren — der smelter intet, ingredienserne bliver kendelige — men den underliggende iagttagelse er rigtig: <b>dette er det land, der konverterer forskel til nyhed i industriel skala</b>.
+        </p>
+        <p>
+          Det musikalske århundrede alene er svimlende: Tin Pan Alley (fra 1880'erne) → jazz født i New Orleans (1910'erne) → Broadway → swing → bebop → rock 'n' roll (Sun Records, Memphis, 1954) → soul (Motown, Stax) → hiphop (Bronx, 1973) → alt siden. Hver af dem er et fusionsprodukt. Gospel møder blues møder europæisk harmoni møder afrikansk rytme møder caribisk synkopation møder hvad-end immigranten der landede tirsdag bragte med. <b>Ingen af det kunne være sket andre steder</b>, fordi ingen andre steder havde befolkningen kollideret så konstant.
+        </p>
+
+        <p class="land-pull">
+          Danmark er god til at <em>raffinere</em>. Amerika er god til at <em>opfinde</em>. To forskellige kulturelle stofskifter.
+        </p>
+
+        <p>
+          Uden for musikken gentager mønsteret sig. Dineren (tysk-jødisk-græsk-italiensk fusion serveret på en kromskænk). Silicon Valley (primært indisk og kinesisk ingeniørarbejde oven på angelsaksisk kapital). Moderne amerikansk madmode (Korean taco, vietnamesisk bánh mì, avocado på alt). Selv sproget er i konstant bevægelse — <em>cool</em>, <em>jazz</em>, <em>OK</em>, <em>gig</em>, halvdelen af det 21. århundredes slang er lånt fra mindretals-engelsk og geneksporteret globalt inden for et år.
+        </p>
+        <p>
+          Vitaliteten har en mørkere side, det er værd at sige højt: den er <b>kommerciel</b>. Hvad smeltedigelen koger op, sælges. Jazzen sluger gospelens lyd og betaler ikke royalties. Rock 'n' roll sluger blues og betaler ikke royalties. Hiphop sluger funk og betaler i hvert fald først royalties bagefter. Den ekstraktive logik fra Den forgyldte republik er aldrig langt væk, selv her.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Opfinderen · bandlederen · genre-blanderen · <b>garagegrundlæggeren</b> · dinerkokken der satte avocado på alt · Tin-Pan-Alley-komponisten · DJ Kool Herc i Bronx 1973 · Sun Records-Sam-Phillips</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1880s</span><span>Tin Pan Alley</span></li>
+            <li><span class="yr">1908</span><span>Zangwill: <em>The Melting Pot</em></span></li>
+            <li><span class="yr">1917</span><span>Første jazzindspilning</span></li>
+            <li><span class="yr">1939</span><span>Hollywood-musicalen modnes (<em>Wizard of Oz</em>)</span></li>
+            <li><span class="yr">1954</span><span><b>Elvis i Sun Records</b></span></li>
+            <li><span class="yr">1959</span><span>Motown stiftes</span></li>
+            <li><span class="yr">1973</span><span>Hiphop fødes i Bronx</span></li>
+            <li><span class="yr">1976</span><span>Apple grundlægges</span></li>
+            <li><span class="yr">2010+</span><span>Platformsalderen</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">WWII brød verden i stykker, og Amerika genopbyggede den globale <em>kreative</em> orden oven på murbrokkerne. Den kolde krig brugte abstrakt ekspressionisme og jazz som soft power.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Han optog hos Sun i Memphis i 1955 — selve smeltedigelens centrale punkt, hvor Sam Phillips bevidst blandede sort og hvid sydlig musik. Cashs samarbejde med Rick Rubin tres år senere (American Recordings, 1994–2010) var et andet remix-projekt: country møder LA-hiphop-producent.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Vi polerer det, vi har. De remixer det, der lige er kommet ind ad døren. Ikke bedre eller dårligere — bare <b>fundamentalt forskelligt</b> stofskifte.</div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Smeltedigelen.html"><span class="sm">— Læs mere —</span>Til Smeltedigel-arkivet →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Slut på Landskab VII <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- LANDSCAPE VIII · DRØMMEFABRIKKEN -->
+<!-- =========================================================== -->
+<section class="land dark" id="drommefabrikken">
+  <div class="wrap">
+    <div class="land-head">
+      <div class="land-rn">VIII</div>
+      <div class="land-titles">
+        <div class="land-eyebrow">Landskab VIII <span class="sep">·</span> Spejlet <span class="sep">·</span> 1893 — nu</div>
+        <h2 class="land-name"><em>Drømmefabrikken</em>.</h2>
+        <p class="land-motto">Hvad er det "rigtige" Amerika?</p>
+      </div>
+    </div>
+
+    <div class="land-body">
+      <div class="land-essay">
+        <p class="dropcap">
+          Et meta-landskab, ikke et landskab på linje med de andre. Amerika er det eneste land i historien, hvis <em>selvbillede</em> også er dets største kulturelle eksport. Andre lande eksporterer varer; Amerika eksporterer <b>idéen om Amerika</b>. Hollywood (Edisons Black Maria, 1893; studie-systemet fra 1920'erne), Madison Avenue fra 1950'erne, MTV fra 1981, platformsfirmaerne fra 2010'erne. Hver generation har produceret sin egen version af samme maskine: apparatet, der pakker, præ-oversætter og afsender <em>Amerika-som-billede</em> til resten af verden.
+        </p>
+        <p>
+          Konsekvensen er, at vi — de europæiske modtagere — næsten aldrig møder Amerika <em>direkte</em>. Vi møder kopier af Amerika. Marlboro-manden er ikke en cowboy, han er en lønnet skuespiller i en reklamekampagne. Politiserien er ikke en politistyrke, den er et manuskript. Valgkampsdækningen er ikke en debat, den er en produktion. <b>Når det når til Aarhus, er det redigeret fire gange.</b>
+        </p>
+
+        <p class="land-pull">
+          Hvilke af de syv foregående landskaber beskriver vi, <em>fordi de er virkelige</em> — og hvilke genkender vi, <em>fordi fabrikken har lært os at genkende dem</em>?
+        </p>
+
+        <p>
+          Dette er ikke en moralsk anklage; ethvert land gør en eller anden version af det. Det specielle ved Amerika er <em>skalaen</em>, <em>professionalismen</em> og <em>den alvor, hvormed landet er begyndt at konsumere sin egen eksport</em>. Trump-som-produkt er det øjeblik, sløjfen lukker — en tidligere realityTV-figur, der styrer det land, hvis selvbillede blev solgt til ham af samme industri, hans netværk hjalp med at bygge.
+        </p>
+        <p>
+          Spørgsmålet, jeg gerne vil efterlade siden med, er ikke "hvad er det rigtige Amerika?". Spørgsmålet er: <em>hvad er det, vi tror, vi ser</em>, og hvor meget af det er filmen, og hvor meget af det er landet bag filmen? Det ærlige svar er: begge dele, blandet, og vi kan som regel ikke skelne. Det er sidens egentlige emne. Det er også enhver europæers egentlige emne, når vi prøver at tænke om Amerika fra afstand.
+        </p>
+      </div>
+
+      <aside class="land-side">
+        <div class="lside">
+          <div class="lab">— Beboere —</div>
+          <div class="val">Studio-mogulen · reklame-manden · <b>influenceren</b> · politikeren-som-celebritet · Trump-som-produkt · TV-evangelisten med produktionsteam · Edward Bernays · Don Draper · enhver TikTok-algoritme</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Knudepunkter —</div>
+          <ul>
+            <li><span class="yr">1893</span><span>Edisons Black Maria · første filmstudie</span></li>
+            <li><span class="yr">1920s</span><span>Hollywood-studio-systemet modnes</span></li>
+            <li><span class="yr">1928</span><span>Bernays · <em>Propaganda</em></span></li>
+            <li><span class="yr">1950s</span><span>Madison Avenue / fjernsynsalderen</span></li>
+            <li><span class="yr">1981</span><span><b>MTV</b> · billede over musik</span></li>
+            <li><span class="yr">1992</span><span>The Real World · reality-TV</span></li>
+            <li><span class="yr">2010+</span><span>Platformsalderen</span></li>
+            <li><span class="yr">2016</span><span>Realityfiguren går efter Det Hvide Hus</span></li>
+          </ul>
+        </div>
+        <div class="lside">
+          <div class="lab">— Krigen krydser her —</div>
+          <div class="val">WWII-propagandafilmen · Den kolde krigs kulturelle diplomati (Voice of America, jazz som soft power) · post-9/11's "America brand"-krise.</div>
+        </div>
+        <div class="lside cash">
+          <div class="lab">— Cash krydser her —</div>
+          <div class="val">Hans tv-show <em>The Johnny Cash Show</em> (1969–71) brugte fabrikken til at smugle hele de andre syv landskaber ind på lørdag aften — Dylan, Pete Seeger, Carl Perkins, Lou Rawls, urindianske gæster, fængselskoncerter på prime time. Sjældent et bedre eksempel på fabrikkens dobbelte natur.</div>
+        </div>
+        <div class="lside">
+          <div class="lab">— Set herfra —</div>
+          <div class="val">Det er <em>her</em>, vi endelig kommer ind i samtalen. Vi er forbrugerne af drømmen. Det, vi modtager fra Amerika, er aldrig landet — altid en aftryk. Det er den korte forklaring på hvorfor de andre syv landskaber er så svære at læse herfra: <b>vi har kun set printet.</b></div>
+        </div>
+        <div class="lside deep-link">
+          <a href="Drømmefabrikken.html"><span class="sm">— Læs mere —</span>Til Drømmefabrikens arkiv →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="land-tail"><span class="st">✶</span> Otte landskaber, én republik <span class="st">✶</span></div>
+  </div>
+</section>
+
+<!-- ============== OUTRO ============== -->
+<section class="outro">
+  <div class="wrap">
+    <div class="outro-grid">
+      <div>
+        <div class="kicker">— Otte indgange —</div>
+        <h2>Otte arkiver, <em>én læseliste</em>.</h2>
+        <p>
+          Hvert landskab har sin egen side, hvor blogposter, anmeldelser og fund samles efterhånden som de skrives. Det her er ikke en encyklopædi — det er en notesbog, der vokser. Følg det landskab, der trækker mest, eller læs i den orden, du har lyst til.
+        </p>
+        <p>
+          Cash dukker op flere steder, men er ikke spinen længere. Han er en god rejsefælle <em>gennem</em> landskaberne — ikke deres formål.
+        </p>
+        <div class="actions">
+          <a class="primary" href="Historien.html">Se også Historien →</a>
+          <a class="secondary" href="Bøger, spil, film.html">Til læselisten</a>
+          <a class="secondary" href="Johnny og jeg.html">Tilbage til Cash</a>
+        </div>
+      </div>
+
+      <aside class="outro-card">
+        <div class="lead">— De otte arkiver —</div>
+        <h4>Spring direkte ind.</h4>
+        <ul>
+          <li><span class="rn">I</span><a href="Naturen.html"><b>Naturen</b> — kontinent &amp; vildmark</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">II</span><a href="Vesten.html"><b>Vesten</b> — grænselandets myte</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">III</span><a href="Den forgyldte republik.html"><b>Den forgyldte republik</b> — kapital</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">IV</span><a href="Syd og Nord.html"><b>Syd &amp; Nord</b> — det uhelede sår</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">V</span><a href="Vækkelsen.html"><b>Vækkelsen</b> — det amerikanske gospel</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">VI</span><a href="Mindretallene.html"><b>Mindretallene</b> — udelukkelsen</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">VII</span><a href="Smeltedigelen.html"><b>Smeltedigelen</b> — vitalitet</a><span class="kind">arkiv</span></li>
+          <li><span class="rn">VIII</span><a href="Drømmefabrikken.html"><b>Drømmefabrikken</b> — spejlet</a><span class="kind">arkiv</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="colophon">
+  <div class="wrap">
+    <div class="colophon-grid">
+      <div>
+        <div class="mark">Johnny <span class="amp">&amp;</span> jeg</div>
+        <p class="blurb">
+          En personlig hyldest til Johnny Cash, til kristendommen i hans liv, og til det Amerika, der formede ham. Drevet af én lytter i Aarhus.
+        </p>
+        <p class="blurb" style="font-style:italic;color:rgba(239,228,207,0.5)">
+          “I wear the black for the poor and the beaten down, livin' in the hopeless, hungry side of town.” — JR Cash
+        </p>
+      </div>
+      <div>
+        <h5>Johnny Cash</h5>
+        <ul>
+          <li><a href="Johnny og jeg.html#musikeren">Musikeren</a></li>
+          <li><a href="Johnny og jeg.html#kristendommen">Cash og Jesus</a></li>
+          <li><a href="Johnny og jeg.html#amerika">Cash og Amerika</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>USA</h5>
+        <ul>
+          <li><a href="Historien.html">Historien</a></li>
+          <li><a href="Kulturen.html">Kulturen</a></li>
+          <li><a href="Bøger, spil, film.html">Bøger, spil, film</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sidens hjørne</h5>
+        <ul>
+          <li><a href="Foredrag.html">Foredrag</a></li>
+          <li><a href="#">Om siden</a></li>
+          <li><a href="Johnny og jeg.html#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colo-bottom">
+      <div>© MMXXVI · Johnny &amp; jeg <span class="star">✶</span> Aarhus · Danmark</div>
+      <div>Et privat, ikke-kommercielt arkiv <span class="star">✶</span> Set fra denne side af Atlanten</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Show sub-nav once the chip grid has scrolled out of view.
+  // Highlight the current landscape based on which section is most in view.
+  (function() {
+    const subnav = document.getElementById('subnav');
+    const chips = document.querySelector('.chips');
+    const sections = document.querySelectorAll('section.land');
+    const navLinks = document.querySelectorAll('.subnav ol li a');
+
+    // Sub-nav visibility: appears once user scrolls past the chip grid.
+    const showObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          subnav.classList.remove('visible');
+        } else if (e.boundingClientRect.top < 0) {
+          subnav.classList.add('visible');
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -85% 0px' });
+    if (chips) showObserver.observe(chips);
+
+    // Active section detection: the section whose top is nearest the top of viewport.
+    function updateActive() {
+      const offset = 200;
+      let currentId = null;
+      sections.forEach(function(s) {
+        const r = s.getBoundingClientRect();
+        if (r.top - offset <= 0) currentId = s.id;
+      });
+      navLinks.forEach(function(a) {
+        if (a.getAttribute('data-section') === currentId) {
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+  })();
+</script>
+
+</body>
+</html>

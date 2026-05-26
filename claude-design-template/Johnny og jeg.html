@@ -1,0 +1,1788 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Johnny og jeg — om Johnny Cash, troen og Amerika</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:        #efe4cf;
+    --paper-2:      #e6d8bb;
+    --paper-3:      #d8c69e;
+    --ink:          #0e0d0c;
+    --ink-2:        #1a1714;
+    --ink-soft:     #2b2620;
+    --barn:         #a4282b;
+    --barn-deep:    #76181b;
+    --denim:        #2c3e58;
+    --denim-deep:   #1c2a3e;
+    --brass:        #c89b3c;
+    --brass-deep:   #8e6a1f;
+    --rule:         rgba(14, 13, 12, 0.16);
+    --rule-strong:  rgba(14, 13, 12, 0.45);
+
+    --f-display: "Playfair Display", "Hoefler Text", Georgia, serif;
+    --f-poster:  "Bebas Neue", "Oswald", "Impact", sans-serif;
+    --f-mono:    "IBM Plex Mono", "Courier New", monospace;
+    --f-body:    "Crimson Pro", "Georgia", serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Paper grain across the whole page */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1.4px),
+      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1.2px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1.5px 1.5px;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0) 60%, rgba(20,12,4,0.18) 100%),
+      radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0) 60%, rgba(20,12,4,0.22) 100%);
+  }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 56px; position: relative; z-index: 2; }
+
+  /* ============== TOP STRIP ============== */
+  .topstrip {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    position: relative; z-index: 5;
+  }
+  .topstrip-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+  }
+  .topstrip .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--barn); margin: 0 10px; vertical-align: middle;
+  }
+
+  /* ============== MASTHEAD ============== */
+  .masthead {
+    padding: 28px 0 18px;
+    border-bottom: 3px double var(--ink);
+    position: relative; z-index: 5;
+    background: var(--paper);
+  }
+  .mast-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .mast-side {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .mast-side.right { text-align: right; }
+  .mast-side b { color: var(--ink); font-weight: 500; }
+
+  .wordmark {
+    text-align: center;
+    line-height: 0.9;
+  }
+  .wordmark .kicker {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 8px;
+  }
+  .wordmark .name {
+    font-family: var(--f-display);
+    font-weight: 900;
+    font-style: italic;
+    font-size: 52px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .wordmark .sub {
+    margin-top: 6px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .wordmark .sub::before, .wordmark .sub::after {
+    content: "✶"; margin: 0 12px; color: var(--brass);
+  }
+
+  /* ============== NAV ============== */
+  nav.primary {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: 4px solid var(--barn);
+  }
+  nav.primary .wrap { padding: 0 56px; }
+  .nav-row {
+    display: flex; align-items: stretch; gap: 0;
+    font-family: var(--f-poster);
+    letter-spacing: 0.1em;
+    font-size: 16px;
+  }
+  .nav-item {
+    position: relative;
+  }
+  .nav-link {
+    display: block;
+    padding: 16px 22px;
+    color: var(--paper);
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-right: 1px solid rgba(239,228,207,0.08);
+    user-select: none;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .nav-item:first-child .nav-link { border-left: 1px solid rgba(239,228,207,0.08); }
+  .nav-link.active, .nav-link:hover { background: var(--barn); color: var(--paper); }
+  .nav-link .caret {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 10px;
+    transform: translateY(-2px);
+    color: var(--brass);
+  }
+  .nav-cta {
+    margin-left: auto;
+    align-self: center;
+    padding: 0 8px;
+  }
+  .nav-cta a {
+    display: inline-block;
+    padding: 9px 16px;
+    border: 1px solid var(--paper);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-cta a:hover { background: var(--paper); color: var(--ink); }
+
+  /* dropdown */
+  .dropdown {
+    position: absolute; top: 100%; left: 0;
+    min-width: 240px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    border-top: none;
+    box-shadow: 6px 8px 0 rgba(14,13,12,0.18);
+    padding: 8px 0;
+    display: none;
+  }
+  .nav-item:hover .dropdown,
+  .nav-item.open .dropdown { display: block; }
+  .dropdown a {
+    display: block;
+    padding: 10px 18px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown a:hover { background: var(--ink); color: var(--paper); }
+  .dropdown a .num {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--barn);
+    margin-right: 10px;
+  }
+
+  /* ============== HERO ============== */
+  .hero {
+    position: relative;
+    padding: 64px 0 80px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ===== Real photograph of the US flag, vintage-graded ===== */
+  .flag-scene {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* The photograph itself — hot-linked from Unsplash, free + no auth.
+     Photo: Aaron Burden, "Waving American Flag" — public CDN. */
+  .flag-photo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 64%;
+    height: 100%;
+    background-image:
+      linear-gradient(
+        to right,
+        rgba(239,228,207,1)    0%,
+        rgba(239,228,207,0.92) 10%,
+        rgba(239,228,207,0.55) 22%,
+        rgba(239,228,207,0.15) 38%,
+        rgba(239,228,207,0)    58%
+      ),
+      url("images/cash-stars-and-stripes.jpeg");
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    filter:
+      sepia(0.18)
+      saturate(0.88)
+      contrast(1.05)
+      brightness(1.0);
+    mix-blend-mode: multiply;
+    opacity: 1;
+  }
+  .flag-photo::after {
+    /* warm wash on top + paper-tone vignette */
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%,
+        rgba(239,228,207,0) 0%,
+        rgba(239,228,207,0) 50%,
+        rgba(120,78,42,0.18) 100%),
+      linear-gradient(to bottom,
+        rgba(232,198,142,0.18) 0%,
+        rgba(120,78,42,0.0) 50%,
+        rgba(60,40,20,0.18) 100%);
+    mix-blend-mode: multiply;
+  }
+  /* Soft cream wash at the very left so the headline column stays clean */
+  .flag-photo::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 28%;
+    background: linear-gradient(to right,
+      var(--paper) 0%,
+      rgba(239,228,207,0.6) 50%,
+      rgba(239,228,207,0) 100%);
+    z-index: 1;
+  }
+
+  /* Subtle paper-grain overlay so the photo reads as printed, not screen-glossy */
+  .flag-grain {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 64%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.10) 1px, transparent 1.4px),
+      radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1.2px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1.5px 1.5px;
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+  }
+
+  /* Hero content */
+  .hero-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1.6fr 0.7fr;
+    gap: 32px;
+    align-items: end;
+  }
+  /* Right column reverts to natural flow; sigcard pushes itself */
+  .hero-grid > div:last-child {
+    align-self: end;
+    min-height: 0;
+  }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 22px;
+  }
+  .eyebrow .bar {
+    display: inline-block; width: 38px; height: 2px;
+    background: var(--barn); vertical-align: middle;
+    margin-right: 14px; transform: translateY(-2px);
+  }
+  h1.hero-title {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 156px;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  h1.hero-title .amp {
+    font-style: italic;
+    color: var(--barn);
+    font-weight: 400;
+    font-size: 0.78em;
+    padding: 0 0.18em;
+    letter-spacing: 0.05em;
+  }
+  .hero-deck {
+    font-family: var(--f-body);
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    max-width: 540px;
+    font-style: italic;
+  }
+  .hero-deck .drop {
+    float: left;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+    color: var(--barn);
+  }
+
+  .hero-meta {
+    margin-top: 36px;
+    display: flex; align-items: center; gap: 28px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hero-meta .pipe { width: 1px; height: 22px; background: var(--rule-strong); }
+  .hero-meta b { color: var(--ink); font-weight: 500; }
+
+  /* Right column: signature card — nudged right + down so the Cash photo breathes */
+  .sigcard {
+    background: var(--paper-2);
+    border: 1px solid var(--ink);
+    box-shadow: 10px 12px 0 rgba(14,13,12,0.15);
+    padding: 24px 28px 22px;
+    position: relative;
+    transform: rotate(1.4deg) translate(28px, 80px);
+    max-width: 360px;
+    margin-left: auto;
+  }
+  .sigcard::before {
+    content: "";
+    position: absolute; left: 18px; right: 18px; top: 14px; bottom: 14px;
+    border: 1px dashed var(--rule-strong);
+    pointer-events: none;
+  }
+  .sigcard .stamp {
+    position: absolute;
+    top: -18px; right: -14px;
+    width: 96px; height: 96px;
+    border: 2px solid var(--barn);
+    color: var(--barn);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    text-align: center;
+    transform: rotate(8deg);
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    line-height: 1.3;
+    background: rgba(239,228,207,0.7);
+    text-transform: uppercase;
+  }
+  .sigcard .stamp b {
+    display: block;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: 0;
+    margin: 4px 0 2px;
+  }
+  .sigcard .label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 12px;
+  }
+  .sigcard h3 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.05;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .sigcard p {
+    margin: 0 0 12px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .sigcard .scripture {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--denim-deep);
+  }
+  .sigcard .scripture::before {
+    content: "✝"; color: var(--barn); margin-right: 8px;
+  }
+  .sigcard .scripture .ref {
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    margin-left: 6px;
+    text-transform: uppercase;
+  }
+
+  /* ============== TICKER / "SETLIST" ============== */
+  .setlist {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 16px 0;
+    overflow: hidden;
+    border-top: 4px solid var(--barn);
+    border-bottom: 4px solid var(--barn);
+    position: relative; z-index: 3;
+  }
+  .setlist-track {
+    display: flex; gap: 48px;
+    white-space: nowrap;
+    animation: scroll 60s linear infinite;
+    font-family: var(--f-poster);
+    letter-spacing: 0.1em;
+    font-size: 18px;
+  }
+  .setlist-track span { display: inline-flex; align-items: center; gap: 16px; }
+  .setlist-track .yr { color: var(--brass); font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.3em; }
+  .setlist-track .star { color: var(--barn); }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ============== SECTION HEADER ============== */
+  .sect-head {
+    padding: 64px 0 28px;
+    text-align: center;
+    position: relative; z-index: 2;
+  }
+  .sect-head .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 14px;
+  }
+  .sect-head h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .sect-head .deck {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 14px auto 0;
+  }
+  .sect-head .ornament {
+    margin: 14px auto 0;
+    width: 220px;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--brass);
+  }
+  .sect-head .ornament::before,
+  .sect-head .ornament::after {
+    content: ""; flex: 1; height: 1px; background: var(--rule-strong);
+  }
+  .sect-head .ornament span { font-size: 14px; }
+
+  /* ============== VINYL TILES ============== */
+  .vinyl-row {
+    padding: 36px 0 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    position: relative; z-index: 2;
+  }
+  .tile {
+    position: relative;
+    padding: 28px 28px 32px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 8px 10px 0 rgba(14,13,12,0.18);
+    cursor: pointer;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  .tile:hover {
+    transform: translate(-3px, -4px);
+    box-shadow: 11px 14px 0 rgba(14,13,12,0.22);
+  }
+  .tile .corner-num {
+    position: absolute;
+    top: 18px; left: 24px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--ink-soft);
+  }
+  .tile .corner-tag {
+    position: absolute;
+    top: 18px; right: 24px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--barn);
+  }
+
+  /* The vinyl record — pure CSS */
+  .vinyl-stage {
+    margin: 36px auto 22px;
+    width: 280px; height: 280px;
+    position: relative;
+  }
+  .vinyl-sleeve {
+    position: absolute;
+    inset: 6px -28px 6px 22px;
+    background: var(--paper-2);
+    border: 1px solid var(--ink);
+    transform: rotate(2deg);
+    box-shadow: 4px 5px 0 rgba(14,13,12,0.12);
+  }
+  .vinyl-sleeve::before {
+    content: "";
+    position: absolute; inset: 8px;
+    border: 1px dashed var(--rule-strong);
+  }
+  .vinyl-sleeve .sleeve-text {
+    position: absolute; bottom: 14px; left: 14px;
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .vinyl {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%,
+        var(--label-color, var(--barn)) 0,
+        var(--label-color, var(--barn)) 22%,
+        #1a1714 22.4%,
+        #0a0908 30%,
+        #1a1714 30.4%,
+        #0a0908 38%,
+        #1a1714 38.4%,
+        #0a0908 46%,
+        #1a1714 46.4%,
+        #0a0908 54%,
+        #1a1714 54.4%,
+        #0a0908 62%,
+        #1a1714 62.4%,
+        #0a0908 70%,
+        #1a1714 70.4%,
+        #0a0908 78%,
+        #1a1714 78.4%,
+        #0a0908 86%,
+        #1a1714 86.4%,
+        #0a0908 100%);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.4),
+      4px 6px 14px rgba(14,13,12,0.35),
+      inset 0 0 30px rgba(0,0,0,0.4);
+    transition: transform 1.2s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .tile:hover .vinyl { transform: rotate(360deg); }
+  .vinyl::after {
+    /* center hole */
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+  .vinyl .label {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 44%; height: 44%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--label-color, var(--barn));
+    color: var(--paper);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 10px;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08), inset 0 0 0 8px var(--label-color, var(--barn));
+  }
+  .vinyl .label .lbl-top {
+    font-family: var(--f-mono);
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 2px;
+  }
+  .vinyl .label .lbl-title {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .vinyl .label .lbl-bot {
+    font-family: var(--f-mono);
+    font-size: 7px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+
+  .tile h3 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 42px;
+    line-height: 1;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .tile .subhead {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .tile p {
+    margin: 0 0 18px;
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-family: var(--f-body);
+  }
+  .tile .tracklist {
+    margin: 0 0 22px;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+  .tile .tracklist .track {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 3px 0;
+  }
+  .tile .tracklist .track .n { color: var(--barn); width: 22px; }
+  .tile .tracklist .track .t { flex: 1; }
+  .tile .tracklist .track .d { color: var(--ink-soft); opacity: 0.7; }
+
+  .tile .more {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4px;
+  }
+  .tile .more:hover { color: var(--barn); border-color: var(--barn); }
+  .tile .more .arrow { color: var(--barn); }
+
+  /* ============== ROADSIDE STRIP ============== */
+  .roadside {
+    background: var(--paper-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 36px 0;
+    position: relative; z-index: 2;
+    overflow: hidden;
+  }
+  .roadside-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    align-items: center;
+  }
+  .roadside-cell {
+    text-align: center;
+    padding: 0 24px;
+    border-right: 1px dashed var(--rule-strong);
+    position: relative;
+  }
+  .roadside-cell:last-child { border-right: none; }
+  .roadside-cell .marker {
+    width: 80px; height: 80px;
+    margin: 0 auto 12px;
+    display: grid; place-items: center;
+  }
+  .roadside-cell .label-top {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 4px;
+  }
+  .roadside-cell .name {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 4px;
+  }
+  .roadside-cell .miles {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    max-width: 180px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ============== LYRIC INTERLUDE ============== */
+  .lyric-strip {
+    background: var(--paper);
+    padding: 56px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative; z-index: 2;
+    text-align: center;
+  }
+  .lyric-strip .ll {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--ink);
+    max-width: 920px;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+  .lyric-strip .ll .h { color: var(--barn); }
+  .lyric-strip .credit {
+    margin-top: 18px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .lyric-strip .credit .star { color: var(--barn); margin: 0 8px; }
+
+  /* ============== POSTMARK ============== */
+  .postmark {
+    position: absolute;
+    top: -28px; right: -28px;
+    width: 100px; height: 100px;
+    transform: rotate(-12deg);
+    color: var(--barn);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  .postmark .ring {
+    position: absolute; inset: 0;
+    border: 2px solid var(--barn);
+    border-radius: 50%;
+  }
+  .postmark .ring.inner { inset: 10px; border-width: 1px; }
+  .postmark .text-curve {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .postmark .center {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: var(--f-mono);
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .postmark .center b {
+    display: block;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  .postmark .bars {
+    position: absolute; left: -28px; top: 50%;
+    transform: translateY(-50%);
+    width: 24px; height: 18px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      var(--barn) 0px, var(--barn) 2px,
+      transparent 2px, transparent 6px
+    );
+  }
+  .thread {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 0;
+    position: relative; z-index: 2;
+    overflow: hidden;
+  }
+  .thread::before {
+    /* faint flag wash */
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(164,40,43,0.10) 0,
+      rgba(164,40,43,0.10) 14px,
+      transparent 14px,
+      transparent 28px
+    );
+  }
+  .thread .wrap { position: relative; z-index: 2; }
+  .thread-head {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 72px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+  .thread-head .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 14px;
+  }
+  .thread-head h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 46px;
+    line-height: 1.02;
+    margin: 0;
+    color: var(--paper);
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+  .thread-head h2 em { color: var(--barn); font-style: italic; }
+  .thread-head p {
+    font-family: var(--f-body);
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(239,228,207,0.78);
+    margin: 0;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(239,228,207,0.18);
+    border-bottom: 1px solid rgba(239,228,207,0.18);
+  }
+  .timeline.row-2 {
+    border-top: none;
+  }
+  .ev {
+    padding: 26px 22px 30px;
+    border-right: 1px solid rgba(239,228,207,0.12);
+    position: relative;
+  }
+  .ev:last-child { border-right: none; }
+  .ev .yr {
+    font-family: var(--f-poster);
+    font-size: 38px;
+    letter-spacing: 0.04em;
+    color: var(--brass);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .ev .place {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.7;
+    margin-bottom: 18px;
+    line-height: 1.5;
+    min-height: 30px;
+  }
+  .ev h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 0 0 10px;
+    color: var(--paper);
+  }
+  .ev p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: rgba(239,228,207,0.72);
+    font-family: var(--f-body);
+  }
+  .ev .dot {
+    position: absolute; top: -7px; left: 22px;
+    width: 12px; height: 12px;
+    background: var(--barn);
+    border: 2px solid var(--paper);
+    border-radius: 50%;
+  }
+
+  /* ============== FORM FLAG ACCENT ============== */
+  .form-flag {
+    width: 130px;
+    height: 96px;
+    flex: 0 0 auto;
+    border-radius: 4px 60px 60px 4px;
+    box-shadow: 4px 4px 0 rgba(14,13,12,0.18);
+    background-image: url('assets/us-flag-painting.png');
+    background-size: cover;
+    background-position: center 42%;
+    transform: rotate(-1.5deg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ============== HYMN / PULL QUOTE ============== */
+  .hymn {
+    padding: 96px 0;
+    text-align: center;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative; z-index: 2;
+  }
+  .hymn .kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--barn);
+    margin-bottom: 24px;
+  }
+  .hymn blockquote {
+    margin: 0 auto;
+    max-width: 900px;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.15;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .hymn blockquote .open,
+  .hymn blockquote .close {
+    color: var(--barn);
+    font-weight: 900;
+    font-size: 80px;
+    line-height: 0;
+    vertical-align: -22px;
+    margin: 0 6px;
+  }
+  .hymn .attrib {
+    margin-top: 28px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hymn .attrib .star { color: var(--barn); margin: 0 10px; }
+
+  /* ============== CONTACT / FOOTER ============== */
+  .contact {
+    padding: 80px 0 60px;
+    background: var(--paper-2);
+    border-top: 3px double var(--ink);
+    position: relative; z-index: 2;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+  }
+  .contact h2 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 1;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .contact .deck {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    max-width: 520px;
+  }
+  .contact .booking {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 24px 28px;
+    border: 1px solid var(--ink);
+    box-shadow: 8px 10px 0 rgba(14,13,12,0.18);
+    margin-top: 8px;
+  }
+  .contact .booking .label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 8px;
+  }
+  .contact .booking h4 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0 0 8px;
+  }
+  .contact .booking p {
+    margin: 0 0 16px;
+    color: rgba(239,228,207,0.78);
+    font-size: 15.5px;
+  }
+  .contact .booking a.btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 11px 18px;
+    background: var(--barn);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--barn);
+  }
+  .contact .booking a.btn:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .contact .booking a.btn .arr { color: var(--paper); }
+
+  /* form */
+  form.contact-form {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 28px 28px 24px;
+    box-shadow: 8px 10px 0 rgba(14,13,12,0.18);
+  }
+  form .form-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--rule); padding-bottom: 12px; margin-bottom: 16px;
+  }
+  form .form-head h3 {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0;
+  }
+  form .form-head .stamp {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--barn);
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule-strong);
+    border-radius: 0;
+    font-family: var(--f-body);
+    font-size: 16px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--ink);
+    background: var(--paper);
+  }
+  .field textarea { min-height: 110px; resize: vertical; font-family: var(--f-body); }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .submit-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 8px;
+  }
+  .submit-row .small {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  button.send {
+    padding: 12px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  button.send:hover { background: var(--barn); border-color: var(--barn); }
+  .form-success {
+    display: none;
+    background: var(--barn);
+    color: var(--paper);
+    padding: 16px 18px;
+    margin-top: 14px;
+    font-family: var(--f-poster);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .form-success.on { display: block; }
+
+  /* footer */
+  footer.colophon {
+    background: var(--ink);
+    color: rgba(239,228,207,0.7);
+    padding: 36px 0 28px;
+    position: relative; z-index: 2;
+    border-top: 4px solid var(--barn);
+  }
+  .colophon-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .colophon h5 {
+    font-family: var(--f-poster);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--paper);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+  .colophon ul { list-style: none; padding: 0; margin: 0; font-family: var(--f-body); font-size: 15px; }
+  .colophon ul li { margin-bottom: 6px; }
+  .colophon a { color: rgba(239,228,207,0.7); text-decoration: none; }
+  .colophon a:hover { color: var(--brass); }
+  .colophon .mark {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--paper);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .colophon .mark .amp { color: var(--barn); }
+  .colophon .blurb {
+    font-family: var(--f-body);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgba(239,228,207,0.6);
+    margin: 0 0 14px;
+  }
+  .colo-bottom {
+    margin-top: 28px; padding-top: 18px;
+    border-top: 1px solid rgba(239,228,207,0.12);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(239,228,207,0.55);
+  }
+  .colo-bottom .star { color: var(--barn); margin: 0 10px; }
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="topstrip">
+  <div class="wrap topstrip-inner">
+    <div>Etb. <b style="color:var(--ink)">2024</b><span class="dot"></span>Aarhus &nbsp;·&nbsp; København</div>
+    <div>En personlig hyldest til <b style="color:var(--ink)">Cash, troen og Amerika</b></div>
+    <div>“The Man in Black” <span class="dot"></span> 1932 — 2003</div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <div class="mast-side">
+        Vol. II &nbsp;·&nbsp; Nr. 14<br>
+        Forår <b>MMXXVI</b>
+      </div>
+      <div class="wordmark">
+        <div class="kicker">— en personlig hyldest —</div>
+        <div class="name">Johnny &amp; jeg</div>
+        <div class="sub">Musikken · Troen · Amerika</div>
+      </div>
+      <div class="mast-side right">
+        Aarhus, Danmark<br>
+        <b>Anno MMXXVI</b>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="primary">
+  <div class="wrap">
+    <div class="nav-row">
+
+      <div class="nav-item">
+        <a class="nav-link active" href="#">Hjem</a>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="Johnny Cash.html">Johnny Cash <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="Johnny Cash.html"><span class="num">○</span>Portræt</a>
+          <a href="Musikeren.html"><span class="num">I</span>Musikeren</a>
+          <a href="Cash og Jesus.html"><span class="num">II</span>Cash og Jesus</a>
+          <a href="Cash og Amerika.html"><span class="num">III</span>Cash og Amerika</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="Historien.html">USA <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="Historien.html"><span class="num">A</span>Historien</a>
+          <a href="Kulturen.html"><span class="num">B</span>Kulturen</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#">Bøger, spil, film</a>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="Foredrag.html">Foredrag</a>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#">Om siden</a>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#kontakt">Kontakt</a>
+      </div>
+
+      <div class="nav-cta">
+        <a href="Foredrag.html">Bestil foredrag →</a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Real photograph of US flag, vintage-graded, behind hero -->
+  <div class="flag-scene" aria-hidden="true">
+    <div class="flag-photo"></div>
+    <div class="flag-grain"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-title">Johnny<br><span class="amp">&nbsp;og&nbsp;</span>jeg</h1>
+        <p class="hero-deck">
+          <span class="drop">D</span>en første gang jeg hørte stemmen — den dybe, brækkede stemme fra et fængsel i Californien — vidste jeg ikke, at jeg lyttede til Amerika selv. Til en præst i sort, til en synder, til et land. Det her er fortællingen om en mand, en tro og en nation — og om hvorfor de stadig taler til os herovre.
+        </p>
+        <div class="hero-meta">
+          <div>Et essay af <b>Mads</b></div>
+          <div class="pipe"></div>
+          <div>Læsetid <b>~ 12 min.</b></div>
+          <div class="pipe"></div>
+          <div>Sidst opdateret <b>April 2026</b></div>
+        </div>
+      </div>
+
+      <aside class="sigcard">
+        <div class="stamp">
+          Sign.<b>JR&nbsp;Cash</b>1955—2003
+        </div>
+        <div class="label">— Forord —</div>
+        <h3>“Hello. I’m Johnny Cash.”</h3>
+        <p>
+          Fire ord, der åbnede tusind koncerter. På denne side åbner de et arkiv: om manden i sort, om de salmer han voksede op med på en bomuldsmark i Arkansas, og om det land, han både elskede og rev fra hinanden i sine sange.
+        </p>
+        <p style="margin-bottom:0">
+          Jeg er ikke historiker. Jeg er en dansker, der har lyttet længe — og som tror, Cash kan vise os noget om Amerika, vi ikke ser i nyhederne.
+        </p>
+        <div class="scripture">
+          “For jeg skammer mig ikke ved evangeliet.”
+          <span class="ref">Rom. 1:16</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- SETLIST TICKER -->
+<div class="setlist" aria-hidden="true">
+  <div class="setlist-track">
+    <span class="yr">1955</span><span>SUN RECORDS, MEMPHIS</span><span class="star">✶</span>
+    <span class="yr">1956</span><span>I WALK THE LINE</span><span class="star">✶</span>
+    <span class="yr">1963</span><span>RING OF FIRE</span><span class="star">✶</span>
+    <span class="yr">1968</span><span>FOLSOM PRISON</span><span class="star">✶</span>
+    <span class="yr">1969</span><span>SAN QUENTIN</span><span class="star">✶</span>
+    <span class="yr">1969</span><span>A BOY NAMED SUE</span><span class="star">✶</span>
+    <span class="yr">1970</span><span>THE GOSPEL ROAD</span><span class="star">✶</span>
+    <span class="yr">1971</span><span>MAN IN BLACK</span><span class="star">✶</span>
+    <span class="yr">1972</span><span>A THING CALLED LOVE</span><span class="star">✶</span>
+    <span class="yr">1974</span><span>RAGGED OLD FLAG</span><span class="star">✶</span>
+    <span class="yr">1976</span><span>ONE PIECE AT A TIME</span><span class="star">✶</span>
+    <span class="yr">1979</span><span>(GHOST) RIDERS IN THE SKY</span><span class="star">✶</span>
+    <span class="yr">1985</span><span>HIGHWAYMAN</span><span class="star">✶</span>
+    <span class="yr">1987</span><span>THE NIGHT HANK WILLIAMS CAME TO TOWN</span><span class="star">✶</span>
+    <span class="yr">1994</span><span>AMERICAN RECORDINGS</span><span class="star">✶</span>
+    <span class="yr">2002</span><span>HURT</span><span class="star">✶</span>
+    <!-- duplicated for seamless scroll -->
+    <span class="yr">1955</span><span>SUN RECORDS, MEMPHIS</span><span class="star">✶</span>
+    <span class="yr">1956</span><span>I WALK THE LINE</span><span class="star">✶</span>
+    <span class="yr">1963</span><span>RING OF FIRE</span><span class="star">✶</span>
+    <span class="yr">1968</span><span>FOLSOM PRISON</span><span class="star">✶</span>
+    <span class="yr">1969</span><span>SAN QUENTIN</span><span class="star">✶</span>
+    <span class="yr">1969</span><span>A BOY NAMED SUE</span><span class="star">✶</span>
+    <span class="yr">1970</span><span>THE GOSPEL ROAD</span><span class="star">✶</span>
+    <span class="yr">1971</span><span>MAN IN BLACK</span><span class="star">✶</span>
+    <span class="yr">1972</span><span>A THING CALLED LOVE</span><span class="star">✶</span>
+    <span class="yr">1974</span><span>RAGGED OLD FLAG</span><span class="star">✶</span>
+    <span class="yr">1976</span><span>ONE PIECE AT A TIME</span><span class="star">✶</span>
+    <span class="yr">1979</span><span>(GHOST) RIDERS IN THE SKY</span><span class="star">✶</span>
+    <span class="yr">1985</span><span>HIGHWAYMAN</span><span class="star">✶</span>
+    <span class="yr">1987</span><span>THE NIGHT HANK WILLIAMS CAME TO TOWN</span><span class="star">✶</span>
+    <span class="yr">1994</span><span>AMERICAN RECORDINGS</span><span class="star">✶</span>
+    <span class="yr">2002</span><span>HURT</span><span class="star">✶</span>
+  </div>
+</div>
+
+<!-- SECTION HEADER -->
+<div class="wrap">
+  <div class="sect-head">
+    <div class="kicker">— Tre rubrikker · Side A · Side B · Side C —</div>
+    <h2>Manden i tre spor</h2>
+    <p class="deck">
+      Cash er ikke én ting. Han er sangskriveren, synderen og borgeren — tre stemmer, der griber ind i hinanden. Vælg en plade, læg nålen på.
+    </p>
+    <div class="ornament"><span>✶</span></div>
+  </div>
+</div>
+
+<!-- VINYL TILES -->
+<div class="wrap">
+  <div class="vinyl-row">
+
+    <!-- TILE 1: MUSIKEREN -->
+    <a class="tile" id="musikeren" href="Musikeren.html" style="--label-color: #a4282b;">
+      <div class="corner-num">SIDE A · No. 01</div>
+      <div class="corner-tag">33⅓ RPM</div>
+
+      <div class="vinyl-stage">
+        <div class="vinyl-sleeve"><div class="sleeve-text">Side A · Long Play</div></div>
+        <div class="vinyl">
+          <div class="label">
+            <div class="lbl-top">— Sun Records —</div>
+            <div class="lbl-title">Musikeren</div>
+            <div class="lbl-bot">Memphis · TN</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Musikeren</h3>
+      <div class="subhead">Boom-chicka-boom · 1955 — 2003</div>
+      <p>
+        Han fandt en rytme på en bomuldsmark og bar den hele vejen til Folsom Prison. Cash var ikke bare country — han var den linje, hvor folkemusik, gospel, rockabilly og protest mødtes. Et plekter, en bas og en stemme som en jernbane.
+      </p>
+      <div class="tracklist">
+        <div class="track"><span class="n">A1</span><span class="t">Folsom Prison Blues</span><span class="d">2:42</span></div>
+        <div class="track"><span class="n">A2</span><span class="t">I Walk the Line</span><span class="d">2:45</span></div>
+        <div class="track"><span class="n">A3</span><span class="t">Ring of Fire</span><span class="d">2:37</span></div>
+        <div class="track"><span class="n">A4</span><span class="t">Hurt (2002)</span><span class="d">3:38</span></div>
+      </div>
+      <span class="more">Læs om musikeren <span class="arrow">→</span></span>
+    </a>
+
+    <!-- TILE 2: KRISTENDOMMEN -->
+    <a class="tile" id="kristendommen" href="Cash og Jesus.html" style="--label-color: #2c3e58;">
+      <div class="corner-num">SIDE B · No. 02</div>
+      <div class="corner-tag">HYMNAL</div>
+
+      <div class="vinyl-stage">
+        <div class="vinyl-sleeve"><div class="sleeve-text">Side B · Gospel Road</div></div>
+        <div class="vinyl">
+          <div class="label">
+            <div class="lbl-top">— Gospel Road —</div>
+            <div class="lbl-title">Cash &amp; Jesus</div>
+            <div class="lbl-bot">Israel · 1971</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Kristendommen</h3>
+      <div class="subhead">Cash og Jesus · Synd og nåde</div>
+      <p>
+        Han faldt og rejste sig — og faldt igen. Cash sang for fanger, fordi han forstod den, der har brug for nåde. Fra moderens salmer i Dyess, Arkansas, til hans egen film om Jesus i 1973: troen var aldrig en facade. Den var hans rygrad i sort.
+      </p>
+      <div class="tracklist">
+        <div class="track"><span class="n">B1</span><span class="t">Personal Jesus</span><span class="d">3:21</span></div>
+        <div class="track"><span class="n">B2</span><span class="t">Why Me Lord</span><span class="d">3:28</span></div>
+        <div class="track"><span class="n">B3</span><span class="t">The Old Rugged Cross</span><span class="d">3:55</span></div>
+        <div class="track"><span class="n">B4</span><span class="t">Were You There</span><span class="d">4:11</span></div>
+      </div>
+      <span class="more">Læs om troen <span class="arrow">→</span></span>
+    </a>
+
+    <!-- TILE 3: AMERIKA -->
+    <a class="tile" id="amerika" href="Cash og Amerika.html" style="--label-color: #c89b3c;">
+      <div class="corner-num">SIDE C · No. 03</div>
+      <div class="corner-tag">RAGGED OLD FLAG</div>
+
+      <div class="vinyl-stage">
+        <div class="vinyl-sleeve"><div class="sleeve-text">Side C · The Ragged Flag</div></div>
+        <div class="vinyl">
+          <div class="label">
+            <div class="lbl-top">— The Republic —</div>
+            <div class="lbl-title">Amerika</div>
+            <div class="lbl-bot">Est. 1776</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Amerika</h3>
+      <div class="subhead">Cash og nationen · Bomuld, jernbane, prærie</div>
+      <p>
+        Han syntes om landet nok til at synge om dets fanger, dets indianere og dets soldater — uden at gøre sig fin. Cash er Amerika på en god dag og en dårlig: republikken set fra en cellevindue, fra en kirkebænk, fra et togvindue mellem Arkansas og Californien.
+      </p>
+      <div class="tracklist">
+        <div class="track"><span class="n">C1</span><span class="t">Ragged Old Flag</span><span class="d">3:08</span></div>
+        <div class="track"><span class="n">C2</span><span class="t">The Ballad of Ira Hayes</span><span class="d">4:08</span></div>
+        <div class="track"><span class="n">C3</span><span class="t">Man in Black</span><span class="d">2:52</span></div>
+        <div class="track"><span class="n">C4</span><span class="t">Big River</span><span class="d">2:31</span></div>
+      </div>
+      <span class="more">Læs om Amerika <span class="arrow">→</span></span>
+    </a>
+
+  </div>
+</div>
+
+<!-- HISTORICAL THREAD -->
+<section class="thread">
+  <div class="wrap">
+    <div class="thread-head">
+      <div>
+        <div class="kicker">— En tråd gennem republikken —</div>
+        <h2>Et liv på <em>tværs</em><br>af et århundrede.</h2>
+      </div>
+      <p>
+        Cashs liv løber langs Amerikas egen rygrad: depressionen, Anden Verdenskrig, borgerrettighedstiden, Vietnam, Watergate, Reagan-årene og helt frem til 11. september. Han voksede op i en koloni Roosevelt byggede til fattige bomuldsbønder — han døde i et land, der var ved at finde sig selv igen.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1932</div>
+        <div class="place">Kingsland · Arkansas</div>
+        <h4>Født ind i depressionen</h4>
+        <p>Den fjerde af syv børn på en bomuldsmark. Familien flytter til en New Deal-koloni i Dyess — Roosevelts forsøg på at redde Sydens fattige. Cash vokser op med Wall Street-krakkets eftervirkninger og statens hjælpende hånd.</p>
+      </div>
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1955</div>
+        <div class="place">Sun Records · Memphis</div>
+        <h4>“Cry! Cry! Cry!”</h4>
+        <p>Sam Phillips udgiver hans første single — samme år som Rosa Parks bliver siddende i bussen i Montgomery. To revolutioner starter i Syden samtidig: rock’n’roll og borgerrettighedsbevægelsen.</p>
+      </div>
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1964</div>
+        <div class="place">Bitter Tears · USA</div>
+        <h4>Borgerrettigheder &amp; Ira Hayes</h4>
+        <p>Mens Civil Rights Act underskrives og Selma nærmer sig, udgiver Cash <em>Bitter Tears</em> — et helt album om amerikanske indianere. Radioerne nægter at spille ham. Han betaler en helsides-annonce for at skælde dem ud.</p>
+      </div>
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1968</div>
+        <div class="place">Folsom State Prison · Californien</div>
+        <h4>Året Amerika revnede</h4>
+        <p>King og Bobby Kennedy myrdes. Tet-offensiven raser i Vietnam. Cash indspiller live i et fængsel og synger med fangerne. Han vælger ikke parti — han vælger den faldne.</p>
+      </div>
+    </div>
+
+    <div class="timeline row-2">
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1970</div>
+        <div class="place">Det Hvide Hus · Washington D.C.</div>
+        <h4>Hos Nixon, mod krigen</h4>
+        <p>Nixon inviterer Cash til at spille i Det Hvide Hus. Han nægter at synge højrekomponerede arbejderhits — vælger i stedet “What Is Truth” og “Man in Black”. Stilfærdig modstand mod Vietnam, fra selve podiet.</p>
+      </div>
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1974</div>
+        <div class="place">Watergate-året</div>
+        <h4>“Ragged Old Flag”</h4>
+        <p>Mens Nixon træder tilbage i ydmygelse, udgiver Cash sin patriotiske ode til en flænset, men stolt nation. Ikke en hyldest til magten — en hyldest til republikken, der har overlevet sine ledere.</p>
+      </div>
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">1985</div>
+        <div class="place">Reagans Amerika</div>
+        <h4>The Highwaymen</h4>
+        <p>Med Willie Nelson, Waylon Jennings og Kris Kristofferson danner Cash et outlaw-supergruppe. Country bliver Reagan-tidens lydspor — men Highwaymen synger om landstrygere, ikke triumf.</p>
+      </div>
+      <div class="ev">
+        <span class="dot"></span>
+        <div class="yr">2002</div>
+        <div class="place">Hendersonville · Tennessee</div>
+        <h4>“Hurt” — et farvel</h4>
+        <p>Et halvt år efter 11. september indspiller Cash sin sidste store sang. Videoen er et helt århundrede pakket ind i fire minutter. Han dør i 2003, fire måneder efter June. En epitaf over en mand og en epoke.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HYMN / PULL QUOTE -->
+<section class="hymn">
+  <div class="wrap">
+    <div class="kicker">— En salme for republikken —</div>
+    <blockquote>
+      <span class="open">“</span>
+      Han bar sort for de fattige og forslåede, for fangen i hans celle og soldaten, der aldrig kom hjem.
+      Cash var ikke et flag — han var, hvad flaget burde minde os om.
+      <span class="close">”</span>
+    </blockquote>
+    <div class="attrib">
+      Mads <span class="star">✶</span> Forord til “Johnny og jeg” <span class="star">✶</span> 2026
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.32em;color:var(--barn);text-transform:uppercase;margin-bottom:14px;">— Skriv til mig —</div>
+        <h2>Send et brev<br>over Atlanten.</h2>
+        <p class="deck">
+          Har du et spørgsmål, en rettelse, en lytteanbefaling — eller vil du blot dele en sang? Skriv til mig. Jeg svarer alle henvendelser personligt, som regel inden for en uges tid.
+        </p>
+
+        <div class="booking" id="foredrag">
+          <div class="label">— Foredrag &amp; arrangementer —</div>
+          <h4>Bestil et foredrag om Cash, troen og Amerika</h4>
+          <p>
+            Jeg holder foredrag for menigheder, biblioteker, højskoler og foreninger. Et arrangement varer typisk 60–90 minutter, med musik, billeder og samtale.
+          </p>
+          <a href="Foredrag.html" class="btn">Til siden om foredrag <span class="arr">→</span></a>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); document.getElementById('formSuccess').classList.add('on'); this.reset();">
+        <div class="form-head">
+          <div class="head-text">
+            <h3>Kontaktformular</h3>
+            <div class="stamp">No. 0014 / MMXXVI</div>
+          </div>
+          <div class="form-flag" role="img" aria-label="Painted stars and stripes"></div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="navn">Navn</label>
+            <input id="navn" type="text" required placeholder="Dit fulde navn" />
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" required placeholder="dig@eksempel.dk" />
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="emne">Emne</label>
+            <select id="emne">
+              <option>Generel henvendelse</option>
+              <option>Forespørgsel om foredrag</option>
+              <option>Rettelse / kommentar til indhold</option>
+              <option>Anbefaling af bog, film eller plade</option>
+              <option>Andet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="org">Organisation (valgfri)</label>
+            <input id="org" type="text" placeholder="Menighed, skole, forening …" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="besked">Besked</label>
+          <textarea id="besked" required placeholder="Skriv din besked her …"></textarea>
+        </div>
+
+        <div class="submit-row">
+          <div class="small">Postlagt fra: <b style="color:var(--ink)">Aarhus, DK</b></div>
+          <button class="send" type="submit">Send →</button>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          ✓ Tak for dit brev. Jeg vender tilbage hurtigst muligt.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / COLOPHON -->
+<footer class="colophon">
+  <div class="wrap">
+    <div class="colophon-grid">
+      <div>
+        <div class="mark">Johnny <span class="amp">&amp;</span> jeg</div>
+        <p class="blurb">
+          En personlig hyldest til Johnny Cash, til kristendommen i hans liv, og til det Amerika, der formede ham. Drevet af én lytter i Aarhus.
+        </p>
+        <p class="blurb" style="font-style:italic;color:rgba(239,228,207,0.5)">
+          “I wear the black for the poor and the beaten down, livin’ in the hopeless, hungry side of town.” — JR Cash
+        </p>
+      </div>
+      <div>
+        <h5>Johnny Cash</h5>
+        <ul>
+          <li><a href="Johnny Cash.html">Portræt</a></li>
+          <li><a href="Musikeren.html">Musikeren</a></li>
+          <li><a href="Cash og Jesus.html">Cash og Jesus</a></li>
+          <li><a href="Cash og Amerika.html">Cash og Amerika</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>USA</h5>
+        <ul>
+          <li><a href="Historien.html">Historien</a></li>
+          <li><a href="Kulturen.html">Kulturen</a></li>
+          <li><a href="Bøger, spil, film.html">Bøger, spil, film</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sidens hjørne</h5>
+        <ul>
+          <li><a href="Foredrag.html">Foredrag</a></li>
+          <li><a href="#">Om siden</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colo-bottom">
+      <div>© MMXXVI · Johnny &amp; jeg <span class="star">✶</span> Aarhus · Danmark</div>
+      <div>Et privat, ikke-kommercielt arkiv <span class="star">✶</span> Set fra denne side af Atlanten</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
