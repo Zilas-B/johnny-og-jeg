@@ -4,9 +4,11 @@ This is the full implementation roadmap for turning the 18-page static design in
 
 **Read first:** `TechStack.md` (in this folder) defines the stack and structural decisions. This Metaplan describes *what gets built when*. If anything here conflicts with `TechStack.md`, the stack doc wins until amended.
 
+**Build strategy: Sanity-first.** Every page-level step authors its schema, creates the Sanity document, and renders from GROQ — no "hardcode first then migrate" detour. The content model is already fully specified by the 18 static HTML pages in `claude-design-template/`, so there's no schema-discovery argument for hardcoding.
+
 ## Locations
 
-- **Design source** (read-only reference): `C:\Users\Andre\Documents\Lokale Git Repositories\johnny-og-jeg\claude-design-template` 
+- **Design source** (read-only reference): `C:\Users\Andre\Documents\Lokale Git Repositories\johnny-og-jeg\claude-design-template`
 - **Project repo** (where code is built): `C:\Users\Andre\Documents\Lokale Git Repositories\johnny-og-jeg`
 
 ## How to use this Metaplan
@@ -14,7 +16,7 @@ This is the full implementation roadmap for turning the 18-page static design in
 For each step:
 1. Open Claude Code in the project repo.
 2. Enter plan mode (`/plan` or Shift+Tab to plan mode).
-3. Reference this file and the step number, e.g. *"Plan Step 2 from `Desktop\Cash hjemmeside\Metaplan.md`."*
+3. Reference this file and the step number, e.g. *"Plan Step 3 from `Metaplan.md`."*
 4. Claude will explore the design, ask clarifying questions, write a detailed plan, and you approve it.
 5. Exit plan mode and let Claude implement.
 6. Verify against the step's **Acceptance criteria**, then move on.
@@ -26,31 +28,30 @@ Each step is intended to leave the project in a working, deployable state. If a 
 Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done, `[~]` for partial (with a short note), `[ ]` for not started.
 
 - [x] Step 0 — Project scaffold
-- [x] Step 1 — Design tokens and global chrome
+- [x] Step 1 — Design tokens and global chrome (hardcoded; migrated in Step 2)
 - [ ] Step 1.5 — Best practices research & audit
-- [ ] Step 2 — Hub page "Johnny og jeg" (hardcoded)
-- [ ] Step 3 — Music player (Cash Radio) shell
-- [ ] Step 4 — Sanity schema (foundations)
-- [ ] Step 5 — Migrate hub page content to Sanity
-- [ ] Step 6 — Music player content from Sanity
-- [ ] Step 7 — Landscape page template
-- [ ] Step 8 — Remaining 7 landscape pages
-- [ ] Step 9 — Supporting pages
-- [ ] Step 10 — Accessibility & performance pass
-- [ ] Step 11 — SEO & metadata
-- [ ] Step 12 — Production launch
+- [ ] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
+- [ ] Step 3 — Hub page "Johnny og jeg" (Sanity-first)
+- [ ] Step 4 — Music player (Cash Radio) shell (Sanity-first)
+- [ ] Step 5 — Landscape page template (one landscape, Sanity-first)
+- [ ] Step 6 — Remaining 7 landscape pages
+- [ ] Step 7 — Supporting pages
+- [ ] Step 8 — Accessibility & performance pass
+- [ ] Step 9 — SEO & metadata
+- [ ] Step 10 — Production launch
 
 Step 0 note: Vercel link + first deploy deferred to a follow-up session (acceptance criterion #4 of Step 0).
+Step 1 note: chrome ships hardcoded in JSX; Step 2 migrates it to Sanity — no extended hardcoded period.
 
 ---
 
-## Phase A — Visible prototype (front page)
+## Phase A — Visible Sanity-driven prototype (front page)
 
-Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visually faithful to the design, with the music player visible (link-out only). Content is hardcoded; Sanity isn't wired yet.
+Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visually faithful to the design, with the music player visible (link-out only) — and **everything an editor sees is editable in Sanity Studio**.
 
 ### Step 0 — Project scaffold
 
-**Outcome:** an empty but working Next.js 15 + TypeScript + Tailwind + Sanity Studio app, deployed to a Vercel preview URL.
+**Outcome:** an empty but working Next.js 15+ + TypeScript + Tailwind v4 + Sanity Studio app, deployed to a Vercel preview URL.
 
 **Includes:**
 - Create Next.js app at `C:\Users\Andre\Documents\Lokale Git Repositories\johnny-og-jeg` (App Router, TypeScript, Tailwind, ESLint).
@@ -77,6 +78,8 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 - Implement paper-grain background (fixed overlay with radial gradients).
 - Build `<Masthead>`, `<Nav>` (with dropdowns, page-aware active state), `<Footer>` components.
 - Place them in `app/(site)/layout.tsx`.
+
+**Note:** chrome content (masthead text, nav items, footer labels) ships hardcoded in JSX as a layout-first pass. Step 2 migrates it to a Sanity `siteSettings` singleton.
 
 **Reference files:** `assets/cash-shared.css`, the top of any of the 18 HTML pages.
 
@@ -117,35 +120,61 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 - A short Decision log entry is added to `Metaplan.md` for any new architectural choices.
 - A skim of the doc by a fresh Claude session is enough to know "the way we build here" without re-deriving it.
 
-### Step 2 — Hub page "Johnny og jeg" (hardcoded)
+### Step 2 — Chrome → Sanity (`siteSettings` singleton)
 
-**Outcome:** the front page (`/`) is a visually faithful reproduction of `Johnny og jeg.html`, content still hardcoded in JSX.
+**Outcome:** the masthead, primary nav, footer columns, and copyright line are editable in Sanity Studio. Editing in `/studio` updates the live chrome.
 
 **Includes:**
-- Hero section with kicker + display title + deck.
-- Era chip grid (4-column, hover lift, roman numerals + names + mottos).
-- Landscape teaser sections.
-- Intro essay block.
-- All section transitions and ornamental dividers.
+- `siteSettings` singleton schema with fields for: masthead kicker, masthead left/right sides, wordmark sub-line, nav items (with dropdown children — title, mark/roman, href), CTA href + label, footer mark, footer blurb, footer quote, footer column groups (Johnny Cash / USA / Sidens hjørne) with link lists, copyright line, bottom tagline.
+- Singleton enforcement via desk structure (pin to a single list item; don't show it under generic document list).
+- Author the singleton in Studio with the current hardcoded chrome content.
+- Refactor `components/chrome/{Masthead,Nav,Footer}.tsx` to read from `siteSettings` via GROQ (server-side fetch in `app/(site)/layout.tsx`, pass as props).
+- Set up `sanity typegen` so types regenerate when schema changes; chrome components import the generated types.
+- Add a Sanity webhook → Next.js revalidation route for `siteSettings`.
+
+**Reference files:** current `components/chrome/*` source (the literal text + `NAV_ITEMS` array become the singleton's initial values).
+
+**Acceptance criteria:**
+- A `siteSettings` singleton exists in Studio with all chrome fields populated.
+- Editing a chrome field in Studio and publishing updates the live site within a few seconds.
+- The chrome looks visually identical before and after migration.
+- `pnpm sanity typegen generate` produces typed schema; components import generated types.
+- The `Nav` client component still computes active state from `usePathname()` against the Sanity-driven items.
+
+### Step 3 — Hub page "Johnny og jeg" (Sanity-first)
+
+**Outcome:** the front page (`/`) is a visually faithful reproduction of `Johnny og jeg.html`, **driven from Sanity**. Editor can change every block.
+
+**Includes:**
+- `homePage` singleton schema with: hero kicker, display title, deck, era chip array (each with roman numeral, name, motto), landscape teaser array (4 items), intro essay (Portable Text), section dividers config.
+- Reusable object types introduced here as needed: `eraChip`, `landscapeTeaser`, and `portableTextEssay` with custom blocks (drop cap, internal link, footnote, image with caption).
+- Author the `homePage` document in Studio with all hub content extracted from `Johnny og jeg.html`.
+- Render the hub page as a server component via GROQ + Portable Text serializers.
+- Wire the **Sanity Presentation tool** so editors see drafts inline at `/studio/presentation`.
 
 **Reference files:** `Johnny og jeg.html`.
 
 **Acceptance criteria:**
 - Side-by-side, the React version and the original HTML are visually indistinguishable on a 1440px viewport (acceptable: minor pixel-level shifts).
+- All hub content is editable in Sanity Studio.
+- Editing a hub field in Studio and publishing updates the live page within a few seconds.
+- Presentation tool shows draft + published states.
 - Hover interactions work on chips.
-- The page is responsive down to 768px without obvious breakage.
+- Responsive down to 768px without obvious breakage.
 
-### Step 3 — Music player (Cash Radio) shell
+### Step 4 — Music player (Cash Radio) shell (Sanity-first)
 
-**Outcome:** the sticky bottom music player is present on every page, with vinyl animation and a hardcoded track list. Play buttons open external streaming links in a new tab — no in-page audio yet.
+**Outcome:** the sticky bottom music player is present on every page with vinyl animation, **driven from Sanity**. Editor adds/reorders tracks in Studio. Play buttons open external streaming links in a new tab — no in-page audio yet (real audio is Phase F-1).
 
 **Includes:**
-- Client component `<MusicPlayer>` mounted in `app/(site)/layout.tsx`.
+- `track` document schema: title, artist (default "Johnny Cash"), year, external URL (Spotify/YouTube/etc.), runtime, notes.
+- Active playlist: either a `tracks: track[]` array on `siteSettings`, or a separate `playlist` singleton referencing tracks. Decide during planning.
+- Author 6–8 starter tracks in Studio.
+- Server-side fetch of tracks in `app/(site)/layout.tsx`; pass as props to `<MusicPlayer>` client component.
 - Vinyl disc CSS spin animation.
 - Now-playing display, track list carousel.
 - Play / skip-forward / skip-back UI (skip cycles through tracks visually).
 - "Play" button opens YouTube / Spotify / Wistia link in `target="_blank"`.
-- Hardcoded track data in a TypeScript file (will move to Sanity in Phase B).
 - Mobile breakpoint at 1100px.
 
 **Reference files:** `assets/cash-radio.js`, the player markup at the bottom of any HTML page.
@@ -153,108 +182,61 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 **Acceptance criteria:**
 - Player persists across navigation (it's in the layout, not the page).
 - Vinyl spins when a track is "playing."
-- Track list shows correct track names.
+- Track list reflects Sanity order.
+- Adding a track in Studio adds it to the player.
+- Reordering tracks in Studio reorders them in the player.
 - External links open in a new tab.
 
 → **Phase A complete.** Share the Vercel URL. Get feedback. Decide whether to proceed to Phase B.
 
 ---
 
-## Phase B — Content in Sanity
-
-Goal: the front page is driven by Sanity. Editing in Studio updates the site. The architecture is in place for the 8 landscape pages.
-
-### Step 4 — Sanity schema (foundations)
-
-**Outcome:** Sanity schema covers the hub page and is ready for landscapes.
-
-**Includes:**
-- Document types: `siteSettings` (singleton), `homePage` (singleton), `landscape`, `era`, `archiveEntry`, `track` (for music player), `person`.
-- Object types: `portableTextEssay`, `imageWithCaption`, `metadataItem`, `eraChip`, `landscapeTeaser`.
-- Portable Text custom blocks: drop cap, internal link, footnote, image with caption.
-- Configure Vision plugin and Presentation tool for live preview.
-- `sanity typegen` configured so types regenerate on schema change.
-
-**Acceptance criteria:**
-- Studio shows all document types in the navigation.
-- A test homepage document can be created and saved.
-- `pnpm sanity typegen generate` produces `sanity.types.ts` without errors.
-
-### Step 5 — Migrate hub page content to Sanity
-
-**Outcome:** the hub page reads from Sanity. Editing in Studio updates the published site (with revalidation).
-
-**Includes:**
-- Author the homepage document in Studio with all hub content (extracted from `Johnny og jeg.html`).
-- Replace hardcoded JSX with GROQ queries.
-- Set up `next-sanity` client (server-side, with `revalidate` strategy).
-- Add Sanity webhook → Next.js revalidation route.
-- Wire Sanity Presentation tool so editors see drafts inline.
-
-**Acceptance criteria:**
-- The hub page renders content fetched from Sanity.
-- Editing a field in Studio and publishing updates the live page within a few seconds.
-- Visual fidelity from Step 2 is preserved.
-
-### Step 6 — Music player content from Sanity
-
-**Outcome:** the music player track list is editable in Sanity.
-
-**Includes:**
-- Move hardcoded track data into Sanity `track` documents.
-- Site settings references the active playlist.
-- Player component fetches tracks server-side and hydrates the client component with the data.
-
-**Acceptance criteria:**
-- Adding a track in Studio adds it to the player.
-- Reordering tracks in Studio reorders them in the player.
-
----
-
-## Phase C — One landscape template
+## Phase B — One landscape template
 
 Goal: one of the 8 landscape pages is fully built and Sanity-driven. The template is reusable for the remaining seven.
 
-### Step 7 — Landscape page template ("Naturen" or chosen first)
+### Step 5 — Landscape page template ("Naturen" or chosen first)
 
 **Outcome:** one landscape page (e.g. `/naturen`) is live, Sanity-driven, visually matching the design.
 
 **Includes:**
-- Dynamic route `app/(site)/[landscape]/page.tsx` (or similar).
+- `landscape` document schema with slug, accent color (oklch / hex), kicker, title, deck, hero image, alternating dark/light section blocks (Portable Text with side essays, drop caps), era timeline (large roman numeral + years + sub-cards via `era` document references), archive entry feed (via `archiveEntry` references).
+- New document types as needed: `era`, `archiveEntry`.
+- Dynamic route `app/(site)/[landscape]/page.tsx`.
 - Page-height editorial layout: alternating dark/light sections, drop caps, side essays, metadata sidebars.
-- Era timeline section (large roman numeral + years + sub-cards).
-- Archive entry feed at bottom ("notebook that grows" model).
-- Per-page accent color override via CSS custom properties.
+- Per-page accent color override via CSS custom properties (read from the `landscape` doc, applied as a body-level `--accent`).
 - Cross-references to other landscapes resolve to internal links.
+- Author the first landscape (Naturen) in Studio.
 
 **Reference files:** `Naturen.html` (or chosen first landscape) plus `assets/cash-shared.css`.
 
 **Acceptance criteria:**
 - The landscape page renders correctly with content from Sanity.
-- Per-page accent color works (e.g. Naturen uses a green accent, Vesten uses something else).
+- Per-page accent color works (Naturen uses a green accent, etc.).
 - Archive entries appear in reverse chronological order.
 - Visual fidelity to the original HTML.
 
-→ **Phase C complete.** This is the major architectural milestone. The remaining landscapes are repetitions of this pattern.
+→ **Phase B complete.** This is the major architectural milestone. The remaining landscapes are repetitions of this pattern.
 
 ---
 
-## Phase D — Roll out all content
+## Phase C — Roll out all content
 
-### Step 8 — Remaining 7 landscape pages
+### Step 6 — Remaining 7 landscape pages
 
 **Outcome:** all 8 landscapes (Naturen, Vesten, Den forgyldte republik, Smeltedigelen, Syd og Nord, Mindretallene, Vækkelsen, Drømmefabrikken) are live with content.
 
 **Includes:**
 - Author landscape documents in Studio (one per landscape).
-- Verify the template handles each landscape's variations.
-- Add navigation entries.
+- Verify the template handles each landscape's variations; tweak schema if a landscape needs a field the template doesn't have.
+- Add navigation entries (already in `siteSettings` from Step 2 — just populate).
 
 **Acceptance criteria:**
 - All 8 landscapes load at their respective URLs.
 - Top nav dropdown links to each.
+- Per-landscape accent colors all distinct and on-brand.
 
-### Step 9 — Supporting pages
+### Step 7 — Supporting pages
 
 **Outcome:** the remaining non-landscape pages (Historien, Musikeren, Cash og Amerika, Cash og Jesus, Foredrag, Kulturen, Bøger spil film) are live.
 
@@ -268,21 +250,21 @@ Goal: one of the 8 landscape pages is fully built and Sanity-driven. The templat
 
 ---
 
-## Phase E — Production polish
+## Phase D — Production polish
 
-### Step 10 — Accessibility & performance pass
+### Step 8 — Accessibility & performance pass
 
 **Includes:**
 - WCAG AA color contrast audit.
 - Alt text on every image (enforced via Sanity schema validation).
-- Keyboard navigation: nav dropdowns, music player controls.
+- Keyboard navigation: nav dropdowns (click-to-open + Escape), music player controls, focus rings.
 - Lighthouse pass on Performance, A11y, Best Practices, SEO.
 - LCP / image size optimization where needed.
 
 **Acceptance criteria:**
 - Lighthouse scores ≥ 90 across the board on the hub and one landscape.
 
-### Step 11 — SEO & metadata
+### Step 9 — SEO & metadata
 
 **Includes:**
 - Per-page `<title>`, meta description, Open Graph tags driven from Sanity.
@@ -290,7 +272,7 @@ Goal: one of the 8 landscape pages is fully built and Sanity-driven. The templat
 - Favicons and OG default image.
 - Structured data (Article schema) on essay pages.
 
-### Step 12 — Production launch
+### Step 10 — Production launch
 
 **Includes:**
 - Custom domain configured in Vercel.
@@ -308,13 +290,14 @@ Goal: one of the 8 landscape pages is fully built and Sanity-driven. The templat
 
 Pick these à la carte. Each is independently valuable but not required for launch.
 
-- **F1** Real audio playback (YouTube IFrame API or Spotify Web Playback SDK).
-- **F2** Search across archive entries (Sanity Embeddings Index for semantic search, or simple text search).
-- **F3** RSS / Atom feed for archive entries.
-- **F4** Richer scroll-driven animations via Framer Motion.
-- **F5** Analytics (Vercel Analytics or Plausible).
-- **F6** Newsletter signup (Buttondown / Mailchimp).
-- **F7** Print stylesheet for essays.
+- **F1** Search across archive entries (Sanity Embeddings Index for semantic search, or simple text search).
+- **F2** RSS / Atom feed for archive entries.
+- **F3** Richer scroll-driven animations via Framer Motion.
+- **F4** Analytics (Vercel Analytics or Plausible).
+- **F5** Newsletter signup (Buttondown / Mailchimp).
+- **F6** Print stylesheet for essays.
+
+Real audio playback was previously listed here; removed by decision (see Decision log). Music player is link-out only, indefinitely.
 
 ---
 
@@ -324,18 +307,24 @@ These are rough ranges assuming a solo developer working with Claude Code, not p
 
 | Phase | Steps | Effort |
 |---|---|---|
-| A — Visible prototype | 0–3 | 3–5 days |
-| B — Sanity-driven hub | 4–6 | 3–5 days |
-| C — One landscape template | 7 | 3–5 days |
-| D — All content | 8–9 | 5–8 days |
-| E — Production polish | 10–12 | 2–4 days |
+| A — Visible Sanity-driven prototype | 0–4 | 4–6 days |
+| B — One landscape template | 5 | 3–5 days |
+| C — All content | 6–7 | 5–8 days |
+| D — Production polish | 8–10 | 2–4 days |
 | F — Optional | à la carte | varies |
 
-**Total to production (A–E):** roughly 3–4 weeks of focused work.
+**Total to production (A–D):** roughly 3–4 weeks of focused work.
 
 ## Decision log
 
 Track major decisions here as the project evolves. Date, decision, rationale.
 
-- `2026-05-26` — Stack chosen: Next.js 15 + TypeScript + Tailwind + CSS Modules + Sanity v3 embedded at `/studio`, deployed on Vercel. See `TechStack.md`.
-- `2026-05-26` — Build strategy: prototype front page first (Phase A), then layer Sanity (Phase B), then expand. Do not attempt the whole site in one go.
+- `2026-05-26` — Stack chosen: Next.js 15+ + TypeScript + Tailwind v4 + CSS Modules + Sanity v3 embedded at `/studio`, deployed on Vercel. See `TechStack.md`.
+- `2026-05-26` — *Initial* build strategy: prototype front page first (Phase A), then layer Sanity (Phase B), then expand. **Superseded — see entry below.**
+- `2026-05-26` — **Build strategy revised: Sanity-first.** The 18 static HTML pages in `claude-design-template/` already fully specify the content model — there's no schema-discovery argument for hardcoding then migrating. The old Phase B (Steps 4–6: schema foundations + hub migration + player migration) dissolves into per-page work. Old Steps 7–12 renumbered to 5–10. Step 1's chrome was the only thing built under the old strategy; new Step 2 migrates it immediately.
+- `2026-05-26` — Scaffolded on Next.js 16.2.6 (current latest from `create-next-app@latest`), not 15 as originally planned. Verified compatible with Sanity v5.26.
+- `2026-05-26` — **Slug encoding**: ASCII-only (`æ→ae`, `ø→oe`, `å→aa`, lowercase, space/comma → `-`). Reason: no encoding surprises in shares, no edge cases. Native Danish slugs explicitly rejected.
+- `2026-05-26` — **Studio language**: keep English Studio UI; content is Danish. Solo developer, all Sanity docs/tutorials match the English labels.
+- `2026-05-26` — **Image strategy**: all images go through Sanity assets (image pipeline, focal points, responsive sizes). Reference PNGs/JPGs in `claude-design-template/images/` will be uploaded to Sanity as part of content authoring from Step 3 onward.
+- `2026-05-26` — **Per-landscape accent colors**: Sanity dropdown of named palette presets (~8 tokens like `barn / denim / brass / forest / dust / copper / lilac / ochre`, each mapped to a CSS variable in `tokens.css`). Editor can swap which preset a landscape uses but cannot invent new colors. Free color picker explicitly rejected.
+- `2026-05-26` — **Music player audio**: link-out only, indefinitely. Real audio (formerly Phase F-1) removed from the optional list. Reason: the editorial focus is text + design fidelity; real playback adds API/state/licensing complexity disproportionate to the editorial value.

@@ -13,11 +13,11 @@ A multi-page editorial website (in Danish) exploring America through Johnny Cash
 
 | Concern | Choice | Notes |
 |---|---|---|
-| Framework | **Next.js 15+ (App Router)** | Server Components by default; client components only where interactivity demands it (e.g. music player). Scaffolded on **Next 16.2.6** (2026-05-26) — `create-next-app@latest` now ships Next 16; verified compatible with Sanity v5.26. |
+| Framework | **Next.js 16+ (App Router)** | Server Components by default; client components only where interactivity demands it (e.g. music player). Scaffolded on **Next 16.2.6** (2026-05-26) from `create-next-app@latest`. |
 | Language | **TypeScript** (strict mode) | All source files `.ts` / `.tsx`. |
 | Runtime | **Node.js 20 LTS** | Required by current Next.js + Sanity tooling. |
 | Package manager | **pnpm** | Fast, disk-efficient, good monorepo story if we ever split. Acceptable fallback: npm. |
-| CMS | **Sanity Studio v3** | Schema-as-code, Portable Text for long-form essays, image pipeline via `@sanity/image-url`. |
+| CMS | **Sanity Studio v5** | Schema-as-code, Portable Text for long-form essays, image pipeline via `@sanity/image-url`. Installed `sanity@5.26`. |
 | Studio location | **Embedded at `/studio`** inside the Next.js app | Pattern: `app/studio/[[...tool]]/page.tsx` using `next-sanity/studio`. Single repo, single deploy. |
 | Styling | **Tailwind CSS v4 + CSS Modules** | Tailwind for layout, spacing, color tokens, common utilities. CSS Modules for the bespoke editorial pieces (drop caps, paper grain, vinyl spin animation, per-page accent overrides). |
 | Fonts | **next/font/google** | Playfair Display (display serif), Bebas Neue (poster sans), IBM Plex Mono (mono), Crimson Pro (body serif). Self-hosted via next/font for zero layout shift. |
@@ -27,7 +27,7 @@ A multi-page editorial website (in Danish) exploring America through Johnny Cash
 | Hosting | **Vercel** | Zero-config deploys from GitHub. Free tier covers this project. Sanity Studio served from the same domain at `/studio`. |
 | Version control | **GitHub** | Branch model: `main` deploys to production; preview deploys per PR on Vercel. |
 | Linting | **ESLint** (next/core-web-vitals + next/typescript) | Run on commit and in CI. |
-| Formatting | **Prettier** | With Tailwind plugin for class sorting. |
+| Formatting | Not configured yet | Prettier was planned but not installed at scaffold time. Add `prettier` + `prettier-plugin-tailwindcss` when consistency starts to matter. |
 
 ## Optional / decide-later
 
