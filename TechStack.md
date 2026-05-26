@@ -13,7 +13,7 @@ A multi-page editorial website (in Danish) exploring America through Johnny Cash
 
 | Concern | Choice | Notes |
 |---|---|---|
-| Framework | **Next.js 15+ (App Router)** | Server Components by default; client components only where interactivity demands it (e.g. music player). |
+| Framework | **Next.js 15+ (App Router)** | Server Components by default; client components only where interactivity demands it (e.g. music player). Scaffolded on **Next 16.2.6** (2026-05-26) — `create-next-app@latest` now ships Next 16; verified compatible with Sanity v5.26. |
 | Language | **TypeScript** (strict mode) | All source files `.ts` / `.tsx`. |
 | Runtime | **Node.js 20 LTS** | Required by current Next.js + Sanity tooling. |
 | Package manager | **pnpm** | Fast, disk-efficient, good monorepo story if we ever split. Acceptable fallback: npm. |
