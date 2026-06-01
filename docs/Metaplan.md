@@ -33,8 +33,8 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 1 — Design tokens and global chrome (hardcoded; migrated in Step 2)
 - [x] Step 1.5 — Best practices research & audit
 - [x] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
-- [~] Step 3 — Hub page "Johnny og jeg" (Sanity-first) — schemas, query, components, Presentation/draft-mode plumbing landed; build green. `homePage` doc still needs to be authored in Studio before `/` renders (page throws a clear error until then).
-- [ ] Step 4 — Music player (Cash Radio) shell (Sanity-first)
+- [x] Step 3 — Hub page "Johnny og jeg" (Sanity-first) — schemas, query, components, Presentation/draft-mode plumbing landed; `homePage` doc seeded from the template via `scripts/seed-homePage.mjs` and published.
+- [x] Step 4 — Music player (Cash Radio) visual shell — `<MusicPlayer>` Server Component mounted in `app/(site)/layout.tsx`; markup, vinyl spin, tracks, transport buttons, and listen-on chips ported as visual-only chrome. Inert; no Sanity model; `prefers-reduced-motion` halts the disc and live-dot.
 - [ ] Step 5 — Landscape page template (one landscape, Sanity-first)
 - [ ] Step 6 — Remaining 7 landscape pages
 - [ ] Step 7 — Supporting pages
@@ -49,7 +49,7 @@ Step 1 note: chrome ships hardcoded in JSX; Step 2 migrates it to Sanity — no 
 
 ## Phase A — Visible Sanity-driven prototype (front page)
 
-Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visually faithful to the design, with the music player visible (link-out only) — and **everything an editor sees is editable in Sanity Studio**.
+Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visually faithful to the design, with the music player **visible as a non-functional visual shell** — and **everything an editor sees is editable in Sanity Studio**.
 
 ### Step 0 — Project scaffold
 
@@ -173,30 +173,35 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 - Hover interactions work on chips.
 - Responsive down to 768px without obvious breakage.
 
-### Step 4 — Music player (Cash Radio) shell (Sanity-first)
+### Step 4 — Music player (Cash Radio) — **visual shell only**
 
-**Outcome:** the sticky bottom music player is present on every page with vinyl animation, **driven from Sanity**. Editor adds/reorders tracks in Studio. Play buttons open external streaming links in a new tab — no in-page audio yet (real audio is Phase F-1).
+**Outcome:** the sticky bottom music player markup is present on every page, visually faithful to the design (vinyl disc, now-playing label, track list, transport controls). **No functionality.** Buttons are inert, nothing fetches, nothing opens external links, no Sanity model. Track names and metadata visible in the shell are baked-in placeholder text drawn straight from `assets/cash-radio.js` — they exist only so the visual reads correctly.
 
 **Includes:**
-- `track` document schema: title, artist (default "Johnny Cash"), year, external URL (Spotify/YouTube/etc.), runtime, notes.
-- Active playlist: either a `tracks: track[]` array on `siteSettings`, or a separate `playlist` singleton referencing tracks. Decide during planning.
-- Author 6–8 starter tracks in Studio.
-- Server-side fetch of tracks in `app/(site)/layout.tsx`; pass as props to `<MusicPlayer>` client component.
-- Vinyl disc CSS spin animation.
-- Now-playing display, track list carousel.
-- Play / skip-forward / skip-back UI (skip cycles through tracks visually).
-- "Play" button opens YouTube / Spotify / Wistia link in `target="_blank"`.
-- Mobile breakpoint at 1100px.
+- `<MusicPlayer>` component placed in `app/(site)/layout.tsx` so it persists across navigation.
+- Sticky bottom positioning, paper/ink palette per the template, mobile breakpoint at 1100px.
+- Vinyl disc CSS art with the spin animation always-on (or `prefers-reduced-motion`-aware halt). The "is the disc spinning" state is hardcoded — not driven by a play state.
+- Visual-only elements: now-playing track + artist text, track list, play / skip-forward / skip-back buttons.
+- Buttons are real `<button>` elements (for a11y and visual fidelity) with `type="button"` and no `onClick` — they have visible focus rings but do nothing when clicked.
 
-**Reference files:** `assets/cash-radio.js`, the player markup at the bottom of any HTML page.
+**Explicitly out of scope (postponed indefinitely):**
+- No `track` / `playlist` schema. No Sanity model for music content at all.
+- No GROQ fetch, no client component for state, no `'use client'` directives.
+- No play / pause / skip behaviour. No external streaming link-outs (Spotify/YouTube).
+- No real audio playback.
+- No "editor adds/reorders tracks in Studio" — the player is not editable. If the visible track names ever need to change, the placeholder array in the component is edited in code.
+
+When (or if) the player becomes interactive, that lands as a separate, scoped step — not folded back into Step 4.
+
+**Reference files:** `assets/cash-radio.js` (placeholder copy + visual layout), the player markup at the bottom of any HTML page.
 
 **Acceptance criteria:**
-- Player persists across navigation (it's in the layout, not the page).
-- Vinyl spins when a track is "playing."
-- Track list reflects Sanity order.
-- Adding a track in Studio adds it to the player.
-- Reordering tracks in Studio reorders them in the player.
-- External links open in a new tab.
+- Player markup persists across navigation (it lives in the layout, not the page).
+- Visual fidelity to the design template at 1440px and at the 1100px mobile breakpoint.
+- Vinyl disc spins via CSS, halts under `prefers-reduced-motion`.
+- Transport buttons render with correct icons and focus styles, but clicking them does nothing.
+- The component is a Server Component — no `'use client'` directive anywhere in the player tree.
+- No new Sanity types, no new GROQ queries, no new env vars.
 
 → **Phase A complete.** Share the Vercel URL. Get feedback. Decide whether to proceed to Phase B.
 
@@ -308,7 +313,7 @@ Pick these à la carte. Each is independently valuable but not required for laun
 - **F5** Newsletter signup (Buttondown / Mailchimp).
 - **F6** Print stylesheet for essays.
 
-Real audio playback was previously listed here; removed by decision (see Decision log). Music player is link-out only, indefinitely.
+Music player functionality (real audio AND link-out playback) was previously listed here and in Step 4; both removed by decision (see Decision log). The music player is a visual-only shell, indefinitely.
 
 ---
 
@@ -353,3 +358,5 @@ Track major decisions here as the project evolves. Date, decision, rationale.
 - `2026-06-01` — **Step 3 schema extended past the plan: `vinylsSection`.** Plan modelled `vinyls` as a flat array of 3 `vinylTile` items. The hub design has a section header above the vinyl row ("— Tre rubrikker · Side A · Side B · Side C —" / "Manden i tre spor" / deck). Per the Step 2 "everything an editor sees is editable" principle, the field was widened to an object `{ kicker, heading, deck, items }`. The flat-array shape would have left those strings hardcoded.
 - `2026-06-01` — **Step 3 `PortableText` wrapper accepts loose block-like types.** `@portabletext/react`'s exported `PortableTextBlock` type marks `children` as required; Sanity TypeGen marks it optional. Rather than cast at every call site, the wrapper's `value` prop accepts `{_type: string; _key?: string}[]` — the runtime payload is identical and `BasePortableText` doesn't need stricter typing to render correctly.
 - `2026-06-01` — **Step 3 draft-mode token check is request-time, not module-load.** `defineEnableDraftMode` needs a Sanity read token to validate Presentation's preview secrets. Token isn't in `.env.local` yet (deferred with the webhook). The enable route returns a 500 with a clear message when the token is missing instead of throwing at import time — keeps `pnpm build` working without a token and makes the missing-token path obvious to a future operator.
+- `2026-06-01` — **Step 3 marked done.** `homePage` singleton seeded from the template via `scripts/seed-homePage.mjs` (`sanity exec ... --with-user-token` → `createOrReplace({_id: 'drafts.homePage', ...})` → publish), so `/` renders end-to-end without a manual Studio authoring pass. Script kept in-tree as the canonical re-seed path. `useCdn` flipped to `false` on the server client so editor publish→reload is immediate (no 60s CDN TTL); revisit when the revalidation webhook is wired.
+- `2026-06-01` — **Step 4 reduced to a visual shell. Music player functionality postponed indefinitely.** Original Step 4 included a `track`/`playlist` Sanity model, server-side fetch, transport state, and external streaming link-outs. All removed — Step 4 now ships the player markup + CSS only, with inert buttons and hardcoded placeholder track names from `cash-radio.js`. Reason: editorial focus is text + design fidelity; even link-out playback adds Sanity model + state + per-track URL maintenance disproportionate to the editorial value. The Phase F "real audio" optional was already dropped on 2026-05-26 — this extends that ethos to the link-out shell too. If the player ever becomes interactive, it lands as a separate scoped step.

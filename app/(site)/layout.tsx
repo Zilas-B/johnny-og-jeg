@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers'
 
 import { Footer } from '@/components/chrome/Footer'
 import { Masthead } from '@/components/chrome/Masthead'
+import { MusicPlayer } from '@/components/chrome/MusicPlayer'
 import { Nav } from '@/components/chrome/Nav'
 import { client } from '@/sanity/client'
 import { SanityLive } from '@/sanity/lib/live'
@@ -60,6 +61,7 @@ export default async function SiteLayout({
           footerBottomTagline: settings.footerBottomTagline,
         }}
       />
+      <MusicPlayer />
       {isDraft && <SanityLive />}
     </>
   )
