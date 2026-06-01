@@ -1,0 +1,53 @@
+.setlist {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 16px 0;
+  overflow: hidden;
+  border-top: 4px solid var(--barn);
+  border-bottom: 4px solid var(--barn);
+  position: relative;
+  z-index: 3;
+}
+
+.track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: scroll 60s linear infinite;
+  font-family: var(--f-poster);
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  width: max-content;
+}
+
+.track > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.yr {
+  color: var(--brass);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+}
+
+.star {
+  color: var(--barn);
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

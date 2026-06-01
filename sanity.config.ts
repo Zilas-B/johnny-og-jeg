@@ -1,12 +1,18 @@
 'use client'
 
 import { defineConfig } from 'sanity'
+import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 
 import { apiVersion, dataset, projectId } from './sanity/env'
 import { schemaTypes } from './sanity/schemas'
 import { structure } from './sanity/structure'
+
+const SINGLETONS = ['siteSettings', 'homePage'] as const
+type Singleton = (typeof SINGLETONS)[number]
+const isSingleton = (type: string): type is Singleton =>
+  (SINGLETONS as readonly string[]).includes(type)
 
 export default defineConfig({
   basePath: '/studio',
@@ -15,11 +21,26 @@ export default defineConfig({
   schema: { types: schemaTypes },
   plugins: [
     structureTool({ structure }),
+    presentationTool({
+      previewUrl: {
+        origin: typeof window === 'undefined' ? 'http://localhost:3000' : window.location.origin,
+        preview: '/',
+        previewMode: {
+          enable: '/api/draft-mode/enable',
+        },
+      },
+      resolve: {
+        locations: {
+          homePage: { locations: [{ title: 'Forside', href: '/' }] },
+          siteSettings: { locations: [{ title: 'Forside', href: '/' }] },
+        },
+      },
+    }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
   document: {
     actions: (prev, { schemaType }) =>
-      schemaType === 'siteSettings'
+      isSingleton(schemaType)
         ? prev.filter(
             ({ action }) =>
               action !== 'duplicate' && action !== 'delete' && action !== 'unpublish',
@@ -27,7 +48,7 @@ export default defineConfig({
         : prev,
     newDocumentOptions: (prev, { creationContext }) =>
       creationContext.type === 'global'
-        ? prev.filter((opt) => opt.templateId !== 'siteSettings')
+        ? prev.filter((opt) => !isSingleton(opt.templateId))
         : prev,
   },
 })

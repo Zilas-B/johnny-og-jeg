@@ -1,10 +1,20 @@
-import { CogIcon } from '@sanity/icons'
+import { CogIcon, HomeIcon } from '@sanity/icons'
 import type { StructureResolver } from 'sanity/structure'
+
+const PINNED_SINGLETONS = ['siteSettings', 'homePage'] as const
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Indhold')
     .items([
+      S.listItem()
+        .title('Forside — Johnny og jeg')
+        .icon(HomeIcon)
+        .child(
+          S.document()
+            .schemaType('homePage')
+            .documentId('homePage'),
+        ),
       S.listItem()
         .title('Indstillinger for sitet')
         .icon(CogIcon)
@@ -15,6 +25,6 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => listItem.getId() !== 'siteSettings',
+        (listItem) => !PINNED_SINGLETONS.includes(listItem.getId() as (typeof PINNED_SINGLETONS)[number]),
       ),
     ])

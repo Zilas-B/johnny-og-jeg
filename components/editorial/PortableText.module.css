@@ -1,0 +1,10 @@
+.withDropCap > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 78px;
+  line-height: 0.85;
+  padding: 6px 12px 0 0;
+  color: var(--barn);
+}

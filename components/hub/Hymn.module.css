@@ -1,0 +1,67 @@
+.hymn {
+  padding: 96px 0;
+  text-align: center;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  z-index: 2;
+}
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--barn);
+  margin-bottom: 24px;
+}
+.quote {
+  margin: 0 auto;
+  max-width: 900px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.15;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.quote :global(p) {
+  margin: 0;
+  display: inline;
+}
+.quote::before {
+  content: '“';
+  color: var(--barn);
+  font-weight: 900;
+  font-size: 80px;
+  line-height: 0;
+  vertical-align: -22px;
+  margin-right: 6px;
+}
+.quote::after {
+  content: '”';
+  color: var(--barn);
+  font-weight: 900;
+  font-size: 80px;
+  line-height: 0;
+  vertical-align: -22px;
+  margin-left: 6px;
+}
+.attrib {
+  margin-top: 28px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 768px) {
+  .quote {
+    font-size: 32px;
+  }
+  .hymn {
+    padding: 64px 0;
+  }
+}

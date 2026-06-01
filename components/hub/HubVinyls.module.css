@@ -1,0 +1,65 @@
+.sectHead {
+  padding: 64px 0 28px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--barn);
+  margin-bottom: 14px;
+}
+.heading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.deck {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 14px auto 0;
+}
+.ornament {
+  margin: 14px auto 0;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--brass);
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule-strong);
+}
+
+.row {
+  padding: 36px 0 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .heading {
+    font-size: 44px;
+  }
+}

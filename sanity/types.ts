@@ -15,6 +15,103 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type TimelineEvent = {
+  _type: "timelineEvent";
+  year?: string;
+  place?: string;
+  heading?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type VinylTile = {
+  _type: "vinylTile";
+  cornerNumber?: string;
+  cornerTag?: string;
+  vinylAccent?: "barn" | "denim" | "brass";
+  sleeveText?: string;
+  vinylTopLabel?: string;
+  vinylTitle?: string;
+  vinylBottomLabel?: string;
+  heading?: string;
+  subhead?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  tracklist?: Array<
+    {
+      _key: string;
+    } & VinylTrack
+  >;
+  linkText?: string;
+  linkHref?: string;
+};
+
+export type VinylTrack = {
+  _type: "vinylTrack";
+  track?: string;
+  title?: string;
+  duration?: string;
+};
+
+export type TickerItem = {
+  _type: "tickerItem";
+  year?: string;
+  milestone?: string;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  ogImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
 export type FooterQuote = {
   _type: "footerQuote";
   text?: string;
@@ -64,6 +161,191 @@ export type Masthead = {
   leftLine2?: string;
   rightLine1?: string;
   rightLine2?: string;
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hero?: {
+    kicker?: string;
+    title?: string;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    meta?: Array<string>;
+  };
+  signatureCard?: {
+    stamp?: string;
+    foreLabel?: string;
+    quote?: string;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    scripture?: {
+      text?: string;
+      reference?: string;
+    };
+  };
+  ticker?: {
+    items?: Array<
+      {
+        _key: string;
+      } & TickerItem
+    >;
+  };
+  vinyls?: {
+    kicker?: string;
+    heading?: string;
+    deck?: string;
+    items?: Array<
+      {
+        _key: string;
+      } & VinylTile
+    >;
+  };
+  historicalThread?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    timeline?: Array<
+      {
+        _key: string;
+      } & TimelineEvent
+    >;
+  };
+  hymn?: {
+    kicker?: string;
+    quote?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    attribution?: string;
+  };
+  contact?: {
+    kicker?: string;
+    heading?: string;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    bookingLabel?: string;
+    bookingHeading?: string;
+    bookingBody?: string;
+    bookingLinkText?: string;
+    bookingLinkHref?: string;
+  };
+  seo?: Seo;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SiteSettings = {
@@ -127,22 +409,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
 };
 
 export type SanityFileAsset = {
@@ -211,19 +477,26 @@ export type Slug = {
 };
 
 export type AllSanitySchemaTypes =
+  | TimelineEvent
+  | VinylTile
+  | VinylTrack
+  | TickerItem
+  | SanityImageAssetReference
+  | Seo
   | FooterQuote
   | FooterColumn
   | Cta
   | NavGroup
   | NavLink
   | Masthead
+  | HomePage
+  | SanityImageCrop
+  | SanityImageHotspot
   | SiteSettings
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
@@ -253,10 +526,238 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   footerBottomTagline: string | null;
 } | null;
 
+// Source: sanity/queries/home.ts
+// Variable: HOME_PAGE_QUERY
+// Query: *[_type == "homePage" && _id == "homePage"][0]{    hero{      kicker,      title,      deck,      meta    },    signatureCard{      stamp,      foreLabel,      quote,      body,      scripture{ text, reference }    },    ticker{      items[]{ year, milestone }    },    vinyls{      kicker,      heading,      deck,      items[]{        cornerNumber,        cornerTag,        vinylAccent,        sleeveText,        vinylTopLabel,        vinylTitle,        vinylBottomLabel,        heading,        subhead,        body,        tracklist[]{ track, title, duration },        linkText,        linkHref      }    },    historicalThread{      kicker,      heading,      intro,      timeline[]{ year, place, heading, description }    },    hymn{      kicker,      quote,      attribution    },    contact{      kicker,      heading,      deck,      bookingLabel,      bookingHeading,      bookingBody,      bookingLinkText,      bookingLinkHref    },    seo{      title,      description,      ogImage{ asset->{url, metadata{dimensions}}, alt }    }  }
+export type HOME_PAGE_QUERY_RESULT = {
+  hero: {
+    kicker: string | null;
+    title: string | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    meta: Array<string> | null;
+  } | null;
+  signatureCard: {
+    stamp: string | null;
+    foreLabel: string | null;
+    quote: string | null;
+    body: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    scripture: {
+      text: string | null;
+      reference: string | null;
+    } | null;
+  } | null;
+  ticker: {
+    items: Array<{
+      year: string | null;
+      milestone: string | null;
+    }> | null;
+  } | null;
+  vinyls: {
+    kicker: string | null;
+    heading: string | null;
+    deck: string | null;
+    items: Array<{
+      cornerNumber: string | null;
+      cornerTag: string | null;
+      vinylAccent: "barn" | "brass" | "denim" | null;
+      sleeveText: string | null;
+      vinylTopLabel: string | null;
+      vinylTitle: string | null;
+      vinylBottomLabel: string | null;
+      heading: string | null;
+      subhead: string | null;
+      body: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+      tracklist: Array<{
+        track: string | null;
+        title: string | null;
+        duration: string | null;
+      }> | null;
+      linkText: string | null;
+      linkHref: string | null;
+    }> | null;
+  } | null;
+  historicalThread: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    intro: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    timeline: Array<{
+      year: string | null;
+      place: string | null;
+      heading: string | null;
+      description: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+    }> | null;
+  } | null;
+  hymn: {
+    kicker: string | null;
+    quote: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    attribution: string | null;
+  } | null;
+  contact: {
+    kicker: string | null;
+    heading: string | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    bookingLabel: string | null;
+    bookingHeading: string | null;
+    bookingBody: string | null;
+    bookingLinkText: string | null;
+    bookingLinkHref: string | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    masthead,\n    nav,\n    cta,\n    footerMark,\n    footerBlurb,\n    footerQuote,\n    footerColumns,\n    footerBottomCopyright,\n    footerBottomTagline\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "homePage" && _id == "homePage"][0]{\n    hero{\n      kicker,\n      title,\n      deck,\n      meta\n    },\n    signatureCard{\n      stamp,\n      foreLabel,\n      quote,\n      body,\n      scripture{ text, reference }\n    },\n    ticker{\n      items[]{ year, milestone }\n    },\n    vinyls{\n      kicker,\n      heading,\n      deck,\n      items[]{\n        cornerNumber,\n        cornerTag,\n        vinylAccent,\n        sleeveText,\n        vinylTopLabel,\n        vinylTitle,\n        vinylBottomLabel,\n        heading,\n        subhead,\n        body,\n        tracklist[]{ track, title, duration },\n        linkText,\n        linkHref\n      }\n    },\n    historicalThread{\n      kicker,\n      heading,\n      intro,\n      timeline[]{ year, place, heading, description }\n    },\n    hymn{\n      kicker,\n      quote,\n      attribution\n    },\n    contact{\n      kicker,\n      heading,\n      deck,\n      bookingLabel,\n      bookingHeading,\n      bookingBody,\n      bookingLinkText,\n      bookingLinkHref\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
   }
 }

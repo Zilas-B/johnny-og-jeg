@@ -32,6 +32,8 @@ Steps should leave the repo in a working, deployable state. If a step starts fee
 
 This folder contains 18 Danish HTML pages, `assets/cash-shared.css`, `assets/cash-radio.js`, and image assets — the original output from Claude Design. **Treat it as a read-only visual fidelity target**, not code to modify or refactor. When implementing pages, reproduce its layout, typography, colors, and animations in the Next.js + Sanity stack; do not edit files inside this folder.
 
+**Visuals and content only.** The template guides *what it looks like* and *what it says*. Architecture, structure, and stack choices come from `docs/best-practices.md` and `docs/TechStack.md`, never the template. The template never overrides best practices.
+
 Reference points inside it:
 - `Johnny og jeg.html` — the hub/homepage
 - 8 thematic "landscape" pages (`Naturen.html`, `Vesten.html`, `Smeltedigelen.html`, `Den forgyldte republik.html`, `Syd og Nord.html`, `Mindretallene.html`, `Vækkelsen.html`, `Drømmefabrikken.html`)

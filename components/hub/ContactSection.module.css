@@ -1,0 +1,218 @@
+.contact {
+  padding: 80px 0 60px;
+  background: var(--paper-2);
+  border-top: 3px double var(--ink);
+  position: relative;
+  z-index: 2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 64px;
+}
+
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--barn);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.heading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 1;
+  margin: 0 0 14px;
+  color: var(--ink);
+  white-space: pre-line;
+}
+.deck {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 24px;
+  max-width: 520px;
+}
+.deck :global(p) {
+  margin: 0 0 12px;
+}
+
+.booking {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 24px 28px;
+  border: 1px solid var(--ink);
+  box-shadow: 8px 10px 0 rgba(14, 13, 12, 0.18);
+  margin-top: 8px;
+}
+.bookingLabel {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 8px;
+}
+.bookingHeading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+.bookingBody {
+  margin: 0 0 16px;
+  color: rgba(239, 228, 207, 0.78);
+  font-size: 15.5px;
+}
+.bookingBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px;
+  background: var(--barn);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--f-poster);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--barn);
+}
+.bookingBtn:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.form {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 28px 28px 24px;
+  box-shadow: 8px 10px 0 rgba(14, 13, 12, 0.18);
+}
+.formHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+.formHead h3 {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0;
+}
+.formStamp {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--barn);
+}
+.formFlag {
+  width: 130px;
+  height: 96px;
+  flex: 0 0 auto;
+  border-radius: 4px 60px 60px 4px;
+  box-shadow: 4px 4px 0 rgba(14, 13, 12, 0.18);
+  background-image: url('/contact-flag.png');
+  background-size: cover;
+  background-position: center 42%;
+  transform: rotate(-1.5deg);
+  position: relative;
+  overflow: hidden;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+.field label {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  font-family: var(--f-body);
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--ink);
+  background: var(--paper);
+}
+.field textarea {
+  min-height: 110px;
+  resize: vertical;
+  font-family: var(--f-body);
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.submitSmall {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+.send {
+  padding: 12px 22px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  font-family: var(--f-poster);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.send:hover {
+  background: var(--barn);
+  border-color: var(--barn);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .heading {
+    font-size: 44px;
+  }
+}

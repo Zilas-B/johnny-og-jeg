@@ -33,7 +33,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 1 — Design tokens and global chrome (hardcoded; migrated in Step 2)
 - [x] Step 1.5 — Best practices research & audit
 - [x] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
-- [ ] Step 3 — Hub page "Johnny og jeg" (Sanity-first)
+- [~] Step 3 — Hub page "Johnny og jeg" (Sanity-first) — schemas, query, components, Presentation/draft-mode plumbing landed; build green. `homePage` doc still needs to be authored in Studio before `/` renders (page throws a clear error until then).
 - [ ] Step 4 — Music player (Cash Radio) shell (Sanity-first)
 - [ ] Step 5 — Landscape page template (one landscape, Sanity-first)
 - [ ] Step 6 — Remaining 7 landscape pages
@@ -156,11 +156,12 @@ Goal: end of Phase A, the **front page is live on a Vercel preview URL**, visual
 **Outcome:** the front page (`/`) is a visually faithful reproduction of `Johnny og jeg.html`, **driven from Sanity**. Editor can change every block.
 
 **Includes:**
-- `homePage` singleton schema with: hero kicker, display title, deck, era chip array (each with roman numeral, name, motto), landscape teaser array (4 items), intro essay (Portable Text), section dividers config.
-- Reusable object types introduced here as needed: `eraChip`, `landscapeTeaser`, and `portableTextEssay` with custom blocks (drop cap, internal link, footnote, image with caption).
+- `homePage` singleton schema modelled on what `Johnny og jeg.html` actually shows: `hero` (kicker, title, deck PT, meta strings), `signatureCard` (stamp, fore-label, headline, body PT, scripture PT), `ticker` (array of `tickerItem` `{year, milestone}`), `vinyls` (exactly 3 `vinylTile` — corner num/tag, accent, vinyl labels, headline, subhead, body PT, 4-track `vinylTrack` list, link), `historicalThread` (kicker, headline PT, intro PT, 8-event `timelineEvent` timeline), `hymn` (kicker, quote PT, attribution), `contact` (kicker, headline, deck PT, booking text + href), `seo` (title/description/ogImage).
+- Reusable object types: `vinylTile`, `vinylTrack`, `tickerItem`, `timelineEvent`.
+- Introduce the shared **PortableText wrapper** (`components/editorial/PortableText.tsx`, per `best-practices.md` §6) — used by every Portable Text field on the hub and forward. Initial component map: paragraph, italic, strong, line break, opt-in drop-cap.
 - Author the `homePage` document in Studio with all hub content extracted from `Johnny og jeg.html`.
-- Render the hub page as a server component via GROQ + Portable Text serializers.
-- Wire the **Sanity Presentation tool** so editors see drafts inline at `/studio/presentation`.
+- Render the hub page as a server component via GROQ + the shared PortableText wrapper.
+- Wire the **Sanity Presentation tool** so editors see drafts inline at `/studio/presentation` — landing the `app/api/draft-mode/{enable,disable}/route.ts` plumbing that `<SanityLive />` was already gated on.
 
 **Reference files:** `Johnny og jeg.html`.
 
@@ -348,3 +349,7 @@ Track major decisions here as the project evolves. Date, decision, rationale.
 - `2026-06-01` — **Step 2 webhook deferred.** `/api/revalidate` route ships with secret verification, but the Sanity webhook itself is not configured in Sanity Manage yet. Dev verification works via `force-dynamic` per-request fetch on `(site)` routes. Production wiring (read token + webhook secret in Vercel, webhook URL pointing at the deployed preview, secret matched) is folded into the first step that exercises a production deploy end-to-end.
 - `2026-06-01` — **Masthead side-line bold dropped.** Original Step 1 chrome bolded `Forår MMXXVI` and `Anno MMXXVI` via `<b>` tags. The Sanity-driven Masthead renders the side fields as plain strings (no rich text). Accepted within Step 1's stated ~5% visual tolerance — restoring it would require either a CSS rule that bolds the second line unconditionally or splitting each side into a richer object, both disproportionate for chrome that rarely changes.
 - `2026-06-01` — **Schema deploy via Sanity CLI.** Running the MCP authoring tools required the schema to be deployed to the project. Used `pnpm sanity schema deploy` from the local Studio (the MCP's `deploy_schema` tool refuses when a local Studio exists, to prevent source/deploy drift). Schema redeploys happen on-demand when MCP work is needed against new types — not added to `predev`/`prebuild`.
+- `2026-06-01` — **`claude-design-template/` is for visuals and content only.** The 18 HTML pages dictate layout, typography, colour, animation, and the literal Danish copy. They do **not** dictate architecture, structure, or stack — those decisions live in `docs/best-practices.md` and `docs/TechStack.md`, and the template never overrides them. Codified in `CLAUDE.md`.
+- `2026-06-01` — **Step 3 schema extended past the plan: `vinylsSection`.** Plan modelled `vinyls` as a flat array of 3 `vinylTile` items. The hub design has a section header above the vinyl row ("— Tre rubrikker · Side A · Side B · Side C —" / "Manden i tre spor" / deck). Per the Step 2 "everything an editor sees is editable" principle, the field was widened to an object `{ kicker, heading, deck, items }`. The flat-array shape would have left those strings hardcoded.
+- `2026-06-01` — **Step 3 `PortableText` wrapper accepts loose block-like types.** `@portabletext/react`'s exported `PortableTextBlock` type marks `children` as required; Sanity TypeGen marks it optional. Rather than cast at every call site, the wrapper's `value` prop accepts `{_type: string; _key?: string}[]` — the runtime payload is identical and `BasePortableText` doesn't need stricter typing to render correctly.
+- `2026-06-01` — **Step 3 draft-mode token check is request-time, not module-load.** `defineEnableDraftMode` needs a Sanity read token to validate Presentation's preview secrets. Token isn't in `.env.local` yet (deferred with the webhook). The enable route returns a 500 with a clear message when the token is missing instead of throwing at import time — keeps `pnpm build` working without a token and makes the missing-token path obvious to a future operator.
