@@ -163,6 +163,135 @@ export type Masthead = {
   rightLine2?: string;
 };
 
+export type LandscapeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "landscape";
+};
+
+export type ArchiveEntry = {
+  _id: string;
+  _type: "archiveEntry";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  landscape?: LandscapeReference;
+  publishedAt?: string;
+  kind?: "anmeldelse" | "fund" | "fodnote" | "note";
+  summary?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type Landscape = {
+  _id: string;
+  _type: "landscape";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  shortName?: string;
+  slug?: Slug;
+  order?: number;
+  romanNumeral?: string;
+  toponym?: string;
+  period?: string;
+  accentColor?: "barn" | "denim" | "brass";
+  eyebrow?: string;
+  motto?: string;
+  deck?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  topicsLabel?: string;
+  topics?: Array<string>;
+  crumbBackText?: string;
+  crumbBackHref?: string;
+  emptyMeta?: string;
+  emptyLabel?: string;
+  emptyHeading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  emptyBody?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  emptyActions?: Array<{
+    text?: string;
+    href?: string;
+    style?: "primary" | "secondary";
+    _key: string;
+  }>;
+  seo?: Seo;
+};
+
 export type HomePage = {
   _id: string;
   _type: "homePage";
@@ -471,12 +600,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
   | TimelineEvent
   | VinylTile
@@ -490,6 +613,10 @@ export type AllSanitySchemaTypes =
   | NavGroup
   | NavLink
   | Masthead
+  | LandscapeReference
+  | ArchiveEntry
+  | Slug
+  | Landscape
   | HomePage
   | SiteSettings
   | SanityImageCrop
@@ -501,8 +628,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;
 
 // Source: sanity/queries/global.ts
 // Variable: SITE_SETTINGS_QUERY
@@ -767,11 +893,140 @@ export type HOME_PAGE_QUERY_RESULT = {
   } | null;
 } | null;
 
+// Source: sanity/queries/landscape.ts
+// Variable: LANDSCAPE_QUERY
+// Query: *[_type == "landscape" && slug.current == $slug][0]{    name,    "slug": slug.current,    order,    romanNumeral,    toponym,    period,    accentColor,    eyebrow,    motto,    deck,    topicsLabel,    topics,    crumbBackText,    crumbBackHref,    emptyMeta,    emptyLabel,    emptyHeading,    emptyBody,    emptyActions[]{ text, href, style },    "entries": *[_type == "archiveEntry" && landscape._ref == ^._id] | order(publishedAt desc){      title,      "slug": slug.current,      publishedAt,      kind,      summary    },    seo{      title,      description,      ogImage{ asset->{url, metadata{dimensions}}, alt }    }  }
+export type LANDSCAPE_QUERY_RESULT = {
+  name: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  slug: string | null;
+  order: number | null;
+  romanNumeral: string | null;
+  toponym: string | null;
+  period: string | null;
+  accentColor: "barn" | "brass" | "denim" | null;
+  eyebrow: string | null;
+  motto: string | null;
+  deck: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  topicsLabel: string | null;
+  topics: Array<string> | null;
+  crumbBackText: string | null;
+  crumbBackHref: string | null;
+  emptyMeta: string | null;
+  emptyLabel: string | null;
+  emptyHeading: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  emptyBody: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  emptyActions: Array<{
+    text: string | null;
+    href: string | null;
+    style: "primary" | "secondary" | null;
+  }> | null;
+  entries: Array<{
+    title: string | null;
+    slug: string | null;
+    publishedAt: string | null;
+    kind: "anmeldelse" | "fodnote" | "fund" | "note" | null;
+    summary: string | null;
+  }>;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: sanity/queries/landscape.ts
+// Variable: LANDSCAPE_SIBLINGS_QUERY
+// Query: *[_type == "landscape"] | order(order asc){    "slug": slug.current,    romanNumeral,    shortName,    order  }
+export type LANDSCAPE_SIBLINGS_QUERY_RESULT = Array<{
+  slug: string | null;
+  romanNumeral: string | null;
+  shortName: string | null;
+  order: number | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    masthead,\n    nav,\n    cta,\n    footerMark,\n    footerBlurb,\n    footerQuote,\n    footerColumns,\n    footerBottomCopyright,\n    footerBottomTagline,\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0]{\n    hero{\n      kicker,\n      title,\n      deck,\n      meta\n    },\n    signatureCard{\n      stamp,\n      foreLabel,\n      quote,\n      body,\n      scripture{ text, reference }\n    },\n    ticker{\n      items[]{ year, milestone }\n    },\n    vinyls{\n      kicker,\n      heading,\n      deck,\n      items[]{\n        cornerNumber,\n        cornerTag,\n        vinylAccent,\n        sleeveText,\n        vinylTopLabel,\n        vinylTitle,\n        vinylBottomLabel,\n        heading,\n        subhead,\n        body,\n        tracklist[]{ track, title, duration },\n        linkText,\n        linkHref\n      }\n    },\n    historicalThread{\n      kicker,\n      heading,\n      intro,\n      timeline[]{ year, place, heading, description }\n    },\n    hymn{\n      kicker,\n      quote,\n      attribution\n    },\n    contact{\n      kicker,\n      heading,\n      deck,\n      bookingLabel,\n      bookingHeading,\n      bookingBody,\n      bookingLinkText,\n      bookingLinkHref\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "landscape" && slug.current == $slug][0]{\n    name,\n    "slug": slug.current,\n    order,\n    romanNumeral,\n    toponym,\n    period,\n    accentColor,\n    eyebrow,\n    motto,\n    deck,\n    topicsLabel,\n    topics,\n    crumbBackText,\n    crumbBackHref,\n    emptyMeta,\n    emptyLabel,\n    emptyHeading,\n    emptyBody,\n    emptyActions[]{ text, href, style },\n    "entries": *[_type == "archiveEntry" && landscape._ref == ^._id] | order(publishedAt desc){\n      title,\n      "slug": slug.current,\n      publishedAt,\n      kind,\n      summary\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': LANDSCAPE_QUERY_RESULT;
+    '\n  *[_type == "landscape"] | order(order asc){\n    "slug": slug.current,\n    romanNumeral,\n    shortName,\n    order\n  }\n': LANDSCAPE_SIBLINGS_QUERY_RESULT;
   }
 }

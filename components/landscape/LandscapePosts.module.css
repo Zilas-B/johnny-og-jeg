@@ -1,0 +1,184 @@
+/* Lifted from claude-design-template/Naturen.html .posts / .posts-empty.
+   --barn replaced by the per-page --accent (resolves to barn). */
+
+.posts {
+  background: var(--paper-2);
+  padding: 96px 0;
+  border-bottom: 4px solid var(--accent);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 36px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 16px;
+}
+.head h2 {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 48px;
+  margin: 0;
+}
+.head h2 em {
+  color: var(--accent);
+  font-style: italic;
+}
+.meta {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* Empty state card */
+.empty {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 10px 12px 0 rgba(14, 13, 12, 0.16);
+  padding: 56px 56px 52px;
+  position: relative;
+  text-align: center;
+}
+.empty::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--rule-strong);
+  pointer-events: none;
+  opacity: 0.6;
+}
+.emptyLab {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+.emptyHeading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 44px;
+  margin: 0 0 14px;
+  color: var(--ink);
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+.emptyHeading em {
+  color: var(--accent);
+  font-style: italic;
+}
+.emptyBody {
+  position: relative;
+  z-index: 2;
+}
+.emptyBody p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 580px;
+  margin: 0 auto 14px;
+  text-wrap: pretty;
+}
+.emptyBody p:last-child {
+  margin-bottom: 28px;
+}
+.emptyBody strong,
+.emptyBody b {
+  font-weight: 600;
+}
+.emptyBody em {
+  color: var(--accent-deep);
+  font-style: italic;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+.actions a {
+  display: inline-block;
+  padding: 11px 20px;
+  text-decoration: none;
+  font-family: var(--f-poster);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.primary {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+}
+.primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.secondary {
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.secondary:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Entry feed (when archive entries exist) */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.entry:first-child {
+  border-top: 1px solid var(--rule-strong);
+}
+.entryTitle {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.entryTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+.entryTitle a:hover {
+  color: var(--accent-deep);
+}
+.entrySummary {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 640px;
+}
+.entryMeta {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}

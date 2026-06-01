@@ -35,9 +35,9 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
 - [x] Step 3 — Hub page "Johnny og jeg" (Sanity-first) — schemas, query, components, Presentation/draft-mode plumbing landed; `homePage` doc seeded from the template via `scripts/seed-homePage.mjs` and published.
 - [x] Step 4 — Music player (Cash Radio) visual shell — `<MusicPlayer>` Server Component mounted in `app/(site)/layout.tsx`; markup, vinyl spin, tracks, transport buttons, and listen-on chips ported as visual-only chrome. Inert; no Sanity model; `prefers-reduced-motion` halts the disc and live-dot.
-- [ ] Step 5 — Landscape page template (one landscape, Sanity-first)
+- [x] Step 5 — Landscape page template (Naturen archive-stub, Sanity-first) — `landscape` + `archiveEntry` schemas, `[landscape]` dynamic route, three components (`LandscapeHero/Posts/Siblings`), all 8 landscape docs seeded (Naturen fully authored, other 7 identity-only). See Decision log 2026-06-01 for the archive-stub reframe.
 - [ ] Step 6 — Remaining 7 landscape pages
-- [ ] Step 7 — Supporting pages
+- [ ] Step 7 — Supporting pages (incl. Kulturen — the rich editorial `.land` template)
 - [ ] Step 8 — Accessibility & performance pass
 - [ ] Step 9 — SEO & metadata
 - [ ] Step 10 — Production launch
@@ -211,28 +211,45 @@ When (or if) the player becomes interactive, that lands as a separate, scoped st
 
 Goal: one of the 8 landscape pages is fully built and Sanity-driven. The template is reusable for the remaining seven.
 
-### Step 5 — Landscape page template ("Naturen" or chosen first)
+### Step 5 — Landscape page template ("Naturen")
 
-**Outcome:** one landscape page (e.g. `/naturen`) is live, Sanity-driven, visually matching the design.
+**Correction (2026-06-01):** the original "Includes" below described a rich page-height
+editorial layout (alternating dark/light sections, drop caps, side essays, era timeline).
+Reading the templates shows that layout does **not** live on the landscape pages — all eight
+landscape files (`Naturen.html`, `Vesten.html`, …) are thin **archive-stub** pages
+(`arkiv-hero` + empty `posts` placeholder + `siblings` grid). The rich `.land` editorial layout
+lives only on `Kulturen.html`, which renders all eight landscapes; that work moves to **Step 7**.
+See the Decision log. The text below is rewritten to match what was actually built.
 
-**Includes:**
-- `landscape` document schema with slug, accent color (oklch / hex), kicker, title, deck, hero image, alternating dark/light section blocks (Portable Text with side essays, drop caps), era timeline (large roman numeral + years + sub-cards via `era` document references), archive entry feed (via `archiveEntry` references).
-- New document types as needed: `era`, `archiveEntry`.
-- Dynamic route `app/(site)/[landscape]/page.tsx`.
-- Page-height editorial layout: alternating dark/light sections, drop caps, side essays, metadata sidebars.
-- Per-page accent color override via CSS custom properties (read from the `landscape` doc, applied as a body-level `--accent`).
-- Cross-references to other landscapes resolve to internal links.
-- Author the first landscape (Naturen) in Studio.
+**Outcome:** the landscape archive page `/naturen` is live, Sanity-driven, visually matching
+`Naturen.html`. A reusable `landscape` + `archiveEntry` model the remaining seven landscapes reuse.
 
-**Reference files:** `Naturen.html` (or chosen first landscape) plus `assets/cash-shared.css`.
+**Includes (as built):**
+- `landscape` document schema: identity (inline-PT `name`, `shortName`, `slug`, `order`,
+  `romanNumeral`, `toponym`, `period`, `accentColor`), hero (`eyebrow`, `motto`, `deck`,
+  `topics`/`topicsLabel`, crumb back-link), empty-state (`emptyMeta/Label/Heading/Body/Actions`),
+  and `seo`. Hero/empty fields are optional; the page guards on `deck`.
+- `archiveEntry` document type (referenced by `landscape`; zero entries authored — the feed
+  renders the empty state, and lists reverse-chronologically once entries exist).
+- Dynamic route `app/(site)/[landscape]/page.tsx`; components `LandscapeHero`, `LandscapePosts`,
+  `LandscapeSiblings` under `components/landscape/`; `components/editorial/InlineText.tsx` for
+  inline PT inside headings.
+- Per-page accent via `--accent`/`--accent-deep` on the page wrapper (resolves to barn — see Decision log).
+- Siblings grid built from a lightweight all-landscapes query, so it is always complete.
+- All eight `landscape` docs seeded (`scripts/seed-landscapes.mjs`); Naturen fully authored,
+  the other seven identity-only (they `notFound()` until Step 6).
+
+**Reference files:** `Naturen.html` plus `assets/cash-shared.css`.
 
 **Acceptance criteria:**
-- The landscape page renders correctly with content from Sanity.
-- Per-page accent color works (Naturen uses a green accent, etc.).
-- Archive entries appear in reverse chronological order.
-- Visual fidelity to the original HTML.
+- `/naturen` renders from Sanity, visually matching `Naturen.html` at 1280px. ✓
+- Per-page accent wired (`--accent`); ships barn-red per the template. ✓
+- The posts section shows the empty state (0 entries); entries would list reverse-chronologically. ✓
+- Siblings grid shows all eight, current highlighted. ✓
+- `[landscape]` route 404s unknown/unauthored slugs. ✓
 
-→ **Phase B complete.** This is the major architectural milestone. The remaining landscapes are repetitions of this pattern.
+→ **Phase B complete (archive-stub).** The remaining landscapes (Step 6) reuse this pattern; the
+rich `.land` editorial template is the Kulturen page in Step 7.
 
 ---
 
@@ -240,17 +257,19 @@ Goal: one of the 8 landscape pages is fully built and Sanity-driven. The templat
 
 ### Step 6 — Remaining 7 landscape pages
 
-**Outcome:** all 8 landscapes (Naturen, Vesten, Den forgyldte republik, Smeltedigelen, Syd og Nord, Mindretallene, Vækkelsen, Drømmefabrikken) are live with content.
+**Outcome:** all 8 landscape archive pages (Naturen, Vesten, Den forgyldte republik, Smeltedigelen, Syd og Nord, Mindretallene, Vækkelsen, Drømmefabrikken) are live with content.
 
 **Includes:**
-- Author landscape documents in Studio (one per landscape).
+- The eight `landscape` docs already exist as identity stubs (seeded in Step 5). Author the hero +
+  empty-state fields for the seven non-Naturen landscapes (from each `*.html` archive-stub) so they
+  pass the page's `deck` guard and stop 404-ing.
 - Verify the template handles each landscape's variations; tweak schema if a landscape needs a field the template doesn't have.
 - Add navigation entries (already in `siteSettings` from Step 2 — just populate).
 
 **Acceptance criteria:**
 - All 8 landscapes load at their respective URLs.
 - Top nav dropdown links to each.
-- Per-landscape accent colors all distinct and on-brand.
+- Each renders its own archive stub faithfully (accent ships barn-red per the template; distinct per-landscape accents are a later polish — see Decision log).
 
 ### Step 7 — Supporting pages
 
@@ -258,7 +277,17 @@ Goal: one of the 8 landscape pages is fully built and Sanity-driven. The templat
 
 **Includes:**
 - Each as a Sanity document with appropriate schema (some may share schema, some may need bespoke).
-- May require 1–2 new Portable Text custom blocks (e.g. timeline entries on Historien).
+- **Kulturen** is the heavy one: it is the landscapes index/essay and the home of the **rich `.land`
+  editorial template** (hero + 8 chips + intro essay + 8 `.land` sections with drop caps, side-essay
+  sidebars, era timelines, pull-quotes + outro) that Step 5 originally — and mistakenly — described.
+  It reads from the existing eight `landscape` docs; expect to extend the `landscape` schema with the
+  `.land` essay/sidebar/timeline fields here. This is the real "rich editorial layout" milestone.
+- **Routing note:** the top-level `[landscape]` route from Step 5 will collide with a top-level
+  `[slug]` route for these supporting pages (Next.js forbids two differently-named dynamic segments as
+  siblings). Reconcile here — e.g. a single disambiguating dynamic segment that branches by document
+  type, or route groups.
+- May require 1–2 new Portable Text custom blocks (e.g. timeline entries on Historien; drop-cap,
+  pull-quote and side-essay serializers for Kulturen's `.land` sections).
 
 **Acceptance criteria:**
 - All 18 pages from the original design are reachable on the live site.
@@ -359,4 +388,9 @@ Track major decisions here as the project evolves. Date, decision, rationale.
 - `2026-06-01` — **Step 3 `PortableText` wrapper accepts loose block-like types.** `@portabletext/react`'s exported `PortableTextBlock` type marks `children` as required; Sanity TypeGen marks it optional. Rather than cast at every call site, the wrapper's `value` prop accepts `{_type: string; _key?: string}[]` — the runtime payload is identical and `BasePortableText` doesn't need stricter typing to render correctly.
 - `2026-06-01` — **Step 3 draft-mode token check is request-time, not module-load.** `defineEnableDraftMode` needs a Sanity read token to validate Presentation's preview secrets. Token isn't in `.env.local` yet (deferred with the webhook). The enable route returns a 500 with a clear message when the token is missing instead of throwing at import time — keeps `pnpm build` working without a token and makes the missing-token path obvious to a future operator.
 - `2026-06-01` — **Step 3 marked done.** `homePage` singleton seeded from the template via `scripts/seed-homePage.mjs` (`sanity exec ... --with-user-token` → `createOrReplace({_id: 'drafts.homePage', ...})` → publish), so `/` renders end-to-end without a manual Studio authoring pass. Script kept in-tree as the canonical re-seed path. `useCdn` flipped to `false` on the server client so editor publish→reload is immediate (no 60s CDN TTL); revisit when the revalidation webhook is wired.
+- `2026-06-01` — **Step 5 reframed: landscape pages are archive-stubs, not the rich editorial layout.** Reading the templates showed all eight landscape files (`Naturen.html`, …) are thin archive-stub pages — `arkiv-hero` + an empty `posts` placeholder + a `siblings` grid. The rich page-height editorial layout the original Step 5 prose described (alternating dark/light sections, drop caps, side-essay sidebars, era timeline, pull-quotes) lives **only on `Kulturen.html`**, which renders all eight landscapes as `.land` sections. The Metaplan author conflated the two. Step 5 builds the faithful `/naturen` archive-stub; the rich `.land` template moves to **Step 7 (Kulturen)**. Consequently Step 5 introduced **no `era` document type** (deferred to Kulturen) — only `landscape` + `archiveEntry`.
+- `2026-06-01` — **Per-landscape accent ships barn-red (template fidelity).** The static templates (incl. `Naturen.html`) use barn-red throughout; there is no green/“distinct” accent in the design despite the Step 5 acceptance criterion and the 2026-05-26 named-palette decision. Step 5 keeps an `accentColor` field (`options.list` barn/denim/brass) wired to `--accent`/`--accent-deep` on the page wrapper, but every landscape ships `barn`. Introducing visually distinct accents is a deliberate future enhancement, not part of reproducing the design.
+- `2026-06-01` — **Step 5 hero/empty-state fields are schema-optional with a page-level guard.** Against `best-practices.md` §5 rule 5 (required on anything rendered unconditionally), the `landscape` hero/empty fields are optional and `[landscape]/page.tsx` calls `notFound()` when `deck` is absent. Reason: landscapes roll out across Steps 5–6, so the seven non-Naturen docs exist as identity-only stubs (seeded for the siblings grid + future Kulturen chips) and would otherwise be permanently invalid in Studio. The guard enforces presence at render time instead.
+- `2026-06-01` — **Per-page topstrip + masthead side-lines not reproduced on landscapes.** The archive templates show page-specific topstrip/masthead values; the live chrome is the global `siteSettings` singleton (and the topstrip isn’t implemented at all). Consistent with Step 3, the landscape page renders only its body (hero + posts + siblings) and inherits the global chrome.
+- `2026-06-01` — **`[landscape]` route will collide with a future `[slug]` supporting-page route (Step 7).** Next.js forbids two differently-named dynamic segments as siblings at the same level. Step 5 ships `[landscape]` per `TechStack.md`'s target structure; reconciliation (single disambiguating segment branching by `_type`, or route groups) is deferred to Step 7 when the supporting pages land.
 - `2026-06-01` — **Step 4 reduced to a visual shell. Music player functionality postponed indefinitely.** Original Step 4 included a `track`/`playlist` Sanity model, server-side fetch, transport state, and external streaming link-outs. All removed — Step 4 now ships the player markup + CSS only, with inert buttons and hardcoded placeholder track names from `cash-radio.js`. Reason: editorial focus is text + design fidelity; even link-out playback adds Sanity model + state + per-track URL maintenance disproportionate to the editorial value. The Phase F "real audio" optional was already dropped on 2026-05-26 — this extends that ethos to the link-out shell too. If the player ever becomes interactive, it lands as a separate scoped step.

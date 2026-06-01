@@ -1,0 +1,80 @@
+/* Lifted from claude-design-template/Naturen.html .siblings.
+   --barn replaced by the per-page --accent (resolves to barn);
+   --brass kept literal (fixed gold highlight). */
+
+.siblings {
+  background: var(--paper);
+  padding: 64px 0 80px;
+}
+.lab {
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.lab b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.cell {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--paper-2);
+  border: 1px solid var(--rule-strong);
+  padding: 14px 16px;
+  transition: background 120ms, border-color 120ms, transform 120ms;
+}
+.cell:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.cell:hover .srn {
+  color: var(--brass);
+}
+.cell:hover .sname {
+  color: var(--paper);
+}
+
+.current {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+.current .srn {
+  color: var(--brass);
+}
+.current .sname {
+  color: var(--paper);
+}
+
+.srn {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 14px;
+  margin-bottom: 2px;
+  transition: color 120ms;
+}
+.sname {
+  font-family: var(--f-poster);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.1;
+  transition: color 120ms;
+}

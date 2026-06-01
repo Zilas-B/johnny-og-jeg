@@ -1,4 +1,6 @@
+import { archiveEntry } from './documents/archiveEntry'
 import { homePage } from './documents/homePage'
+import { landscape } from './documents/landscape'
 import { siteSettings } from './documents/siteSettings'
 import { cta } from './objects/cta'
 import { footerColumn } from './objects/footerColumn'
@@ -16,6 +18,8 @@ export const schemaTypes = [
   // Documents
   siteSettings,
   homePage,
+  landscape,
+  archiveEntry,
   // Objects
   masthead,
   navLink,

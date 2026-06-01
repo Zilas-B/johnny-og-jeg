@@ -1,0 +1,116 @@
+/* Lifted from claude-design-template/Naturen.html .arkiv-hero.
+   --barn replaced by the per-page --accent (resolves to barn). */
+
+.hero {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--paper);
+}
+
+.crumb {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.crumb a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+.crumb a:hover {
+  color: var(--accent-deep);
+  border-bottom-style: solid;
+}
+.sep {
+  color: var(--ink-soft);
+  margin: 0 10px;
+  opacity: 0.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.rn {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 240px;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  margin: 0;
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.title em {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.motto {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--ink-soft);
+  margin: 0 0 24px;
+}
+
+.deck {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 720px;
+  text-wrap: pretty;
+}
+.deck p {
+  margin: 0;
+}
+.deck b,
+.deck strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.deck em {
+  color: var(--accent-deep);
+  font-style: italic;
+}
+
+.tags {
+  margin-top: 26px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.tags b {
+  color: var(--accent);
+  font-weight: 500;
+}
