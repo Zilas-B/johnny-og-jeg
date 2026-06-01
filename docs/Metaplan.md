@@ -30,7 +30,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 0 — Project scaffold
 - [x] Step 1 — Design tokens and global chrome (hardcoded; migrated in Step 2)
 - [x] Step 1.5 — Best practices research & audit
-- [ ] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
+- [x] Step 2 — Chrome → Sanity (`siteSettings` singleton + typegen)
 - [ ] Step 3 — Hub page "Johnny og jeg" (Sanity-first)
 - [ ] Step 4 — Music player (Cash Radio) shell (Sanity-first)
 - [ ] Step 5 — Landscape page template (one landscape, Sanity-first)
@@ -343,3 +343,6 @@ Track major decisions here as the project evolves. Date, decision, rationale.
 - `2026-05-26` — **`<SanityLive />` import path**: in `next-sanity@^13`, `defineLive` is exported from `next-sanity/live` (subpath export), not from the package root. `docs/best-practices.md` §1 sketch shows the v11/v12 path; corrected at implementation.
 - `2026-05-26` — **`(site)` routes are `force-dynamic`** because every page fetches `siteSettings` server-side via the layout. Freshness comes from tag-based revalidation, not static prerender. `/studio` and `/_not-found` remain static.
 - `2026-05-26` — **`revalidateTag` profile**: Next 16 requires a profile argument. Used `'max'` per the Sanity advisory pattern — tag has the longest-lived cache profile and we bust it explicitly on webhook.
+- `2026-06-01` — **Step 2 webhook deferred.** `/api/revalidate` route ships with secret verification, but the Sanity webhook itself is not configured in Sanity Manage yet. Dev verification works via `force-dynamic` per-request fetch on `(site)` routes. Production wiring (read token + webhook secret in Vercel, webhook URL pointing at the deployed preview, secret matched) is folded into the first step that exercises a production deploy end-to-end.
+- `2026-06-01` — **Masthead side-line bold dropped.** Original Step 1 chrome bolded `Forår MMXXVI` and `Anno MMXXVI` via `<b>` tags. The Sanity-driven Masthead renders the side fields as plain strings (no rich text). Accepted within Step 1's stated ~5% visual tolerance — restoring it would require either a CSS rule that bolds the second line unconditionally or splitting each side into a richer object, both disproportionate for chrome that rarely changes.
+- `2026-06-01` — **Schema deploy via Sanity CLI.** Running the MCP authoring tools required the schema to be deployed to the project. Used `pnpm sanity schema deploy` from the local Studio (the MCP's `deploy_schema` tool refuses when a local Studio exists, to prevent source/deploy drift). Schema redeploys happen on-demand when MCP work is needed against new types — not added to `predev`/`prebuild`.
