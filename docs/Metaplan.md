@@ -2,9 +2,11 @@
 
 This is the full implementation roadmap for turning the 18-page static design in this folder into a production Next.js + Sanity website. Each **Step** below is sized to become its own focused plan-mode session in Claude Code: you open plan mode, ask for the next step to be planned, review the plan, then implement it.
 
-**Read first:** `TechStack.md` (in this folder) defines the stack and structural decisions. This Metaplan describes *what gets built when*. If anything here conflicts with `TechStack.md`, the stack doc wins until amended.
+**Read first:** `TechStack.md` (in this folder) defines the stack and structural decisions; `best-practices.md` defines *how* we use that stack well. This Metaplan describes *what gets built when*. If anything here conflicts with `TechStack.md` or `best-practices.md`, those docs win until amended.
 
 **Build strategy: Sanity-first.** Every page-level step authors its schema, creates the Sanity document, and renders from GROQ — no "hardcode first then migrate" detour. The content model is already fully specified by the 18 static HTML pages in `claude-design-template/`, so there's no schema-discovery argument for hardcoding.
+
+**Visual fidelity: `claude-design-template/` is the visual source of truth.** Every step that produces UI — chrome, hub, landscapes, supporting pages, music player — must reproduce the layout, typography, spacing, colour, and animation of the corresponding file(s) in `claude-design-template/`. Treat the template as a fixed visual target, not code to refactor; do not edit files inside that folder. When a step's plan is drafted, it must name the specific template file(s) it reproduces (the "Reference files" line in each step below points to the canonical one). If a `docs/best-practices.md` rule appears to conflict with a template detail, call it out in the plan with a recommendation — the *visual* outcome defers to the template, the *implementation* technique defers to the docs.
 
 ## Locations
 
