@@ -10,6 +10,7 @@ export const siteSettings = defineType({
     { name: 'masthead', title: 'Masthead', default: true },
     { name: 'navigation', title: 'Navigation' },
     { name: 'footer', title: 'Footer' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({
@@ -80,6 +81,14 @@ export const siteSettings = defineType({
       type: 'string',
       group: 'footer',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO — sitewide standardværdier',
+      description:
+        'Bruges som standard <title>, beskrivelse og Open Graph-billede for sider, der ikke selv definerer metadata (fx /studio, /styleguide). Sider med egen SEO overrider disse.',
+      type: 'seo',
+      group: 'seo',
     }),
   ],
   preview: {

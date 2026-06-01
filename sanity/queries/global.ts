@@ -10,6 +10,11 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     footerQuote,
     footerColumns,
     footerBottomCopyright,
-    footerBottomTagline
+    footerBottomTagline,
+    seo{
+      title,
+      description,
+      ogImage{ asset->{url, metadata{dimensions}}, alt }
+    }
   }
 `)

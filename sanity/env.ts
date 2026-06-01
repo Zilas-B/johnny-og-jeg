@@ -2,8 +2,10 @@
  * Public env — used by browser and server. Asserted at module load
  * because every render needs them; missing values fail fast at boot.
  */
-export const apiVersion =
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2026-05-01'
+export const apiVersion = assertValue(
+  process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+  'Missing environment variable: NEXT_PUBLIC_SANITY_API_VERSION',
+)
 
 export const dataset = assertValue(
   process.env.NEXT_PUBLIC_SANITY_DATASET,

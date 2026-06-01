@@ -11,19 +11,22 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
+// Names mirror the CSS custom properties declared in styles/tokens.css.
+// We render swatches off `var(--<name>)` so tokens.css stays the only source
+// of truth — change a hex there and the styleguide reflects it for free.
 const NEUTRALS = [
-  { name: 'paper', value: '#efe4cf' },
-  { name: 'paper-2', value: '#e6d8bb' },
-  { name: 'paper-3', value: '#d8c69e' },
-  { name: 'ink', value: '#0e0d0c' },
-  { name: 'ink-2', value: '#1a1714' },
-  { name: 'ink-soft', value: '#2b2620' },
+  { name: 'paper' },
+  { name: 'paper-2' },
+  { name: 'paper-3' },
+  { name: 'ink' },
+  { name: 'ink-2' },
+  { name: 'ink-soft' },
 ] as const
 
 const ACCENTS = [
-  { name: 'barn', value: '#a4282b', deep: '#76181b' },
-  { name: 'denim', value: '#2c3e58', deep: '#1c2a3e' },
-  { name: 'brass', value: '#c89b3c', deep: '#8e6a1f' },
+  { name: 'barn', deep: 'barn-deep' },
+  { name: 'denim', deep: 'denim-deep' },
+  { name: 'brass', deep: 'brass-deep' },
 ] as const
 
 export default function StyleguidePage() {
@@ -91,7 +94,7 @@ export default function StyleguidePage() {
             >
               <div
                 style={{
-                  background: a.value,
+                  background: `var(--${a.name})`,
                   height: 56,
                   borderRadius: 2,
                   border: '1px solid var(--rule)',
@@ -99,14 +102,14 @@ export default function StyleguidePage() {
               />
               <div
                 style={{
-                  background: a.deep,
+                  background: `var(--${a.deep})`,
                   height: 56,
                   borderRadius: 2,
                   border: '1px solid var(--rule)',
                 }}
               />
               <div style={{ fontFamily: 'var(--f-mono)', fontSize: 13 }}>
-                {a.name} · {a.value} / {a.deep}
+                {a.name} / {a.deep}
               </div>
             </div>
           ))}
@@ -142,7 +145,7 @@ export default function StyleguidePage() {
 function SwatchGrid({
   swatches,
 }: {
-  swatches: readonly { name: string; value: string }[]
+  swatches: readonly { name: string }[]
 }) {
   return (
     <div
@@ -157,7 +160,7 @@ function SwatchGrid({
         <div key={s.name}>
           <div
             style={{
-              background: s.value,
+              background: `var(--${s.name})`,
               height: 80,
               borderRadius: 2,
               border: '1px solid var(--rule)',
@@ -166,7 +169,7 @@ function SwatchGrid({
           <div style={{ fontFamily: 'var(--f-mono)', fontSize: 12, marginTop: 6 }}>
             {s.name}
             <br />
-            <span style={{ color: 'var(--ink-soft)' }}>{s.value}</span>
+            <span style={{ color: 'var(--ink-soft)' }}>var(--{s.name})</span>
           </div>
         </div>
       ))}

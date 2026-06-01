@@ -56,7 +56,9 @@ johnny-og-jeg/
 │   └── api/                          # Route handlers (revalidation webhooks, etc.)
 ├── components/
 │   ├── chrome/                       # Masthead, Nav, Footer, MusicPlayer
-│   ├── editorial/                    # Hero, EraChip, LandscapeCard, EssayBlock, …
+│   ├── editorial/                    # PortableText, SanityImage, EraChip, drop cap, …
+│   ├── hub/                          # Hub-page section blocks (HubHero, HubVinyls, …)
+│   ├── <page-type>/                  # Same pattern for landscape/, supporting/, etc.
 │   └── ui/                           # Low-level primitives if needed
 ├── sanity/
 │   ├── schemas/                      # Document + object schemas
@@ -74,6 +76,8 @@ johnny-og-jeg/
 ├── tsconfig.json
 └── package.json
 ```
+
+Per-page-type folders under `components/` (e.g. `hub/`, future `landscape/`) hold section blocks first introduced for that page-type. They live under `components/` rather than a route-private folder so they remain importable from any page that wants to reuse a block.
 
 ## Environment variables
 

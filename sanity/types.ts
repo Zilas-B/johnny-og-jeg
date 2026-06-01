@@ -332,22 +332,6 @@ export type HomePage = {
   seo?: Seo;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -371,6 +355,23 @@ export type SiteSettings = {
   >;
   footerBottomCopyright?: string;
   footerBottomTagline?: string;
+  seo?: Seo;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -490,9 +491,9 @@ export type AllSanitySchemaTypes =
   | NavLink
   | Masthead
   | HomePage
+  | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
-  | SiteSettings
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -505,7 +506,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/queries/global.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{    masthead,    nav,    cta,    footerMark,    footerBlurb,    footerQuote,    footerColumns,    footerBottomCopyright,    footerBottomTagline  }
+// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{    masthead,    nav,    cta,    footerMark,    footerBlurb,    footerQuote,    footerColumns,    footerBottomCopyright,    footerBottomTagline,    seo{      title,      description,      ogImage{ asset->{url, metadata{dimensions}}, alt }    }  }
 export type SITE_SETTINGS_QUERY_RESULT = {
   masthead: Masthead | null;
   nav: Array<
@@ -524,6 +525,19 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   > | null;
   footerBottomCopyright: string | null;
   footerBottomTagline: string | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
 } | null;
 
 // Source: sanity/queries/home.ts
@@ -757,7 +771,7 @@ export type HOME_PAGE_QUERY_RESULT = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    masthead,\n    nav,\n    cta,\n    footerMark,\n    footerBlurb,\n    footerQuote,\n    footerColumns,\n    footerBottomCopyright,\n    footerBottomTagline\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    masthead,\n    nav,\n    cta,\n    footerMark,\n    footerBlurb,\n    footerQuote,\n    footerColumns,\n    footerBottomCopyright,\n    footerBottomTagline,\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0]{\n    hero{\n      kicker,\n      title,\n      deck,\n      meta\n    },\n    signatureCard{\n      stamp,\n      foreLabel,\n      quote,\n      body,\n      scripture{ text, reference }\n    },\n    ticker{\n      items[]{ year, milestone }\n    },\n    vinyls{\n      kicker,\n      heading,\n      deck,\n      items[]{\n        cornerNumber,\n        cornerTag,\n        vinylAccent,\n        sleeveText,\n        vinylTopLabel,\n        vinylTitle,\n        vinylBottomLabel,\n        heading,\n        subhead,\n        body,\n        tracklist[]{ track, title, duration },\n        linkText,\n        linkHref\n      }\n    },\n    historicalThread{\n      kicker,\n      heading,\n      intro,\n      timeline[]{ year, place, heading, description }\n    },\n    hymn{\n      kicker,\n      quote,\n      attribution\n    },\n    contact{\n      kicker,\n      heading,\n      deck,\n      bookingLabel,\n      bookingHeading,\n      bookingBody,\n      bookingLinkText,\n      bookingLinkHref\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
   }
 }
