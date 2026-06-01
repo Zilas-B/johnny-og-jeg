@@ -3,38 +3,14 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import type { SITE_SETTINGS_QUERY_RESULT } from '@/sanity/types'
+
 import styles from './Nav.module.css'
 
-type NavChild = { mark: string; label: string; href: string }
-type NavItem = {
-  label: string
-  href?: string
-  children?: NavChild[]
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { label: 'Hjem', href: '/' },
-  {
-    label: 'Johnny Cash',
-    children: [
-      { mark: '○', label: 'Portræt', href: '/portraet' },
-      { mark: 'I', label: 'Musikeren', href: '/musikeren' },
-      { mark: 'II', label: 'Cash og Jesus', href: '/cash-og-jesus' },
-      { mark: 'III', label: 'Cash og Amerika', href: '/cash-og-amerika' },
-    ],
-  },
-  {
-    label: 'USA',
-    children: [
-      { mark: 'A', label: 'Historien', href: '/historien' },
-      { mark: 'B', label: 'Kulturen', href: '/kulturen' },
-    ],
-  },
-  { label: 'Bøger, spil, film', href: '/boeger-spil-film' },
-  { label: 'Foredrag', href: '/foredrag' },
-  { label: 'Om siden', href: '/om-siden' },
-  { label: 'Kontakt', href: '/kontakt' },
-]
+type Settings = NonNullable<SITE_SETTINGS_QUERY_RESULT>
+type NavItems = NonNullable<Settings['nav']>
+type NavItem = NavItems[number]
+type CtaData = NonNullable<Settings['cta']>
 
 function isActive(pathname: string, item: NavItem): boolean {
   if (item.href) {
@@ -43,28 +19,32 @@ function isActive(pathname: string, item: NavItem): boolean {
   return Boolean(item.children?.some((child) => pathname === child.href))
 }
 
-export function Nav() {
+export function Nav({ items, cta }: { items: NavItems; cta: CtaData }) {
   const pathname = usePathname() ?? '/'
 
   return (
     <nav className={styles.primary} aria-label="Primær">
       <div className={styles.wrap}>
         <div className={styles.row}>
-          {NAV_ITEMS.map((item) => {
+          {items.map((item) => {
             const active = isActive(pathname, item)
             const linkClass = active ? `${styles.link} ${styles.linkActive}` : styles.link
 
-            if (item.children) {
+            if (item.children && item.children.length > 0) {
               return (
-                <div key={item.label} className={styles.item}>
+                <div key={item._key} className={styles.item}>
                   <button type="button" className={linkClass} aria-haspopup="true">
                     {item.label}
                     <span className={styles.caret} aria-hidden="true">▾</span>
                   </button>
                   <div className={styles.dropdown}>
                     {item.children.map((child) => (
-                      <Link key={child.href} href={child.href} className={styles.dropdownLink}>
-                        <span className={styles.num}>{child.mark}</span>
+                      <Link
+                        key={child._key}
+                        href={child.href ?? '#'}
+                        className={styles.dropdownLink}
+                      >
+                        {child.mark && <span className={styles.num}>{child.mark}</span>}
                         {child.label}
                       </Link>
                     ))}
@@ -74,7 +54,7 @@ export function Nav() {
             }
 
             return (
-              <div key={item.label} className={styles.item}>
+              <div key={item._key} className={styles.item}>
                 <Link href={item.href ?? '#'} className={linkClass}>
                   {item.label}
                 </Link>
@@ -82,11 +62,13 @@ export function Nav() {
             )
           })}
 
-          <div className={styles.cta}>
-            <Link href="/foredrag" className={styles.ctaLink}>
-              Bestil foredrag →
-            </Link>
-          </div>
+          {cta.href && cta.label && (
+            <div className={styles.cta}>
+              <Link href={cta.href} className={styles.ctaLink}>
+                {cta.label}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

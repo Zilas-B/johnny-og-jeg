@@ -1,63 +1,65 @@
+import { Fragment } from 'react'
 import Link from 'next/link'
+
+import type { SITE_SETTINGS_QUERY_RESULT } from '@/sanity/types'
 
 import styles from './Footer.module.css'
 
-export function Footer() {
+type Settings = NonNullable<SITE_SETTINGS_QUERY_RESULT>
+
+type FooterData = {
+  footerMark: NonNullable<Settings['footerMark']>
+  footerBlurb: NonNullable<Settings['footerBlurb']>
+  footerQuote: NonNullable<Settings['footerQuote']>
+  footerColumns: NonNullable<Settings['footerColumns']>
+  footerBottomCopyright: NonNullable<Settings['footerBottomCopyright']>
+  footerBottomTagline: NonNullable<Settings['footerBottomTagline']>
+}
+
+function wrapDelimiter(text: string, delimiter: string, className: string) {
+  const parts = text.split(delimiter)
+  return parts.map((part, i) => (
+    <Fragment key={i}>
+      {part}
+      {i < parts.length - 1 && <span className={className}>{delimiter}</span>}
+    </Fragment>
+  ))
+}
+
+export function Footer({ data }: { data: FooterData }) {
   return (
     <footer className={styles.colophon}>
       <div className="wrap">
         <div className={styles.grid}>
           <div>
             <div className={styles.mark}>
-              Johnny <span className={styles.amp}>&amp;</span> jeg
+              {wrapDelimiter(data.footerMark, '&', styles.amp)}
             </div>
-            <p className={styles.blurb}>
-              En personlig hyldest til Johnny Cash, til kristendommen i hans liv,
-              og til det Amerika, der formede ham. Drevet af én lytter i Aarhus.
-            </p>
+            <p className={styles.blurb}>{data.footerBlurb}</p>
             <p className={`${styles.blurb} ${styles.blurbQuote}`}>
-              “I wear the black for the poor and the beaten down, livin’ in the
-              hopeless, hungry side of town.” — JR Cash
+              “{data.footerQuote.text}” — {data.footerQuote.attribution}
             </p>
           </div>
 
-          <div>
-            <h5 className={styles.heading}>Johnny Cash</h5>
-            <ul className={styles.list}>
-              <li><Link href="/portraet" className={styles.link}>Portræt</Link></li>
-              <li><Link href="/musikeren" className={styles.link}>Musikeren</Link></li>
-              <li><Link href="/cash-og-jesus" className={styles.link}>Cash og Jesus</Link></li>
-              <li><Link href="/cash-og-amerika" className={styles.link}>Cash og Amerika</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h5 className={styles.heading}>USA</h5>
-            <ul className={styles.list}>
-              <li><Link href="/historien" className={styles.link}>Historien</Link></li>
-              <li><Link href="/kulturen" className={styles.link}>Kulturen</Link></li>
-              <li><Link href="/boeger-spil-film" className={styles.link}>Bøger, spil, film</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h5 className={styles.heading}>Sidens hjørne</h5>
-            <ul className={styles.list}>
-              <li><Link href="/foredrag" className={styles.link}>Foredrag</Link></li>
-              <li><Link href="/om-siden" className={styles.link}>Om siden</Link></li>
-              <li><Link href="/kontakt" className={styles.link}>Kontakt</Link></li>
-            </ul>
-          </div>
+          {data.footerColumns.map((column) => (
+            <div key={column._key}>
+              <h5 className={styles.heading}>{column.title}</h5>
+              <ul className={styles.list}>
+                {column.links?.map((link) => (
+                  <li key={link._key}>
+                    <Link href={link.href ?? '#'} className={styles.link}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className={styles.bottom}>
-          <div>
-            © MMXXVI · Johnny &amp; jeg <span className={styles.star}>✶</span> Aarhus · Danmark
-          </div>
-          <div>
-            Et privat, ikke-kommercielt arkiv{' '}
-            <span className={styles.star}>✶</span> Set fra denne side af Atlanten
-          </div>
+          <div>{wrapDelimiter(data.footerBottomCopyright, '✶', styles.star)}</div>
+          <div>{wrapDelimiter(data.footerBottomTagline, '✶', styles.star)}</div>
         </div>
       </div>
     </footer>

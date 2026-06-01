@@ -71,3 +71,11 @@ body::after {
   position: relative;
   z-index: 2;
 }
+
+/* Keyboard focus — Tailwind's reset strips browser defaults; we replace them
+   with an accent-colored outline so :focus-visible is always visible. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

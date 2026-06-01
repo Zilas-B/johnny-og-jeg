@@ -16,6 +16,11 @@
   --color-brass: #c89b3c;
   --color-brass-deep: #8e6a1f;
 
+  /* Per-page accent (bg-accent, text-accent, border-accent).
+     The runtime value comes from --accent in tokens.css; pages override it. */
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+
   /* Font utilities (font-display, font-poster, font-mono, font-body) */
   --font-display: var(--font-playfair), "Hoefler Text", Georgia, serif;
   --font-poster: var(--font-bebas), "Oswald", "Impact", sans-serif;
@@ -48,4 +53,26 @@ body {
 
 a {
   color: var(--barn-deep);
+}
+
+/* Skip-link — first focusable element in the site layout. */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 18px;
+  font-family: var(--f-poster);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--accent);
+}
+
+.skip-link:focus {
+  top: 16px;
+  left: 16px;
 }
