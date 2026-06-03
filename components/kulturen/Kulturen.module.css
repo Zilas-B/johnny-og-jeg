@@ -1,0 +1,792 @@
+/* ================================================================
+   Kulturen.module.css — the rich `.land` editorial template.
+   Ported from claude-design-template/Kulturen.html.
+   Accent colours are driven by --accent / --accent-deep, which each
+   .land section sets per background variant (dark → brass, else barn).
+   ================================================================ */
+
+/* ============== HERO ============== */
+.khero {
+  position: relative;
+  padding: 72px 0 48px;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--barn);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.eyebrow .bar {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--barn);
+}
+.kheroTitle {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 124px;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+  color: var(--ink);
+  text-wrap: balance;
+  max-width: 1080px;
+}
+.kheroTitle em {
+  color: var(--barn);
+  font-style: italic;
+}
+.subhead {
+  font-family: var(--f-poster);
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 0.16em;
+  color: var(--barn);
+  text-transform: uppercase;
+  margin: 0 0 28px;
+}
+.deck {
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 760px;
+  text-wrap: pretty;
+}
+.deck :global(p) {
+  margin: 0 0 12px;
+}
+.deck :global(p:last-child) {
+  margin-bottom: 0;
+}
+.deck :global(p + p) {
+  font-size: 19px;
+}
+.deck :global(em) {
+  color: var(--ink);
+  font-style: italic;
+}
+
+/* ============== CHIP GRID ============== */
+.chips {
+  padding: 56px 0 72px;
+  background: var(--paper);
+  border-bottom: 4px solid var(--ink);
+}
+.chipsHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 14px;
+}
+.chipsHead .lab {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--barn);
+}
+.chipsHead .lab :global(strong) {
+  color: var(--ink);
+  font-weight: 500;
+}
+.chipsHead .count {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+.chipsHead .count :global(em) {
+  color: var(--barn);
+  font-style: italic;
+}
+.chipsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.chip {
+  display: block;
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 22px 22px 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+  box-shadow: 4px 5px 0 rgba(14, 13, 12, 0.14);
+}
+.chip:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 9px 0 rgba(14, 13, 12, 0.22);
+}
+.chip::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed var(--rule-strong);
+  pointer-events: none;
+  opacity: 0.5;
+}
+.ckTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+.ckTop .rn {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  color: var(--barn);
+  font-size: 22px;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+}
+.ckName {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 0.96;
+  color: var(--ink);
+  margin: 0 0 6px;
+  text-wrap: balance;
+  position: relative;
+  z-index: 2;
+}
+.ckName em {
+  color: var(--barn);
+  font-style: italic;
+}
+.ckMotto {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--barn-deep);
+  margin: 0 0 12px;
+  position: relative;
+  z-index: 2;
+  line-height: 1.35;
+}
+.ckPeriod {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-top: 1px dotted var(--rule-strong);
+  padding-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+.ckArrow {
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+  font-family: var(--f-mono);
+  font-size: 14px;
+  color: var(--barn);
+  z-index: 2;
+  transition: transform 140ms ease;
+}
+.chip:hover .ckArrow {
+  transform: translateX(3px);
+}
+
+/* ============== INTRO ESSAY ============== */
+.kintro {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 96px 0 88px;
+  border-bottom: 4px solid var(--barn);
+  position: relative;
+}
+.kintroGrid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+.kintro .kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.kintroHeading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 0.96;
+  margin: 0 0 4px;
+  color: var(--paper);
+  text-wrap: balance;
+}
+.kintroHeading em {
+  color: var(--brass);
+  font-style: italic;
+}
+.signature {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(239, 228, 207, 0.6);
+  margin-top: 20px;
+}
+.kintroBody :global(p) {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(239, 228, 207, 0.85);
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+.kintroBody :global(p:last-child) {
+  margin-bottom: 0;
+}
+.kintroBody :global(b),
+.kintroBody :global(strong) {
+  color: var(--paper);
+  font-weight: 500;
+}
+.kintroBody :global(em) {
+  color: var(--brass);
+  font-style: italic;
+}
+
+/* ============== LANDSCAPE SECTION ============== */
+.land {
+  padding: 96px 0 88px;
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--paper);
+  scroll-margin-top: 120px;
+}
+.land.paper2 {
+  background: var(--paper-2);
+}
+.land.dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.landHead {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 56px;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 28px;
+}
+.land.dark .landHead {
+  border-bottom-color: rgba(239, 228, 207, 0.4);
+}
+.landRn {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  margin: 0;
+}
+.landTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.landEyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.landEyebrow .sep {
+  color: currentColor;
+  opacity: 0.5;
+  margin: 0 6px;
+}
+.landName {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 84px;
+  line-height: 0.92;
+  margin: 4px 0 8px;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+.landName em {
+  color: var(--accent);
+  font-style: italic;
+}
+.landMotto {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: balance;
+}
+.land.dark .landMotto {
+  color: rgba(239, 228, 207, 0.75);
+}
+
+.landBody {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* essay — paragraphs come from the shared PortableText map (p / h4.subhead /
+   p.pull). Dropcap + subhead + pull typography live in PortableText.module.css
+   and read var(--accent); here we set inline-mark colours + spacing. */
+.essay {
+  font-size: 18.5px;
+  line-height: 1.65;
+}
+.essay :global(p) {
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+.essay :global(p:last-child) {
+  margin-bottom: 0;
+}
+.essay :global(strong),
+.essay :global(b) {
+  font-weight: 600;
+  color: var(--ink);
+}
+.land.dark .essay :global(strong),
+.land.dark .essay :global(b) {
+  color: var(--paper);
+}
+.essay :global(em) {
+  font-style: italic;
+  color: var(--accent-deep);
+}
+
+/* sidebar */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.lside {
+  background: rgba(14, 13, 12, 0.04);
+  border: 1px solid var(--rule-strong);
+  padding: 18px 20px 16px;
+  position: relative;
+}
+.land.paper2 .lside {
+  background: rgba(14, 13, 12, 0.06);
+}
+.land.dark .lside {
+  background: rgba(239, 228, 207, 0.04);
+  border-color: rgba(239, 228, 207, 0.22);
+}
+.lside.cash {
+  border-style: solid;
+  border-color: var(--barn);
+  border-width: 1.5px;
+  background: rgba(164, 40, 43, 0.05);
+}
+.land.dark .lside.cash {
+  background: rgba(200, 155, 60, 0.08);
+  border-color: var(--brass);
+}
+.lside .lab {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.lside .val {
+  font-family: var(--f-body);
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.lside .val :global(p) {
+  margin: 0 0 10px;
+}
+.lside .val :global(p:last-child) {
+  margin-bottom: 0;
+}
+.land.dark .lside .val {
+  color: rgba(239, 228, 207, 0.82);
+}
+.lside .val :global(strong),
+.lside .val :global(b) {
+  color: var(--ink);
+  font-weight: 600;
+}
+.land.dark .lside .val :global(strong),
+.land.dark .lside .val :global(b) {
+  color: var(--paper);
+}
+.lside .val :global(em) {
+  color: var(--accent-deep);
+  font-style: italic;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.timeline li {
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px dotted var(--rule-strong);
+}
+.timeline li:last-child {
+  border-bottom: none;
+}
+.land.dark .timeline li {
+  color: rgba(239, 228, 207, 0.82);
+  border-bottom-color: rgba(239, 228, 207, 0.16);
+}
+.timeline li .yr {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+.timeline li :global(strong),
+.timeline li :global(b) {
+  color: var(--ink);
+  font-weight: 600;
+}
+.land.dark .timeline li :global(strong),
+.land.dark .timeline li :global(b) {
+  color: var(--paper);
+}
+.timeline li :global(em) {
+  color: var(--accent-deep);
+  font-style: italic;
+}
+
+.lside.deepLink {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 18px 20px;
+}
+.land.dark .lside.deepLink {
+  background: var(--barn);
+  border-color: var(--barn);
+}
+.lside.deepLink a {
+  display: block;
+  text-decoration: none;
+  color: var(--paper);
+  font-family: var(--f-poster);
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.lside.deepLink a .sm {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.3em;
+  color: var(--brass);
+  margin-bottom: 4px;
+}
+.lside.deepLink a:hover {
+  color: var(--brass);
+}
+.land.dark .lside.deepLink a:hover {
+  color: var(--paper);
+  text-decoration: underline;
+}
+
+.landTail {
+  margin-top: 56px;
+  display: flex;
+  justify-content: center;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+.land.dark .landTail {
+  color: rgba(239, 228, 207, 0.5);
+}
+.landTail .st {
+  color: var(--accent);
+  margin: 0 12px;
+}
+
+/* ============== OUTRO ============== */
+.outro {
+  background: var(--paper);
+  padding: 96px 0 80px;
+  border-top: 4px solid var(--barn);
+}
+.outroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.outroHeading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 1;
+  margin: 0 0 16px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.outroHeading em {
+  color: var(--barn);
+  font-style: italic;
+}
+.outro .kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  color: var(--barn);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.outroBody :global(p) {
+  font-size: 18px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0 0 14px;
+  text-wrap: pretty;
+}
+.outroBody :global(b),
+.outroBody :global(strong) {
+  color: var(--ink);
+  font-weight: 600;
+}
+.outroBody :global(em) {
+  color: var(--barn-deep);
+  font-style: italic;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+.actions a {
+  display: inline-block;
+  padding: 11px 20px;
+  text-decoration: none;
+  font-family: var(--f-poster);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.actions .primary {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+}
+.actions .primary:hover {
+  background: var(--barn);
+  border-color: var(--barn);
+}
+.actions .secondary {
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.actions .secondary:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.outroCard {
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  padding: 26px 28px;
+  box-shadow: 10px 12px 0 rgba(14, 13, 12, 0.18);
+}
+.outroCard h4 {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+.outroCard .lead {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--barn);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.outroCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.outroCard li {
+  padding: 10px 0;
+  border-bottom: 1px dotted var(--rule-strong);
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  font-family: var(--f-body);
+  font-size: 15.5px;
+}
+.outroCard li:last-child {
+  border-bottom: none;
+}
+.outroCard li .rn {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--barn);
+  font-size: 15px;
+}
+.outroCard li a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+}
+.outroCard li a:hover {
+  border-bottom-color: var(--barn);
+  color: var(--barn-deep);
+}
+.outroCard li .kind {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* ============== STICKY SUB-NAV (TOC) ============== */
+.subnav {
+  position: sticky;
+  top: 56px;
+  z-index: 40;
+  background: var(--ink-2);
+  color: var(--paper);
+  border-bottom: 1px solid rgba(239, 228, 207, 0.12);
+  transform: translateY(-100%);
+  transition: transform 220ms ease, opacity 220ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.subnav.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.subnavInner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.subnav .label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brass);
+  padding: 11px 18px 11px 0;
+  border-right: 1px solid rgba(239, 228, 207, 0.14);
+  margin-right: 4px;
+  white-space: nowrap;
+}
+.subnav ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+.subnav ol li {
+  flex: 1;
+  min-width: 0;
+}
+.subnav ol li a {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 11px 8px;
+  text-decoration: none;
+  color: rgba(239, 228, 207, 0.7);
+  font-family: var(--f-poster);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(239, 228, 207, 0.07);
+  transition: background 120ms, color 120ms;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.subnav ol li:last-child a {
+  border-right: none;
+}
+.subnav ol li a .rn {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--brass);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.subnav ol li a:hover {
+  background: rgba(239, 228, 207, 0.06);
+  color: var(--paper);
+}
+.subnav ol li a.active {
+  color: var(--paper);
+  background: var(--barn);
+}
+.subnav ol li a.active .rn {
+  color: var(--paper);
+}

@@ -20,6 +20,10 @@ type Props = {
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => <p>{children}</p>,
+    // Subsection heading inside an essay (e.g. Kulturen's Mindretallene section).
+    h4: ({ children }) => <h4 className={styles.subhead}>{children}</h4>,
+    // Pull-quote callout — the `.land-pull` style, accent-coloured.
+    pull: ({ children }) => <p className={styles.pull}>{children}</p>,
   },
   marks: {
     em: ({ children }) => <em>{children}</em>,

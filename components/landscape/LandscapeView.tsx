@@ -9,16 +9,14 @@ import { LandscapeSiblings } from '@/components/landscape/LandscapeSiblings'
 import { client } from '@/sanity/client'
 import { LANDSCAPE_QUERY, LANDSCAPE_SIBLINGS_QUERY } from '@/sanity/queries/landscape'
 
-type Params = { params: Promise<{ landscape: string }> }
-
-// Maps an accentColor preset to its CSS variable pair. Naturen ships `barn`.
+// Maps an accentColor preset to its CSS variable pair. Landscapes ship `barn`.
 const ACCENT_VARS: Record<string, { accent: string; deep: string }> = {
   barn: { accent: 'var(--barn)', deep: 'var(--barn-deep)' },
   denim: { accent: 'var(--denim)', deep: 'var(--denim-deep)' },
   brass: { accent: 'var(--brass)', deep: 'var(--brass-deep)' },
 }
 
-function fetchLandscape(slug: string) {
+export function fetchLandscape(slug: string) {
   return client.fetch(
     LANDSCAPE_QUERY,
     { slug },
@@ -26,9 +24,8 @@ function fetchLandscape(slug: string) {
   )
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { landscape } = await params
-  const data = await fetchLandscape(landscape)
+export async function landscapeMetadata(slug: string): Promise<Metadata> {
+  const data = await fetchLandscape(slug)
   if (!data) return {}
   const title = data.seo?.title ?? (plainText(data.name) || 'Landskab')
   const description = data.seo?.description ?? data.motto ?? undefined
@@ -44,16 +41,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 }
 
-export default async function LandscapePage({ params }: Params) {
-  const { landscape: slug } = await params
-
+export async function LandscapeView({ slug }: { slug: string }) {
   const [data, siblings] = await Promise.all([
     fetchLandscape(slug),
     client.fetch(LANDSCAPE_SIBLINGS_QUERY, {}, { next: { tags: ['landscape'] } }),
   ])
 
   // Guard: a landscape that exists only as an identity stub (no authored hero)
-  // is not yet renderable — filled in Step 6.
+  // is not yet renderable.
   if (!data || !data.deck) notFound()
 
   const accent = ACCENT_VARS[data.accentColor ?? 'barn'] ?? ACCENT_VARS.barn

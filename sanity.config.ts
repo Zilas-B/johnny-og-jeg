@@ -9,7 +9,7 @@ import { apiVersion, dataset, projectId } from './sanity/env'
 import { schemaTypes } from './sanity/schemas'
 import { structure } from './sanity/structure'
 
-const SINGLETONS = ['siteSettings', 'homePage'] as const
+const SINGLETONS = ['siteSettings', 'homePage', 'kulturenPage'] as const
 type Singleton = (typeof SINGLETONS)[number]
 const isSingleton = (type: string): type is Singleton =>
   (SINGLETONS as readonly string[]).includes(type)
@@ -33,6 +33,16 @@ export default defineConfig({
         locations: {
           homePage: { locations: [{ title: 'Forside', href: '/' }] },
           siteSettings: { locations: [{ title: 'Forside', href: '/' }] },
+          kulturenPage: { locations: [{ title: 'Kulturen', href: '/kulturen' }] },
+          landscape: {
+            select: { slug: 'slug.current' },
+            resolve: (doc) => ({
+              locations: [
+                { title: 'Kulturen', href: '/kulturen' },
+                ...(doc?.slug ? [{ title: 'Arkivside', href: `/${doc.slug}` }] : []),
+              ],
+            }),
+          },
         },
       },
     }),

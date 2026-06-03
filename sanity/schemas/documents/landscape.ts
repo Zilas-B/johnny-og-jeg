@@ -9,6 +9,18 @@ const inlineBlock = defineArrayMember({
   lists: [],
 })
 
+// Rich essay block for the Kulturen `.land` section: normal paragraphs plus a
+// subsection heading (h4) and a pull-quote callout style. Marks em/strong only.
+const kulturenEssayBlock = defineArrayMember({
+  type: 'block',
+  styles: [
+    { title: 'Normal', value: 'normal' },
+    { title: 'Mellemrubrik', value: 'h4' },
+    { title: 'Fremhævet citat', value: 'pull' },
+  ],
+  lists: [],
+})
+
 // Flatten inline Portable Text to a plain string for Studio previews.
 function plainText(blocks?: Array<{ children?: Array<{ text?: string }> }>): string {
   if (!Array.isArray(blocks)) return ''
@@ -35,6 +47,7 @@ export const landscape = defineType({
     { name: 'identity', title: 'Identitet', default: true },
     { name: 'hero', title: 'Hero' },
     { name: 'empty', title: 'Arkiv (tom tilstand)' },
+    { name: 'kulturen', title: 'Kulturen (.land)' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -221,6 +234,58 @@ export const landscape = defineType({
         }),
       ],
       group: 'empty',
+    }),
+
+    // ---- Kulturen (.land) section (optional; rendered on the Kulturen page) ----
+    defineField({
+      name: 'kulturenBgVariant',
+      title: 'Baggrund',
+      description: 'Sektionens baggrund på Kulturen-siden. "Mørk" skifter accenten til brass.',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Papir', value: 'paper' },
+          { title: 'Papir (mørkere)', value: 'paper-2' },
+          { title: 'Mørk (brass-accent)', value: 'dark' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'paper',
+      group: 'kulturen',
+    }),
+    defineField({
+      name: 'kulturenEssay',
+      title: 'Essay',
+      description:
+        'Selve .land-essayet. Første afsnit får drop-cap. Stilarter: Normal, Mellemrubrik (h4), Fremhævet citat.',
+      type: 'array',
+      of: [kulturenEssayBlock],
+      group: 'kulturen',
+    }),
+    defineField({
+      name: 'kulturenSidebar',
+      title: 'Side-bokse',
+      description: 'Bokse i højre kolonne, i visningsrækkefølge. "Til arkivet"-knappen tilføjes automatisk.',
+      type: 'array',
+      of: [
+        defineArrayMember({ type: 'kulturenSideNote' }),
+        defineArrayMember({ type: 'kulturenTimeline' }),
+      ],
+      group: 'kulturen',
+    }),
+    defineField({
+      name: 'kulturenArchiveCta',
+      title: 'Arkiv-knap (tekst)',
+      description: 'Teksten på "Til arkivet"-knappen, fx "Til Naturen-arkivet →". Tom = genereres.',
+      type: 'string',
+      group: 'kulturen',
+    }),
+    defineField({
+      name: 'kulturenCardTag',
+      title: 'Outro-kort — kort beskrivelse',
+      description: 'Vises i outro-listen efter navnet, fx "kontinent & vildmark".',
+      type: 'string',
+      group: 'kulturen',
     }),
 
     defineField({

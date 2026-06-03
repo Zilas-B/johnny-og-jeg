@@ -1,7 +1,7 @@
-import { CogIcon, HomeIcon } from '@sanity/icons'
+import { CogIcon, EarthAmericasIcon, HomeIcon } from '@sanity/icons'
 import type { StructureResolver } from 'sanity/structure'
 
-const PINNED_SINGLETONS = ['siteSettings', 'homePage'] as const
+const PINNED_SINGLETONS = ['siteSettings', 'homePage', 'kulturenPage'] as const
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -14,6 +14,14 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .schemaType('homePage')
             .documentId('homePage'),
+        ),
+      S.listItem()
+        .title('Kulturen')
+        .icon(EarthAmericasIcon)
+        .child(
+          S.document()
+            .schemaType('kulturenPage')
+            .documentId('kulturenPage'),
         ),
       S.listItem()
         .title('Indstillinger for sitet')
