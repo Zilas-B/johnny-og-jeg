@@ -76,3 +76,17 @@ a {
   top: 16px;
   left: 16px;
 }
+
+/* Reduced-motion safety net (best-practices §10 rule 6). Per-module animations
+   already gate on this; this global fallback ensures any future animation or
+   transition degrades safely for users who request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

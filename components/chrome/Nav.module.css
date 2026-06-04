@@ -100,7 +100,8 @@
 }
 
 .item:hover .dropdown,
-.item:focus-within .dropdown {
+.item:focus-within .dropdown,
+.itemOpen .dropdown {
   display: block;
 }
 

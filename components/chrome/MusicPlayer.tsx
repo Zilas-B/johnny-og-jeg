@@ -18,7 +18,7 @@ export function MusicPlayer() {
       <div className={styles.progress}>
         <div className={styles.bar} />
       </div>
-      <button type="button" className={styles.radioTab} aria-label="Toggle player">
+      <button type="button" className={styles.radioTab}>
         <span className={styles.live} aria-hidden="true" />
         {' Cash Radio · Side A · Studiet '}
         <span className={styles.chev} aria-hidden="true">

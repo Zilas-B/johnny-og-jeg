@@ -21,7 +21,7 @@ export function ContactSection({ data }: { data: Data }) {
 
             <div className={styles.booking} id="foredrag">
               <div className={styles.bookingLabel}>{data.bookingLabel}</div>
-              <h4 className={styles.bookingHeading}>{data.bookingHeading}</h4>
+              <h3 className={styles.bookingHeading}>{data.bookingHeading}</h3>
               <p className={styles.bookingBody}>{data.bookingBody}</p>
               {data.bookingLinkHref ? (
                 <a href={data.bookingLinkHref} className={styles.bookingBtn}>

@@ -41,7 +41,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 6 — Remaining 7 landscape pages — all eight `landscape` docs fully authored (hero + empty-state + seo) via the extended `scripts/seed-landscapes.mjs`; the seven non-Naturen pages now render instead of `notFound()`. Top-nav criterion dropped (template fidelity). See Decision log 2026-06-01.
 - [x] Step 7 — Supporting pages. **Split into 7a–7d** (too large for one session). **All four done — Step 7 complete.** **7a done:** routing reconciled to a single `[slug]` dispatcher branching by `_type`; **Kulturen** (`/kulturen`) built as the rich `.land` template — `kulturenPage` singleton + `landscape` extended with `.land` essay/sidebar/timeline fields, all 8 sections authored. **7b Plan 1 done:** block infrastructure (slugged `page` doc + reorderable `blocks[]`, shared block menu `vinylHero · steppedList · cardGrid · pullQuote · nextEssay`, `BlockRenderer`, `[slug]` `page` branch) + **Musikeren** (`/musikeren`) authored & seeded. **7b Plan 2 split per essay (user decision):** **2a done** — **Cash og Jesus** (`/cash-og-jesus`, denim) on four new blocks (`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote`/`nextEssay` (extended). **2b done** — **Cash og Amerika** (`/cash-og-amerika`, brass) on four new blocks (`flagHero · statsBar · themes · locationGrid`) + reused `pullQuote` (ink/brass) / `nextEssay` (barn+denim); introduced the project's first Sanity image pipeline (§7: `sanity/image.ts` + `SanityImage`). **7b complete. 7c done:** **Historien** (`/historien`) built as a fixed bespoke `historienPage` singleton (hero + derived timeline strip + six alternating era sections + outro), routed via the `[slug]` dispatcher; all seven era photos uploaded through §7. **7d done:** **Foredrag** (`/foredrag`) and **Bøger, spil, film** (`/boeger-spil-film`) built as fixed bespoke singletons (`foredragPage`, `bogerPage`) routed via `[slug]`; booking form + category filter + recommendation card are client-leaf visual shells (no backend). **Step 7 complete.** See Decision log 2026-06-03, 2026-06-04 (7c) and 2026-06-04 (7d).
 - [x] Step 7e — Home page → block model (Plan 3). Home migrated from its fixed named-field schema to the shared `blocks[]` model: six new home-only block types (`hubHero · setlistTicker · hubVinyls · historicalThread · hymn · contact`) ported 1:1 from the existing fields; the seven hub components reused unchanged (only prop-type aliases re-pointed); `homePage` stays a singleton rendered at `/` via the now-shared `BlockRenderer`. Visually identical; reorderable/toggleable in Studio. See Decision log 2026-06-04 (7e).
-- [ ] Step 8 — Accessibility & performance pass
+- [x] Step 8 — Accessibility & performance pass. A11y/Best-Practices/SEO Lighthouse ≥ 90 on hub + a landscape (96/100/90 and 96/100/100); Performance (88) deferred to Step 10 with the `force-dynamic` → static/ISR move. Nav dropdowns made keyboard-accessible (click/Escape/outside + `aria-expanded`); two real WCAG fixes (heading-order re-tags, MusicPlayer label-in-name); global reduced-motion fallback; LCP `priority` on the Bøger hero map. Full contrast audit in `docs/a11y-contrast-audit.md`; brass-on-light failures kept as accepted deviations (fidelity-wins). See Decision log 2026-06-04 (Step 8).
 - [ ] Step 9 — SEO & metadata
 - [ ] Step 10 — Production launch
 
@@ -513,4 +513,38 @@ Track major decisions here as the project evolves. Date, decision, rationale.
   - **Hub components reused unchanged in markup** — only their derived prop-type aliases re-pointed from named fields (`HOME_PAGE_QUERY_RESULT['vinyls']` …) to block members (`Extract<HomeBlock, { _type: 'hubVinyls' }>`), mirroring the essay block-component pattern. The two components that take inner fields (`HubHero`, `SetlistTicker`) are fed `block.hero!`/`block.items!` — required fields trusted (fail-loud §6, no graceful degradation), consistent with existing `!` usage.
   - **Content-migrated** the one `homePage` doc via the rewritten `scripts/seed-homePage.mjs` (now `createOrReplace` on published `_id: 'homePage'`, same Danish copy verbatim, idempotent) and **deleted the stale pre-7e `drafts.homePage`** (old named-field shape) so Studio shows the clean published block doc.
   - **No §3 client leaves added** (all hub components stay Server Components); **§4/§7 not engaged** (home has no per-page accent or new images); **§8 preserved** (`generateMetadata` still reads `seo`; H1 fallback moved to the first `hubHero` block). `pnpm types`/`tsc`/`build`/`lint` clean; `/` renders all six sections and `/musikeren`, `/cash-og-jesus`, `/cash-og-amerika`, `/kulturen`, `/historien`, `/foredrag`, `/boeger-spil-film`, `/naturen`, `/styleguide` all return 200, unchanged. **Next: Step 8 (a11y & performance).**
+- `2026-06-04` — **Step 8 shipped: accessibility & performance pass.** The codebase
+  already satisfied most of best-practices §10 (`<html lang="da">`, skip-link, global
+  `:focus-visible`, required image `alt`, a reduced-motion + `aria-live` music player).
+  Step 8 closed the remaining gaps and ran Lighthouse. **Two scoping decisions (user, this
+  session):**
+  - **Contrast — fidelity wins, audit + document only.** Produced `docs/a11y-contrast-audit.md`
+    (WCAG 2.1 ratios for every real text/background token pair). The only AA failures are
+    **brass / brass-deep as a foreground on light paper** (e.g. paper-on-brass vinyl-tile label
+    2.03; brass kickers/eyebrows/numerals on paper) plus a 4.49 footer quote a hair under 4.5 —
+    the template's signature editorial labels. **Kept as accepted deviations, not recoloured**,
+    continuing the standing fidelity-over-criteria precedent (2026-06-01). Brass on *dark* bands
+    (ink 7.59, denim-deep 5.66) passes, so the token is fine wherever the template puts it on dark;
+    a future minimal fix would be a darker brass token used only on light backgrounds.
+  - **Performance — a11y-focused now, score deferred to Step 10.** Rendering is still
+    `force-dynamic` with the read token unwired (the static/ISR bundle is Step 10, lines 271–276),
+    which caps Lighthouse Performance. Step 8 targeted **A11y / Best Practices / SEO ≥ 90** and did
+    cheap perf hygiene; the binding **Performance ≥ 90** acceptance moves to Step 10.
+  - **Code changes.** (1) **Nav dropdowns made keyboard-accessible** (`components/chrome/Nav.tsx`,
+    the one real change): click-to-open, `aria-expanded`/`aria-controls`, Escape-closes-and-refocuses,
+    click/focus-outside-closes (document listeners mounted only while open, mirroring the
+    `KulturenSubnav` client-leaf pattern); CSS gains `.itemOpen` alongside the existing
+    `:hover`/`:focus-within` so pointer hover is unchanged (template fidelity). (2) Global
+    `prefers-reduced-motion` fallback in `styles/globals.css` (per-module guards already existed).
+    (3) LCP `priority` added to the above-the-fold Bøger hero map (`BogerView`); all `SanityImage`
+    call sites already passed `sizes`, no raw `<img>` anywhere (§7). **Two real WCAG fixes surfaced
+    by Lighthouse and fixed (not contrast, visually free):** `heading-order` skips re-tagged
+    (`HubHero` sig-quote h3→h2, `ContactSection` booking h4→h3, `Footer` columns h5→h2 — styling is
+    CSS-class-driven, zero visual change) and `label-content-name-mismatch` (removed the music
+    player's mismatched `aria-label` so its accessible name equals its visible text, WCAG 2.5.3).
+  - **Lighthouse (local `pnpm start`, headless):** hub `/` = 88 / 96 / 100 / 90, `/naturen` =
+    88 / 96 / 100 / 100 (Perf / A11y / BP / SEO). A11y/BP/SEO ≥ 90 met on both; the sole remaining
+    A11y deduction is the accepted brass `color-contrast`. `pnpm lint`/`build` clean; all routes
+    return 200, visually unchanged. **No best-practices deviation** (the contrast call is an
+    explicit user decision, recorded; no §-rule was broken). **Next: Step 9 (SEO & metadata).**
 - `2026-06-01` — **Step 4 reduced to a visual shell. Music player functionality postponed indefinitely.** Original Step 4 included a `track`/`playlist` Sanity model, server-side fetch, transport state, and external streaming link-outs. All removed — Step 4 now ships the player markup + CSS only, with inert buttons and hardcoded placeholder track names from `cash-radio.js`. Reason: editorial focus is text + design fidelity; even link-out playback adds Sanity model + state + per-track URL maintenance disproportionate to the editorial value. The Phase F "real audio" optional was already dropped on 2026-05-26 — this extends that ethos to the link-out shell too. If the player ever becomes interactive, it lands as a separate scoped step.

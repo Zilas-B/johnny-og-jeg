@@ -161,7 +161,7 @@ export function BogerView({ data }: { data: Data }) {
               {hero.litmap ? (
                 <figure className={styles.litmap}>
                   <div className={styles.litmapFrame}>
-                    <SanityImage image={hero.litmap.image} width={640} sizes="(max-width: 1280px) 50vw, 600px" />
+                    <SanityImage image={hero.litmap.image} width={640} sizes="(max-width: 1280px) 50vw, 600px" priority />
                   </div>
                   <figcaption>
                     <span className={styles.capTag}>{hero.litmap.capTag}</span>

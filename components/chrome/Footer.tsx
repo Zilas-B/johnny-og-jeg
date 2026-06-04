@@ -43,7 +43,7 @@ export function Footer({ data }: { data: FooterData }) {
 
           {data.footerColumns.map((column) => (
             <div key={column._key}>
-              <h5 className={styles.heading}>{column.title}</h5>
+              <h2 className={styles.heading}>{column.title}</h2>
               <ul className={styles.list}>
                 {column.links?.map((link) => (
                   <li key={link._key}>
