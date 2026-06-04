@@ -28,6 +28,13 @@ const components: PortableTextComponents = {
   marks: {
     em: ({ children }) => <em>{children}</em>,
     strong: ({ children }) => <strong>{children}</strong>,
+    // External link annotation (essay prose, §6 rule 2). Internal links are a
+    // later step; everything authored so far is an outbound reference.
+    link: ({ children, value }) => (
+      <a href={(value as { href?: string })?.href} target="_blank" rel="noreferrer">
+        {children}
+      </a>
+    ),
   },
 }
 

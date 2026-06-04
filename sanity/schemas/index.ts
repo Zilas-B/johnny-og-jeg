@@ -2,7 +2,13 @@ import { archiveEntry } from './documents/archiveEntry'
 import { homePage } from './documents/homePage'
 import { kulturenPage } from './documents/kulturenPage'
 import { landscape } from './documents/landscape'
+import { page } from './documents/page'
 import { siteSettings } from './documents/siteSettings'
+import { cardGrid } from './objects/blocks/cardGrid'
+import { nextEssay } from './objects/blocks/nextEssay'
+import { pullQuote } from './objects/blocks/pullQuote'
+import { steppedList } from './objects/blocks/steppedList'
+import { vinylHero } from './objects/blocks/vinylHero'
 import { cta } from './objects/cta'
 import { footerColumn } from './objects/footerColumn'
 import { footerQuote } from './objects/footerQuote'
@@ -25,6 +31,7 @@ export const schemaTypes = [
   kulturenPage,
   landscape,
   archiveEntry,
+  page,
   // Objects
   masthead,
   navLink,
@@ -40,4 +47,10 @@ export const schemaTypes = [
   kulturenSideNote,
   kulturenTimeline,
   kulturenTimelineEntry,
+  // Block menu (Step 7b)
+  vinylHero,
+  steppedList,
+  cardGrid,
+  pullQuote,
+  nextEssay,
 ]

@@ -1,0 +1,62 @@
+/* Ported from claude-design-template/Musikeren.html .lyric. Dark band; the
+   kicker uses brass while the quote-marks/stripes follow the page --accent. */
+
+.lyric {
+  padding: 80px 0;
+  text-align: center;
+  background: var(--ink);
+  color: var(--paper);
+  border-top: 4px solid var(--accent);
+  border-bottom: 4px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+.lyric::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(164, 40, 43, 0.1) 0,
+    rgba(164, 40, 43, 0.1) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+}
+.wrap {
+  position: relative;
+  z-index: 2;
+}
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.quote {
+  margin: 0 auto;
+  max-width: 940px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 44px;
+  line-height: 1.2;
+  color: var(--paper);
+  text-wrap: balance;
+}
+.h {
+  color: var(--accent);
+}
+.attrib {
+  margin-top: 24px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: rgba(239, 228, 207, 0.65);
+  text-transform: uppercase;
+}
+.star {
+  color: var(--accent);
+  margin: 0 10px;
+}

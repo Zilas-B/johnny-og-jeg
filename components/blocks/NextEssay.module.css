@@ -1,0 +1,74 @@
+/* Ported from claude-design-template/Musikeren.html .next-side / .next-card. */
+
+.nextSide {
+  padding: 60px 0 80px;
+  background: var(--paper);
+}
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.heading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1;
+  margin: 0 0 36px;
+  color: var(--ink);
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.card {
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+  padding: 28px 30px;
+  text-decoration: none;
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 22px;
+  align-items: center;
+  box-shadow: 7px 9px 0 rgba(14, 13, 12, 0.18);
+  transition: transform 160ms ease;
+}
+.card:hover {
+  transform: translate(-2px, -3px);
+}
+.ro {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 70px;
+  color: var(--c);
+  line-height: 1;
+}
+.tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+.cardHeading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1;
+  margin: 6px 0;
+}
+.ar {
+  font-family: var(--f-poster);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--c);
+  text-transform: uppercase;
+}

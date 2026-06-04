@@ -15,6 +15,238 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type NextEssay = {
+  _type: "nextEssay";
+  kicker?: string;
+  heading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  cards?: Array<{
+    roman?: string;
+    tag?: string;
+    cardHeading?: string;
+    cta?: string;
+    href?: string;
+    colorScheme?: "denim" | "brass";
+    _type: "nextCard";
+    _key: string;
+  }>;
+};
+
+export type PullQuote = {
+  _type: "pullQuote";
+  kicker?: string;
+  quote?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  attribution?: Array<string>;
+};
+
+export type CardGrid = {
+  _type: "cardGrid";
+  kicker?: string;
+  heading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  deck?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  cards?: Array<{
+    roman?: string;
+    tag?: string;
+    cardHeading?: string;
+    cardBody?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "gridCard";
+    _key: string;
+  }>;
+};
+
+export type SteppedList = {
+  _type: "steppedList";
+  kicker?: string;
+  heading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  deck?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  items?: Array<{
+    years?: string;
+    label?: string;
+    tag?: Array<{
+      label?: string;
+      value?: string;
+      _key: string;
+    }>;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    cuts?: Array<{
+      cutLabel?: string;
+      cutTitle?: string;
+      cutDuration?: string;
+      cutHref?: string;
+      _type: "cutItem";
+      _key: string;
+    }>;
+    _type: "eraItem";
+    _key: string;
+  }>;
+};
+
+export type VinylHero = {
+  _type: "vinylHero";
+  eyebrow?: string;
+  romanNumeral?: string;
+  heading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  lede?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  metaItems?: Array<{
+    label?: string;
+    value?: string;
+    _key: string;
+  }>;
+  vinylTop?: string;
+  vinylTitle?: string;
+  vinylBottom?: string;
+  tickerItems?: Array<string>;
+};
+
 export type KulturenTimelineEntry = {
   _type: "kulturenTimelineEntry";
   year?: string;
@@ -220,6 +452,41 @@ export type Masthead = {
   rightLine2?: string;
 };
 
+export type Page = {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  accentColor?: "barn" | "denim" | "brass";
+  blocks?: Array<
+    | ({
+        _key: string;
+      } & VinylHero)
+    | ({
+        _key: string;
+      } & SteppedList)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & PullQuote)
+    | ({
+        _key: string;
+      } & NextEssay)
+  >;
+  seo?: Seo;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type LandscapeReference = {
   _ref: string;
   _type: "reference";
@@ -239,12 +506,6 @@ export type ArchiveEntry = {
   publishedAt?: string;
   kind?: "anmeldelse" | "fund" | "fodnote" | "note";
   summary?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type Landscape = {
@@ -861,6 +1122,11 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | NextEssay
+  | PullQuote
+  | CardGrid
+  | SteppedList
+  | VinylHero
   | KulturenTimelineEntry
   | KulturenTimeline
   | KulturenSideNote
@@ -876,9 +1142,10 @@ export type AllSanitySchemaTypes =
   | NavGroup
   | NavLink
   | Masthead
+  | Page
+  | Slug
   | LandscapeReference
   | ArchiveEntry
-  | Slug
   | Landscape
   | KulturenPage
   | HomePage
@@ -1570,15 +1837,263 @@ export type LANDSCAPE_SIBLINGS_QUERY_RESULT = Array<{
   order: number | null;
 }>;
 
+// Source: sanity/queries/page.ts
+// Variable: PAGE_QUERY
+// Query: *[_type == "page" && slug.current == $slug][0]{    title,    accentColor,    blocks[]{      _type,      _key,      _type == "vinylHero" => {        eyebrow,        romanNumeral,        heading,        lede,        metaItems[]{ label, value },        vinylTop,        vinylTitle,        vinylBottom,        tickerItems      },      _type == "steppedList" => {        kicker,        heading,        deck,        items[]{          years,          label,          tag[]{ label, value },          body,          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }        }      },      _type == "cardGrid" => {        kicker,        heading,        deck,        cards[]{ roman, tag, cardHeading, cardBody }      },      _type == "pullQuote" => {        kicker,        quote,        attribution      },      _type == "nextEssay" => {        kicker,        heading,        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }      }    },    seo{      title,      description,      ogImage{ asset->{ url, metadata{ dimensions } }, alt }    }  }
+export type PAGE_QUERY_RESULT = {
+  title: string | null;
+  accentColor: "barn" | "brass" | "denim" | null;
+  blocks: Array<
+    | {
+        _type: "cardGrid";
+        _key: string;
+        kicker: string | null;
+        heading: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        deck: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        cards: Array<{
+          roman: string | null;
+          tag: string | null;
+          cardHeading: string | null;
+          cardBody: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+        }> | null;
+      }
+    | {
+        _type: "nextEssay";
+        _key: string;
+        kicker: string | null;
+        heading: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        cards: Array<{
+          roman: string | null;
+          tag: string | null;
+          cardHeading: string | null;
+          cta: string | null;
+          href: string | null;
+          colorScheme: "brass" | "denim" | null;
+        }> | null;
+      }
+    | {
+        _type: "pullQuote";
+        _key: string;
+        kicker: string | null;
+        quote: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        attribution: Array<string> | null;
+      }
+    | {
+        _type: "steppedList";
+        _key: string;
+        kicker: string | null;
+        heading: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        deck: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        items: Array<{
+          years: string | null;
+          label: string | null;
+          tag: Array<{
+            label: string | null;
+            value: string | null;
+          }> | null;
+          body: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+          cuts: Array<{
+            cutLabel: string | null;
+            cutTitle: string | null;
+            cutDuration: string | null;
+            cutHref: string | null;
+          }> | null;
+        }> | null;
+      }
+    | {
+        _type: "vinylHero";
+        _key: string;
+        eyebrow: string | null;
+        romanNumeral: string | null;
+        heading: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        lede: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        metaItems: Array<{
+          label: string | null;
+          value: string | null;
+        }> | null;
+        vinylTop: string | null;
+        vinylTitle: string | null;
+        vinylBottom: string | null;
+        tickerItems: Array<string> | null;
+      }
+  > | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+} | null;
+
 // Source: sanity/queries/router.ts
 // Variable: SLUG_TYPE_QUERY
-// Query: *[    (_type == "landscape" && slug.current == $slug) ||    (_type == "kulturenPage" && $slug == "kulturen")  ][0]{ _type }
+// Query: *[    (_type == "landscape" && slug.current == $slug) ||    (_type == "page" && slug.current == $slug) ||    (_type == "kulturenPage" && $slug == "kulturen")  ][0]{ _type }
 export type SLUG_TYPE_QUERY_RESULT =
   | {
       _type: "kulturenPage";
     }
   | {
       _type: "landscape";
+    }
+  | {
+      _type: "page";
     }
   | null;
 
@@ -1591,6 +2106,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "kulturenPage"][0]{\n    hero{ eyebrow, title, subhead, deck },\n    chips{ label, count },\n    intro{ kicker, heading, signature, body },\n    outro{\n      kicker,\n      heading,\n      body,\n      actions[]{ text, href, style },\n      cardLead,\n      cardHeading\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    },\n    "landscapes": *[_type == "landscape"] | order(order asc){\n      "slug": slug.current,\n      romanNumeral,\n      toponym,\n      period,\n      name,\n      motto,\n      shortName,\n      kulturenBgVariant,\n      kulturenArchiveCta,\n      kulturenCardTag,\n      kulturenEssay,\n      kulturenSidebar[]{\n        _type,\n        _key,\n        label,\n        emphasis,\n        value,\n        entries[]{ _key, year, text }\n      }\n    }\n  }\n': KULTUREN_QUERY_RESULT;
     '\n  *[_type == "landscape" && slug.current == $slug][0]{\n    name,\n    "slug": slug.current,\n    order,\n    romanNumeral,\n    toponym,\n    period,\n    accentColor,\n    eyebrow,\n    motto,\n    deck,\n    topicsLabel,\n    topics,\n    crumbBackText,\n    crumbBackHref,\n    emptyMeta,\n    emptyLabel,\n    emptyHeading,\n    emptyBody,\n    emptyActions[]{ text, href, style },\n    "entries": *[_type == "archiveEntry" && landscape._ref == ^._id] | order(publishedAt desc){\n      title,\n      "slug": slug.current,\n      publishedAt,\n      kind,\n      summary\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': LANDSCAPE_QUERY_RESULT;
     '\n  *[_type == "landscape"] | order(order asc){\n    "slug": slug.current,\n    romanNumeral,\n    shortName,\n    order\n  }\n': LANDSCAPE_SIBLINGS_QUERY_RESULT;
-    '\n  *[\n    (_type == "landscape" && slug.current == $slug) ||\n    (_type == "kulturenPage" && $slug == "kulturen")\n  ][0]{ _type }\n': SLUG_TYPE_QUERY_RESULT;
+    '\n  *[_type == "page" && slug.current == $slug][0]{\n    title,\n    accentColor,\n    blocks[]{\n      _type,\n      _key,\n      _type == "vinylHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        vinylTop,\n        vinylTitle,\n        vinylBottom,\n        tickerItems\n      },\n      _type == "steppedList" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          years,\n          label,\n          tag[]{ label, value },\n          body,\n          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }\n        }\n      },\n      _type == "cardGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ roman, tag, cardHeading, cardBody }\n      },\n      _type == "pullQuote" => {\n        kicker,\n        quote,\n        attribution\n      },\n      _type == "nextEssay" => {\n        kicker,\n        heading,\n        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }\n      }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': PAGE_QUERY_RESULT;
+    '\n  *[\n    (_type == "landscape" && slug.current == $slug) ||\n    (_type == "page" && slug.current == $slug) ||\n    (_type == "kulturenPage" && $slug == "kulturen")\n  ][0]{ _type }\n': SLUG_TYPE_QUERY_RESULT;
   }
 }

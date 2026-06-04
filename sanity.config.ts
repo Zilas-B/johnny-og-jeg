@@ -43,6 +43,14 @@ export default defineConfig({
               ],
             }),
           },
+          page: {
+            select: { title: 'title', slug: 'slug.current' },
+            resolve: (doc) => ({
+              locations: doc?.slug
+                ? [{ title: (doc.title as string) ?? 'Side', href: `/${doc.slug}` }]
+                : [],
+            }),
+          },
         },
       },
     }),
