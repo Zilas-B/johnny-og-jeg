@@ -1,4 +1,7 @@
 import { archiveEntry } from './documents/archiveEntry'
+import { bogerPage } from './documents/bogerPage'
+import { foredragPage } from './documents/foredragPage'
+import { historienPage } from './documents/historienPage'
 import { homePage } from './documents/homePage'
 import { kulturenPage } from './documents/kulturenPage'
 import { landscape } from './documents/landscape'
@@ -20,6 +23,7 @@ import { vinylHero } from './objects/blocks/vinylHero'
 import { cta } from './objects/cta'
 import { footerColumn } from './objects/footerColumn'
 import { footerQuote } from './objects/footerQuote'
+import { historienEra } from './objects/historienEra'
 import { kulturenSideNote } from './objects/kulturenSideNote'
 import { kulturenTimeline } from './objects/kulturenTimeline'
 import { kulturenTimelineEntry } from './objects/kulturenTimelineEntry'
@@ -37,6 +41,9 @@ export const schemaTypes = [
   siteSettings,
   homePage,
   kulturenPage,
+  historienPage,
+  foredragPage,
+  bogerPage,
   landscape,
   archiveEntry,
   page,
@@ -55,6 +62,7 @@ export const schemaTypes = [
   kulturenSideNote,
   kulturenTimeline,
   kulturenTimelineEntry,
+  historienEra,
   // Block menu (Step 7b)
   vinylHero,
   steppedList,

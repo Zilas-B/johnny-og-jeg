@@ -8,6 +8,9 @@ export const SLUG_TYPE_QUERY = defineQuery(`
   *[
     (_type == "landscape" && slug.current == $slug) ||
     (_type == "page" && slug.current == $slug) ||
-    (_type == "kulturenPage" && $slug == "kulturen")
+    (_type == "kulturenPage" && $slug == "kulturen") ||
+    (_type == "historienPage" && $slug == "historien") ||
+    (_type == "foredragPage" && $slug == "foredrag") ||
+    (_type == "bogerPage" && $slug == "boeger-spil-film")
   ][0]{ _type }
 `)

@@ -39,7 +39,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 4 — Music player (Cash Radio) visual shell — `<MusicPlayer>` Server Component mounted in `app/(site)/layout.tsx`; markup, vinyl spin, tracks, transport buttons, and listen-on chips ported as visual-only chrome. Inert; no Sanity model; `prefers-reduced-motion` halts the disc and live-dot.
 - [x] Step 5 — Landscape page template (Naturen archive-stub, Sanity-first) — `landscape` + `archiveEntry` schemas, `[landscape]` dynamic route, three components (`LandscapeHero/Posts/Siblings`), all 8 landscape docs seeded (Naturen fully authored, other 7 identity-only). See Decision log 2026-06-01 for the archive-stub reframe.
 - [x] Step 6 — Remaining 7 landscape pages — all eight `landscape` docs fully authored (hero + empty-state + seo) via the extended `scripts/seed-landscapes.mjs`; the seven non-Naturen pages now render instead of `notFound()`. Top-nav criterion dropped (template fidelity). See Decision log 2026-06-01.
-- [~] Step 7 — Supporting pages. **Split into 7a–7d** (too large for one session). **7a done:** routing reconciled to a single `[slug]` dispatcher branching by `_type`; **Kulturen** (`/kulturen`) built as the rich `.land` template — `kulturenPage` singleton + `landscape` extended with `.land` essay/sidebar/timeline fields, all 8 sections authored. **7b Plan 1 done:** block infrastructure (slugged `page` doc + reorderable `blocks[]`, shared block menu `vinylHero · steppedList · cardGrid · pullQuote · nextEssay`, `BlockRenderer`, `[slug]` `page` branch) + **Musikeren** (`/musikeren`) authored & seeded. **7b Plan 2 split per essay (user decision):** **2a done** — **Cash og Jesus** (`/cash-og-jesus`, denim) on four new blocks (`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote`/`nextEssay` (extended). **2b done** — **Cash og Amerika** (`/cash-og-amerika`, brass) on four new blocks (`flagHero · statsBar · themes · locationGrid`) + reused `pullQuote` (ink/brass) / `nextEssay` (barn+denim); introduced the project's first Sanity image pipeline (§7: `sanity/image.ts` + `SanityImage`). **7b complete.** Remaining: 7c Historien, 7d utility pages (Foredrag, Bøger/spil/film). See Decision log 2026-06-03 and 2026-06-04.
+- [x] Step 7 — Supporting pages. **Split into 7a–7d** (too large for one session). **All four done — Step 7 complete.** **7a done:** routing reconciled to a single `[slug]` dispatcher branching by `_type`; **Kulturen** (`/kulturen`) built as the rich `.land` template — `kulturenPage` singleton + `landscape` extended with `.land` essay/sidebar/timeline fields, all 8 sections authored. **7b Plan 1 done:** block infrastructure (slugged `page` doc + reorderable `blocks[]`, shared block menu `vinylHero · steppedList · cardGrid · pullQuote · nextEssay`, `BlockRenderer`, `[slug]` `page` branch) + **Musikeren** (`/musikeren`) authored & seeded. **7b Plan 2 split per essay (user decision):** **2a done** — **Cash og Jesus** (`/cash-og-jesus`, denim) on four new blocks (`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote`/`nextEssay` (extended). **2b done** — **Cash og Amerika** (`/cash-og-amerika`, brass) on four new blocks (`flagHero · statsBar · themes · locationGrid`) + reused `pullQuote` (ink/brass) / `nextEssay` (barn+denim); introduced the project's first Sanity image pipeline (§7: `sanity/image.ts` + `SanityImage`). **7b complete. 7c done:** **Historien** (`/historien`) built as a fixed bespoke `historienPage` singleton (hero + derived timeline strip + six alternating era sections + outro), routed via the `[slug]` dispatcher; all seven era photos uploaded through §7. **7d done:** **Foredrag** (`/foredrag`) and **Bøger, spil, film** (`/boeger-spil-film`) built as fixed bespoke singletons (`foredragPage`, `bogerPage`) routed via `[slug]`; booking form + category filter + recommendation card are client-leaf visual shells (no backend). **Step 7 complete.** See Decision log 2026-06-03, 2026-06-04 (7c) and 2026-06-04 (7d).
 - [ ] Step 7e — Home page → block model (Plan 3; gated on 7b). See Decision log 2026-06-04.
 - [ ] Step 8 — Accessibility & performance pass
 - [ ] Step 9 — SEO & metadata
@@ -111,9 +111,11 @@ essay pages, Historien's bespoke era layout, two bespoke utility pages, and the 
   a new reorderable `blocks[]` model (full design in the **Step 7b detail** section below + Decision
   log 2026-06-04). Per-page accent barn/denim/brass. **Two plan-mode sessions:** Plan 1 (block infra
   + Musikeren), Plan 2 (the other two essays).
-- **7c — Historien:** bespoke 6-era alternating layout (fixed schema, *not* block-composed).
-- **7d — Utility pages:** Foredrag (ticket/posters/booking form/FAQ), Bøger/spil/film
-  (filter bar/book entries/suggestion form).
+- **7c — Historien (done):** bespoke 6-era alternating layout (fixed `historienPage` singleton,
+  *not* block-composed); routed via the `[slug]` dispatcher. See Decision log 2026-06-04 (7c).
+- **7d — Utility pages (done):** Foredrag (ticket/posters/booking form/FAQ) and Bøger/spil/film
+  (filter bar/book entries/suggestion form), both fixed bespoke singletons routed via `[slug]`.
+  See Decision log 2026-06-04 (7d).
 
 **Outcome:** the remaining non-landscape pages (Historien, Musikeren, Cash og Amerika, Cash og Jesus, Foredrag, Kulturen, Bøger spil film) are live.
 
@@ -455,4 +457,55 @@ Track major decisions here as the project evolves. Date, decision, rationale.
     overlay variant added** (honouring the Metaplan's explicit "pullQuote, no extension").
   - `pnpm types`/`tsc`/`build`/`lint` clean. Regression: `/`, `/musikeren`, `/cash-og-jesus`,
     `/kulturen`, and the landscapes all return 200 and are unchanged.
+- `2026-06-04` — **Step 7c shipped: Historien (`/historien`).** Built as a fixed bespoke
+  **`historienPage` singleton** — *not* block-composed (Decision log 2026-06-04 keeps Historien a fixed
+  schema). Modelled exactly like `kulturenPage`: a pinned singleton (structure.ts) routed through the
+  `[slug]` dispatcher via `SLUG_TYPE_QUERY`'s new `(_type == "historienPage" && $slug == "historien")`
+  branch (mirrors the kulturen fixed-path match). Ported 1:1 from `Historien.html`.
+  - **Schema.** `historienPage` (hero · `eras[]` · outro · seo) + a registered `historienEra` object
+    (roman/period/navName/timelineName/heading/deck/body/image(+collage)/credit/cashnote/posts). The
+    hero "Bladre i" list **and** the timeline strip are both **derived from `eras[]`** in the renderer
+    (single source). **Dark + photo-reversed acts (II/IV/VI) are derived from the array index**, not a
+    stored field. Per §5: every type has `preview` + the page/object carry `icon`/preview; required
+    validation on everything rendered unconditionally (only `posts`/`imageCollage` optional).
+  - **§7 engaged.** Seven era photos uploaded via `scripts/seed-historien.mjs` (the second image-using
+    seed). Act IV renders the two-photo collage (`era-4-migrant-mother` + `era-4-iwo-jima`); the others
+    are single framed photos with a `shape` (wide/tall/sq) field, all through `SanityImage` (`fill`).
+  - **§6 unchanged** — era prose uses only the existing normal + em/strong; cash-note song + outro
+    card lines render through `InlineText`; no new serializers.
+  - **Deviation (minor, ~5% tolerance):** the schema uses one `period` per era for the stamp, year-chip,
+    hero-list and timeline. Act VI therefore shows `1989 — nutid` in the hero-list/timeline where the
+    template shows the shorter `1989 — nu` (stamp/chip already say `nutid`). Judged not worth a second
+    field. Outro buttons forward-link to `/boeger-spil-film` + `/foredrag` (known forward-404 until 7d,
+    same pattern as prior steps).
+  - `pnpm types`/`tsc`/`build`/`lint` clean; seed verified (6 eras, act-IV collage, image dims+lqip,
+    7 outro items, router → `historienPage`). `/`, `/musikeren`, `/cash-og-jesus`, `/cash-og-amerika`,
+    `/kulturen`, and the landscapes unchanged. **Remaining in Step 7: 7d (utility pages).**
+- `2026-06-04` — **Step 7d shipped: Foredrag + Bøger/spil/film; Step 7 complete.** The two utility
+  pages built as fixed bespoke singletons (`foredragPage` `/foredrag`, `bogerPage`
+  `/boeger-spil-film`) — *not* block-composed (Decision log 2026-06-04 keeps both as
+  structured/functional pages). Both pinned in structure.ts and routed via `SLUG_TYPE_QUERY`'s new
+  fixed-path branches (`$slug == "foredrag"` / `$slug == "boeger-spil-film"`), mirroring kulturen/
+  historien. Ported 1:1 from `Foredrag.html` and `Bøger, spil, film.html`.
+  - **Foredrag.** hero + ticket-stub · three programme posters · dark practical grid · venues +
+    testimonial · booking copy · FAQ. The **booking form is a visual shell** (`BookingForm.tsx`, the
+    one client leaf, §3 rule 4) — required-field validation + a client-side success note, nothing sent
+    (TechStack: forms out of scope; a real Resend/Formspree backend is a later decision, consistent
+    with the music-player visual-shell precedent). Form field labels/placeholders are functional UI
+    hardcoded in the component; only the surrounding editorial copy is authored.
+  - **Bøger/spil/film.** hero + literary-map (§7) · category filter bar · three full book reviews
+    (§7 covers + Saxo buy-links) · empty Spil/Film states with "coming" preview lists · invitation +
+    recommendation card. Two client leaves (§3 rule 4): `CategoryFilter.tsx` (toggles visibility of the
+    server-rendered category blocks — heavy review/image rendering stays on the server, the client only
+    flips a `hidden` class, a faithful rewrite of the template's vanilla-JS handler) and `AddCard.tsx`
+    (visual-shell recommendation input). Four images uploaded via `scripts/seed-boger.mjs`
+    (`literary-usa-map` + 3 covers); `rating` modelled as a 1–5 number rendered to ★/dimmed-★.
+  - **§6 unchanged** — both pages use only normal + em/strong prose through `PortableText`/`InlineText`;
+    no new serializers. **§5** — every object has `preview`; required validation throughout (shared
+    loosely-typed `req` helper, documented). Internal links resolved: Historien's outro and Cash og
+    Jesus/Amerika `nextEssay` forward-links to `/foredrag` + `/boeger-spil-film` now all resolve.
+  - `pnpm types`/`tsc`/`build`/`lint` clean; both seeds verified (Foredrag: 3 programs/10 venues/6 FAQ/
+    4 practical cells/4 ticket lines; Bøger: 3 books w/ cover dims + map lqip, 4+5 previews; both
+    routers resolve). All prior routes unchanged. **Step 7 (all of 7a–7d) complete; next is 7e (home →
+    block model) or Step 8.**
 - `2026-06-01` — **Step 4 reduced to a visual shell. Music player functionality postponed indefinitely.** Original Step 4 included a `track`/`playlist` Sanity model, server-side fetch, transport state, and external streaming link-outs. All removed — Step 4 now ships the player markup + CSS only, with inert buttons and hardcoded placeholder track names from `cash-radio.js`. Reason: editorial focus is text + design fidelity; even link-out playback adds Sanity model + state + per-track URL maintenance disproportionate to the editorial value. The Phase F "real audio" optional was already dropped on 2026-05-26 — this extends that ethos to the link-out shell too. If the player ever becomes interactive, it lands as a separate scoped step.

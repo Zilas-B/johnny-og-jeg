@@ -15,6 +15,47 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type Cashnote = {
+  label?: string;
+  heading?: string;
+  song?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
 export type Telegram = {
   headLeft?: string;
   headTitle?: string;
@@ -607,6 +648,79 @@ export type VinylHero = {
   tickerItems?: Array<string>;
 };
 
+export type HistorienEra = {
+  _type: "historienEra";
+  romanNumeral?: string;
+  period?: string;
+  navName?: string;
+  timelineName?: string;
+  heading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  deck?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    shape?: "wide" | "tall" | "sq";
+    _type: "image";
+  };
+  imageCollage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  creditLeft?: string;
+  creditRight?: string;
+  cashnote?: Cashnote;
+  posts?: Array<{
+    kind?: string;
+    title?: string;
+    date?: string;
+    href?: string;
+    empty?: boolean;
+    _key: string;
+  }>;
+};
+
 export type KulturenTimelineEntry = {
   _type: "kulturenTimelineEntry";
   year?: string;
@@ -1029,6 +1143,676 @@ export type Landscape = {
   >;
   kulturenArchiveCta?: string;
   kulturenCardTag?: string;
+  seo?: Seo;
+};
+
+export type BogerPage = {
+  _id: string;
+  _type: "bogerPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hero?: {
+    eyebrow?: string;
+    titleLead?: string;
+    titleTrail?: string;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    litmap?: {
+      image?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      capTag?: string;
+      caption?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+    };
+  };
+  filters?: {
+    lhs?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    alleCount?: string;
+    bogerCount?: string;
+    spilCount?: string;
+    filmCount?: string;
+    rhs?: string;
+  };
+  booksTitle?: string;
+  booksCount?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  books?: Array<{
+    catTag?: string;
+    roman?: string;
+    coverImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    buyHref?: string;
+    rating?: 1 | 2 | 3 | 4 | 5;
+    readWhen?: string;
+    pages?: string;
+    language?: string;
+    title?: string;
+    author?: string;
+    year?: string;
+    metaRow?: Array<{
+      label?: string;
+      value?: string;
+      _key: string;
+    }>;
+    lead?: string;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    verdictLine?: string;
+    recoLabel?: string;
+    recoText?: string;
+    tags?: Array<string>;
+    _type: "book";
+    _key: string;
+  }>;
+  spil?: {
+    title?: string;
+    count?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    glyph?: string;
+    heading?: string;
+    body?: string;
+    pending?: string;
+    previewLabel?: string;
+    preview?: Array<{
+      yr?: string;
+      text?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _key: string;
+    }>;
+  };
+  film?: {
+    title?: string;
+    count?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    glyph?: string;
+    heading?: string;
+    body?: string;
+    pending?: string;
+    previewLabel?: string;
+    preview?: Array<{
+      yr?: string;
+      text?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _key: string;
+    }>;
+  };
+  invite?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    actions?: Array<{
+      text?: string;
+      href?: string;
+      style?: "primary" | "secondary";
+      _key: string;
+    }>;
+    addCard?: {
+      label?: string;
+      heading?: string;
+      body?: string;
+      placeholder?: string;
+      small?: string;
+    };
+  };
+  seo?: Seo;
+};
+
+export type ForedragPage = {
+  _id: string;
+  _type: "foredragPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hero?: {
+    eyebrow?: string;
+    title?: string;
+    titleSmall?: string;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    metaCells?: Array<{
+      k?: string;
+      v?: string;
+      _key: string;
+    }>;
+    ticket?: {
+      stampTop?: string;
+      stampBig?: string;
+      stampBottom?: string;
+      headLhs?: string;
+      headNum?: string;
+      heading?: string;
+      lines?: Array<{
+        label?: string;
+        value?: string;
+        _key: string;
+      }>;
+      priceLabel?: string;
+      price?: string;
+      priceUnit?: string;
+      ctaText?: string;
+      ctaHref?: string;
+    };
+  };
+  programsHead?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  programs?: Array<{
+    side?: string;
+    roman?: string;
+    theme?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    sub?: string;
+    body?: string;
+    arc?: Array<string>;
+    duration?: string;
+    bestFor?: string;
+    _type: "program";
+    _key: string;
+  }>;
+  practical?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    intro?: string;
+    cells?: Array<{
+      k?: string;
+      label?: string;
+      heading?: string;
+      body?: string;
+      _key: string;
+    }>;
+  };
+  venuesHead?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  venues?: Array<{
+    yr?: string;
+    place?: string;
+    city?: string;
+    _key: string;
+  }>;
+  testimonial?: {
+    quote?: string;
+    attribName?: string;
+    attribPlace?: string;
+    attribWhen?: string;
+    alsoLabel?: string;
+    alsoOrgs?: Array<string>;
+  };
+  booking?: {
+    kicker?: string;
+    heading?: string;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    scripture?: string;
+    scriptureRef?: string;
+    formTitle?: string;
+    formStamp?: string;
+    formPostmark?: string;
+    formSuccess?: string;
+  };
+  faqHead?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  faq?: Array<{
+    q?: string;
+    a?: string;
+    _key: string;
+  }>;
+  seo?: Seo;
+};
+
+export type HistorienPage = {
+  _id: string;
+  _type: "historienPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hero?: {
+    eyebrow?: string;
+    title?: string;
+    titleSub?: string;
+    deck?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    sideLabel?: string;
+    sideHeading?: string;
+  };
+  eras?: Array<
+    {
+      _key: string;
+    } & HistorienEra
+  >;
+  outro?: {
+    kicker?: string;
+    heading?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    actions?: Array<{
+      text?: string;
+      href?: string;
+      style?: "primary" | "secondary";
+      _key: string;
+    }>;
+    cardHeading?: string;
+    cardItems?: Array<{
+      text?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      year?: string;
+      _key: string;
+    }>;
+  };
   seo?: Seo;
 };
 
@@ -1499,6 +2283,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | Cashnote
   | Telegram
   | Quote
   | Song
@@ -1516,6 +2301,7 @@ export type AllSanitySchemaTypes =
   | CardGrid
   | SteppedList
   | VinylHero
+  | HistorienEra
   | KulturenTimelineEntry
   | KulturenTimeline
   | KulturenSideNote
@@ -1537,6 +2323,9 @@ export type AllSanitySchemaTypes =
   | LandscapeReference
   | ArchiveEntry
   | Landscape
+  | BogerPage
+  | ForedragPage
+  | HistorienPage
   | KulturenPage
   | HomePage
   | SiteSettings
@@ -1548,6 +2337,580 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
+// Source: sanity/queries/boger.ts
+// Variable: BOGER_QUERY
+// Query: *[_type == "bogerPage"][0]{    hero{      eyebrow, titleLead, titleTrail, deck,      litmap{        image{ asset->{ _id, metadata{ dimensions, lqip } }, alt },        capTag, caption      }    },    filters{ lhs, alleCount, bogerCount, spilCount, filmCount, rhs },    booksTitle,    booksCount,    books[]{      catTag, roman,      coverImage{ asset->{ _id, metadata{ dimensions, lqip } }, alt },      buyHref, rating, readWhen, pages, language,      title, author, year,      metaRow[]{ label, value },      lead, body, verdictLine, recoLabel, recoText, tags    },    spil{ title, count, glyph, heading, body, pending, previewLabel, preview[]{ yr, text } },    film{ title, count, glyph, heading, body, pending, previewLabel, preview[]{ yr, text } },    invite{      kicker, heading, body,      actions[]{ text, href, style },      addCard{ label, heading, body, placeholder, small }    },    seo{      title,      description,      ogImage{ asset->{ url, metadata{ dimensions } }, alt }    }  }
+export type BOGER_QUERY_RESULT = {
+  hero: {
+    eyebrow: string | null;
+    titleLead: string | null;
+    titleTrail: string | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    litmap: {
+      image: {
+        asset: {
+          _id: string;
+          metadata: {
+            dimensions: SanityImageDimensions | null;
+            lqip: string | null;
+          } | null;
+        } | null;
+        alt: string | null;
+      } | null;
+      capTag: string | null;
+      caption: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+    } | null;
+  } | null;
+  filters: {
+    lhs: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    alleCount: string | null;
+    bogerCount: string | null;
+    spilCount: string | null;
+    filmCount: string | null;
+    rhs: string | null;
+  } | null;
+  booksTitle: string | null;
+  booksCount: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  books: Array<{
+    catTag: string | null;
+    roman: string | null;
+    coverImage: {
+      asset: {
+        _id: string;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+    buyHref: string | null;
+    rating: 1 | 2 | 3 | 4 | 5 | null;
+    readWhen: string | null;
+    pages: string | null;
+    language: string | null;
+    title: string | null;
+    author: string | null;
+    year: string | null;
+    metaRow: Array<{
+      label: string | null;
+      value: string | null;
+    }> | null;
+    lead: string | null;
+    body: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    verdictLine: string | null;
+    recoLabel: string | null;
+    recoText: string | null;
+    tags: Array<string> | null;
+  }> | null;
+  spil: {
+    title: string | null;
+    count: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    glyph: string | null;
+    heading: string | null;
+    body: string | null;
+    pending: string | null;
+    previewLabel: string | null;
+    preview: Array<{
+      yr: string | null;
+      text: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+    }> | null;
+  } | null;
+  film: {
+    title: string | null;
+    count: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    glyph: string | null;
+    heading: string | null;
+    body: string | null;
+    pending: string | null;
+    previewLabel: string | null;
+    preview: Array<{
+      yr: string | null;
+      text: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+    }> | null;
+  } | null;
+  invite: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    body: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    actions: Array<{
+      text: string | null;
+      href: string | null;
+      style: "primary" | "secondary" | null;
+    }> | null;
+    addCard: {
+      label: string | null;
+      heading: string | null;
+      body: string | null;
+      placeholder: string | null;
+      small: string | null;
+    } | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: sanity/queries/foredrag.ts
+// Variable: FOREDRAG_QUERY
+// Query: *[_type == "foredragPage"][0]{    hero{      eyebrow, title, titleSmall, deck,      metaCells[]{ k, v },      ticket{        stampTop, stampBig, stampBottom, headLhs, headNum, heading,        lines[]{ label, value },        priceLabel, price, priceUnit, ctaText, ctaHref      }    },    programsHead{ kicker, heading, deck },    programs[]{ side, roman, theme, heading, sub, body, arc, duration, bestFor },    practical{ kicker, heading, intro, cells[]{ k, label, heading, body } },    venuesHead{ kicker, heading, deck },    venues[]{ yr, place, city },    testimonial{ quote, attribName, attribPlace, attribWhen, alsoLabel, alsoOrgs },    booking{      kicker, heading, body, scripture, scriptureRef,      formTitle, formStamp, formPostmark, formSuccess    },    faqHead{ kicker, heading },    faq[]{ q, a },    seo{      title,      description,      ogImage{ asset->{ url, metadata{ dimensions } }, alt }    }  }
+export type FOREDRAG_QUERY_RESULT = {
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    titleSmall: string | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    metaCells: Array<{
+      k: string | null;
+      v: string | null;
+    }> | null;
+    ticket: {
+      stampTop: string | null;
+      stampBig: string | null;
+      stampBottom: string | null;
+      headLhs: string | null;
+      headNum: string | null;
+      heading: string | null;
+      lines: Array<{
+        label: string | null;
+        value: string | null;
+      }> | null;
+      priceLabel: string | null;
+      price: string | null;
+      priceUnit: string | null;
+      ctaText: string | null;
+      ctaHref: string | null;
+    } | null;
+  } | null;
+  programsHead: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+  } | null;
+  programs: Array<{
+    side: string | null;
+    roman: string | null;
+    theme: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    sub: string | null;
+    body: string | null;
+    arc: Array<string> | null;
+    duration: string | null;
+    bestFor: string | null;
+  }> | null;
+  practical: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    intro: string | null;
+    cells: Array<{
+      k: string | null;
+      label: string | null;
+      heading: string | null;
+      body: string | null;
+    }> | null;
+  } | null;
+  venuesHead: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+  } | null;
+  venues: Array<{
+    yr: string | null;
+    place: string | null;
+    city: string | null;
+  }> | null;
+  testimonial: {
+    quote: string | null;
+    attribName: string | null;
+    attribPlace: string | null;
+    attribWhen: string | null;
+    alsoLabel: string | null;
+    alsoOrgs: Array<string> | null;
+  } | null;
+  booking: {
+    kicker: string | null;
+    heading: string | null;
+    body: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    scripture: string | null;
+    scriptureRef: string | null;
+    formTitle: string | null;
+    formStamp: string | null;
+    formPostmark: string | null;
+    formSuccess: string | null;
+  } | null;
+  faqHead: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+  } | null;
+  faq: Array<{
+    q: string | null;
+    a: string | null;
+  }> | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+} | null;
 
 // Source: sanity/queries/global.ts
 // Variable: SITE_SETTINGS_QUERY
@@ -1570,6 +2933,229 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   > | null;
   footerBottomCopyright: string | null;
   footerBottomTagline: string | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    ogImage: {
+      asset: {
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: sanity/queries/historien.ts
+// Variable: HISTORIEN_QUERY
+// Query: *[_type == "historienPage"][0]{    hero{ eyebrow, title, titleSub, deck, sideLabel, sideHeading },    eras[]{      romanNumeral,      period,      navName,      timelineName,      heading,      deck,      body,      image{        asset->{ _id, metadata{ dimensions, lqip } },        alt,        shape      },      imageCollage{        asset->{ _id, metadata{ dimensions, lqip } },        alt      },      creditLeft,      creditRight,      cashnote{ label, heading, song, body },      posts[]{ kind, title, date, href, empty }    },    outro{      kicker,      heading,      body,      actions[]{ text, href, style },      cardHeading,      cardItems[]{ text, year }    },    seo{      title,      description,      ogImage{ asset->{ url, metadata{ dimensions } }, alt }    }  }
+export type HISTORIEN_QUERY_RESULT = {
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    titleSub: string | null;
+    deck: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    sideLabel: string | null;
+    sideHeading: string | null;
+  } | null;
+  eras: Array<{
+    romanNumeral: string | null;
+    period: string | null;
+    navName: string | null;
+    timelineName: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    deck: string | null;
+    body: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    image: {
+      asset: {
+        _id: string;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+        } | null;
+      } | null;
+      alt: string | null;
+      shape: "sq" | "tall" | "wide" | null;
+    } | null;
+    imageCollage: {
+      asset: {
+        _id: string;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+    creditLeft: string | null;
+    creditRight: string | null;
+    cashnote: {
+      label: string | null;
+      heading: string | null;
+      song: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+      body: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+    } | null;
+    posts: Array<{
+      kind: string | null;
+      title: string | null;
+      date: string | null;
+      href: string | null;
+      empty: boolean | null;
+    }> | null;
+  }> | null;
+  outro: {
+    kicker: string | null;
+    heading: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    body: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    actions: Array<{
+      text: string | null;
+      href: string | null;
+      style: "primary" | "secondary" | null;
+    }> | null;
+    cardHeading: string | null;
+    cardItems: Array<{
+      text: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: never;
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+      year: string | null;
+    }> | null;
+  } | null;
   seo: {
     title: string | null;
     description: string | null;
@@ -2806,8 +4392,17 @@ export type PAGE_QUERY_RESULT = {
 
 // Source: sanity/queries/router.ts
 // Variable: SLUG_TYPE_QUERY
-// Query: *[    (_type == "landscape" && slug.current == $slug) ||    (_type == "page" && slug.current == $slug) ||    (_type == "kulturenPage" && $slug == "kulturen")  ][0]{ _type }
+// Query: *[    (_type == "landscape" && slug.current == $slug) ||    (_type == "page" && slug.current == $slug) ||    (_type == "kulturenPage" && $slug == "kulturen") ||    (_type == "historienPage" && $slug == "historien") ||    (_type == "foredragPage" && $slug == "foredrag") ||    (_type == "bogerPage" && $slug == "boeger-spil-film")  ][0]{ _type }
 export type SLUG_TYPE_QUERY_RESULT =
+  | {
+      _type: "bogerPage";
+    }
+  | {
+      _type: "foredragPage";
+    }
+  | {
+      _type: "historienPage";
+    }
   | {
       _type: "kulturenPage";
     }
@@ -2823,12 +4418,15 @@ export type SLUG_TYPE_QUERY_RESULT =
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    '\n  *[_type == "bogerPage"][0]{\n    hero{\n      eyebrow, titleLead, titleTrail, deck,\n      litmap{\n        image{ asset->{ _id, metadata{ dimensions, lqip } }, alt },\n        capTag, caption\n      }\n    },\n    filters{ lhs, alleCount, bogerCount, spilCount, filmCount, rhs },\n    booksTitle,\n    booksCount,\n    books[]{\n      catTag, roman,\n      coverImage{ asset->{ _id, metadata{ dimensions, lqip } }, alt },\n      buyHref, rating, readWhen, pages, language,\n      title, author, year,\n      metaRow[]{ label, value },\n      lead, body, verdictLine, recoLabel, recoText, tags\n    },\n    spil{ title, count, glyph, heading, body, pending, previewLabel, preview[]{ yr, text } },\n    film{ title, count, glyph, heading, body, pending, previewLabel, preview[]{ yr, text } },\n    invite{\n      kicker, heading, body,\n      actions[]{ text, href, style },\n      addCard{ label, heading, body, placeholder, small }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': BOGER_QUERY_RESULT;
+    '\n  *[_type == "foredragPage"][0]{\n    hero{\n      eyebrow, title, titleSmall, deck,\n      metaCells[]{ k, v },\n      ticket{\n        stampTop, stampBig, stampBottom, headLhs, headNum, heading,\n        lines[]{ label, value },\n        priceLabel, price, priceUnit, ctaText, ctaHref\n      }\n    },\n    programsHead{ kicker, heading, deck },\n    programs[]{ side, roman, theme, heading, sub, body, arc, duration, bestFor },\n    practical{ kicker, heading, intro, cells[]{ k, label, heading, body } },\n    venuesHead{ kicker, heading, deck },\n    venues[]{ yr, place, city },\n    testimonial{ quote, attribName, attribPlace, attribWhen, alsoLabel, alsoOrgs },\n    booking{\n      kicker, heading, body, scripture, scriptureRef,\n      formTitle, formStamp, formPostmark, formSuccess\n    },\n    faqHead{ kicker, heading },\n    faq[]{ q, a },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': FOREDRAG_QUERY_RESULT;
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    masthead,\n    nav,\n    cta,\n    footerMark,\n    footerBlurb,\n    footerQuote,\n    footerColumns,\n    footerBottomCopyright,\n    footerBottomTagline,\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "historienPage"][0]{\n    hero{ eyebrow, title, titleSub, deck, sideLabel, sideHeading },\n    eras[]{\n      romanNumeral,\n      period,\n      navName,\n      timelineName,\n      heading,\n      deck,\n      body,\n      image{\n        asset->{ _id, metadata{ dimensions, lqip } },\n        alt,\n        shape\n      },\n      imageCollage{\n        asset->{ _id, metadata{ dimensions, lqip } },\n        alt\n      },\n      creditLeft,\n      creditRight,\n      cashnote{ label, heading, song, body },\n      posts[]{ kind, title, date, href, empty }\n    },\n    outro{\n      kicker,\n      heading,\n      body,\n      actions[]{ text, href, style },\n      cardHeading,\n      cardItems[]{ text, year }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': HISTORIEN_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0]{\n    hero{\n      kicker,\n      title,\n      deck,\n      meta\n    },\n    signatureCard{\n      stamp,\n      foreLabel,\n      quote,\n      body,\n      scripture{ text, reference }\n    },\n    ticker{\n      items[]{ year, milestone }\n    },\n    vinyls{\n      kicker,\n      heading,\n      deck,\n      items[]{\n        cornerNumber,\n        cornerTag,\n        vinylAccent,\n        sleeveText,\n        vinylTopLabel,\n        vinylTitle,\n        vinylBottomLabel,\n        heading,\n        subhead,\n        body,\n        tracklist[]{ track, title, duration },\n        linkText,\n        linkHref\n      }\n    },\n    historicalThread{\n      kicker,\n      heading,\n      intro,\n      timeline[]{ year, place, heading, description }\n    },\n    hymn{\n      kicker,\n      quote,\n      attribution\n    },\n    contact{\n      kicker,\n      heading,\n      deck,\n      bookingLabel,\n      bookingHeading,\n      bookingBody,\n      bookingLinkText,\n      bookingLinkHref\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
     '\n  *[_type == "kulturenPage"][0]{\n    hero{ eyebrow, title, subhead, deck },\n    chips{ label, count },\n    intro{ kicker, heading, signature, body },\n    outro{\n      kicker,\n      heading,\n      body,\n      actions[]{ text, href, style },\n      cardLead,\n      cardHeading\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    },\n    "landscapes": *[_type == "landscape"] | order(order asc){\n      "slug": slug.current,\n      romanNumeral,\n      toponym,\n      period,\n      name,\n      motto,\n      shortName,\n      kulturenBgVariant,\n      kulturenArchiveCta,\n      kulturenCardTag,\n      kulturenEssay,\n      kulturenSidebar[]{\n        _type,\n        _key,\n        label,\n        emphasis,\n        value,\n        entries[]{ _key, year, text }\n      }\n    }\n  }\n': KULTUREN_QUERY_RESULT;
     '\n  *[_type == "landscape" && slug.current == $slug][0]{\n    name,\n    "slug": slug.current,\n    order,\n    romanNumeral,\n    toponym,\n    period,\n    accentColor,\n    eyebrow,\n    motto,\n    deck,\n    topicsLabel,\n    topics,\n    crumbBackText,\n    crumbBackHref,\n    emptyMeta,\n    emptyLabel,\n    emptyHeading,\n    emptyBody,\n    emptyActions[]{ text, href, style },\n    "entries": *[_type == "archiveEntry" && landscape._ref == ^._id] | order(publishedAt desc){\n      title,\n      "slug": slug.current,\n      publishedAt,\n      kind,\n      summary\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': LANDSCAPE_QUERY_RESULT;
     '\n  *[_type == "landscape"] | order(order asc){\n    "slug": slug.current,\n    romanNumeral,\n    shortName,\n    order\n  }\n': LANDSCAPE_SIBLINGS_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0]{\n    title,\n    accentColor,\n    blocks[]{\n      _type,\n      _key,\n      _type == "vinylHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        vinylTop,\n        vinylTitle,\n        vinylBottom,\n        tickerItems\n      },\n      _type == "steppedList" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          years,\n          label,\n          tag[]{ label, value },\n          body,\n          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }\n        }\n      },\n      _type == "cardGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ roman, tag, cardHeading, cardBody }\n      },\n      _type == "pullQuote" => {\n        kicker,\n        quote,\n        attribution,\n        background,\n        borderTone\n      },\n      _type == "nextEssay" => {\n        kicker,\n        heading,\n        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }\n      },\n      _type == "hymnHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        glassCaptionTop,\n        glassQuote\n      },\n      _type == "scriptureStrip" => {\n        quote,\n        reference\n      },\n      _type == "stations" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          roman,\n          years,\n          location,\n          heading,\n          where,\n          body,\n          quote{ text, attribution }\n        }\n      },\n      _type == "hymnal" => {\n        kicker,\n        heading,\n        deck,\n        columns[]{\n          header,\n          subhead,\n          rows[]{ number, title, sub, duration, href }\n        }\n      },\n      _type == "flagHero" => {\n        eyebrow,\n        romanNumeral,\n        headingLead,\n        headingAmp,\n        headingGold,\n        lede,\n        metaItems[]{ label, value },\n        backgroundImage{\n          asset->{ _id, metadata{ dimensions, lqip } },\n          alt\n        },\n        telegram{\n          headLeft,\n          headTitle,\n          headYear,\n          lines,\n          sig,\n          postmarkTop,\n          postmarkMid,\n          postmarkBottom\n        }\n      },\n      _type == "statsBar" => {\n        cells[]{ top, big }\n      },\n      _type == "themes" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          num,\n          when,\n          title,\n          keys,\n          body,\n          song{ label, title, href }\n        }\n      },\n      _type == "locationGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ placeTag, name, coords, body }\n      }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': PAGE_QUERY_RESULT;
-    '\n  *[\n    (_type == "landscape" && slug.current == $slug) ||\n    (_type == "page" && slug.current == $slug) ||\n    (_type == "kulturenPage" && $slug == "kulturen")\n  ][0]{ _type }\n': SLUG_TYPE_QUERY_RESULT;
+    '\n  *[\n    (_type == "landscape" && slug.current == $slug) ||\n    (_type == "page" && slug.current == $slug) ||\n    (_type == "kulturenPage" && $slug == "kulturen") ||\n    (_type == "historienPage" && $slug == "historien") ||\n    (_type == "foredragPage" && $slug == "foredrag") ||\n    (_type == "bogerPage" && $slug == "boeger-spil-film")\n  ][0]{ _type }\n': SLUG_TYPE_QUERY_RESULT;
   }
 }

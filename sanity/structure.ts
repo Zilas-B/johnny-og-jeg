@@ -1,7 +1,14 @@
-import { CogIcon, EarthAmericasIcon, HomeIcon } from '@sanity/icons'
+import { BookIcon, CogIcon, EarthAmericasIcon, HomeIcon, PresentationIcon } from '@sanity/icons'
 import type { StructureResolver } from 'sanity/structure'
 
-const PINNED_SINGLETONS = ['siteSettings', 'homePage', 'kulturenPage'] as const
+const PINNED_SINGLETONS = [
+  'siteSettings',
+  'homePage',
+  'kulturenPage',
+  'historienPage',
+  'foredragPage',
+  'bogerPage',
+] as const
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -22,6 +29,30 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .schemaType('kulturenPage')
             .documentId('kulturenPage'),
+        ),
+      S.listItem()
+        .title('Historien')
+        .icon(BookIcon)
+        .child(
+          S.document()
+            .schemaType('historienPage')
+            .documentId('historienPage'),
+        ),
+      S.listItem()
+        .title('Foredrag')
+        .icon(PresentationIcon)
+        .child(
+          S.document()
+            .schemaType('foredragPage')
+            .documentId('foredragPage'),
+        ),
+      S.listItem()
+        .title('Bøger, spil, film')
+        .icon(BookIcon)
+        .child(
+          S.document()
+            .schemaType('bogerPage')
+            .documentId('bogerPage'),
         ),
       S.listItem()
         .title('Indstillinger for sitet')
