@@ -48,6 +48,7 @@ export const nextEssay = defineType({
               type: 'string',
               options: {
                 list: [
+                  { title: 'Barn (rød)', value: 'barn' },
                   { title: 'Denim (blå)', value: 'denim' },
                   { title: 'Brass (gul)', value: 'brass' },
                 ],

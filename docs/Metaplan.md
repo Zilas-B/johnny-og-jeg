@@ -39,7 +39,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 4 — Music player (Cash Radio) visual shell — `<MusicPlayer>` Server Component mounted in `app/(site)/layout.tsx`; markup, vinyl spin, tracks, transport buttons, and listen-on chips ported as visual-only chrome. Inert; no Sanity model; `prefers-reduced-motion` halts the disc and live-dot.
 - [x] Step 5 — Landscape page template (Naturen archive-stub, Sanity-first) — `landscape` + `archiveEntry` schemas, `[landscape]` dynamic route, three components (`LandscapeHero/Posts/Siblings`), all 8 landscape docs seeded (Naturen fully authored, other 7 identity-only). See Decision log 2026-06-01 for the archive-stub reframe.
 - [x] Step 6 — Remaining 7 landscape pages — all eight `landscape` docs fully authored (hero + empty-state + seo) via the extended `scripts/seed-landscapes.mjs`; the seven non-Naturen pages now render instead of `notFound()`. Top-nav criterion dropped (template fidelity). See Decision log 2026-06-01.
-- [~] Step 7 — Supporting pages. **Split into 7a–7d** (too large for one session). **7a done:** routing reconciled to a single `[slug]` dispatcher branching by `_type`; **Kulturen** (`/kulturen`) built as the rich `.land` template — `kulturenPage` singleton + `landscape` extended with `.land` essay/sidebar/timeline fields, all 8 sections authored. **7b Plan 1 done:** block infrastructure (slugged `page` doc + reorderable `blocks[]`, shared block menu `vinylHero · steppedList · cardGrid · pullQuote · nextEssay`, `BlockRenderer`, `[slug]` `page` branch) + **Musikeren** (`/musikeren`) authored & seeded. Remaining: 7b Plan 2 (Cash og Jesus / Cash og Amerika), 7c Historien, 7d utility pages (Foredrag, Bøger/spil/film). See Decision log 2026-06-03 and 2026-06-04.
+- [~] Step 7 — Supporting pages. **Split into 7a–7d** (too large for one session). **7a done:** routing reconciled to a single `[slug]` dispatcher branching by `_type`; **Kulturen** (`/kulturen`) built as the rich `.land` template — `kulturenPage` singleton + `landscape` extended with `.land` essay/sidebar/timeline fields, all 8 sections authored. **7b Plan 1 done:** block infrastructure (slugged `page` doc + reorderable `blocks[]`, shared block menu `vinylHero · steppedList · cardGrid · pullQuote · nextEssay`, `BlockRenderer`, `[slug]` `page` branch) + **Musikeren** (`/musikeren`) authored & seeded. **7b Plan 2 split per essay (user decision):** **2a done** — **Cash og Jesus** (`/cash-og-jesus`, denim) on four new blocks (`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote`/`nextEssay` (extended). Remaining: 7b Plan 2b (Cash og Amerika), 7c Historien, 7d utility pages (Foredrag, Bøger/spil/film). See Decision log 2026-06-03 and 2026-06-04.
 - [ ] Step 7e — Home page → block model (Plan 3; gated on 7b). See Decision log 2026-06-04.
 - [ ] Step 8 — Accessibility & performance pass
 - [ ] Step 9 — SEO & metadata
@@ -185,12 +185,21 @@ decided (a block-builder proposal was pressure-tested and deliberately narrowed)
 - **Acceptance:** `/musikeren` renders from Sanity, visually matches `Musikeren.html` at 1280px;
   blocks reorderable/toggleable in Studio; home, landscapes, and Kulturen unchanged; `pnpm build` clean.
 
-**Plan 2 — Cash og Jesus + Cash og Amerika (one session).**
-- Add the block types unique to these two (`hymn-hero` / `flag-hero`, `stations` / `themes`,
-  `hymnal` / `ameri-map`, `gospel-pull` / `ragged`), reusing Plan 1's menu types where structure
-  matches. Accents denim / brass (confirm against templates).
-- Author + seed both `page` docs; reuse the `BlockRenderer` + dispatcher from Plan 1.
-- **Acceptance:** `/cash-og-jesus` and `/cash-og-amerika` render faithfully at 1280px; 7b complete.
+**Plan 2 — Cash og Jesus + Cash og Amerika. Split per essay (2026-06-04, user decision):**
+each needs ~4 bespoke bands (~8 new block types total), larger than Plan 1 — so one session per
+essay, each independently deployable.
+
+**Plan 2a — Cash og Jesus (done).** `/cash-og-jesus` (denim) on four new blocks
+(`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote` (extended with
+`background`/`borderTone` tone enums for the accent-deep/brass `gospel-pull`) and `nextEssay`
+(extended with a `barn` colorScheme). Seeded via `scripts/seed-cash-og-jesus.mjs`. See Decision
+log 2026-06-04.
+
+**Plan 2b — Cash og Amerika (remaining).** `/cash-og-amerika` (brass): new blocks `flagHero`
+(telegram card + `cash-stars-and-stripes.jpeg` background — engages §7, upload via seed), `statsBar`
+(republic-bar), `themes`, `locationGrid` (ameri-map); reuses `pullQuote` (ink/brass, no extension)
+and `nextEssay`.
+- **Acceptance:** `/cash-og-amerika` renders faithfully at 1280px; 7b complete.
 
 **Reference files:** `Musikeren.html`, `Cash og Jesus.html`, `Cash og Amerika.html`, `assets/cash-shared.css`.
 
@@ -396,4 +405,26 @@ Track major decisions here as the project evolves. Date, decision, rationale.
     rel="noreferrer"`). Additive and §6-correct (the component map is required to cover external
     links); existing landscape/Kulturen content has no link marks, so no regression. Schema mark +
     serializer shipped in the same commit per §6 rule 3.
+- `2026-06-04` — **Step 7b Plan 2 split per essay (user decision); Plan 2a shipped: Cash og Jesus.**
+  Plan 2 was framed as one session for both remaining essays, but each needs ~4 bespoke bands
+  (~8 new block types) — larger than Plan 1. Per the CLAUDE.md "split if too large, stay deployable"
+  rule, split into **2a (Cash og Jesus, done)** and **2b (Cash og Amerika, next session)**.
+  - **2a built `/cash-og-jesus` (denim) with four new blocks** — `hymnHero` (text + CSS-only
+    stained-glass figure), `scriptureStrip` (accent divider band), `stations` (six numbered narrative
+    stops; `items[].quote` is the one schema-optional field, §5-justified as legitimately absent on
+    stations IV & V), `hymnal` (two-column song list linking out). Ported ~1:1 from
+    `Cash og Jesus.html`. Seeded via `scripts/seed-cash-og-jesus.mjs` (non-draft `_id`,
+    `createOrReplace`).
+  - **Two shared blocks extended (additive, backward-compatible).** `nextEssay.colorScheme` gained a
+    `barn` value (+ a `CARD_COLOR` map in the component) for the barn-red Musikeren "Vend pladen"
+    card. `pullQuote` gained `background` (`ink`/`accentDeep`) + `borderTone` (`accent`/`brass`) closed
+    enums, driven via `--pq-bg`/`--pq-border` CSS vars with a `.glow` modifier swapping the barn-stripe
+    overlay for a brass radial — so the denim `gospel-pull` (accent-deep bg, brass borders, brass glow)
+    is faithful while Musikeren's `.lyric` is unchanged (both fields default to the Musikeren values
+    when unset; Musikeren's seeded doc has them null, no reseed).
+  - **No §6 deviation this time** — the `proseBlock` `link` annotation from Plan 1 already covers the
+    station Wikipedia links; no new serializers. **§7 not engaged** — Cash og Jesus has no raster
+    images (the stained glass is pure CSS). The `/cash-og-amerika` `nextEssay` card is a known forward
+    404 until 2b ships (same pattern as the `boeger-spil-film` forward links). `pnpm types`/`build`/
+    `lint` clean; `/`, landscapes, `/kulturen`, and `/musikeren` verified unchanged.
 - `2026-06-01` — **Step 4 reduced to a visual shell. Music player functionality postponed indefinitely.** Original Step 4 included a `track`/`playlist` Sanity model, server-side fetch, transport state, and external streaming link-outs. All removed — Step 4 now ships the player markup + CSS only, with inert buttons and hardcoded placeholder track names from `cash-radio.js`. Reason: editorial focus is text + design fidelity; even link-out playback adds Sanity model + state + per-track URL maintenance disproportionate to the editorial value. The Phase F "real audio" optional was already dropped on 2026-05-26 — this extends that ethos to the link-out shell too. If the player ever becomes interactive, it lands as a separate scoped step.

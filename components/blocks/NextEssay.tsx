@@ -9,6 +9,14 @@ import styles from './NextEssay.module.css'
 type Block = Extract<NonNullable<NonNullable<PAGE_QUERY_RESULT>['blocks']>[number], { _type: 'nextEssay' }>
 type Card = NonNullable<Block['cards']>[number]
 
+// The card colour is intrinsic to the band (the sibling essay's accent), not the
+// page accent: barn for Musikeren, denim for Cash og Jesus, brass for Cash og Amerika.
+const CARD_COLOR: Record<string, string> = {
+  barn: 'var(--barn)',
+  denim: 'var(--denim)',
+  brass: 'var(--brass)',
+}
+
 // `.next-side` band from Musikeren.html: "Vend pladen" footer with linked cards
 // to sibling essays. Each card carries its own colour via the --c custom prop.
 export function NextEssay({ data }: { data: Block }) {
@@ -22,7 +30,7 @@ export function NextEssay({ data }: { data: Block }) {
         <div className={styles.grid}>
           {(data.cards ?? []).map((card: Card, i: number) => {
             const style = {
-              '--c': card.colorScheme === 'brass' ? 'var(--brass)' : 'var(--denim)',
+              '--c': CARD_COLOR[card.colorScheme ?? 'barn'] ?? 'var(--barn)',
             } as CSSProperties
             return (
               <a className={styles.card} href={card.href ?? undefined} style={style} key={i}>

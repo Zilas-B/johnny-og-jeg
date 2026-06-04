@@ -34,6 +34,34 @@ export const pullQuote = defineType({
       of: [defineArrayMember({ type: 'string' })],
       validation: (Rule) => Rule.required().min(1),
     }),
+    defineField({
+      name: 'background',
+      title: 'Baggrund',
+      description: 'Bandets baggrundsfarve. Standard er mørk (ink).',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Ink (mørk)', value: 'ink' },
+          { title: 'Accent (dyb)', value: 'accentDeep' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'ink',
+    }),
+    defineField({
+      name: 'borderTone',
+      title: 'Kantfarve',
+      description: 'Farven på over- og underkant. Standard følger sidens accent.',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Accent', value: 'accent' },
+          { title: 'Brass (gul)', value: 'brass' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'accent',
+    }),
   ],
   preview: {
     select: { quote: 'quote' },

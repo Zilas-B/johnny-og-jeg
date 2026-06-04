@@ -5,8 +5,12 @@ import { landscape } from './documents/landscape'
 import { page } from './documents/page'
 import { siteSettings } from './documents/siteSettings'
 import { cardGrid } from './objects/blocks/cardGrid'
+import { hymnHero } from './objects/blocks/hymnHero'
+import { hymnal } from './objects/blocks/hymnal'
 import { nextEssay } from './objects/blocks/nextEssay'
 import { pullQuote } from './objects/blocks/pullQuote'
+import { scriptureStrip } from './objects/blocks/scriptureStrip'
+import { stations } from './objects/blocks/stations'
 import { steppedList } from './objects/blocks/steppedList'
 import { vinylHero } from './objects/blocks/vinylHero'
 import { cta } from './objects/cta'
@@ -53,4 +57,8 @@ export const schemaTypes = [
   cardGrid,
   pullQuote,
   nextEssay,
+  hymnHero,
+  scriptureStrip,
+  stations,
+  hymnal,
 ]

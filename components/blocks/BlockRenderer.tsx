@@ -1,8 +1,12 @@
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 
 import { CardGrid } from './CardGrid'
+import { HymnHero } from './HymnHero'
+import { Hymnal } from './Hymnal'
 import { NextEssay } from './NextEssay'
 import { PullQuote } from './PullQuote'
+import { ScriptureStrip } from './ScriptureStrip'
+import { Stations } from './Stations'
 import { SteppedList } from './SteppedList'
 import { VinylHero } from './VinylHero'
 
@@ -27,6 +31,14 @@ export function BlockRenderer({ blocks }: { blocks: Blocks }) {
             return <PullQuote key={block._key} data={block} />
           case 'nextEssay':
             return <NextEssay key={block._key} data={block} />
+          case 'hymnHero':
+            return <HymnHero key={block._key} data={block} />
+          case 'scriptureStrip':
+            return <ScriptureStrip key={block._key} data={block} />
+          case 'stations':
+            return <Stations key={block._key} data={block} />
+          case 'hymnal':
+            return <Hymnal key={block._key} data={block} />
           default:
             return null
         }

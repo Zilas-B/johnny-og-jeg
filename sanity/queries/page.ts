@@ -43,12 +43,51 @@ export const PAGE_QUERY = defineQuery(`
       _type == "pullQuote" => {
         kicker,
         quote,
-        attribution
+        attribution,
+        background,
+        borderTone
       },
       _type == "nextEssay" => {
         kicker,
         heading,
         cards[]{ roman, tag, cardHeading, cta, href, colorScheme }
+      },
+      _type == "hymnHero" => {
+        eyebrow,
+        romanNumeral,
+        heading,
+        lede,
+        metaItems[]{ label, value },
+        glassCaptionTop,
+        glassQuote
+      },
+      _type == "scriptureStrip" => {
+        quote,
+        reference
+      },
+      _type == "stations" => {
+        kicker,
+        heading,
+        deck,
+        items[]{
+          roman,
+          years,
+          location,
+          heading,
+          where,
+          body,
+          quote{ text, attribution }
+        }
+      },
+      _type == "hymnal" => {
+        kicker,
+        heading,
+        deck,
+        columns[]{
+          header,
+          subhead,
+          rows[]{ number, title, sub, duration, href }
+        }
       }
     },
     seo{

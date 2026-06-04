@@ -1,0 +1,22 @@
+/* Ported from claude-design-template/Cash og Jesus.html .scripture-strip. */
+
+.strip {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 18px 0;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 18px;
+  text-align: center;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.ref {
+  font-family: var(--f-mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 14px;
+}

@@ -1,13 +1,16 @@
-/* Ported from claude-design-template/Musikeren.html .lyric. Dark band; the
-   kicker uses brass while the quote-marks/stripes follow the page --accent. */
+/* Ported from claude-design-template/Musikeren.html .lyric and Cash og Jesus.html
+   .gospel-pull. Dark band; the kicker uses brass while the quote-marks/stripes
+   follow the page --accent. Background, border, and overlay are tone-selectable:
+   --pq-bg / --pq-border (set by the component, defaulting to the Musikeren values),
+   and the .glow modifier swaps the barn stripe texture for a brass radial glow. */
 
 .lyric {
   padding: 80px 0;
   text-align: center;
-  background: var(--ink);
+  background: var(--pq-bg, var(--ink));
   color: var(--paper);
-  border-top: 4px solid var(--accent);
-  border-bottom: 4px solid var(--accent);
+  border-top: 4px solid var(--pq-border, var(--accent));
+  border-bottom: 4px solid var(--pq-border, var(--accent));
   position: relative;
   overflow: hidden;
 }
@@ -21,6 +24,13 @@
     rgba(164, 40, 43, 0.1) 12px,
     transparent 12px,
     transparent 24px
+  );
+}
+.glow::before {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(200, 155, 60, 0.18) 0%,
+    rgba(0, 0, 0, 0) 60%
   );
 }
 .wrap {
