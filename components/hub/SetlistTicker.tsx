@@ -2,7 +2,9 @@ import type { HOME_PAGE_QUERY_RESULT } from '@/sanity/types'
 
 import styles from './SetlistTicker.module.css'
 
-type Items = NonNullable<NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['ticker']>['items']>
+type HomeBlock = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['blocks']>[number]
+type TickerBlock = Extract<HomeBlock, { _type: 'setlistTicker' }>
+type Items = NonNullable<TickerBlock['items']>
 
 export function SetlistTicker({ items }: { items: Items }) {
   // Duplicate the list once so the keyframe can translate -50% for a seamless loop.

@@ -15,6 +15,47 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type Hero = {
+  kicker?: string;
+  title?: string;
+  deck?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  meta?: Array<string>;
+};
+
+export type SignatureCard = {
+  stamp?: string;
+  foreLabel?: string;
+  quote?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  scripture?: Scripture;
+};
+
 export type Cashnote = {
   label?: string;
   heading?: string;
@@ -76,6 +117,121 @@ export type Song = {
   label?: string;
   title?: string;
   href?: string;
+};
+
+export type Scripture = {
+  text?: string;
+  reference?: string;
+};
+
+export type Contact = {
+  _type: "contact";
+  kicker?: string;
+  heading?: string;
+  deck?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  bookingLabel?: string;
+  bookingHeading?: string;
+  bookingBody?: string;
+  bookingLinkText?: string;
+  bookingLinkHref?: string;
+};
+
+export type Hymn = {
+  _type: "hymn";
+  kicker?: string;
+  quote?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  attribution?: string;
+};
+
+export type HistoricalThread = {
+  _type: "historicalThread";
+  kicker?: string;
+  heading?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  intro?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  timeline?: Array<
+    {
+      _key: string;
+    } & TimelineEvent
+  >;
+};
+
+export type HubVinyls = {
+  _type: "hubVinyls";
+  kicker?: string;
+  heading?: string;
+  deck?: string;
+  items?: Array<
+    {
+      _key: string;
+    } & VinylTile
+  >;
+};
+
+export type SetlistTicker = {
+  _type: "setlistTicker";
+  items?: Array<
+    {
+      _key: string;
+    } & TickerItem
+  >;
+};
+
+export type HubHero = {
+  _type: "hubHero";
+  hero?: Hero;
+  signatureCard?: SignatureCard;
 };
 
 export type LocationGrid = {
@@ -1996,166 +2152,26 @@ export type HomePage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  hero?: {
-    kicker?: string;
-    title?: string;
-    deck?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  blocks?: Array<
+    | ({
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
+      } & HubHero)
+    | ({
         _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    meta?: Array<string>;
-  };
-  signatureCard?: {
-    stamp?: string;
-    foreLabel?: string;
-    quote?: string;
-    body?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+      } & SetlistTicker)
+    | ({
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
+      } & HubVinyls)
+    | ({
         _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    scripture?: {
-      text?: string;
-      reference?: string;
-    };
-  };
-  ticker?: {
-    items?: Array<
-      {
+      } & HistoricalThread)
+    | ({
         _key: string;
-      } & TickerItem
-    >;
-  };
-  vinyls?: {
-    kicker?: string;
-    heading?: string;
-    deck?: string;
-    items?: Array<
-      {
+      } & Hymn)
+    | ({
         _key: string;
-      } & VinylTile
-    >;
-  };
-  historicalThread?: {
-    kicker?: string;
-    heading?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    intro?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    timeline?: Array<
-      {
-        _key: string;
-      } & TimelineEvent
-    >;
-  };
-  hymn?: {
-    kicker?: string;
-    quote?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    attribution?: string;
-  };
-  contact?: {
-    kicker?: string;
-    heading?: string;
-    deck?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    bookingLabel?: string;
-    bookingHeading?: string;
-    bookingBody?: string;
-    bookingLinkText?: string;
-    bookingLinkHref?: string;
-  };
+      } & Contact)
+  >;
   seo?: Seo;
 };
 
@@ -2283,10 +2299,19 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | Hero
+  | SignatureCard
   | Cashnote
   | Telegram
   | Quote
   | Song
+  | Scripture
+  | Contact
+  | Hymn
+  | HistoricalThread
+  | HubVinyls
+  | SetlistTicker
+  | HubHero
   | LocationGrid
   | Themes
   | StatsBar
@@ -3173,216 +3198,208 @@ export type HISTORIEN_QUERY_RESULT = {
 
 // Source: sanity/queries/home.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_type == "homePage" && _id == "homePage"][0]{    hero{      kicker,      title,      deck,      meta    },    signatureCard{      stamp,      foreLabel,      quote,      body,      scripture{ text, reference }    },    ticker{      items[]{ year, milestone }    },    vinyls{      kicker,      heading,      deck,      items[]{        cornerNumber,        cornerTag,        vinylAccent,        sleeveText,        vinylTopLabel,        vinylTitle,        vinylBottomLabel,        heading,        subhead,        body,        tracklist[]{ track, title, duration },        linkText,        linkHref      }    },    historicalThread{      kicker,      heading,      intro,      timeline[]{ year, place, heading, description }    },    hymn{      kicker,      quote,      attribution    },    contact{      kicker,      heading,      deck,      bookingLabel,      bookingHeading,      bookingBody,      bookingLinkText,      bookingLinkHref    },    seo{      title,      description,      ogImage{ asset->{url, metadata{dimensions}}, alt }    }  }
+// Query: *[_type == "homePage" && _id == "homePage"][0]{    blocks[]{      _type,      _key,      _type == "hubHero" => {        hero{          kicker,          title,          deck,          meta        },        signatureCard{          stamp,          foreLabel,          quote,          body,          scripture{ text, reference }        }      },      _type == "setlistTicker" => {        items[]{ year, milestone }      },      _type == "hubVinyls" => {        kicker,        heading,        deck,        items[]{          cornerNumber,          cornerTag,          vinylAccent,          sleeveText,          vinylTopLabel,          vinylTitle,          vinylBottomLabel,          heading,          subhead,          body,          tracklist[]{ track, title, duration },          linkText,          linkHref        }      },      _type == "historicalThread" => {        kicker,        heading,        intro,        timeline[]{ year, place, heading, description }      },      _type == "hymn" => {        kicker,        quote,        attribution      },      _type == "contact" => {        kicker,        heading,        deck,        bookingLabel,        bookingHeading,        bookingBody,        bookingLinkText,        bookingLinkHref      }    },    seo{      title,      description,      ogImage{ asset->{url, metadata{dimensions}}, alt }    }  }
 export type HOME_PAGE_QUERY_RESULT = {
-  hero: {
-    kicker: string | null;
-    title: string | null;
-    deck: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  blocks: Array<
+    | {
+        _type: "contact";
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    meta: Array<string> | null;
-  } | null;
-  signatureCard: {
-    stamp: string | null;
-    foreLabel: string | null;
-    quote: string | null;
-    body: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    scripture: {
-      text: string | null;
-      reference: string | null;
-    } | null;
-  } | null;
-  ticker: {
-    items: Array<{
-      year: string | null;
-      milestone: string | null;
-    }> | null;
-  } | null;
-  vinyls: {
-    kicker: string | null;
-    heading: string | null;
-    deck: string | null;
-    items: Array<{
-      cornerNumber: string | null;
-      cornerTag: string | null;
-      vinylAccent: "barn" | "brass" | "denim" | null;
-      sleeveText: string | null;
-      vinylTopLabel: string | null;
-      vinylTitle: string | null;
-      vinylBottomLabel: string | null;
-      heading: string | null;
-      subhead: string | null;
-      body: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
+        kicker: string | null;
+        heading: string | null;
+        deck: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
           _key: string;
-        }>;
-        style?: "normal";
-        listItem?: never;
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
+        }> | null;
+        bookingLabel: string | null;
+        bookingHeading: string | null;
+        bookingBody: string | null;
+        bookingLinkText: string | null;
+        bookingLinkHref: string | null;
+      }
+    | {
+        _type: "historicalThread";
+        _key: string;
+        kicker: string | null;
+        heading: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
           _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }> | null;
-      tracklist: Array<{
-        track: string | null;
-        title: string | null;
-        duration: string | null;
-      }> | null;
-      linkText: string | null;
-      linkHref: string | null;
-    }> | null;
-  } | null;
-  historicalThread: {
-    kicker: string | null;
-    heading: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    intro: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    timeline: Array<{
-      year: string | null;
-      place: string | null;
-      heading: string | null;
-      description: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
+        }> | null;
+        intro: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
           _key: string;
-        }>;
-        style?: "normal";
-        listItem?: never;
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
+        }> | null;
+        timeline: Array<{
+          year: string | null;
+          place: string | null;
+          heading: string | null;
+          description: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+        }> | null;
+      }
+    | {
+        _type: "hubHero";
+        _key: string;
+        hero: {
+          kicker: string | null;
+          title: string | null;
+          deck: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+          meta: Array<string> | null;
+        } | null;
+        signatureCard: {
+          stamp: string | null;
+          foreLabel: string | null;
+          quote: string | null;
+          body: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+          scripture: {
+            text: string | null;
+            reference: string | null;
+          } | null;
+        } | null;
+      }
+    | {
+        _type: "hubVinyls";
+        _key: string;
+        kicker: string | null;
+        heading: string | null;
+        deck: string | null;
+        items: Array<{
+          cornerNumber: string | null;
+          cornerTag: string | null;
+          vinylAccent: "barn" | "brass" | "denim" | null;
+          sleeveText: string | null;
+          vinylTopLabel: string | null;
+          vinylTitle: string | null;
+          vinylBottomLabel: string | null;
+          heading: string | null;
+          subhead: string | null;
+          body: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+          tracklist: Array<{
+            track: string | null;
+            title: string | null;
+            duration: string | null;
+          }> | null;
+          linkText: string | null;
+          linkHref: string | null;
+        }> | null;
+      }
+    | {
+        _type: "hymn";
+        _key: string;
+        kicker: string | null;
+        quote: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: never;
+          markDefs?: null;
+          level?: number;
+          _type: "block";
           _key: string;
-        }>;
-        level?: number;
-        _type: "block";
+        }> | null;
+        attribution: string | null;
+      }
+    | {
+        _type: "setlistTicker";
         _key: string;
-      }> | null;
-    }> | null;
-  } | null;
-  hymn: {
-    kicker: string | null;
-    quote: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    attribution: string | null;
-  } | null;
-  contact: {
-    kicker: string | null;
-    heading: string | null;
-    deck: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    bookingLabel: string | null;
-    bookingHeading: string | null;
-    bookingBody: string | null;
-    bookingLinkText: string | null;
-    bookingLinkHref: string | null;
-  } | null;
+        items: Array<{
+          year: string | null;
+          milestone: string | null;
+        }> | null;
+      }
+  > | null;
   seo: {
     title: string | null;
     description: string | null;
@@ -4422,7 +4439,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "foredragPage"][0]{\n    hero{\n      eyebrow, title, titleSmall, deck,\n      metaCells[]{ k, v },\n      ticket{\n        stampTop, stampBig, stampBottom, headLhs, headNum, heading,\n        lines[]{ label, value },\n        priceLabel, price, priceUnit, ctaText, ctaHref\n      }\n    },\n    programsHead{ kicker, heading, deck },\n    programs[]{ side, roman, theme, heading, sub, body, arc, duration, bestFor },\n    practical{ kicker, heading, intro, cells[]{ k, label, heading, body } },\n    venuesHead{ kicker, heading, deck },\n    venues[]{ yr, place, city },\n    testimonial{ quote, attribName, attribPlace, attribWhen, alsoLabel, alsoOrgs },\n    booking{\n      kicker, heading, body, scripture, scriptureRef,\n      formTitle, formStamp, formPostmark, formSuccess\n    },\n    faqHead{ kicker, heading },\n    faq[]{ q, a },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': FOREDRAG_QUERY_RESULT;
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    masthead,\n    nav,\n    cta,\n    footerMark,\n    footerBlurb,\n    footerQuote,\n    footerColumns,\n    footerBottomCopyright,\n    footerBottomTagline,\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "historienPage"][0]{\n    hero{ eyebrow, title, titleSub, deck, sideLabel, sideHeading },\n    eras[]{\n      romanNumeral,\n      period,\n      navName,\n      timelineName,\n      heading,\n      deck,\n      body,\n      image{\n        asset->{ _id, metadata{ dimensions, lqip } },\n        alt,\n        shape\n      },\n      imageCollage{\n        asset->{ _id, metadata{ dimensions, lqip } },\n        alt\n      },\n      creditLeft,\n      creditRight,\n      cashnote{ label, heading, song, body },\n      posts[]{ kind, title, date, href, empty }\n    },\n    outro{\n      kicker,\n      heading,\n      body,\n      actions[]{ text, href, style },\n      cardHeading,\n      cardItems[]{ text, year }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': HISTORIEN_QUERY_RESULT;
-    '\n  *[_type == "homePage" && _id == "homePage"][0]{\n    hero{\n      kicker,\n      title,\n      deck,\n      meta\n    },\n    signatureCard{\n      stamp,\n      foreLabel,\n      quote,\n      body,\n      scripture{ text, reference }\n    },\n    ticker{\n      items[]{ year, milestone }\n    },\n    vinyls{\n      kicker,\n      heading,\n      deck,\n      items[]{\n        cornerNumber,\n        cornerTag,\n        vinylAccent,\n        sleeveText,\n        vinylTopLabel,\n        vinylTitle,\n        vinylBottomLabel,\n        heading,\n        subhead,\n        body,\n        tracklist[]{ track, title, duration },\n        linkText,\n        linkHref\n      }\n    },\n    historicalThread{\n      kicker,\n      heading,\n      intro,\n      timeline[]{ year, place, heading, description }\n    },\n    hymn{\n      kicker,\n      quote,\n      attribution\n    },\n    contact{\n      kicker,\n      heading,\n      deck,\n      bookingLabel,\n      bookingHeading,\n      bookingBody,\n      bookingLinkText,\n      bookingLinkHref\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "homePage" && _id == "homePage"][0]{\n    blocks[]{\n      _type,\n      _key,\n      _type == "hubHero" => {\n        hero{\n          kicker,\n          title,\n          deck,\n          meta\n        },\n        signatureCard{\n          stamp,\n          foreLabel,\n          quote,\n          body,\n          scripture{ text, reference }\n        }\n      },\n      _type == "setlistTicker" => {\n        items[]{ year, milestone }\n      },\n      _type == "hubVinyls" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          cornerNumber,\n          cornerTag,\n          vinylAccent,\n          sleeveText,\n          vinylTopLabel,\n          vinylTitle,\n          vinylBottomLabel,\n          heading,\n          subhead,\n          body,\n          tracklist[]{ track, title, duration },\n          linkText,\n          linkHref\n        }\n      },\n      _type == "historicalThread" => {\n        kicker,\n        heading,\n        intro,\n        timeline[]{ year, place, heading, description }\n      },\n      _type == "hymn" => {\n        kicker,\n        quote,\n        attribution\n      },\n      _type == "contact" => {\n        kicker,\n        heading,\n        deck,\n        bookingLabel,\n        bookingHeading,\n        bookingBody,\n        bookingLinkText,\n        bookingLinkHref\n      }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
     '\n  *[_type == "kulturenPage"][0]{\n    hero{ eyebrow, title, subhead, deck },\n    chips{ label, count },\n    intro{ kicker, heading, signature, body },\n    outro{\n      kicker,\n      heading,\n      body,\n      actions[]{ text, href, style },\n      cardLead,\n      cardHeading\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    },\n    "landscapes": *[_type == "landscape"] | order(order asc){\n      "slug": slug.current,\n      romanNumeral,\n      toponym,\n      period,\n      name,\n      motto,\n      shortName,\n      kulturenBgVariant,\n      kulturenArchiveCta,\n      kulturenCardTag,\n      kulturenEssay,\n      kulturenSidebar[]{\n        _type,\n        _key,\n        label,\n        emphasis,\n        value,\n        entries[]{ _key, year, text }\n      }\n    }\n  }\n': KULTUREN_QUERY_RESULT;
     '\n  *[_type == "landscape" && slug.current == $slug][0]{\n    name,\n    "slug": slug.current,\n    order,\n    romanNumeral,\n    toponym,\n    period,\n    accentColor,\n    eyebrow,\n    motto,\n    deck,\n    topicsLabel,\n    topics,\n    crumbBackText,\n    crumbBackHref,\n    emptyMeta,\n    emptyLabel,\n    emptyHeading,\n    emptyBody,\n    emptyActions[]{ text, href, style },\n    "entries": *[_type == "archiveEntry" && landscape._ref == ^._id] | order(publishedAt desc){\n      title,\n      "slug": slug.current,\n      publishedAt,\n      kind,\n      summary\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': LANDSCAPE_QUERY_RESULT;
     '\n  *[_type == "landscape"] | order(order asc){\n    "slug": slug.current,\n    romanNumeral,\n    shortName,\n    order\n  }\n': LANDSCAPE_SIBLINGS_QUERY_RESULT;

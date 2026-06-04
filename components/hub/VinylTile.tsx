@@ -6,7 +6,8 @@ import { PortableText } from '@/components/editorial/PortableText'
 
 import styles from './VinylTile.module.css'
 
-type VinylsSection = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['vinyls']>
+type HomeBlock = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['blocks']>[number]
+type VinylsSection = Extract<HomeBlock, { _type: 'hubVinyls' }>
 type Vinyl = NonNullable<VinylsSection['items']>[number]
 
 export function VinylTile({ vinyl }: { vinyl: Vinyl }) {

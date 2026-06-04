@@ -4,7 +4,8 @@ import { PortableText } from '@/components/editorial/PortableText'
 
 import styles from './ContactSection.module.css'
 
-type Data = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['contact']>
+type HomeBlock = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['blocks']>[number]
+type Data = Extract<HomeBlock, { _type: 'contact' }>
 
 export function ContactSection({ data }: { data: Data }) {
   return (

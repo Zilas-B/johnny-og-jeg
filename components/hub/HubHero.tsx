@@ -4,9 +4,10 @@ import { PortableText } from '@/components/editorial/PortableText'
 
 import styles from './HubHero.module.css'
 
-type Data = NonNullable<HOME_PAGE_QUERY_RESULT>
-type Hero = NonNullable<Data['hero']>
-type Signature = NonNullable<Data['signatureCard']>
+type HomeBlock = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['blocks']>[number]
+type HeroBlock = Extract<HomeBlock, { _type: 'hubHero' }>
+type Hero = NonNullable<HeroBlock['hero']>
+type Signature = NonNullable<HeroBlock['signatureCard']>
 
 function renderTitleWithAmp(title: string) {
   // Hub title is "Johnny og jeg" — render " og " in barn-red with .amp styling.

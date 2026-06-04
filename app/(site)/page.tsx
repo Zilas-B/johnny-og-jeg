@@ -1,11 +1,6 @@
 import type { Metadata } from 'next'
 
-import { ContactSection } from '@/components/hub/ContactSection'
-import { HistoricalThread } from '@/components/hub/HistoricalThread'
-import { HubHero } from '@/components/hub/HubHero'
-import { HubVinyls } from '@/components/hub/HubVinyls'
-import { Hymn } from '@/components/hub/Hymn'
-import { SetlistTicker } from '@/components/hub/SetlistTicker'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { client } from '@/sanity/client'
 import { HOME_PAGE_QUERY } from '@/sanity/queries/home'
 
@@ -15,7 +10,8 @@ async function fetchHomePage() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await fetchHomePage()
-  const title = data?.seo?.title ?? data?.hero?.title ?? 'Johnny og jeg'
+  const heroBlock = data?.blocks?.find((b) => b._type === 'hubHero')
+  const title = data?.seo?.title ?? heroBlock?.hero?.title ?? 'Johnny og jeg'
   const description = data?.seo?.description ?? undefined
   const ogImageUrl = data?.seo?.ogImage?.asset?.url
   return {
@@ -32,29 +28,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const data = await fetchHomePage()
 
-  if (
-    !data ||
-    !data.hero ||
-    !data.signatureCard ||
-    !data.ticker?.items?.length ||
-    !data.vinyls?.items?.length ||
-    !data.historicalThread ||
-    !data.hymn ||
-    !data.contact
-  ) {
+  if (!data?.blocks?.length) {
     throw new Error(
-      'homePage er ikke udfyldt eller udgivet. Åbn /studio → "Forside — Johnny og jeg" og udfyld alle påkrævede felter.',
+      'homePage er ikke udfyldt eller udgivet. Åbn /studio → "Forside — Johnny og jeg" og tilføj mindst én blok.',
     )
   }
 
-  return (
-    <>
-      <HubHero hero={data.hero} sig={data.signatureCard} />
-      <SetlistTicker items={data.ticker.items} />
-      <HubVinyls data={data.vinyls} />
-      <HistoricalThread data={data.historicalThread} />
-      <Hymn data={data.hymn} />
-      <ContactSection data={data.contact} />
-    </>
-  )
+  return <BlockRenderer blocks={data.blocks} />
 }

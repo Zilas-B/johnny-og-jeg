@@ -4,7 +4,8 @@ import { PortableText } from '@/components/editorial/PortableText'
 
 import styles from './Hymn.module.css'
 
-type Data = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['hymn']>
+type HomeBlock = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['blocks']>[number]
+type Data = Extract<HomeBlock, { _type: 'hymn' }>
 
 export function Hymn({ data }: { data: Data }) {
   return (

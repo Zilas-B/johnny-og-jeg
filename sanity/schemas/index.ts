@@ -8,13 +8,19 @@ import { landscape } from './documents/landscape'
 import { page } from './documents/page'
 import { siteSettings } from './documents/siteSettings'
 import { cardGrid } from './objects/blocks/cardGrid'
+import { contact } from './objects/blocks/contact'
 import { flagHero } from './objects/blocks/flagHero'
+import { historicalThread } from './objects/blocks/historicalThread'
+import { hubHero } from './objects/blocks/hubHero'
+import { hubVinyls } from './objects/blocks/hubVinyls'
+import { hymn } from './objects/blocks/hymn'
 import { hymnHero } from './objects/blocks/hymnHero'
 import { hymnal } from './objects/blocks/hymnal'
 import { locationGrid } from './objects/blocks/locationGrid'
 import { nextEssay } from './objects/blocks/nextEssay'
 import { pullQuote } from './objects/blocks/pullQuote'
 import { scriptureStrip } from './objects/blocks/scriptureStrip'
+import { setlistTicker } from './objects/blocks/setlistTicker'
 import { stations } from './objects/blocks/stations'
 import { statsBar } from './objects/blocks/statsBar'
 import { steppedList } from './objects/blocks/steppedList'
@@ -77,4 +83,11 @@ export const schemaTypes = [
   statsBar,
   themes,
   locationGrid,
+  // Block menu — home (Step 7e)
+  hubHero,
+  setlistTicker,
+  hubVinyls,
+  historicalThread,
+  hymn,
+  contact,
 ]

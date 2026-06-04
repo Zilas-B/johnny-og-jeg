@@ -3,7 +3,8 @@ import type { HOME_PAGE_QUERY_RESULT } from '@/sanity/types'
 import { VinylTile } from './VinylTile'
 import styles from './HubVinyls.module.css'
 
-type Section = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['vinyls']>
+type HomeBlock = NonNullable<NonNullable<HOME_PAGE_QUERY_RESULT>['blocks']>[number]
+type Section = Extract<HomeBlock, { _type: 'hubVinyls' }>
 
 export function HubVinyls({ data }: { data: Section }) {
   return (
