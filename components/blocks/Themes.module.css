@@ -1,0 +1,142 @@
+/* Ported from claude-design-template/Cash og Amerika.html .themes. */
+
+.themes {
+  padding: 80px 0 40px;
+}
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.heading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 1;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.deck :global(p) {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin: 0 0 56px;
+  text-wrap: pretty;
+}
+
+.theme {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.theme:last-of-type {
+  border-bottom: 1px solid var(--rule);
+}
+.num {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 86px;
+  line-height: 0.85;
+  color: var(--accent-deep);
+  margin-bottom: 6px;
+}
+.when {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.h3 {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.05;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+.key {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  line-height: 1.7;
+}
+.key span {
+  display: inline-block;
+  padding: 3px 9px;
+  margin: 0 4px 4px 0;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-2);
+}
+
+.body :global(p) {
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0 0 14px;
+  max-width: 740px;
+  text-wrap: pretty;
+}
+.body :global(a) {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.songPin {
+  margin-top: 18px;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  gap: 14px;
+  align-items: center;
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  padding: 14px 18px;
+  box-shadow: 4px 5px 0 rgba(14, 13, 12, 0.15);
+  text-decoration: none;
+  color: inherit;
+}
+.pip {
+  width: 26px;
+  height: 26px;
+  background: var(--accent-deep);
+  color: var(--paper);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--f-mono);
+  font-size: 11px;
+}
+.t {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+}
+.sm {
+  font-family: var(--f-mono);
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 400;
+}

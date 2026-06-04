@@ -88,6 +88,51 @@ export const PAGE_QUERY = defineQuery(`
           subhead,
           rows[]{ number, title, sub, duration, href }
         }
+      },
+      _type == "flagHero" => {
+        eyebrow,
+        romanNumeral,
+        headingLead,
+        headingAmp,
+        headingGold,
+        lede,
+        metaItems[]{ label, value },
+        backgroundImage{
+          asset->{ _id, metadata{ dimensions, lqip } },
+          alt
+        },
+        telegram{
+          headLeft,
+          headTitle,
+          headYear,
+          lines,
+          sig,
+          postmarkTop,
+          postmarkMid,
+          postmarkBottom
+        }
+      },
+      _type == "statsBar" => {
+        cells[]{ top, big }
+      },
+      _type == "themes" => {
+        kicker,
+        heading,
+        deck,
+        items[]{
+          num,
+          when,
+          title,
+          keys,
+          body,
+          song{ label, title, href }
+        }
+      },
+      _type == "locationGrid" => {
+        kicker,
+        heading,
+        deck,
+        cards[]{ placeTag, name, coords, body }
       }
     },
     seo{

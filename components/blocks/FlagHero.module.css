@@ -1,0 +1,234 @@
+/* Ported from claude-design-template/Cash og Amerika.html .flag-hero. The
+   template's CSS `background-image` becomes a <SanityImage fill> (§7); the sepia
+   filter moves onto the image, and the gradient + grain overlays become a sibling
+   tint layer. The page wrapper sets --accent / --accent-deep (brass). */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--accent);
+  background: var(--paper);
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.bgImage {
+  object-fit: cover;
+  object-position: center 35%;
+  filter: sepia(0.32) saturate(0.85) contrast(1.05) brightness(0.92);
+}
+.bgTint {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      var(--paper) 0%,
+      rgba(239, 228, 207, 0.92) 22%,
+      rgba(239, 228, 207, 0.35) 50%,
+      rgba(239, 228, 207, 0.15) 75%,
+      rgba(60, 40, 20, 0.25) 100%
+    ),
+    radial-gradient(ellipse at 70% 0%, rgba(0, 0, 0, 0) 60%, rgba(20, 12, 4, 0.4) 100%);
+}
+.bgTint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1.4px),
+    radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1.2px);
+  background-size: 3px 3px, 7px 7px;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
+  align-items: end;
+  padding: 96px 0 96px;
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.bar {
+  width: 48px;
+  height: 2px;
+  background: var(--accent-deep);
+}
+
+.roman {
+  font-family: var(--f-poster);
+  font-size: 22px;
+  letter-spacing: 0.32em;
+  color: var(--accent-deep);
+  margin-bottom: 8px;
+}
+
+.heading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 138px;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+  color: var(--ink);
+}
+.amp {
+  color: var(--barn);
+  font-style: italic;
+  font-weight: 400;
+  padding: 0 0.1em;
+}
+.gold {
+  color: var(--accent-deep);
+}
+
+.lede :global(p) {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 540px;
+  text-wrap: pretty;
+  margin: 0;
+}
+.lede :global(p:first-of-type)::first-letter {
+  float: left;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 86px;
+  line-height: 0.85;
+  padding: 6px 14px 0 0;
+  color: var(--barn);
+}
+
+.meta {
+  margin-top: 28px;
+  display: flex;
+  gap: 26px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.meta b {
+  color: var(--ink);
+  font-weight: 500;
+}
+.pipe {
+  width: 1px;
+  background: var(--rule-strong);
+}
+
+/* Telegram card */
+.telegram {
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  box-shadow: 12px 14px 0 rgba(14, 13, 12, 0.18);
+  padding: 24px 28px 22px;
+  position: relative;
+  max-width: 380px;
+  margin-left: auto;
+  transform: rotate(-1.4deg);
+}
+.telegram::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed var(--rule-strong);
+  pointer-events: none;
+}
+.head {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.head b {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.line {
+  margin: 0 0 10px;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  line-height: 1.55;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.stop {
+  color: var(--barn);
+  font-weight: 700;
+}
+.sig {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink);
+  text-align: right;
+}
+.postmark {
+  position: absolute;
+  top: -22px;
+  right: -24px;
+  width: 92px;
+  height: 92px;
+  border: 2px solid var(--accent-deep);
+  border-radius: 50%;
+  background: rgba(239, 228, 207, 0.85);
+  color: var(--accent-deep);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  transform: rotate(11deg);
+}
+.postmark b {
+  display: block;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0;
+  margin: 2px 0;
+}

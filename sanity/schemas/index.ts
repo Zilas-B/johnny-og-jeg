@@ -5,13 +5,17 @@ import { landscape } from './documents/landscape'
 import { page } from './documents/page'
 import { siteSettings } from './documents/siteSettings'
 import { cardGrid } from './objects/blocks/cardGrid'
+import { flagHero } from './objects/blocks/flagHero'
 import { hymnHero } from './objects/blocks/hymnHero'
 import { hymnal } from './objects/blocks/hymnal'
+import { locationGrid } from './objects/blocks/locationGrid'
 import { nextEssay } from './objects/blocks/nextEssay'
 import { pullQuote } from './objects/blocks/pullQuote'
 import { scriptureStrip } from './objects/blocks/scriptureStrip'
 import { stations } from './objects/blocks/stations'
+import { statsBar } from './objects/blocks/statsBar'
 import { steppedList } from './objects/blocks/steppedList'
+import { themes } from './objects/blocks/themes'
 import { vinylHero } from './objects/blocks/vinylHero'
 import { cta } from './objects/cta'
 import { footerColumn } from './objects/footerColumn'
@@ -61,4 +65,8 @@ export const schemaTypes = [
   scriptureStrip,
   stations,
   hymnal,
+  flagHero,
+  statsBar,
+  themes,
+  locationGrid,
 ]

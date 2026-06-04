@@ -1,13 +1,17 @@
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 
 import { CardGrid } from './CardGrid'
+import { FlagHero } from './FlagHero'
 import { HymnHero } from './HymnHero'
 import { Hymnal } from './Hymnal'
+import { LocationGrid } from './LocationGrid'
 import { NextEssay } from './NextEssay'
 import { PullQuote } from './PullQuote'
 import { ScriptureStrip } from './ScriptureStrip'
 import { Stations } from './Stations'
+import { StatsBar } from './StatsBar'
 import { SteppedList } from './SteppedList'
+import { Themes } from './Themes'
 import { VinylHero } from './VinylHero'
 
 type Blocks = NonNullable<PAGE_QUERY_RESULT>['blocks']
@@ -39,6 +43,14 @@ export function BlockRenderer({ blocks }: { blocks: Blocks }) {
             return <Stations key={block._key} data={block} />
           case 'hymnal':
             return <Hymnal key={block._key} data={block} />
+          case 'flagHero':
+            return <FlagHero key={block._key} data={block} />
+          case 'statsBar':
+            return <StatsBar key={block._key} data={block} />
+          case 'themes':
+            return <Themes key={block._key} data={block} />
+          case 'locationGrid':
+            return <LocationGrid key={block._key} data={block} />
           default:
             return null
         }
