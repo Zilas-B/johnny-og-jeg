@@ -138,9 +138,11 @@ Three pieces of one visual-identity system.
 ### Rules
 
 1. **Global tokens in `styles/tokens.css`** under Tailwind v4's `@theme` directive (typography scale, neutrals, spacing, motion, paper grain). Tokens generate utilities *and* are exposed as CSS variables CSS Modules can read. Single source.
-2. **Per-page accent color is content, not a token.** Each `landscape` document in Sanity has an `accentColor` field. The route writes it once as `--accent` on the wrapper; `@theme { --color-accent: var(--accent); }` makes `bg-accent`/`text-accent`/`border-accent` work everywhere downstream. No per-page CSS files; editors change accents without code.
+2. **Per-page accent is a preset the editor *selects*, not a free color they *invent*.** Each `landscape` document has an `accentColor` field that is a **closed enum of named presets** (`barn`/`denim`/`brass`/…), authored via `options.list` — a free color picker is explicitly rejected (Metaplan Decision log 2026-05-26). The route maps the selected preset name to its token pair in code and writes them once on the wrapper as `--accent` + `--accent-deep`; `@theme { --color-accent: var(--accent); }` makes `bg-accent`/`text-accent`/`border-accent` work everywhere downstream. No per-page CSS files. Editors switch *which* preset a page uses without code; **adding a new preset is a code change** (token in `tokens.css` + entry in the route's map + value in the schema's `options.list`) — this is intended, so the palette stays curated.
    ```tsx
-   <main style={{ '--accent': landscape.accentColor } as React.CSSProperties}>
+   // ACCENT_VARS maps a preset name → its CSS-variable pair (see LandscapeView.tsx)
+   const accent = ACCENT_VARS[landscape.accentColor ?? 'barn'] ?? ACCENT_VARS.barn
+   <main style={{ '--accent': accent.accent, '--accent-deep': accent.deep } as React.CSSProperties}>
      <h1 className="text-accent">{landscape.title}</h1>
    </main>
    ```
@@ -177,6 +179,7 @@ Portable Text is Sanity's structured rich-text format: content is stored as type
 ### Rules
 
 1. **One file: `components/editorial/PortableText.tsx`** exports a `<PortableText value={...} />` wrapper passing a shared `components` object to `@portabletext/react`. Every essay, intro, footnote, and pull-quote renders through this wrapper.
+   - **Inline exception (`InlineText`).** Headings/titles are modelled as *inline* Portable Text (so an editor can italicise/redden a single word — e.g. `landscape.name`), but `@portabletext/react` always wraps blocks in `<p>`, which is invalid inside an `<h1>`/`<h2>`. For these inline contexts use `components/editorial/InlineText.tsx`, a wrapper-less renderer that emits only `em`/`strong` spans. Rule of thumb: **block-level body copy → `PortableText`; inline-into-a-heading → `InlineText`.** `InlineText` also exports `plainText()` to flatten inline PT to a string for metadata/SEO titles. (Schema previews have their own local `plainText` copy; consolidating the two is a known minor cleanup.)
 2. **The component map covers, at minimum:** drop-cap on the first paragraph of an essay, footnotes (mark → back-linked list at the bottom), internal links (`reference` mark → typed `next/link`), external links (`target="_blank" rel="noreferrer"`), captioned images, pull-quotes, and a "song" inline block that fires the MusicPlayer event from §3.
 3. **Custom marks and blocks live in the schema first.** A serializer without a schema definition is dead code; a schema mark without a serializer renders as nothing. Add both in the same commit.
 4. **Images inside Portable Text go through the same `next/image` + Sanity pipeline** as standalone images. Never `<img src={asset.url}>` from a serializer.
