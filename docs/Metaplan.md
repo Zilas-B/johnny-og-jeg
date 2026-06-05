@@ -6,13 +6,13 @@ This is the full implementation roadmap for turning the 18-page static design in
 
 **Completed steps are condensed.** Steps 0–9 are done; their one-line summary lives in the Progress list and their full original `Includes`/`Acceptance criteria` are archived in [`metaplan-archive.md`](./metaplan-archive.md) to keep this file small. The **Decision log** (below) and all pending steps stay here and remain authoritative.
 
-**Build strategy: Sanity-first.** Every page-level step authors its schema, creates the Sanity document, and renders from GROQ — no "hardcode first then migrate" detour. The content model is already fully specified by the 18 static HTML pages in `claude-design-template/`, so there's no schema-discovery argument for hardcoding.
+**Build strategy: Sanity-first.** Every page-level step authors its schema, creates the Sanity document, and renders from GROQ — no "hardcode first then migrate" detour. The content model was fully specified by the 18 static HTML pages of the original design template (now removed; see git history), so there was no schema-discovery argument for hardcoding.
 
-**Visual fidelity: `claude-design-template/` is the visual source of truth.** Every step that produces UI — chrome, hub, landscapes, supporting pages, music player — must reproduce the layout, typography, spacing, colour, and animation of the corresponding file(s) in `claude-design-template/`. Treat the template as a fixed visual target, not code to refactor; do not edit files inside that folder. When a step's plan is drafted, it must name the specific template file(s) it reproduces (the "Reference files" line in each step below points to the canonical one). If a `docs/best-practices.md` rule appears to conflict with a template detail, call it out in the plan with a recommendation — the *visual* outcome defers to the template, the *implementation* technique defers to the docs.
+**Visual fidelity (historical).** The original `claude-design-template/` folder was the visual source of truth for every UI step — chrome, hub, landscapes, supporting pages, music player reproduced its layout, typography, spacing, colour, and animation. All pages are now built and the template has been removed; per-file "Ported from…" comments and git history record the provenance. For any remaining UI work, consult git history for the original design.
 
 ## Locations
 
-- **Design source** (read-only reference): `C:\Users\Andre\Documents\Lokale Git Repositories\johnny-og-jeg\claude-design-template`
+- **Design source** (removed; consult git history): formerly `claude-design-template/` in the project repo
 - **Project repo** (where code is built): `C:\Users\Andre\Documents\Lokale Git Repositories\johnny-og-jeg`
 
 ## How to use this Metaplan

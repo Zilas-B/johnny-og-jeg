@@ -10,17 +10,18 @@ Danish editorial website about Johnny Cash — Next.js App Router + Sanity v3, o
 | What to build next, in what order (Steps 0–12, Phases A–F) + acceptance criteria | `docs/Metaplan.md` | Each numbered step = one plan-mode session. |
 | *How* to use the stack well — data layer, typegen, music player, design tokens, schema, Portable Text, images, SEO, a11y (§1–§10) | `docs/best-practices.md` | Binding rules. |
 | Token / agent-usage discipline | `docs/agent-mistakes.md` | |
-| What pages look like and say (visual fidelity target) | `claude-design-template/` | Read-only. |
+
+> The original visual-fidelity reference (`claude-design-template/` — 18 static HTML pages) was **removed** once all pages were built. It lives in git history if you need to consult the original design; code/copy lifted from it is noted in per-file "Ported from…" comments.
 
 ## Rules that live nowhere else
 
 - **Plan mode:** read `docs/best-practices.md` *in full* before producing any plan. The plan must cite which §1–§10 sections apply and how. Any deviation must be called out with a reason — silent deviation is not allowed.
 - **Each step leaves the repo working and deployable.** If a step feels too large mid-implementation, stop and split it.
-- **`claude-design-template/` is read-only and visuals-only.** Reproduce its layout, typography, colors, and animations in the stack; never edit files inside it. Architecture and stack choices come from `docs/`, never the template — it never overrides best practices.
+- **The design template has been removed** (all pages are built). Historically it was a read-only, visuals-only reference: layout, typography, colors, copy, and animations were reproduced in the stack from it, while architecture and stack choices always came from `docs/` and never the template. Consult git history if you need the original design.
 
 ## Gotchas
 
-- Content is **Danish** throughout. Template page filenames use `æ`, `ø`, `å` — watch filename encoding when importing.
+- Content is **Danish** throughout — watch `æ`, `ø`, `å` filename/string encoding.
 - Sanity Studio is **embedded** in the Next.js app at `app/studio/[[...tool]]/page.tsx` — not a separate project. Site routes live under `app/(site)/` so Studio and site don't share chrome.
 - The persistent "Cash Radio" player lives in `app/(site)/layout.tsx` so it survives client-side navigation. Per-page accent colors are CSS custom properties — never hardcode colors per page.
 - Git is already initialized (`main` + `origin` remote configured). Do not re-run `git init`.
