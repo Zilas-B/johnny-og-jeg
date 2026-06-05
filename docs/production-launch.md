@@ -48,6 +48,22 @@ owner's accounts.
 
 ### Phase 0 — Ownership & accounts (prerequisite; do before Phase 1)
 
+> **Status: DONE (2026-06-05).** Sanity project `xx10xher` **transferred** (not recreated)
+> into the owner's org `oKqcQm8P0` (Zilas Bastrup) — Project ID + `production` dataset
+> unchanged, so no code/env edits were needed; an empty duplicate the owner had created
+> (`qas3bsu8`) was deleted. Vercel project created under the owner; first deploy green at
+> **`johnny-og-jeg.vercel.app`** (the exact planned webhook target — no plan change).
+>
+> **Deviation — repo ownership:** the plan assumed the repo could stay on the developer's
+> GitHub with the owner's Vercel granted read access. That doesn't work on **Vercel Hobby
+> (free)**: Hobby can't deploy a collaborator repo owned by *another personal account* (Vercel
+> only lists repos owned by the connected account), and it **can't deploy a GitHub-org-owned
+> repo at all** (org repos require Pro). Resolution: the repo was **transferred to the owner's
+> personal GitHub account** (`Zilas-B/johnny-og-jeg`), with the developer added back as a
+> **collaborator** (retains push access). The developer's local `origin` was repointed to the
+> new URL. Net effect: the owner now owns the source repo too; the developer keeps full dev
+> access via collaborator status.
+
 The site will be **owned and paid by the site owner** (a non-technical friend), not the
 developer. Both Sanity and Vercel must therefore live under the owner's accounts before any
 launch infrastructure (domain, env vars, webhook) is wired up — otherwise that work is done
