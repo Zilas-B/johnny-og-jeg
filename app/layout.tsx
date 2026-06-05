@@ -1,13 +1,20 @@
 import type { Metadata } from 'next'
 
+import { DEFAULT_OG_IMAGE } from '@/components/seo/metadata'
 import { client } from '@/sanity/client'
+import { siteUrl } from '@/sanity/env'
 import { SITE_SETTINGS_QUERY } from '@/sanity/queries/global'
 
 import '../styles/globals.css'
 import { fontVariables } from './fonts'
 
-// Sitewide default metadata is authored in Sanity (siteSettings.seo) so it's
-// editable, not hardcoded in JSX. Per-page generateMetadata overrides this.
+const SITE_NAME = 'Johnny og jeg'
+const DEFAULT_TITLE = 'Johnny og jeg — om Johnny Cash, troen og Amerika'
+
+// Sitewide defaults: `metadataBase` (so relative OG/canonical URLs resolve),
+// the `%s — Johnny og jeg` title template every sub-page inherits, and the
+// editor-authored siteSettings.seo fallbacks. Per-page generateMetadata
+// overrides title/description/OG; the home page opts out of the suffix.
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await client.fetch(
     SITE_SETTINGS_QUERY,
@@ -15,14 +22,27 @@ export async function generateMetadata(): Promise<Metadata> {
     { next: { tags: ['siteSettings'] } },
   )
   const seo = settings?.seo
-  const ogImageUrl = seo?.ogImage?.asset?.url
+  const ogImageUrl = seo?.ogImage?.asset?.url ?? DEFAULT_OG_IMAGE
   return {
-    title: seo?.title ?? undefined,
+    metadataBase: new URL(siteUrl),
+    title: {
+      template: `%s — ${SITE_NAME}`,
+      default: seo?.title ?? DEFAULT_TITLE,
+    },
     description: seo?.description ?? undefined,
     openGraph: {
-      title: seo?.title ?? undefined,
+      title: seo?.title ?? DEFAULT_TITLE,
       description: seo?.description ?? undefined,
-      ...(ogImageUrl ? { images: [{ url: ogImageUrl }] } : {}),
+      images: [{ url: ogImageUrl }],
+      siteName: SITE_NAME,
+      locale: 'da_DK',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo?.title ?? DEFAULT_TITLE,
+      description: seo?.description ?? undefined,
+      images: [{ url: ogImageUrl }],
     },
   }
 }

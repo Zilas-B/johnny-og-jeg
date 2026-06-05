@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { accentStyle } from '@/components/blocks/accent'
 import { plainText } from '@/components/editorial/InlineText'
+import { buildMetadata } from '@/components/seo/metadata'
 import { LandscapeHero } from '@/components/landscape/LandscapeHero'
 import { LandscapePosts } from '@/components/landscape/LandscapePosts'
 import { LandscapeSiblings } from '@/components/landscape/LandscapeSiblings'
@@ -20,18 +21,13 @@ export function fetchLandscape(slug: string) {
 export async function landscapeMetadata(slug: string): Promise<Metadata> {
   const data = await fetchLandscape(slug)
   if (!data) return {}
-  const title = data.seo?.title ?? (plainText(data.name) || 'Landskab')
-  const description = data.seo?.description ?? data.motto ?? undefined
-  const ogImageUrl = data.seo?.ogImage?.asset?.url
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      ...(ogImageUrl ? { images: [{ url: ogImageUrl }] } : {}),
-    },
-  }
+  return buildMetadata({
+    seoTitle: data.seo?.title,
+    fallbackTitle: plainText(data.name) || 'Landskab',
+    description: data.seo?.description ?? data.motto,
+    ogImageUrl: data.seo?.ogImage?.asset?.url,
+    canonicalPath: `/${slug}`,
+  })
 }
 
 export async function LandscapeView({ slug }: { slug: string }) {

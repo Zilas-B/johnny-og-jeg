@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
+import { buildMetadata } from '@/components/seo/metadata'
 import { client } from '@/sanity/client'
 import { HOME_PAGE_QUERY } from '@/sanity/queries/home'
 
@@ -11,18 +12,17 @@ async function fetchHomePage() {
 export async function generateMetadata(): Promise<Metadata> {
   const data = await fetchHomePage()
   const heroBlock = data?.blocks?.find((b) => b._type === 'hubHero')
-  const title = data?.seo?.title ?? heroBlock?.hero?.title ?? 'Johnny og jeg'
-  const description = data?.seo?.description ?? undefined
-  const ogImageUrl = data?.seo?.ogImage?.asset?.url
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      ...(ogImageUrl ? { images: [{ url: ogImageUrl }] } : {}),
-    },
-  }
+  // The home title already carries the brand — always absolute (no suffix).
+  return buildMetadata({
+    seoTitle:
+      data?.seo?.title ??
+      heroBlock?.hero?.title ??
+      'Johnny og jeg — om Johnny Cash, troen og Amerika',
+    description: data?.seo?.description,
+    ogImageUrl: data?.seo?.ogImage?.asset?.url,
+    canonicalPath: '/',
+    ogType: 'website',
+  })
 }
 
 export default async function HomePage() {

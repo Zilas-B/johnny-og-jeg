@@ -1,7 +1,7 @@
 # Metaplan — Archive (completed steps)
 
 Detailed `Includes` / `Out of scope` / `Reference files` / `Acceptance criteria` for
-**completed** steps (0–6), moved out of `Metaplan.md` to keep the active roadmap small.
+**completed** steps (0–8), moved out of `Metaplan.md` to keep the active roadmap small.
 These steps are done — this file is kept for reference and audit only.
 
 **Authority unchanged:** the live roadmap, all pending steps, and the **Decision log**
@@ -240,3 +240,159 @@ rich `.land` editorial template is the Kulturen page in Step 7.
 - Each renders its own archive stub faithfully (accent ships barn-red per the template; distinct per-landscape accents are a later polish — see Decision log).
 
 > **Note:** the "top nav dropdown links to each" criterion was dropped (template fidelity, Decision log 2026-06-01) — landscapes are reached via the siblings grid and Kulturen.
+
+### Step 7 — Supporting pages
+
+**Split (2026-06-03):** the seven supporting pages are not uniform (three `cash-shared.css`
+essay pages, Historien's bespoke era layout, two bespoke utility pages, and the rich Kulturen
+`.land` template) and need a routing prerequisite first — too large for one session. Broken into:
+- **7a — Routing + Kulturen (done).** Reconciled `[landscape]` → a single `[slug]` dispatcher
+  that branches by `_type`; built the Kulturen `.land` template. See below + Decision log.
+- **7b — Essay family (block-composed):** Musikeren, Cash og Jesus, Cash og Amerika, built on
+  a new reorderable `blocks[]` model (full design in the **Step 7b detail** section below + Decision
+  log 2026-06-04). Per-page accent barn/denim/brass. **Two plan-mode sessions:** Plan 1 (block infra
+  + Musikeren), Plan 2 (the other two essays).
+- **7c — Historien (done):** bespoke 6-era alternating layout (fixed `historienPage` singleton,
+  *not* block-composed); routed via the `[slug]` dispatcher. See Decision log 2026-06-04 (7c).
+- **7d — Utility pages (done):** Foredrag (ticket/posters/booking form/FAQ) and Bøger/spil/film
+  (filter bar/book entries/suggestion form), both fixed bespoke singletons routed via `[slug]`.
+  See Decision log 2026-06-04 (7d).
+
+**Outcome:** the remaining non-landscape pages (Historien, Musikeren, Cash og Amerika, Cash og Jesus, Foredrag, Kulturen, Bøger spil film) are live.
+
+**Includes:**
+- Each as a Sanity document with appropriate schema (some may share schema, some may need bespoke).
+- **Kulturen** is the heavy one: it is the landscapes index/essay and the home of the **rich `.land`
+  editorial template** (hero + 8 chips + intro essay + 8 `.land` sections with drop caps, side-essay
+  sidebars, era timelines, pull-quotes + outro) that Step 5 originally — and mistakenly — described.
+  It reads from the existing eight `landscape` docs; expect to extend the `landscape` schema with the
+  `.land` essay/sidebar/timeline fields here. This is the real "rich editorial layout" milestone.
+- **Routing note:** the top-level `[landscape]` route from Step 5 will collide with a top-level
+  `[slug]` route for these supporting pages (Next.js forbids two differently-named dynamic segments as
+  siblings). Reconcile here — e.g. a single disambiguating dynamic segment that branches by document
+  type, or route groups.
+- May require 1–2 new Portable Text custom blocks (e.g. timeline entries on Historien; drop-cap,
+  pull-quote and side-essay serializers for Kulturen's `.land` sections).
+
+**Acceptance criteria:**
+- All 18 pages from the original design are reachable on the live site.
+- Internal cross-references work.
+
+#### Step 7b — Essay family, block-composed (Plans 1 & 2)
+
+**Reframed 7b.** The three essay pages become the first pages built on a reorderable `blocks[]`
+model. Full rationale: **Decision log 2026-06-04** — read it before planning. Summary of what was
+decided (a block-builder proposal was pressure-tested and deliberately narrowed):
+
+- **Scope is narrow.** `blocks[]` composition applies to the **home page + these 3 essays only**.
+  `landscape` (×8), `kulturenPage`, Historien, Foredrag, and Bøger/spil/film stay **fixed bespoke
+  schemas**. The idea of one universal `page` type replacing existing types was **rejected** — it
+  would break the landscape set-semantics the siblings grid and `KULTUREN_QUERY` rely on.
+- **Curated, closed menu of designed blocks ported ~1:1 from the templates** — pixel-faithful, *not*
+  a generic page-builder, *not* genericized up front. **Adding a new block type is a code deploy**
+  (accepted); the editor's ongoing power is reorder / toggle / place existing blocks in Studio.
+  Cross-page reuse is mostly theoretical on day one — the 3 essays share almost no section types
+  (each is 5 bespoke bands; only `next-side` is common) — but the shared menu costs nothing.
+- **Fail-loud, no graceful degradation.** `Rule.required()` stays on each block's inner fields
+  (Studio won't publish a malformed block); the renderer trusts required fields. **No `best-practices.md`
+  §5 rule 5 deviation**, no error boundaries, no `Rule.warning()`. A missing section is just absent
+  from the array, not an error.
+
+**Type & routing model.**
+- New **slugged `page` document type**: `blocks[]` body + `slug`, `accentColor`
+  (barn/denim/brass enum per §4), `seo`. `homePage`/`landscape`/`kulturenPage` untouched here.
+- The existing dispatcher `app/(site)/[slug]/page.tsx` (`SLUG_TYPE_QUERY`, `sanity/queries/router.ts`)
+  gains a `_type == "page"` branch rendering a new **`BlockRenderer`** that maps each `block._type`
+  → its React component. `landscape` + `kulturenPage` branches unchanged.
+- Per-page accent via the existing `--accent`/`--accent-deep` wrapper pattern (§4).
+- Blocks of essay prose render through the shared `components/editorial/PortableText.tsx` (§6).
+- `blocks[]` is a discriminated union typed via `defineQuery` + `sanity typegen` (§2); commit the
+  regenerated `sanity/types.ts`.
+
+**Plan 1 — Block infrastructure + Musikeren (one session).**
+- Design the shared block object-type menu needed by `Musikeren.html` (sections:
+  `vinyl-hero · eras · anatomy · lyric · next-side`). Candidate block types: an essay-hero block,
+  a stepped/numbered-list block (`eras`), a prose block (`anatomy`), a pull-quote block (`lyric`),
+  a "next essay" link block (`next-side`). **Look for shared structure under the bespoke class names**
+  so one type can serve multiple essays (e.g. `eras` / `stations` / `themes` may collapse into one
+  `steppedListBlock` with an accent prop) — but only where pixel-fidelity survives; keep genuinely
+  distinctive sections as one-off blocks.
+- `page` schema + `blocks[]` using `defineType` / `defineField` / `defineArrayMember`, with `preview`
+  + `icon` on every type (§5).
+- `BlockRenderer` + per-block components under `components/blocks/`.
+- `[slug]` dispatcher `page` branch; author + seed the Musikeren `page` doc (follow the existing
+  `scripts/seed-*.mjs` pattern, idempotent `createOrReplace` + publish).
+- `pnpm types`; commit `sanity/types.ts`.
+- **Acceptance:** `/musikeren` renders from Sanity, visually matches `Musikeren.html` at 1280px;
+  blocks reorderable/toggleable in Studio; home, landscapes, and Kulturen unchanged; `pnpm build` clean.
+
+**Plan 2 — Cash og Jesus + Cash og Amerika. Split per essay (2026-06-04, user decision):**
+each needs ~4 bespoke bands (~8 new block types total), larger than Plan 1 — so one session per
+essay, each independently deployable.
+
+**Plan 2a — Cash og Jesus (done).** `/cash-og-jesus` (denim) on four new blocks
+(`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote` (extended with
+`background`/`borderTone` tone enums for the accent-deep/brass `gospel-pull`) and `nextEssay`
+(extended with a `barn` colorScheme). Seeded via `scripts/seed-cash-og-jesus.mjs`. See Decision
+log 2026-06-04.
+
+**Plan 2b — Cash og Amerika (remaining).** `/cash-og-amerika` (brass): new blocks `flagHero`
+(telegram card + `cash-stars-and-stripes.jpeg` background — engages §7, upload via seed), `statsBar`
+(republic-bar), `themes`, `locationGrid` (ameri-map); reuses `pullQuote` (ink/brass, no extension)
+and `nextEssay`.
+- **Acceptance:** `/cash-og-amerika` renders faithfully at 1280px; 7b complete.
+
+**Reference files:** `Musikeren.html`, `Cash og Jesus.html`, `Cash og Amerika.html`, `assets/cash-shared.css`.
+
+#### Step 7e — Migrate the home page to the block model (Plan 3)
+
+**Gated on 7b** — build the home migration against the proven block system. Independent of 7c/7d;
+can land any time after 7b. Full rationale: **Decision log 2026-06-04**.
+
+**What.** Convert the shipped `homePage` singleton from its fixed named-field schema
+(`hero` / `ticker` / `vinyls` / `historicalThread` / `hymn` / `contact`, rendered at
+`app/(site)/page.tsx:50-58`) to a `blocks[]` body drawing from the shared menu, **reusing the
+existing hub components** (`HubHero`, `SetlistTicker`, `HubVinyls`, `HistoricalThread`, `Hymn`,
+`ContactSection`) as block components. This is a **refactor, not a redesign** — `/` must look identical.
+
+**Includes.**
+- Add the home-specific block types to the shared menu (hub-hero, ticker, vinyl-row,
+  historical-thread, hymn, contact). These are home-only on day one — the shared menu is mostly
+  disjoint from the essays (accepted, Decision log 2026-06-04).
+- `homePage` **stays a singleton** (rendered at `/`, not via `[slug]`); its fixed fields become a
+  `blocks[]` array. Keep `seo`.
+- `app/(site)/page.tsx` renders via the same `BlockRenderer`; keep a top-level fail-loud throw if
+  `blocks` is empty/unpublished (consistent with the current home + layout throws).
+- **Content-migrate the one existing `homePage` document** into the block array — update
+  `scripts/seed-homePage.mjs` to emit `blocks[]` (idempotent `createOrReplace` + publish, per the
+  Step 3 pattern, Decision log 2026-06-01).
+- `pnpm types`; commit the regenerated `sanity/types.ts`.
+
+**Acceptance.**
+- `/` is **visually identical** to the current shipped home (side-by-side at 1440px).
+- Home sections reorderable/toggleable in Studio; editing + publishing a home block updates `/`.
+- `pnpm build` clean; no regression to landscapes, Kulturen, or the essays.
+
+**Reference files:** `Johnny og jeg.html`, current `app/(site)/page.tsx` + `components/hub/*`.
+
+---
+
+## Phase D — Production polish
+
+### Step 8 — Accessibility & performance pass
+
+**Includes:**
+- WCAG AA color contrast audit.
+- Alt text on every image (enforced via Sanity schema validation).
+- Keyboard navigation: nav dropdowns (click-to-open + Escape), music player controls, focus rings.
+- Lighthouse pass on Performance, A11y, Best Practices, SEO.
+- LCP / image size optimization where needed.
+
+**Acceptance criteria:**
+- Lighthouse scores ≥ 90 across the board on the hub and one landscape.
+
+> **As built (2026-06-04):** scoped to a11y + perf hygiene; Performance score deferred to Step 10
+> with the `force-dynamic` → static/ISR move. A11y/Best-Practices/SEO Lighthouse ≥ 90 on hub +
+> `/naturen` (96/100/90 and 96/100/100). Full contrast audit + Lighthouse record in
+> `docs/a11y-contrast-audit.md`; brass-on-light contrast failures kept as accepted deviations
+> (fidelity-wins). See Metaplan Decision log 2026-06-04 (Step 8).

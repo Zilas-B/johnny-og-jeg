@@ -8,6 +8,8 @@ export const PAGE_QUERY = defineQuery(`
   *[_type == "page" && slug.current == $slug][0]{
     title,
     accentColor,
+    _createdAt,
+    _updatedAt,
     blocks[]{
       _type,
       _key,

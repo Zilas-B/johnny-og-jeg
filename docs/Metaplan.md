@@ -42,7 +42,7 @@ Convention: at the end of each step, mark its checkbox. Use `[x]` for fully done
 - [x] Step 7 — Supporting pages. **Split into 7a–7d** (too large for one session). **All four done — Step 7 complete.** **7a done:** routing reconciled to a single `[slug]` dispatcher branching by `_type`; **Kulturen** (`/kulturen`) built as the rich `.land` template — `kulturenPage` singleton + `landscape` extended with `.land` essay/sidebar/timeline fields, all 8 sections authored. **7b Plan 1 done:** block infrastructure (slugged `page` doc + reorderable `blocks[]`, shared block menu `vinylHero · steppedList · cardGrid · pullQuote · nextEssay`, `BlockRenderer`, `[slug]` `page` branch) + **Musikeren** (`/musikeren`) authored & seeded. **7b Plan 2 split per essay (user decision):** **2a done** — **Cash og Jesus** (`/cash-og-jesus`, denim) on four new blocks (`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote`/`nextEssay` (extended). **2b done** — **Cash og Amerika** (`/cash-og-amerika`, brass) on four new blocks (`flagHero · statsBar · themes · locationGrid`) + reused `pullQuote` (ink/brass) / `nextEssay` (barn+denim); introduced the project's first Sanity image pipeline (§7: `sanity/image.ts` + `SanityImage`). **7b complete. 7c done:** **Historien** (`/historien`) built as a fixed bespoke `historienPage` singleton (hero + derived timeline strip + six alternating era sections + outro), routed via the `[slug]` dispatcher; all seven era photos uploaded through §7. **7d done:** **Foredrag** (`/foredrag`) and **Bøger, spil, film** (`/boeger-spil-film`) built as fixed bespoke singletons (`foredragPage`, `bogerPage`) routed via `[slug]`; booking form + category filter + recommendation card are client-leaf visual shells (no backend). **Step 7 complete.** See Decision log 2026-06-03, 2026-06-04 (7c) and 2026-06-04 (7d).
 - [x] Step 7e — Home page → block model (Plan 3). Home migrated from its fixed named-field schema to the shared `blocks[]` model: six new home-only block types (`hubHero · setlistTicker · hubVinyls · historicalThread · hymn · contact`) ported 1:1 from the existing fields; the seven hub components reused unchanged (only prop-type aliases re-pointed); `homePage` stays a singleton rendered at `/` via the now-shared `BlockRenderer`. Visually identical; reorderable/toggleable in Studio. See Decision log 2026-06-04 (7e).
 - [x] Step 8 — Accessibility & performance pass. A11y/Best-Practices/SEO Lighthouse ≥ 90 on hub + a landscape (96/100/90 and 96/100/100); Performance (88) deferred to Step 10 with the `force-dynamic` → static/ISR move. Nav dropdowns made keyboard-accessible (click/Escape/outside + `aria-expanded`); two real WCAG fixes (heading-order re-tags, MusicPlayer label-in-name); global reduced-motion fallback; LCP `priority` on the Bøger hero map. Full contrast audit in `docs/a11y-contrast-audit.md`; brass-on-light failures kept as accepted deviations (fidelity-wins). See Decision log 2026-06-04 (Step 8).
-- [ ] Step 9 — SEO & metadata
+- [x] Step 9 — SEO & metadata. `app/sitemap.ts` (one `SITEMAP_QUERY` over all public slugs + `_updatedAt`, `_type`→path) and `app/robots.ts` (allow `/`, disallow `/studio`+`/api`, sitemap+host) added; `metadataBase` + a shared `buildMetadata` helper (`components/seo/metadata.ts`) centralise OG/Twitter/canonical with a single static default share image (`public/og-default.jpg`, 1200×630 from a template photo); per-page `seo.title` used verbatim while a bare-heading fallback gets the `%s — Johnny og jeg` suffix (matches the bespoke static `<title>`s); branded `app/icon.svg` + regenerated `app/favicon.ico`; `Article` JSON-LD on the three essays only via `components/seo/JsonLd.tsx`. See Decision log 2026-06-05.
 - [ ] Step 10 — Production launch
 
 Step 0 note: Vercel link + first deploy deferred to a follow-up session (acceptance criterion #4 of Step 0).
@@ -100,167 +100,21 @@ Goal: one of the 8 landscape pages is fully built and Sanity-driven. The templat
 
 All eight `landscape` docs fully authored via `scripts/seed-landscapes.mjs`; the seven non-Naturen pages render. Top-nav criterion dropped (template fidelity, Decision log 2026-06-01). **Full detail → [`metaplan-archive.md`](./metaplan-archive.md).**
 
-### Step 7 — Supporting pages
+### Step 7 — Supporting pages ✅
 
-**Split (2026-06-03):** the seven supporting pages are not uniform (three `cash-shared.css`
-essay pages, Historien's bespoke era layout, two bespoke utility pages, and the rich Kulturen
-`.land` template) and need a routing prerequisite first — too large for one session. Broken into:
-- **7a — Routing + Kulturen (done).** Reconciled `[landscape]` → a single `[slug]` dispatcher
-  that branches by `_type`; built the Kulturen `.land` template. See below + Decision log.
-- **7b — Essay family (block-composed):** Musikeren, Cash og Jesus, Cash og Amerika, built on
-  a new reorderable `blocks[]` model (full design in the **Step 7b detail** section below + Decision
-  log 2026-06-04). Per-page accent barn/denim/brass. **Two plan-mode sessions:** Plan 1 (block infra
-  + Musikeren), Plan 2 (the other two essays).
-- **7c — Historien (done):** bespoke 6-era alternating layout (fixed `historienPage` singleton,
-  *not* block-composed); routed via the `[slug]` dispatcher. See Decision log 2026-06-04 (7c).
-- **7d — Utility pages (done):** Foredrag (ticket/posters/booking form/FAQ) and Bøger/spil/film
-  (filter bar/book entries/suggestion form), both fixed bespoke singletons routed via `[slug]`.
-  See Decision log 2026-06-04 (7d).
-
-**Outcome:** the remaining non-landscape pages (Historien, Musikeren, Cash og Amerika, Cash og Jesus, Foredrag, Kulturen, Bøger spil film) are live.
-
-**Includes:**
-- Each as a Sanity document with appropriate schema (some may share schema, some may need bespoke).
-- **Kulturen** is the heavy one: it is the landscapes index/essay and the home of the **rich `.land`
-  editorial template** (hero + 8 chips + intro essay + 8 `.land` sections with drop caps, side-essay
-  sidebars, era timelines, pull-quotes + outro) that Step 5 originally — and mistakenly — described.
-  It reads from the existing eight `landscape` docs; expect to extend the `landscape` schema with the
-  `.land` essay/sidebar/timeline fields here. This is the real "rich editorial layout" milestone.
-- **Routing note:** the top-level `[landscape]` route from Step 5 will collide with a top-level
-  `[slug]` route for these supporting pages (Next.js forbids two differently-named dynamic segments as
-  siblings). Reconcile here — e.g. a single disambiguating dynamic segment that branches by document
-  type, or route groups.
-- May require 1–2 new Portable Text custom blocks (e.g. timeline entries on Historien; drop-cap,
-  pull-quote and side-essay serializers for Kulturen's `.land` sections).
-
-**Acceptance criteria:**
-- All 18 pages from the original design are reachable on the live site.
-- Internal cross-references work.
-
----
-
-### Step 7b — Essay family, block-composed (Plans 1 & 2)
-
-**Reframed 7b.** The three essay pages become the first pages built on a reorderable `blocks[]`
-model. Full rationale: **Decision log 2026-06-04** — read it before planning. Summary of what was
-decided (a block-builder proposal was pressure-tested and deliberately narrowed):
-
-- **Scope is narrow.** `blocks[]` composition applies to the **home page + these 3 essays only**.
-  `landscape` (×8), `kulturenPage`, Historien, Foredrag, and Bøger/spil/film stay **fixed bespoke
-  schemas**. The idea of one universal `page` type replacing existing types was **rejected** — it
-  would break the landscape set-semantics the siblings grid and `KULTUREN_QUERY` rely on.
-- **Curated, closed menu of designed blocks ported ~1:1 from the templates** — pixel-faithful, *not*
-  a generic page-builder, *not* genericized up front. **Adding a new block type is a code deploy**
-  (accepted); the editor's ongoing power is reorder / toggle / place existing blocks in Studio.
-  Cross-page reuse is mostly theoretical on day one — the 3 essays share almost no section types
-  (each is 5 bespoke bands; only `next-side` is common) — but the shared menu costs nothing.
-- **Fail-loud, no graceful degradation.** `Rule.required()` stays on each block's inner fields
-  (Studio won't publish a malformed block); the renderer trusts required fields. **No `best-practices.md`
-  §5 rule 5 deviation**, no error boundaries, no `Rule.warning()`. A missing section is just absent
-  from the array, not an error.
-
-**Type & routing model.**
-- New **slugged `page` document type**: `blocks[]` body + `slug`, `accentColor`
-  (barn/denim/brass enum per §4), `seo`. `homePage`/`landscape`/`kulturenPage` untouched here.
-- The existing dispatcher `app/(site)/[slug]/page.tsx` (`SLUG_TYPE_QUERY`, `sanity/queries/router.ts`)
-  gains a `_type == "page"` branch rendering a new **`BlockRenderer`** that maps each `block._type`
-  → its React component. `landscape` + `kulturenPage` branches unchanged.
-- Per-page accent via the existing `--accent`/`--accent-deep` wrapper pattern (§4).
-- Blocks of essay prose render through the shared `components/editorial/PortableText.tsx` (§6).
-- `blocks[]` is a discriminated union typed via `defineQuery` + `sanity typegen` (§2); commit the
-  regenerated `sanity/types.ts`.
-
-**Plan 1 — Block infrastructure + Musikeren (one session).**
-- Design the shared block object-type menu needed by `Musikeren.html` (sections:
-  `vinyl-hero · eras · anatomy · lyric · next-side`). Candidate block types: an essay-hero block,
-  a stepped/numbered-list block (`eras`), a prose block (`anatomy`), a pull-quote block (`lyric`),
-  a "next essay" link block (`next-side`). **Look for shared structure under the bespoke class names**
-  so one type can serve multiple essays (e.g. `eras` / `stations` / `themes` may collapse into one
-  `steppedListBlock` with an accent prop) — but only where pixel-fidelity survives; keep genuinely
-  distinctive sections as one-off blocks.
-- `page` schema + `blocks[]` using `defineType` / `defineField` / `defineArrayMember`, with `preview`
-  + `icon` on every type (§5).
-- `BlockRenderer` + per-block components under `components/blocks/`.
-- `[slug]` dispatcher `page` branch; author + seed the Musikeren `page` doc (follow the existing
-  `scripts/seed-*.mjs` pattern, idempotent `createOrReplace` + publish).
-- `pnpm types`; commit `sanity/types.ts`.
-- **Acceptance:** `/musikeren` renders from Sanity, visually matches `Musikeren.html` at 1280px;
-  blocks reorderable/toggleable in Studio; home, landscapes, and Kulturen unchanged; `pnpm build` clean.
-
-**Plan 2 — Cash og Jesus + Cash og Amerika. Split per essay (2026-06-04, user decision):**
-each needs ~4 bespoke bands (~8 new block types total), larger than Plan 1 — so one session per
-essay, each independently deployable.
-
-**Plan 2a — Cash og Jesus (done).** `/cash-og-jesus` (denim) on four new blocks
-(`hymnHero · scriptureStrip · stations · hymnal`) + reused `pullQuote` (extended with
-`background`/`borderTone` tone enums for the accent-deep/brass `gospel-pull`) and `nextEssay`
-(extended with a `barn` colorScheme). Seeded via `scripts/seed-cash-og-jesus.mjs`. See Decision
-log 2026-06-04.
-
-**Plan 2b — Cash og Amerika (remaining).** `/cash-og-amerika` (brass): new blocks `flagHero`
-(telegram card + `cash-stars-and-stripes.jpeg` background — engages §7, upload via seed), `statsBar`
-(republic-bar), `themes`, `locationGrid` (ameri-map); reuses `pullQuote` (ink/brass, no extension)
-and `nextEssay`.
-- **Acceptance:** `/cash-og-amerika` renders faithfully at 1280px; 7b complete.
-
-**Reference files:** `Musikeren.html`, `Cash og Jesus.html`, `Cash og Amerika.html`, `assets/cash-shared.css`.
-
----
-
-### Step 7e — Migrate the home page to the block model (Plan 3)
-
-**Gated on 7b** — build the home migration against the proven block system. Independent of 7c/7d;
-can land any time after 7b. Full rationale: **Decision log 2026-06-04**.
-
-**What.** Convert the shipped `homePage` singleton from its fixed named-field schema
-(`hero` / `ticker` / `vinyls` / `historicalThread` / `hymn` / `contact`, rendered at
-`app/(site)/page.tsx:50-58`) to a `blocks[]` body drawing from the shared menu, **reusing the
-existing hub components** (`HubHero`, `SetlistTicker`, `HubVinyls`, `HistoricalThread`, `Hymn`,
-`ContactSection`) as block components. This is a **refactor, not a redesign** — `/` must look identical.
-
-**Includes.**
-- Add the home-specific block types to the shared menu (hub-hero, ticker, vinyl-row,
-  historical-thread, hymn, contact). These are home-only on day one — the shared menu is mostly
-  disjoint from the essays (accepted, Decision log 2026-06-04).
-- `homePage` **stays a singleton** (rendered at `/`, not via `[slug]`); its fixed fields become a
-  `blocks[]` array. Keep `seo`.
-- `app/(site)/page.tsx` renders via the same `BlockRenderer`; keep a top-level fail-loud throw if
-  `blocks` is empty/unpublished (consistent with the current home + layout throws).
-- **Content-migrate the one existing `homePage` document** into the block array — update
-  `scripts/seed-homePage.mjs` to emit `blocks[]` (idempotent `createOrReplace` + publish, per the
-  Step 3 pattern, Decision log 2026-06-01).
-- `pnpm types`; commit the regenerated `sanity/types.ts`.
-
-**Acceptance.**
-- `/` is **visually identical** to the current shipped home (side-by-side at 1440px).
-- Home sections reorderable/toggleable in Studio; editing + publishing a home block updates `/`.
-- `pnpm build` clean; no regression to landscapes, Kulturen, or the essays.
-
-**Reference files:** `Johnny og jeg.html`, current `app/(site)/page.tsx` + `components/hub/*`.
+Split into 7a–7e (too large for one session). All supporting pages live: **Kulturen** (rich `.land` template, 7a) · the three block-composed essays **Musikeren / Cash og Jesus / Cash og Amerika** (7b) · **Historien** (bespoke era layout, 7c) · **Foredrag** + **Bøger/spil/film** (bespoke utility singletons, 7d) · plus the **home-page migration to the shared `blocks[]` model** (7e). Routing reconciled to a single `[slug]` dispatcher branching by `_type`. All 18 pages reachable; cross-references resolve. See Decision log 2026-06-03 / 2026-06-04. **Full detail → [`metaplan-archive.md`](./metaplan-archive.md).**
 
 ---
 
 ## Phase D — Production polish
 
-### Step 8 — Accessibility & performance pass
+### Step 8 — Accessibility & performance pass ✅
 
-**Includes:**
-- WCAG AA color contrast audit.
-- Alt text on every image (enforced via Sanity schema validation).
-- Keyboard navigation: nav dropdowns (click-to-open + Escape), music player controls, focus rings.
-- Lighthouse pass on Performance, A11y, Best Practices, SEO.
-- LCP / image size optimization where needed.
+A11y/Best-Practices/SEO Lighthouse ≥ 90 on the hub + a landscape (96/100/90, 96/100/100); keyboard-accessible nav dropdowns (click/Escape/outside + `aria-expanded`); WCAG contrast audit in `docs/a11y-contrast-audit.md` with brass-on-light kept as accepted deviations (fidelity-wins); two real WCAG fixes (heading-order, label-in-name); global reduced-motion fallback; LCP `priority` hygiene. Performance (88) deferred to Step 10 with the `force-dynamic` → static/ISR move. See Decision log 2026-06-04 (Step 8). **Full detail → [`metaplan-archive.md`](./metaplan-archive.md).**
 
-**Acceptance criteria:**
-- Lighthouse scores ≥ 90 across the board on the hub and one landscape.
+### Step 9 — SEO & metadata ✅
 
-### Step 9 — SEO & metadata
-
-**Includes:**
-- Per-page `<title>`, meta description, Open Graph tags driven from Sanity.
-- `app/sitemap.ts` and `app/robots.ts`.
-- Favicons and OG default image.
-- Structured data (Article schema) on essay pages.
+Per-page `<title>` / description / OG were already Sanity-driven (Steps 3–8); Step 9 added the remaining pieces: `app/sitemap.ts` + `app/robots.ts`, `metadataBase` + a shared `buildMetadata` helper with a single static default OG image, a branded favicon (`app/icon.svg` + `app/favicon.ico`), and `Article` JSON-LD on the three essays. The base URL is an unasserted `siteUrl` (env → Vercel → localhost), pending the Step 10 custom domain. See Decision log 2026-06-05.
 
 ### Step 10 — Production launch
 
@@ -547,4 +401,49 @@ Track major decisions here as the project evolves. Date, decision, rationale.
     A11y deduction is the accepted brass `color-contrast`. `pnpm lint`/`build` clean; all routes
     return 200, visually unchanged. **No best-practices deviation** (the contrast call is an
     explicit user decision, recorded; no §-rule was broken). **Next: Step 9 (SEO & metadata).**
+- `2026-06-05` — **Step 9 shipped: SEO & metadata.** Most of §8 was already in place from
+  Steps 3–8 (an `seo` object on every public document type; per-page `generateMetadata` reading
+  it with H1/first-paragraph/hero fallbacks). Step 9 added the four missing pieces and refactored
+  the repeated metadata construction into one helper.
+  - **Base URL.** New unasserted `siteUrl` export in `sanity/env.ts` (`NEXT_PUBLIC_SITE_URL` →
+    `https://$VERCEL_PROJECT_PRODUCTION_URL` → `http://localhost:3000`), documented in
+    `.env.example`. Intentionally *not* asserted (unlike the Sanity public vars) because no
+    production domain is wired until Step 10 — the fallback keeps sitemap/robots/canonical correct
+    on previews and locally. Set the real origin at launch.
+  - **`metadataBase` + shared `buildMetadata`** (`components/seo/metadata.ts`). The root layout sets
+    `metadataBase` (so relative OG/canonical URLs resolve) and owns the `%s — Johnny og jeg` title
+    template. `buildMetadata` centralises `openGraph` + `twitter` (`summary_large_image`) + canonical
+    and the default-OG fallback, replacing the ~7 hand-rolled `openGraph` blocks across the root
+    layout, home, the five `[slug]` branches, and `landscapeMetadata`.
+  - **Title resolution mirrors the bespoke static `<title>`s.** They are *not* a uniform suffix
+    ("Musikeren — Johnny Cash", "Naturen — Kulturen · Johnny og jeg", "Foredrag — Johnny og jeg").
+    So an editor-set `seo.title` is used **verbatim** (`title.absolute`); only the bare-heading
+    `fallbackTitle` flows through the root template and gets the `— Johnny og jeg` suffix. (First cut
+    used a single string title under the template and double-suffixed every page — caught by a live
+    `<title>` check and corrected to the `seoTitle`/`fallbackTitle` split.) Live titles now match the
+    templates exactly.
+  - **One OG source (§8 rule 6).** A single static `public/og-default.jpg` (1200×630, cover-crop of a
+    template photo via `scripts/gen-brand-assets.mjs` + sharp) is the fallback; editor `seo.ogImage`
+    overrides it per page. No `opengraph-image.tsx` — everything flows through the metadata API, so no
+    file-convention/metadata precedence surprises.
+  - **Favicon.** Branded `app/icon.svg` (ink rounded square + brass five-point star, from the
+    palette in `tokens.css`) is the source of truth; `app/favicon.ico` is regenerated from it by the
+    same script (PNG-in-ICO) so the two can't drift. The generic create-next-app favicon is replaced.
+  - **JSON-LD `Article` on the three essays only** (`components/seo/JsonLd.tsx` + `articleSchema`),
+    built from the same Sanity fields rendered on-page; `_createdAt`/`_updatedAt` added to
+    `PAGE_QUERY` for `datePublished`/`dateModified`. Per the user decision this session, scope is the
+    literal §8 "per essay" — the `_type == "page"` docs (Musikeren, Cash og Jesus, Cash og Amerika);
+    Historien/Kulturen/landscapes/utility pages emit none. Verified live: 1 block per essay, 0
+    elsewhere.
+  - **Deviation (best-practices §6 rule 5).** `JsonLd` uses `dangerouslySetInnerHTML` for the
+    `<script type="application/ld+json">`. §6 rule 5 ("no `dangerouslySetInnerHTML`, ever") is scoped
+    to *Portable Text content* rendering; JSON-LD injection is the Next.js-sanctioned mechanism and
+    the payload is `JSON.stringify` output we control, with `<` escaped to `<` to bar a
+    `</script>` breakout. No untrusted-HTML path.
+  - **Sitemap + robots.** `app/sitemap.ts` (one `SITEMAP_QUERY` — 8 landscapes with a `deck` + 3
+    `page` essays + 5 fixed singletons = 16 URLs, tagged with every public `_type` so the §1 webhook
+    busts it) and `app/robots.ts` (allow `/`, disallow `/studio`+`/api`, `sitemap`+`host`).
+  - `pnpm types`/`build`/`lint` clean; live smoke test of `/sitemap.xml`, `/robots.txt`, all route
+    titles/canonicals/OG, the essay JSON-LD, and HTTP 200 + correct content-type for every route,
+    `icon.svg`, `favicon.ico`, `og-default.jpg`. **Next: Step 10 (production launch).**
 - `2026-06-01` — **Step 4 reduced to a visual shell. Music player functionality postponed indefinitely.** Original Step 4 included a `track`/`playlist` Sanity model, server-side fetch, transport state, and external streaming link-outs. All removed — Step 4 now ships the player markup + CSS only, with inert buttons and hardcoded placeholder track names from `cash-radio.js`. Reason: editorial focus is text + design fidelity; even link-out playback adds Sanity model + state + per-track URL maintenance disproportionate to the editorial value. The Phase F "real audio" optional was already dropped on 2026-05-26 — this extends that ethos to the link-out shell too. If the player ever becomes interactive, it lands as a separate scoped step.

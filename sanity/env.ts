@@ -18,6 +18,20 @@ export const projectId = assertValue(
 )
 
 /**
+ * Public site origin — used for `metadataBase`, canonical/OG URLs, sitemap,
+ * and robots. No production domain is wired yet (Metaplan Step 10), so this
+ * is intentionally not asserted: it falls back to the Vercel preview URL and
+ * then localhost, keeping sitemap/robots correct everywhere in the meantime.
+ * Trailing slash stripped so callers can concatenate `${siteUrl}/path`.
+ */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'http://localhost:3000')
+).replace(/\/+$/, '')
+
+/**
  * Server-only secrets. Exposed as raw strings (possibly undefined) so
  * the module loads without them — CLI tooling (`pnpm types`) and public
  * page renders don't need them. Consumers assert at point of use:
