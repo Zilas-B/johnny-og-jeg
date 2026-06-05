@@ -4,7 +4,7 @@ This is the full implementation roadmap for turning the 18-page static design in
 
 **Read first:** `TechStack.md` (in this folder) defines the stack and structural decisions; `best-practices.md` defines *how* we use that stack well. This Metaplan describes *what gets built when*. If anything here conflicts with `TechStack.md` or `best-practices.md`, those docs win until amended.
 
-**Completed steps are condensed.** Steps 0–6 are done; their one-line summary lives in the Progress list and their full original `Includes`/`Acceptance criteria` are archived in [`metaplan-archive.md`](./metaplan-archive.md) to keep this file small. The **Decision log** (below) and all pending steps stay here and remain authoritative.
+**Completed steps are condensed.** Steps 0–9 are done; their one-line summary lives in the Progress list and their full original `Includes`/`Acceptance criteria` are archived in [`metaplan-archive.md`](./metaplan-archive.md) to keep this file small. The **Decision log** (below) and all pending steps stay here and remain authoritative.
 
 **Build strategy: Sanity-first.** Every page-level step authors its schema, creates the Sanity document, and renders from GROQ — no "hardcode first then migrate" detour. The content model is already fully specified by the 18 static HTML pages in `claude-design-template/`, so there's no schema-discovery argument for hardcoding.
 
@@ -114,7 +114,7 @@ A11y/Best-Practices/SEO Lighthouse ≥ 90 on the hub + a landscape (96/100/90, 9
 
 ### Step 9 — SEO & metadata ✅
 
-Per-page `<title>` / description / OG were already Sanity-driven (Steps 3–8); Step 9 added the remaining pieces: `app/sitemap.ts` + `app/robots.ts`, `metadataBase` + a shared `buildMetadata` helper with a single static default OG image, a branded favicon (`app/icon.svg` + `app/favicon.ico`), and `Article` JSON-LD on the three essays. The base URL is an unasserted `siteUrl` (env → Vercel → localhost), pending the Step 10 custom domain. See Decision log 2026-06-05.
+Per-page `<title>` / description / OG were already Sanity-driven (Steps 3–8); Step 9 added the remaining pieces: `app/sitemap.ts` + `app/robots.ts`, `metadataBase` + a shared `buildMetadata` helper with a single static default OG image, a branded favicon (`app/icon.svg` + `app/favicon.ico`), and `Article` JSON-LD on the three essays. The base URL is an unasserted `siteUrl` (env → Vercel → localhost), pending the Step 10 custom domain. See Decision log 2026-06-05. **Full detail → [`metaplan-archive.md`](./metaplan-archive.md).**
 
 ### Step 10 — Production launch
 

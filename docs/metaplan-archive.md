@@ -1,7 +1,7 @@
 # Metaplan — Archive (completed steps)
 
 Detailed `Includes` / `Out of scope` / `Reference files` / `Acceptance criteria` for
-**completed** steps (0–8), moved out of `Metaplan.md` to keep the active roadmap small.
+**completed** steps (0–9), moved out of `Metaplan.md` to keep the active roadmap small.
 These steps are done — this file is kept for reference and audit only.
 
 **Authority unchanged:** the live roadmap, all pending steps, and the **Decision log**
@@ -396,3 +396,22 @@ existing hub components** (`HubHero`, `SetlistTicker`, `HubVinyls`, `HistoricalT
 > `/naturen` (96/100/90 and 96/100/100). Full contrast audit + Lighthouse record in
 > `docs/a11y-contrast-audit.md`; brass-on-light contrast failures kept as accepted deviations
 > (fidelity-wins). See Metaplan Decision log 2026-06-04 (Step 8).
+
+### Step 9 — SEO & metadata
+
+**Includes:**
+- Per-page `<title>`, meta description, Open Graph tags driven from Sanity.
+- `app/sitemap.ts` and `app/robots.ts`.
+- Favicons and OG default image.
+- Structured data (Article schema) on essay pages.
+
+> **As built (2026-06-05):** most of §8 was already in place from Steps 3–8 (an `seo` object on
+> every public document type; per-page `generateMetadata` with H1/first-paragraph/hero fallbacks).
+> Step 9 added the four remaining pieces and centralised the repeated metadata construction:
+> `app/sitemap.ts` (one `SITEMAP_QUERY` over all public slugs) + `app/robots.ts`; `metadataBase` +
+> a shared `buildMetadata` helper (`components/seo/metadata.ts`) owning OG/Twitter/canonical and a
+> single static default OG image (`public/og-default.jpg`); per-page `seo.title` used verbatim while
+> a bare-heading fallback gets the `%s — Johnny og jeg` suffix; a branded favicon (`app/icon.svg` +
+> regenerated `app/favicon.ico`); and `Article` JSON-LD on the three essays only
+> (`components/seo/JsonLd.tsx`). The base URL is an unasserted `siteUrl` (env → Vercel → localhost),
+> pending the Step 10 custom domain. See Metaplan Decision log 2026-06-05 (Step 9).
