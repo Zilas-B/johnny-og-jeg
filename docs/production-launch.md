@@ -96,6 +96,18 @@ target depends on (see Scope decisions and 1.3).
 
 ### Phase 1 — ISR bundle (the core; do not split across deploys mid-way)
 
+> **Status: DONE (2026-06-06).** Shipped as one bundle (commit `30e1ffe`, deployed via
+> `b673d63`). `force-dynamic` removed; `[slug]` now prerenders as SSG (16 paths) with
+> `dynamicParams = true`; `FIXED_PATH` single-sourced in `sanity/queries/router.ts` (shared
+> by the `[slug]` route, sitemap, and `generateStaticParams`). Webhook live and verified:
+> a `homePage` publish returned `200 {"revalidated":true,"type":"homePage","slug":null}` in
+> the Sanity delivery log, and edits appear on the live site with **no redeploy** — acceptance
+> criterion #2 met on `johnny-og-jeg.vercel.app`.
+>
+> **Deviation — Vercel plan:** Phase 0 assumed **Hobby (free)**, but a collaborator/owner
+> repo on Hobby blocked deploys (same root cause as the Phase 0 repo-ownership note). Resolved
+> by **upgrading the owner's Vercel to Pro**, which unblocked deploys from `Zilas-B/johnny-og-jeg`.
+
 > All of 1.1–1.5 land together and are verified as one before moving on. Each is small;
 > the risk is in their interaction, so they're sequenced and then tested end-to-end.
 
@@ -157,6 +169,21 @@ explanatory comment above it). This is done **last** in Phase 1, only after 1.1�
   change appears without redeploy.
 
 ### Phase 2 — Styled 404
+
+> **Status: DONE (2026-06-06).** Added `app/(site)/not-found.tsx` (+ `not-found.module.css`),
+> designed from the editorial token system (no template — poster `404`, display-italic
+> "Siden findes ikke", mono kicker, ink CTA back to `/`). Carries a `metadata.title`
+> ("Siden findes ikke", suffixed by the root template). `pnpm lint` and `pnpm build` clean;
+> `[slug]` still SSG (●), `/_not-found` prerenders.
+>
+> **Unmatched-route fallthrough — verified, no root handler added.** Tested against `pnpm
+> start`: a bad single-segment slug (`/denne-side-findes-ikke`) returns **404 with full
+> `(site)` chrome** (masthead + nav + footer + music player + skip-link) — `[slug]` calls
+> `notFound()`, caught by the `(site)` boundary inside its layout. A deep unmatched path
+> (`/a/b/c`) returns 404 via Next's **generic chrome-less fallback**. Decision: leave it — no
+> internal link produces deep paths, the plan's error scope explicitly accepts a generic
+> fallback for non-`[slug]` cases, and a root `app/not-found.tsx` couldn't carry the `(site)`
+> chrome anyway (chrome lives in the site layout, not the root layout).
 
 - Create `app/(site)/not-found.tsx` rendering inside the site layout (so it carries
   masthead + nav + footer + music player). Short Danish copy ("Siden findes ikke" + a link
