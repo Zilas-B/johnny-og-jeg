@@ -8,11 +8,6 @@ import { client } from '@/sanity/client'
 import { SanityLive } from '@/sanity/lib/live'
 import { SITE_SETTINGS_QUERY } from '@/sanity/queries/global'
 
-// All site routes fetch siteSettings server-side; force dynamic so build
-// doesn't try to prerender pages that depend on an authored singleton.
-// Freshness comes from tag-based revalidation, not static prerender.
-export const dynamic = 'force-dynamic'
-
 export default async function SiteLayout({
   children,
 }: {

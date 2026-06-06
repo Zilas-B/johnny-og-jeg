@@ -18,9 +18,22 @@ import { FOREDRAG_QUERY } from '@/sanity/queries/foredrag'
 import { HISTORIEN_QUERY } from '@/sanity/queries/historien'
 import { KULTUREN_QUERY } from '@/sanity/queries/kulturen'
 import { PAGE_QUERY } from '@/sanity/queries/page'
-import { SLUG_TYPE_QUERY } from '@/sanity/queries/router'
+import { FIXED_PATH, SLUG_TYPE_QUERY } from '@/sanity/queries/router'
+import { SITEMAP_QUERY } from '@/sanity/queries/sitemap'
 
 type Params = { params: Promise<{ slug: string }> }
+
+// Prerender every public route at build (SSG); a freshly published doc whose
+// slug isn't in this list still renders on demand instead of 404ing.
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+  const docs = await client.fetch(SITEMAP_QUERY)
+  return docs
+    .map((doc) => FIXED_PATH[doc._type] ?? doc.slug)
+    .filter((slug): slug is string => Boolean(slug)) // drops homePage ('') — it renders at '/'
+    .map((slug) => ({ slug }))
+}
 
 function fetchRouter(slug: string) {
   return client.fetch(
