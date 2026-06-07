@@ -1,0 +1,47 @@
+name: CI
+
+# Gate: runs on PRs into main (the thing branch protection enforces) and as a
+# safety net on direct pushes to dev / main. Does NOT deploy — Vercel's Git
+# integration owns previews (dev/PR) and production (main) separately.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [dev, main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      # These are NEXT_PUBLIC_* — public values shipped to the browser, not secrets.
+      # `sanity/env.ts` asserts them at module load, so `pnpm types` and `pnpm build`
+      # fail without them. Inlined so CI is green on the first push with no repo setup.
+      NEXT_PUBLIC_SANITY_PROJECT_ID: xx10xher
+      NEXT_PUBLIC_SANITY_DATASET: production
+      NEXT_PUBLIC_SANITY_API_VERSION: 2026-05-01
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typegen
+        run: pnpm types
+
+      - name: Fail if typegen left tracked files dirty
+        run: git diff --exit-code
+
+      - name: Build
+        run: pnpm build

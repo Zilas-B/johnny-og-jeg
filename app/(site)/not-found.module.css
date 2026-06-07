@@ -1,0 +1,72 @@
+/* Styled 404 — designed from the editorial token system (no template source).
+   Mirrors the kicker / display-italic-heading / poster idiom used across the
+   block components (cf. NextEssay.module.css). */
+
+.notFound {
+  padding: 120px 0 140px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.code {
+  font-family: var(--f-poster);
+  font-size: clamp(120px, 26vw, 260px);
+  line-height: 0.8;
+  color: var(--ink);
+  margin: 0 0 12px;
+  letter-spacing: 0.02em;
+}
+
+.heading {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(40px, 7vw, 64px);
+  line-height: 1;
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+
+.body {
+  font-family: var(--f-body);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 540px;
+  margin: 0 auto 40px;
+}
+
+.home {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  box-shadow: 6px 7px 0 rgba(14, 13, 12, 0.18);
+  transition: transform 160ms ease, background 120ms ease, color 120ms ease;
+}
+
+.home:hover {
+  transform: translate(-2px, -3px);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+
+.home span {
+  margin-left: 6px;
+}
