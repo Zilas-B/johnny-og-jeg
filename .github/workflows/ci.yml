@@ -1,13 +1,14 @@
 name: CI
 
 # Gate: runs on PRs into main (the thing branch protection enforces) and as a
-# safety net on direct pushes to dev / main. Does NOT deploy — Vercel's Git
-# integration owns previews (dev/PR) and production (main) separately.
+# safety net on direct pushes to main. dev work is checked once, via its PR.
+# Does NOT deploy — Vercel's Git integration owns previews (dev/PR) and
+# production (main) separately.
 on:
   pull_request:
     branches: [main]
   push:
-    branches: [dev, main]
+    branches: [main]
 
 jobs:
   ci:
