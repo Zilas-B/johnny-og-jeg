@@ -1,0 +1,8 @@
+/* TEMPORARY — deploy smoke test. Turns all home-page text yellow by
+   overriding the ink tokens for this subtree only. Delete when done. */
+.yellowTest {
+  --ink: #e8b32c;
+  --ink-2: #e8b32c;
+  --ink-soft: #e8b32c;
+  color: #e8b32c;
+}
