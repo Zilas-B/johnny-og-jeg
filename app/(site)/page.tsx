@@ -5,8 +5,6 @@ import { buildMetadata } from '@/components/seo/metadata'
 import { client } from '@/sanity/client'
 import { HOME_PAGE_QUERY } from '@/sanity/queries/home'
 
-import styles from './home-color-test.module.css'
-
 async function fetchHomePage() {
   return client.fetch(HOME_PAGE_QUERY, {}, { next: { tags: ['homePage'] } })
 }
@@ -36,9 +34,5 @@ export default async function HomePage() {
     )
   }
 
-  return (
-    <div className={styles.yellowTest}>
-      <BlockRenderer blocks={data.blocks} />
-    </div>
-  )
+  return <BlockRenderer blocks={data.blocks} />
 }
