@@ -3,7 +3,7 @@
 //
 // Authors the hero + six era sections + outro verbatim from
 // claude-design-template/Historien.html, uploading the seven era photos through
-// the Sanity asset pipeline (best-practices §7). _id 'historienPage' (non-draft)
+// the Sanity asset pipeline. _id 'historienPage' (non-draft)
 // → published directly; createOrReplace keeps re-runs idempotent (Sanity dedupes
 // each asset by content hash).
 

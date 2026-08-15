@@ -24,8 +24,8 @@ import { VinylHero } from './VinylHero'
 // Serves both the essay `page` blocks and the home `homePage` blocks (Step 7e).
 // Typed as an *array of the union* (not a union of arrays) so `.map` typechecks;
 // `PageBlock[]` and `HomeBlock[]` are both assignable to `AnyBlock[]` by array
-// covariance. Required inner fields are trusted (best-practices §6 spirit:
-// typed dispatch, no graceful degradation) — the schema's Rule.required() blocks
+// covariance. Required inner fields are trusted (typed dispatch, no graceful
+// degradation) — the schema's Rule.required() blocks
 // publishing a malformed block.
 type AnyBlock =
   | NonNullable<NonNullable<PAGE_QUERY_RESULT>['blocks']>[number]

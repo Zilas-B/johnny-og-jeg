@@ -10,9 +10,9 @@ How the engineering skills should consume this repo's domain documentation when 
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
 
-This repo is **single-context**: one `CONTEXT.md` + `docs/adr/` at the root. Neither exists yet — that's expected.
+This repo is **single-context**: one `CONTEXT.md` + `docs/adr/` at the root.
 
-Note that these are separate from the existing `docs/` files (`TechStack.md`, `best-practices.md`, `agent-mistakes.md`, …), which are already authoritative per `CLAUDE.md` and should be read as that table describes.
+Note that these are separate from `docs/TechStack.md`, which is already authoritative per `CLAUDE.md` and should be read as that table describes.
 
 ## File structure
 

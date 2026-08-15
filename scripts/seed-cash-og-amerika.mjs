@@ -4,7 +4,7 @@
 // Authors the six blocks (flagHero · statsBar · themes · locationGrid ·
 // pullQuote · nextEssay) verbatim from claude-design-template/Cash og Amerika.html.
 // This is the project's first image upload: the flag background goes through the
-// Sanity asset pipeline (best-practices §7). Non-draft _id → published directly;
+// Sanity asset pipeline. Non-draft _id → published directly;
 // createOrReplace keeps re-runs idempotent (Sanity dedupes the asset by hash).
 
 import { readFileSync } from 'node:fs'

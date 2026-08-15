@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
-// Single static default share image (Metaplan Step 9 / §8 rule 6 — one OG
-// source). Editor-chosen `seo.ogImage` overrides it per page; pages without one
+// Single static default share image — one OG source for the whole site.
+// Editor-chosen `seo.ogImage` overrides it per page; pages without one
 // fall back here so every share preview has an image. Path is relative and
 // resolves to an absolute URL via `metadataBase` (set in the root layout).
 export const DEFAULT_OG_IMAGE = '/og-default.jpg'

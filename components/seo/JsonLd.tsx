@@ -5,8 +5,8 @@ import { DEFAULT_OG_IMAGE } from './metadata'
 /**
  * Emits a JSON-LD structured-data script. Using `dangerouslySetInnerHTML` here
  * is the Next.js-sanctioned mechanism for `<script type="application/ld+json">`
- * and is a deliberate, scoped exception to best-practices §6 rule 5 (which bars
- * `dangerouslySetInnerHTML` for *Portable Text content* rendering). The payload
+ * and is a deliberate, scoped exception to the ban on `dangerouslySetInnerHTML`,
+ * which is about *Portable Text content* rendering. The payload
  * is `JSON.stringify` output we control — `<` is escaped to `<` to prevent
  * a `</script>` breakout — so there is no untrusted-HTML injection path.
  */

@@ -1,6 +1,6 @@
 # Tech Stack — Johnny og Jeg
 
-This document defines the technology choices for the Johnny og Jeg website. It is the source of truth for all stack decisions; if a step in `Metaplan.md` conflicts with this document, this document wins until updated.
+This document defines the technology choices for the Johnny og Jeg website. It is the source of truth for all stack decisions and wins over any other doc on conflict, until amended.
 
 ## Purpose of the project
 
@@ -81,13 +81,14 @@ Per-page-type folders under `components/` (e.g. `hub/`, future `landscape/`) hol
 
 ## Environment variables
 
-| Variable | Where | Purpose |
-|---|---|---|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Vercel + `.env.local` | Public, used by browser-side image URLs. |
-| `NEXT_PUBLIC_SANITY_DATASET` | Vercel + `.env.local` | Usually `production`. |
-| `NEXT_PUBLIC_SANITY_API_VERSION` | Vercel + `.env.local` | Pinned ISO date, e.g. `2026-05-01`. |
-| `SANITY_API_READ_TOKEN` | Vercel (server only) | For draft mode / preview queries. |
-| `SANITY_WEBHOOK_SECRET` | Vercel (server only) | Verifies revalidation webhook signatures. |
+| Variable                         | Where                 | Purpose                                                                                                                                                          |
+|----------------------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NEXT_PUBLIC_SANITY_PROJECT_ID`  | Vercel + `.env.local` | Public, used by browser-side image URLs.                                                                                                                         |
+| `NEXT_PUBLIC_SANITY_DATASET`     | Vercel + `.env.local` | Usually `production`.                                                                                                                                            |
+| `NEXT_PUBLIC_SANITY_API_VERSION` | Vercel + `.env.local` | Pinned ISO date, e.g. `2026-05-01`.                                                                                                                              |
+| `SANITY_API_READ_TOKEN`          | Vercel (server only)  | For draft mode / preview queries.                                                                                                                                |
+| `SANITY_WEBHOOK_SECRET`          | Vercel (server only)  | Verifies revalidation webhook signatures.                                                                                                                        |
+| `NEXT_PUBLIC_SITE_URL`           | Vercel (Production)   | The public origin, `https://johnnyogjeg.dk`. Drives `metadataBase`, canonicals, OG URLs, sitemap and robots. Falls back to the Vercel deployment URL when unset. |
 
 ## Versioning policy
 

@@ -10,7 +10,7 @@ export type SubnavItem = {
   shortName: string | null
 }
 
-// The only client leaf on the Kulturen page (best-practices §3 rule 4): a
+// The only client leaf on the Kulturen page: a
 // scroll-revealed sticky table of contents. Appears once the first `.land`
 // section reaches the top of the viewport and highlights the active section.
 export function KulturenSubnav({ items }: { items: SubnavItem[] }) {

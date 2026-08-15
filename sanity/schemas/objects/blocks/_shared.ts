@@ -6,7 +6,7 @@ import { defineArrayMember, defineField } from 'sanity'
 //   rendered through InlineText (the design's signature red-emphasis word).
 // `proseBlock` — body copy: normal paragraphs, em/strong, plus an external-link
 //   annotation. Musikeren's era prose links out to Wikipedia/YouTube, so the
-//   link mark + its PortableText serializer ship together (best-practices §6).
+//   link mark + its PortableText serializer ship together.
 
 export const inlineBlock = defineArrayMember({
   type: 'block',

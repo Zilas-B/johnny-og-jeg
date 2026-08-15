@@ -2,7 +2,7 @@ import { createImageUrlBuilder } from '@sanity/image-url'
 
 import { client } from './client'
 
-// Single image-URL builder for the whole site (best-practices §7). Co-located
+// Single image-URL builder for the whole site. Co-located
 // with sanity/client.ts. `urlFor(image)` returns a chainable builder —
 // .width(...).auto('format').url() etc. Consumed by components/editorial/SanityImage.tsx.
 const builder = createImageUrlBuilder(client)

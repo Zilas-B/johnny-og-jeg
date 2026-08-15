@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-// Maps an accentColor preset to its CSS-variable pair (best-practices §4). The
+// Maps an accentColor preset to its CSS-variable pair. The
 // page wrapper writes these once as --accent / --accent-deep; every downstream
 // accent element reads them. Shared by LandscapeView and the block renderer.
 export const ACCENT_VARS: Record<string, { accent: string; deep: string }> = {

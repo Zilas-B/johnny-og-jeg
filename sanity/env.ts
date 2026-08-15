@@ -19,9 +19,9 @@ export const projectId = assertValue(
 
 /**
  * Public site origin — used for `metadataBase`, canonical/OG URLs, sitemap,
- * and robots. No production domain is wired yet (Metaplan Step 10), so this
- * is intentionally not asserted: it falls back to the Vercel preview URL and
- * then localhost, keeping sitemap/robots correct everywhere in the meantime.
+ * and robots. Set to the production domain in Vercel; intentionally not
+ * asserted so preview deploys and local dev still resolve, falling back to
+ * the Vercel URL and then localhost.
  * Trailing slash stripped so callers can concatenate `${siteUrl}/path`.
  */
 export const siteUrl = (

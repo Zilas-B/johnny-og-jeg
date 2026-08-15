@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react'
 
 import { urlFor } from '@/sanity/image'
 
-// The Sanity image pipeline + next/image wrapper (best-practices §7). Reads
+// The Sanity image pipeline + next/image wrapper. Reads
 // width/height from asset.metadata.dimensions, blurs from lqip, trusts the
 // schema-required `alt`. Two modes: a sized image (pass `width`) or a `fill`
 // layer for backgrounds (parent must be positioned). The adapter layer if the

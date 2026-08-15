@@ -30,7 +30,7 @@ export function Nav({ items, cta }: { items: NavItems; cta: CtaData }) {
 
   // Close on Escape (refocus the trigger) and on click/focus outside the nav —
   // listeners mounted only while a dropdown is open. Mirrors the KulturenSubnav
-  // client-leaf pattern (best-practices §3 rule 4).
+  // client-leaf pattern.
   useEffect(() => {
     if (!openKey) return
 

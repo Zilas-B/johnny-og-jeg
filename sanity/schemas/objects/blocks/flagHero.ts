@@ -4,7 +4,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import { proseBlock } from './_shared'
 
 // `.flag-hero` band from Cash og Amerika.html: a flag-photo background (the
-// project's first raster image, best-practices §7), a left text column, and a
+// project's first raster image), a left text column, and a
 // right "telegram" card. The H1 carries two distinct non-accent colours — `og`
 // barn-red, `Amerika.` brass — which the shared inlineBlock/InlineText (single
 // `em` accent) cannot express, so the heading is modelled as three bespoke
