@@ -30,3 +30,17 @@ Danish editorial website about Johnny Cash — Next.js App Router + Sanity v3, o
 ## Commands
 
 `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm types` (Sanity schema extract + typegen; also runs automatically via `predev`/`prebuild`). See `package.json` scripts for the full list.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as GitHub issues on `Zilas-B/johnny-og-jeg`, managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles, each label string equal to its name. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
