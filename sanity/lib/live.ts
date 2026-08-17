@@ -59,5 +59,11 @@ const liveClient = client.withConfig({
 export const { sanityFetch, SanityLive } = defineLive({
   client: liveClient,
   serverToken: readToken,
-  browserToken: readToken,
+  // Never shared with the browser. `browserToken` would let the live channel
+  // subscribe to draft events outside the Studio — but the token is written to
+  // the page, and ours has write scope. Previewing happens inside Presentation,
+  // which feeds drafts through its own channel, so nothing is lost. `false`
+  // rather than `undefined`: it silences the dev warning, which exists to catch
+  // an accidental omission, not a deliberate one.
+  browserToken: false,
 })
