@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { buildMetadata } from '@/components/seo/metadata'
-import { client } from '@/sanity/client'
+import { sanityFetch } from '@/sanity/lib/live'
 import { HOME_PAGE_QUERY } from '@/sanity/queries/home'
 
 async function fetchHomePage() {
-  return client.fetch(HOME_PAGE_QUERY, {}, { next: { tags: ['homePage'] } })
+  const { data } = await sanityFetch({ query: HOME_PAGE_QUERY, tags: ['homePage'] })
+  return data
 }
 
 export async function generateMetadata(): Promise<Metadata> {

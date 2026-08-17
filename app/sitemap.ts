@@ -5,6 +5,8 @@ import { siteUrl } from '@/sanity/env'
 import { FIXED_PATH } from '@/sanity/queries/router'
 import { SITEMAP_QUERY } from '@/sanity/queries/sitemap'
 
+// Base client on purpose — the sitemap is a public artefact and must list
+// published documents only, never whatever the editor happens to have in draft.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const docs = await client.fetch(
     SITEMAP_QUERY,

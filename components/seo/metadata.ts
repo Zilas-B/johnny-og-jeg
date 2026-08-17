@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { stegaClean } from 'next-sanity'
 
 // Single static default share image — one OG source for the whole site.
 // Editor-chosen `seo.ogImage` overrides it per page; pages without one
@@ -35,7 +36,10 @@ export function buildMetadata(input: {
   const description = input.description ?? undefined
   const images = [{ url: input.ogImageUrl ?? DEFAULT_OG_IMAGE }]
 
-  return {
+  // Under Draft Mode the page fetch encodes stega characters into editable
+  // strings. Head tags are not previewable — nothing overlays a <title> — so
+  // strip them here, the one funnel every page's metadata passes through.
+  return stegaClean({
     // seoTitle → absolute (verbatim); fallback → string so the template suffixes it.
     title: seoTitle ? { absolute: seoTitle } : fallbackTitle,
     description,
@@ -54,5 +58,5 @@ export function buildMetadata(input: {
       description,
       images,
     },
-  }
+  })
 }

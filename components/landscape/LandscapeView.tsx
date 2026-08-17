@@ -7,15 +7,21 @@ import { buildMetadata } from '@/components/seo/metadata'
 import { LandscapeHero } from '@/components/landscape/LandscapeHero'
 import { LandscapePosts } from '@/components/landscape/LandscapePosts'
 import { LandscapeSiblings } from '@/components/landscape/LandscapeSiblings'
-import { client } from '@/sanity/client'
+import { sanityFetch } from '@/sanity/lib/live'
 import { LANDSCAPE_QUERY, LANDSCAPE_SIBLINGS_QUERY } from '@/sanity/queries/landscape'
 
-export function fetchLandscape(slug: string) {
-  return client.fetch(
-    LANDSCAPE_QUERY,
-    { slug },
-    { next: { tags: [`landscape:${slug}`, 'landscape', 'archiveEntry'] } },
-  )
+export async function fetchLandscape(slug: string) {
+  const { data } = await sanityFetch({
+    query: LANDSCAPE_QUERY,
+    params: { slug },
+    tags: [`landscape:${slug}`, 'landscape', 'archiveEntry'],
+  })
+  return data
+}
+
+async function fetchLandscapeSiblings() {
+  const { data } = await sanityFetch({ query: LANDSCAPE_SIBLINGS_QUERY, tags: ['landscape'] })
+  return data
 }
 
 export async function landscapeMetadata(slug: string): Promise<Metadata> {
@@ -31,10 +37,7 @@ export async function landscapeMetadata(slug: string): Promise<Metadata> {
 }
 
 export async function LandscapeView({ slug }: { slug: string }) {
-  const [data, siblings] = await Promise.all([
-    fetchLandscape(slug),
-    client.fetch(LANDSCAPE_SIBLINGS_QUERY, {}, { next: { tags: ['landscape'] } }),
-  ])
+  const [data, siblings] = await Promise.all([fetchLandscape(slug), fetchLandscapeSiblings()])
 
   // Guard: a landscape that exists only as an identity stub (no authored hero)
   // is not yet renderable.

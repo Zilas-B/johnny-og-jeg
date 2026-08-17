@@ -1,11 +1,12 @@
 import { draftMode } from 'next/headers'
+import { VisualEditing } from 'next-sanity/visual-editing'
 
 import { Footer } from '@/components/chrome/Footer'
 import { Masthead } from '@/components/chrome/Masthead'
 import { MusicPlayer } from '@/components/chrome/MusicPlayer'
 import { Nav } from '@/components/chrome/Nav'
-import { client } from '@/sanity/client'
-import { SanityLive } from '@/sanity/lib/live'
+import { readToken } from '@/sanity/env'
+import { sanityFetch, SanityLive } from '@/sanity/lib/live'
 import { SITE_SETTINGS_QUERY } from '@/sanity/queries/global'
 
 export default async function SiteLayout({
@@ -13,11 +14,10 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode
 }) {
-  const settings = await client.fetch(
-    SITE_SETTINGS_QUERY,
-    {},
-    { next: { tags: ['siteSettings'] } },
-  )
+  const { data: settings } = await sanityFetch({
+    query: SITE_SETTINGS_QUERY,
+    tags: ['siteSettings'],
+  })
 
   if (
     !settings ||
@@ -38,6 +38,16 @@ export default async function SiteLayout({
 
   const { isEnabled: isDraft } = await draftMode()
 
+  // Without a read token `sanityFetch` silently falls back to the published
+  // perspective with stega off — draft mode would look enabled and preview
+  // nothing, the exact bug this route exists to prevent. Fail loudly instead,
+  // matching /api/draft-mode/enable.
+  if (isDraft && !readToken) {
+    throw new Error(
+      'Draft Mode is on but SANITY_API_READ_TOKEN is missing — set it in .env.local (and in Vercel) or preview will render published content.',
+    )
+  }
+
   return (
     <>
       <a href="#main" className="skip-link">
@@ -57,7 +67,15 @@ export default async function SiteLayout({
         }}
       />
       <MusicPlayer />
-      {isDraft && <SanityLive />}
+      {/* Draft Mode only: SanityLive streams content changes, VisualEditing
+          turns the stega-encoded strings into Presentation's click-to-edit
+          overlays. Public visitors load neither. */}
+      {isDraft && (
+        <>
+          <SanityLive />
+          <VisualEditing />
+        </>
+      )}
     </>
   )
 }

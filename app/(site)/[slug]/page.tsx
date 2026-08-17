@@ -13,6 +13,7 @@ import { KulturenView } from '@/components/kulturen/KulturenView'
 import { LandscapeView, landscapeMetadata } from '@/components/landscape/LandscapeView'
 import { client } from '@/sanity/client'
 import { siteUrl } from '@/sanity/env'
+import { sanityFetch } from '@/sanity/lib/live'
 import { BOGER_QUERY } from '@/sanity/queries/boger'
 import { FOREDRAG_QUERY } from '@/sanity/queries/foredrag'
 import { HISTORIEN_QUERY } from '@/sanity/queries/historien'
@@ -28,6 +29,9 @@ type Params = { params: Promise<{ slug: string }> }
 export const dynamicParams = true
 
 export async function generateStaticParams() {
+  // Published-only, and on the base client on purpose: `sanityFetch` reads
+  // `draftMode()`, which throws inside `generateStaticParams`, and a draft slug
+  // must never become a prerendered public route.
   const docs = await client.fetch(SITEMAP_QUERY)
   return docs
     .map((doc) => FIXED_PATH[doc._type] ?? doc.slug)
@@ -35,32 +39,45 @@ export async function generateStaticParams() {
     .map((slug) => ({ slug }))
 }
 
-function fetchRouter(slug: string) {
-  return client.fetch(
-    SLUG_TYPE_QUERY,
-    { slug },
-    { next: { tags: ['landscape', 'page', 'kulturenPage'] } },
-  )
+async function fetchRouter(slug: string) {
+  const { data } = await sanityFetch({
+    query: SLUG_TYPE_QUERY,
+    params: { slug },
+    tags: ['landscape', 'page', 'kulturenPage'],
+  })
+  return data
 }
 
-function fetchKulturen() {
-  return client.fetch(KULTUREN_QUERY, {}, { next: { tags: ['kulturenPage', 'landscape'] } })
+async function fetchKulturen() {
+  const { data } = await sanityFetch({
+    query: KULTUREN_QUERY,
+    tags: ['kulturenPage', 'landscape'],
+  })
+  return data
 }
 
-function fetchHistorien() {
-  return client.fetch(HISTORIEN_QUERY, {}, { next: { tags: ['historienPage'] } })
+async function fetchHistorien() {
+  const { data } = await sanityFetch({ query: HISTORIEN_QUERY, tags: ['historienPage'] })
+  return data
 }
 
-function fetchForedrag() {
-  return client.fetch(FOREDRAG_QUERY, {}, { next: { tags: ['foredragPage'] } })
+async function fetchForedrag() {
+  const { data } = await sanityFetch({ query: FOREDRAG_QUERY, tags: ['foredragPage'] })
+  return data
 }
 
-function fetchBoger() {
-  return client.fetch(BOGER_QUERY, {}, { next: { tags: ['bogerPage'] } })
+async function fetchBoger() {
+  const { data } = await sanityFetch({ query: BOGER_QUERY, tags: ['bogerPage'] })
+  return data
 }
 
-function fetchPage(slug: string) {
-  return client.fetch(PAGE_QUERY, { slug }, { next: { tags: [`page:${slug}`, 'page'] } })
+async function fetchPage(slug: string) {
+  const { data } = await sanityFetch({
+    query: PAGE_QUERY,
+    params: { slug },
+    tags: [`page:${slug}`, 'page'],
+  })
+  return data
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {

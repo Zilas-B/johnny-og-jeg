@@ -36,6 +36,7 @@ Conventions the code already demonstrates are not listed here — read the neigh
 - **Images:** no raw `<img>` in `app/` or `components/`. Everything goes through the Sanity image wrapper, which takes width and height from asset metadata — without them the page reflows when the image loads.
 - **Rich text:** no `dangerouslySetInnerHTML` for content. A new text feature is a schema definition *and* a serializer in the shared Portable Text component map, added in the same commit — one without the other is a dead editor button or dead code.
 - **Accents:** the per-page accent is a closed list of named presets the editor selects, never a free colour picker. Adding a preset is a code change, deliberately.
+- **Enum fields consumed as lookup keys** must be listed in `LOOKUP_KEY_FIELDS` in `sanity/lib/live.ts`. Draft Mode encodes invisible stega characters into every string it thinks is editable; an encoded value stops matching its `Record` key and falls through to the default. Silent, and preview-only — the published site looks fine.
 - **`app/(site)/layout.tsx` stays a Server Component.** No `'use client'` on it — that collapses every page beneath it into a client tree.
 - **Schema:** anything the frontend renders unconditionally is `Rule.required()`, image `alt` included. Enumerations use `options.list`, never free text — a typo in content is forever.
 - **`next-sanity` is pinned to `^13`.** Next 16 with anything older triggers a prefetch cascade that multiplies Sanity API requests several-fold.

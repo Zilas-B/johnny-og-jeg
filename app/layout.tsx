@@ -15,6 +15,9 @@ const DEFAULT_TITLE = 'Johnny og jeg — om Johnny Cash, troen og Amerika'
 // the `%s — Johnny og jeg` title template every sub-page inherits, and the
 // editor-authored siteSettings.seo fallbacks. Per-page generateMetadata
 // overrides title/description/OG; the home page opts out of the suffix.
+// Base client, not `sanityFetch`: this layout also wraps /studio, and stega
+// characters in <title>/<meta> are never visible in the preview pane — they'd
+// only leak invisible junk into head tags. Nothing here is previewable.
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await client.fetch(
     SITE_SETTINGS_QUERY,

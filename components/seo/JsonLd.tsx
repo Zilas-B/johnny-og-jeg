@@ -1,3 +1,5 @@
+import { stegaClean } from 'next-sanity'
+
 import { siteUrl } from '@/sanity/env'
 
 import { DEFAULT_OG_IMAGE } from './metadata'
@@ -9,12 +11,17 @@ import { DEFAULT_OG_IMAGE } from './metadata'
  * which is about *Portable Text content* rendering. The payload
  * is `JSON.stringify` output we control — `<` is escaped to `<` to prevent
  * a `</script>` breakout — so there is no untrusted-HTML injection path.
+ *
+ * `stegaClean` strips the Draft Mode source-map characters: structured data is
+ * machine-read and never overlaid, so encoded strings would be pure noise.
  */
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(stegaClean(data)).replace(/</g, '\\u003c'),
+      }}
     />
   )
 }
