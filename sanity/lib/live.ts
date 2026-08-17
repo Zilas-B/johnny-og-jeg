@@ -1,7 +1,7 @@
 import { defineLive } from 'next-sanity/live'
 
 import { client } from '../client'
-import { editorToken } from '../env'
+import { readToken } from '../env'
 
 /**
  * Field names whose value is a lookup key, not prose — accent presets, variant
@@ -58,14 +58,15 @@ const liveClient = client.withConfig({
  *
  * `browserToken: false` on purpose. `defineLive` hands that token to the
  * `<SanityLive />` client component, which serialises it into the page's RSC
- * payload — readable by anyone who can reach a draft-mode page. Ours grants
- * write access, so it stays server-side. The cost is that live draft updates
- * work inside the Presentation tool only, not in a standalone browser tab;
- * that is the whole preview workflow here. Set it to `editorToken` to opt back
- * in, and read the sentence above again before you do.
+ * payload — readable by anyone who reaches a draft-mode page. Ours is a Viewer
+ * token, so the exposure is read-only, but it still reads *drafts*, which is
+ * more than a visitor may see — and nothing needs it client-side, because
+ * Presentation feeds draft updates through its own channel. The cost is that
+ * standalone draft preview, in a browser tab outside the Studio, won't
+ * live-update. Set it to `readToken` if you ever want that.
  */
 export const { sanityFetch, SanityLive } = defineLive({
   client: liveClient,
-  serverToken: editorToken,
+  serverToken: readToken,
   browserToken: false,
 })
