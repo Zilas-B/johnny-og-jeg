@@ -5,7 +5,7 @@ import { Footer } from '@/components/chrome/Footer'
 import { Masthead } from '@/components/chrome/Masthead'
 import { MusicPlayer } from '@/components/chrome/MusicPlayer'
 import { Nav } from '@/components/chrome/Nav'
-import { readToken } from '@/sanity/env'
+import { editorToken } from '@/sanity/env'
 import { sanityFetch, SanityLive } from '@/sanity/lib/live'
 import { SITE_SETTINGS_QUERY } from '@/sanity/queries/global'
 
@@ -38,13 +38,13 @@ export default async function SiteLayout({
 
   const { isEnabled: isDraft } = await draftMode()
 
-  // Without a read token `sanityFetch` silently falls back to the published
+  // Without a token `sanityFetch` silently falls back to the published
   // perspective with stega off — draft mode would look enabled and preview
   // nothing, the exact bug this route exists to prevent. Fail loudly instead,
   // matching /api/draft-mode/enable.
-  if (isDraft && !readToken) {
+  if (isDraft && !editorToken) {
     throw new Error(
-      'Draft Mode is on but SANITY_API_READ_TOKEN is missing — set it in .env.local (and in Vercel) or preview will render published content.',
+      'Draft Mode is on but SANITY_API_EDITOR_TOKEN is missing — set it in .env.local (and in Vercel) or preview will render published content.',
     )
   }
 

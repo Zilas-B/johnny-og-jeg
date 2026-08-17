@@ -1,7 +1,7 @@
 import { defineLive } from 'next-sanity/live'
 
 import { client } from '../client'
-import { readToken } from '../env'
+import { editorToken } from '../env'
 
 /**
  * Field names whose value is a lookup key, not prose — accent presets, variant
@@ -55,15 +55,17 @@ const liveClient = client.withConfig({
  * `useCdn: true` on its own copy (mitigated by `cacheMode: 'noStale'` outside
  * the build phase), and every call costs two requests — one for the sync tags,
  * one for the data. Neither is configurable in v13.
+ *
+ * `browserToken: false` on purpose. `defineLive` hands that token to the
+ * `<SanityLive />` client component, which serialises it into the page's RSC
+ * payload — readable by anyone who can reach a draft-mode page. Ours grants
+ * write access, so it stays server-side. The cost is that live draft updates
+ * work inside the Presentation tool only, not in a standalone browser tab;
+ * that is the whole preview workflow here. Set it to `editorToken` to opt back
+ * in, and read the sentence above again before you do.
  */
 export const { sanityFetch, SanityLive } = defineLive({
   client: liveClient,
-  serverToken: readToken,
-  // Never shared with the browser. `browserToken` would let the live channel
-  // subscribe to draft events outside the Studio — but the token is written to
-  // the page, and ours has write scope. Previewing happens inside Presentation,
-  // which feeds drafts through its own channel, so nothing is lost. `false`
-  // rather than `undefined`: it silences the dev warning, which exists to catch
-  // an accidental omission, not a deliberate one.
+  serverToken: editorToken,
   browserToken: false,
 })

@@ -35,11 +35,14 @@ export const siteUrl = (
  * Server-only secrets. Exposed as raw strings (possibly undefined) so
  * the module loads without them — CLI tooling (`pnpm types`) and public
  * page renders don't need them. Consumers assert at point of use:
- * Draft Mode for readToken, webhook handler for webhookSecret.
+ * Draft Mode for editorToken, webhook handler for webhookSecret.
+ *
+ * `editorToken` carries write access, so it must never reach the browser:
+ * `defineLive`'s `browserToken` is deliberately off in `sanity/lib/live.ts`.
  *
  * Never import from a 'use client' file.
  */
-export const readToken = process.env.SANITY_API_READ_TOKEN
+export const editorToken = process.env.SANITY_API_EDITOR_TOKEN
 export const webhookSecret = process.env.SANITY_WEBHOOK_SECRET
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
