@@ -3,7 +3,6 @@ import { VisualEditing } from 'next-sanity/visual-editing'
 
 import { Footer } from '@/components/chrome/Footer'
 import { Masthead } from '@/components/chrome/Masthead'
-import { MusicPlayer } from '@/components/chrome/MusicPlayer'
 import { Nav } from '@/components/chrome/Nav'
 import { readToken } from '@/sanity/env'
 import { sanityFetch, SanityLive } from '@/sanity/lib/live'
@@ -66,7 +65,6 @@ export default async function SiteLayout({
           footerBottomTagline: settings.footerBottomTagline,
         }}
       />
-      <MusicPlayer />
       {/* Draft Mode only: SanityLive streams content changes, VisualEditing
           turns the stega-encoded strings into Presentation's click-to-edit
           overlays. Public visitors load neither. */}

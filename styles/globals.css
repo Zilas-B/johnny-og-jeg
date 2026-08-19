@@ -45,7 +45,6 @@ body {
   font-size: 18px;
   line-height: 1.55;
   min-height: 100vh;
-  padding-bottom: 96px; /* reserved for Step 3 music player */
   position: relative;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './not-found.module.css'
 
 // Styled 404. Rendered inside app/(site)/layout.tsx, so it carries masthead + nav
-// + footer + music player. Catches notFound() thrown from a bad [slug] (the common
+// + footer. Catches notFound() thrown from a bad [slug] (the common
 // case); deep unmatched paths fall through to Next's generic chrome-less 404, which
 // is accepted — chrome lives in the site layout, so a root not-found couldn't carry
 // it anyway. There is deliberately no error.tsx / global-error.tsx either.

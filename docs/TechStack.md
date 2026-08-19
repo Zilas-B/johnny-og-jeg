@@ -13,7 +13,7 @@ A multi-page editorial website (in Danish) exploring America through Johnny Cash
 
 | Concern | Choice | Notes |
 |---|---|---|
-| Framework | **Next.js 16+ (App Router)** | Server Components by default; client components only where interactivity demands it (e.g. music player). Scaffolded on **Next 16.2.6** (2026-05-26) from `create-next-app@latest`. |
+| Framework | **Next.js 16+ (App Router)** | Server Components by default; client components only where interactivity demands it. Scaffolded on **Next 16.2.6** (2026-05-26) from `create-next-app@latest`. |
 | Language | **TypeScript** (strict mode) | All source files `.ts` / `.tsx`. |
 | Runtime | **Node.js 20 LTS** | Required by current Next.js + Sanity tooling. |
 | Package manager | **pnpm** | Fast, disk-efficient, good monorepo story if we ever split. Acceptable fallback: npm. |
@@ -37,9 +37,8 @@ A multi-page editorial website (in Danish) exploring America through Johnny Cash
 | Search | None in prototype. Sanity Embeddings Index for semantic search when content volume justifies it. |
 | Forms | None in design. If "Foredrag" page later needs a contact form: native HTML form → Resend (email) or Formspree. |
 | Animations beyond CSS | CSS keyframes are sufficient for vinyl spin, ticker, hover lifts. Add **Framer Motion** only if a future step needs scroll-driven or gesture animations. |
-| Audio playback | Prototype: external links only (open YouTube/Spotify in new tab). Future: YouTube IFrame API or Spotify Web Playback SDK if licensing/UX justifies it. |
 | i18n | **Not needed.** Site is Danish-only. |
-| Testing | None in prototype. Add **Playwright** for critical-path E2E (nav, music player, page loads) once shape stabilizes. Avoid premature unit testing of presentational components. |
+| Testing | None in prototype. Add **Playwright** for critical-path E2E (nav, page loads) once shape stabilizes. Avoid premature unit testing of presentational components. |
 | Error monitoring | None in prototype. **Sentry** (free tier) if real users start hitting bugs. |
 
 ## Project structure (target)
@@ -48,14 +47,14 @@ A multi-page editorial website (in Danish) exploring America through Johnny Cash
 johnny-og-jeg/
 ├── app/
 │   ├── (site)/                       # Public site route group
-│   │   ├── layout.tsx                # Masthead, sticky nav, footer, music player
+│   │   ├── layout.tsx                # Masthead, sticky nav, footer
 │   │   ├── page.tsx                  # "Johnny og jeg" hub page
 │   │   ├── [landscape]/page.tsx      # 8 landscapes: Naturen, Vesten, etc.
 │   │   └── [slug]/page.tsx           # Other top-level pages (Historien, Musikeren, …)
 │   ├── studio/[[...tool]]/page.tsx   # Embedded Sanity Studio
 │   └── api/                          # Route handlers (revalidation webhooks, etc.)
 ├── components/
-│   ├── chrome/                       # Masthead, Nav, Footer, MusicPlayer
+│   ├── chrome/                       # Masthead, Nav, Footer
 │   ├── editorial/                    # PortableText, SanityImage, EraChip, drop cap, …
 │   ├── hub/                          # Hub-page section blocks (HubHero, HubVinyls, …)
 │   ├── <page-type>/                  # Same pattern for landscape/, supporting/, etc.
@@ -106,3 +105,4 @@ The following are explicitly **not** part of this stack — adding any of them r
 - No headless UI library (Radix, shadcn) unless a specific component justifies it.
 - No authentication for the public site. Sanity Studio handles its own auth.
 - No e-commerce.
+- No audio playback of any kind — no player, no embed, no "listen on" widget. See `.out-of-scope/music-player.md`. Music links, if wanted, belong in article body text.

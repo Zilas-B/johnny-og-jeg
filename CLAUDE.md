@@ -23,7 +23,7 @@ Danish editorial website about Johnny Cash — Next.js App Router + Sanity v3, o
 
 - Content is **Danish** throughout — watch `æ`, `ø`, `å` filename/string encoding.
 - Sanity Studio is **embedded** in the Next.js app at `app/studio/[[...tool]]/page.tsx` — not a separate project. Site routes live under `app/(site)/` so Studio and site don't share chrome.
-- The persistent "Cash Radio" player lives in `app/(site)/layout.tsx` so it survives client-side navigation. Per-page accent colors are CSS custom properties — never hardcode colors per page.
+- Per-page accent colors are CSS custom properties — never hardcode colors per page.
 - Git is already initialized (`main` + `origin` remote configured). Do not re-run `git init`.
 - **Solo developer — work directly on `main`.** Do not create feature branches or open PRs; commit straight to `main` (still only when asked). This overrides the default "branch first when on the default branch" behavior.
 
