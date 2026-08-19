@@ -353,13 +353,6 @@ export type StatsBar = {
   }>;
 };
 
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
-
 export type FlagHero = {
   _type: "flagHero";
   eyebrow?: string;
@@ -391,14 +384,6 @@ export type FlagHero = {
     _type: "metaItem";
     _key: string;
   }>;
-  backgroundImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
   telegram?: Telegram;
 };
 
@@ -804,6 +789,13 @@ export type VinylHero = {
   tickerItems?: Array<string>;
 };
 
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type HistorienEra = {
   _type: "historienEra";
   romanNumeral?: string;
@@ -1126,22 +1118,6 @@ export type Page = {
       } & LocationGrid)
   >;
   seo?: Seo;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type Slug = {
@@ -1603,6 +1579,22 @@ export type BogerPage = {
     };
   };
   seo?: Seo;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type ForedragPage = {
@@ -2315,7 +2307,6 @@ export type AllSanitySchemaTypes =
   | LocationGrid
   | Themes
   | StatsBar
-  | SanityImageAssetReference
   | FlagHero
   | Hymnal
   | Stations
@@ -2326,6 +2317,7 @@ export type AllSanitySchemaTypes =
   | CardGrid
   | SteppedList
   | VinylHero
+  | SanityImageAssetReference
   | HistorienEra
   | KulturenTimelineEntry
   | KulturenTimeline
@@ -2342,13 +2334,13 @@ export type AllSanitySchemaTypes =
   | NavLink
   | Masthead
   | Page
-  | SanityImageCrop
-  | SanityImageHotspot
   | Slug
   | LandscapeReference
   | ArchiveEntry
   | Landscape
   | BogerPage
+  | SanityImageCrop
+  | SanityImageHotspot
   | ForedragPage
   | HistorienPage
   | KulturenPage
@@ -3830,7 +3822,7 @@ export type LANDSCAPE_SIBLINGS_QUERY_RESULT = Array<{
 
 // Source: sanity/queries/page.ts
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{    title,    accentColor,    _createdAt,    _updatedAt,    blocks[]{      _type,      _key,      _type == "vinylHero" => {        eyebrow,        romanNumeral,        heading,        lede,        metaItems[]{ label, value },        vinylTop,        vinylTitle,        vinylBottom,        tickerItems      },      _type == "steppedList" => {        kicker,        heading,        deck,        items[]{          years,          label,          tag[]{ label, value },          body,          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }        }      },      _type == "cardGrid" => {        kicker,        heading,        deck,        cards[]{ roman, tag, cardHeading, cardBody }      },      _type == "pullQuote" => {        kicker,        quote,        attribution,        background,        borderTone      },      _type == "nextEssay" => {        kicker,        heading,        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }      },      _type == "hymnHero" => {        eyebrow,        romanNumeral,        heading,        lede,        metaItems[]{ label, value },        glassCaptionTop,        glassQuote      },      _type == "scriptureStrip" => {        quote,        reference      },      _type == "stations" => {        kicker,        heading,        deck,        items[]{          roman,          years,          location,          heading,          where,          body,          quote{ text, attribution }        }      },      _type == "hymnal" => {        kicker,        heading,        deck,        columns[]{          header,          subhead,          rows[]{ number, title, sub, duration, href }        }      },      _type == "flagHero" => {        eyebrow,        romanNumeral,        headingLead,        headingAmp,        headingGold,        lede,        metaItems[]{ label, value },        backgroundImage{          asset->{ _id, metadata{ dimensions, lqip } },          alt        },        telegram{          headLeft,          headTitle,          headYear,          lines,          sig,          postmarkTop,          postmarkMid,          postmarkBottom        }      },      _type == "statsBar" => {        cells[]{ top, big }      },      _type == "themes" => {        kicker,        heading,        deck,        items[]{          num,          when,          title,          keys,          body,          song{ label, title, href }        }      },      _type == "locationGrid" => {        kicker,        heading,        deck,        cards[]{ placeTag, name, coords, body }      }    },    seo{      title,      description,      ogImage{ asset->{ url, metadata{ dimensions } }, alt }    }  }
+// Query: *[_type == "page" && slug.current == $slug][0]{    title,    accentColor,    _createdAt,    _updatedAt,    blocks[]{      _type,      _key,      _type == "vinylHero" => {        eyebrow,        romanNumeral,        heading,        lede,        metaItems[]{ label, value },        vinylTop,        vinylTitle,        vinylBottom,        tickerItems      },      _type == "steppedList" => {        kicker,        heading,        deck,        items[]{          years,          label,          tag[]{ label, value },          body,          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }        }      },      _type == "cardGrid" => {        kicker,        heading,        deck,        cards[]{ roman, tag, cardHeading, cardBody }      },      _type == "pullQuote" => {        kicker,        quote,        attribution,        background,        borderTone      },      _type == "nextEssay" => {        kicker,        heading,        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }      },      _type == "hymnHero" => {        eyebrow,        romanNumeral,        heading,        lede,        metaItems[]{ label, value },        glassCaptionTop,        glassQuote      },      _type == "scriptureStrip" => {        quote,        reference      },      _type == "stations" => {        kicker,        heading,        deck,        items[]{          roman,          years,          location,          heading,          where,          body,          quote{ text, attribution }        }      },      _type == "hymnal" => {        kicker,        heading,        deck,        columns[]{          header,          subhead,          rows[]{ number, title, sub, duration, href }        }      },      _type == "flagHero" => {        eyebrow,        romanNumeral,        headingLead,        headingAmp,        headingGold,        lede,        metaItems[]{ label, value },        telegram{          headLeft,          headTitle,          headYear,          lines,          sig,          postmarkTop,          postmarkMid,          postmarkBottom        }      },      _type == "statsBar" => {        cells[]{ top, big }      },      _type == "themes" => {        kicker,        heading,        deck,        items[]{          num,          when,          title,          keys,          body,          song{ label, title, href }        }      },      _type == "locationGrid" => {        kicker,        heading,        deck,        cards[]{ placeTag, name, coords, body }      }    },    seo{      title,      description,      ogImage{ asset->{ url, metadata{ dimensions } }, alt }    }  }
 export type PAGE_QUERY_RESULT = {
   title: string | null;
   accentColor: "barn" | "brass" | "denim" | null;
@@ -3927,16 +3919,6 @@ export type PAGE_QUERY_RESULT = {
           label: string | null;
           value: string | null;
         }> | null;
-        backgroundImage: {
-          asset: {
-            _id: string;
-            metadata: {
-              dimensions: SanityImageDimensions | null;
-              lqip: string | null;
-            } | null;
-          } | null;
-          alt: string | null;
-        } | null;
         telegram: {
           headLeft: string | null;
           headTitle: string | null;
@@ -4486,7 +4468,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "kulturenPage"][0]{\n    hero{ eyebrow, title, subhead, deck },\n    chips{ label, count },\n    intro{ kicker, heading, signature, body },\n    outro{\n      kicker,\n      heading,\n      body,\n      actions[]{ text, href, style },\n      cardLead,\n      cardHeading\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    },\n    "landscapes": *[_type == "landscape"] | order(order asc){\n      "slug": slug.current,\n      romanNumeral,\n      toponym,\n      period,\n      name,\n      motto,\n      shortName,\n      kulturenBgVariant,\n      kulturenArchiveCta,\n      kulturenCardTag,\n      kulturenEssay,\n      kulturenSidebar[]{\n        _type,\n        _key,\n        label,\n        emphasis,\n        value,\n        entries[]{ _key, year, text }\n      }\n    }\n  }\n': KULTUREN_QUERY_RESULT;
     '\n  *[_type == "landscape" && slug.current == $slug][0]{\n    name,\n    "slug": slug.current,\n    order,\n    romanNumeral,\n    toponym,\n    period,\n    accentColor,\n    eyebrow,\n    motto,\n    deck,\n    topicsLabel,\n    topics,\n    crumbBackText,\n    crumbBackHref,\n    emptyMeta,\n    emptyLabel,\n    emptyHeading,\n    emptyBody,\n    emptyActions[]{ text, href, style },\n    "entries": *[_type == "archiveEntry" && landscape._ref == ^._id] | order(publishedAt desc){\n      title,\n      "slug": slug.current,\n      publishedAt,\n      kind,\n      summary\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{url, metadata{dimensions}}, alt }\n    }\n  }\n': LANDSCAPE_QUERY_RESULT;
     '\n  *[_type == "landscape"] | order(order asc){\n    "slug": slug.current,\n    romanNumeral,\n    shortName,\n    order\n  }\n': LANDSCAPE_SIBLINGS_QUERY_RESULT;
-    '\n  *[_type == "page" && slug.current == $slug][0]{\n    title,\n    accentColor,\n    _createdAt,\n    _updatedAt,\n    blocks[]{\n      _type,\n      _key,\n      _type == "vinylHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        vinylTop,\n        vinylTitle,\n        vinylBottom,\n        tickerItems\n      },\n      _type == "steppedList" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          years,\n          label,\n          tag[]{ label, value },\n          body,\n          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }\n        }\n      },\n      _type == "cardGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ roman, tag, cardHeading, cardBody }\n      },\n      _type == "pullQuote" => {\n        kicker,\n        quote,\n        attribution,\n        background,\n        borderTone\n      },\n      _type == "nextEssay" => {\n        kicker,\n        heading,\n        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }\n      },\n      _type == "hymnHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        glassCaptionTop,\n        glassQuote\n      },\n      _type == "scriptureStrip" => {\n        quote,\n        reference\n      },\n      _type == "stations" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          roman,\n          years,\n          location,\n          heading,\n          where,\n          body,\n          quote{ text, attribution }\n        }\n      },\n      _type == "hymnal" => {\n        kicker,\n        heading,\n        deck,\n        columns[]{\n          header,\n          subhead,\n          rows[]{ number, title, sub, duration, href }\n        }\n      },\n      _type == "flagHero" => {\n        eyebrow,\n        romanNumeral,\n        headingLead,\n        headingAmp,\n        headingGold,\n        lede,\n        metaItems[]{ label, value },\n        backgroundImage{\n          asset->{ _id, metadata{ dimensions, lqip } },\n          alt\n        },\n        telegram{\n          headLeft,\n          headTitle,\n          headYear,\n          lines,\n          sig,\n          postmarkTop,\n          postmarkMid,\n          postmarkBottom\n        }\n      },\n      _type == "statsBar" => {\n        cells[]{ top, big }\n      },\n      _type == "themes" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          num,\n          when,\n          title,\n          keys,\n          body,\n          song{ label, title, href }\n        }\n      },\n      _type == "locationGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ placeTag, name, coords, body }\n      }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': PAGE_QUERY_RESULT;
+    '\n  *[_type == "page" && slug.current == $slug][0]{\n    title,\n    accentColor,\n    _createdAt,\n    _updatedAt,\n    blocks[]{\n      _type,\n      _key,\n      _type == "vinylHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        vinylTop,\n        vinylTitle,\n        vinylBottom,\n        tickerItems\n      },\n      _type == "steppedList" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          years,\n          label,\n          tag[]{ label, value },\n          body,\n          cuts[]{ cutLabel, cutTitle, cutDuration, cutHref }\n        }\n      },\n      _type == "cardGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ roman, tag, cardHeading, cardBody }\n      },\n      _type == "pullQuote" => {\n        kicker,\n        quote,\n        attribution,\n        background,\n        borderTone\n      },\n      _type == "nextEssay" => {\n        kicker,\n        heading,\n        cards[]{ roman, tag, cardHeading, cta, href, colorScheme }\n      },\n      _type == "hymnHero" => {\n        eyebrow,\n        romanNumeral,\n        heading,\n        lede,\n        metaItems[]{ label, value },\n        glassCaptionTop,\n        glassQuote\n      },\n      _type == "scriptureStrip" => {\n        quote,\n        reference\n      },\n      _type == "stations" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          roman,\n          years,\n          location,\n          heading,\n          where,\n          body,\n          quote{ text, attribution }\n        }\n      },\n      _type == "hymnal" => {\n        kicker,\n        heading,\n        deck,\n        columns[]{\n          header,\n          subhead,\n          rows[]{ number, title, sub, duration, href }\n        }\n      },\n      _type == "flagHero" => {\n        eyebrow,\n        romanNumeral,\n        headingLead,\n        headingAmp,\n        headingGold,\n        lede,\n        metaItems[]{ label, value },\n        telegram{\n          headLeft,\n          headTitle,\n          headYear,\n          lines,\n          sig,\n          postmarkTop,\n          postmarkMid,\n          postmarkBottom\n        }\n      },\n      _type == "statsBar" => {\n        cells[]{ top, big }\n      },\n      _type == "themes" => {\n        kicker,\n        heading,\n        deck,\n        items[]{\n          num,\n          when,\n          title,\n          keys,\n          body,\n          song{ label, title, href }\n        }\n      },\n      _type == "locationGrid" => {\n        kicker,\n        heading,\n        deck,\n        cards[]{ placeTag, name, coords, body }\n      }\n    },\n    seo{\n      title,\n      description,\n      ogImage{ asset->{ url, metadata{ dimensions } }, alt }\n    }\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[\n    (_type == "landscape" && slug.current == $slug) ||\n    (_type == "page" && slug.current == $slug) ||\n    (_type == "kulturenPage" && $slug == "kulturen") ||\n    (_type == "historienPage" && $slug == "historien") ||\n    (_type == "foredragPage" && $slug == "foredrag") ||\n    (_type == "bogerPage" && $slug == "boeger-spil-film")\n  ][0]{ _type }\n': SLUG_TYPE_QUERY_RESULT;
     '\n  *[\n    (_type == "landscape" && defined(slug.current) && defined(deck)) ||\n    (_type == "page" && defined(slug.current)) ||\n    _type in ["homePage", "kulturenPage", "historienPage", "foredragPage", "bogerPage"]\n  ]{\n    _type,\n    _updatedAt,\n    "slug": slug.current\n  }\n': SITEMAP_QUERY_RESULT;
   }

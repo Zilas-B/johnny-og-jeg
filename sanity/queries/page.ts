@@ -99,10 +99,6 @@ export const PAGE_QUERY = defineQuery(`
         headingGold,
         lede,
         metaItems[]{ label, value },
-        backgroundImage{
-          asset->{ _id, metadata{ dimensions, lqip } },
-          alt
-        },
         telegram{
           headLeft,
           headTitle,

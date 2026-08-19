@@ -13,7 +13,8 @@
   display: flex;
   gap: 48px;
   white-space: nowrap;
-  animation: scroll 60s linear infinite;
+  /* 100s per cycle: slow enough to read a passing item (#6). */
+  animation: scroll 100s linear infinite;
   font-family: var(--f-poster);
   letter-spacing: 0.1em;
   font-size: 18px;

@@ -3,13 +3,13 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import { proseBlock } from './_shared'
 
-// `.flag-hero` band from Cash og Amerika.html: a flag-photo background (the
-// project's first raster image), a left text column, and a
-// right "telegram" card. The H1 carries two distinct non-accent colours — `og`
-// barn-red, `Amerika.` brass — which the shared inlineBlock/InlineText (single
-// `em` accent) cannot express, so the heading is modelled as three bespoke
-// string parts and the component renders the .amp/.gold spans (documented
-// deviation from the inlineBlock-heading convention).
+// `.flag-hero` band from Cash og Amerika.html: a left text column and a right
+// "telegram" card. The flag-photo background was removed in #6. The H1 carries
+// two distinct non-accent colours — `og` barn-red, `Amerika.` brass — which
+// the shared inlineBlock/InlineText (single `em` accent) cannot express, so the
+// heading is modelled as three bespoke string parts and the component renders
+// the .amp/.gold spans (documented deviation from the inlineBlock-heading
+// convention).
 export const flagHero = defineType({
   name: 'flagHero',
   title: 'Flag-hero',
@@ -76,22 +76,6 @@ export const flagHero = defineType({
         }),
       ],
       validation: (Rule) => Rule.required().min(1),
-    }),
-    defineField({
-      name: 'backgroundImage',
-      title: 'Baggrundsbillede (flag)',
-      description: 'Falmet flag-foto bag hero-teksten. Går gennem Sanity-billedpipelinen (§7).',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alt-tekst',
-          type: 'string',
-          validation: (Rule) => Rule.required(),
-        }),
-      ],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'telegram',

@@ -3,14 +3,13 @@ import { Fragment } from 'react'
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 
 import { PortableText } from '@/components/editorial/PortableText'
-import { SanityImage } from '@/components/editorial/SanityImage'
 
 import styles from './FlagHero.module.css'
 
 type Block = Extract<NonNullable<NonNullable<PAGE_QUERY_RESULT>['blocks']>[number], { _type: 'flagHero' }>
 
-// `.flag-hero` band from Cash og Amerika.html. A faded flag photo (the project's
-// first raster image, §7) sits behind a left text column and a right "telegram"
+// `.flag-hero` band from Cash og Amerika.html, minus the flag photo that used to
+// sit behind it (removed in #6). A left text column and a right "telegram"
 // card. The H1's two coloured words (.amp barn / .gold brass) are bespoke string
 // parts, not inline Portable Text. The .lede drop-cap is a ::first-letter rule.
 export function FlagHero({ data }: { data: Block }) {
@@ -19,18 +18,6 @@ export function FlagHero({ data }: { data: Block }) {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.bg} aria-hidden="true">
-        {data.backgroundImage ? (
-          <SanityImage
-            image={data.backgroundImage}
-            fill
-            priority
-            sizes="100vw"
-            className={styles.bgImage}
-          />
-        ) : null}
-        <div className={styles.bgTint} />
-      </div>
       <div className="wrap">
         <div className={styles.grid}>
           <div>

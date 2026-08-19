@@ -1,54 +1,16 @@
 /* Ported from claude-design-template/Cash og Amerika.html .flag-hero. The
-   template's CSS `background-image` becomes a <SanityImage fill> (§7); the sepia
-   filter moves onto the image, and the gradient + grain overlays become a sibling
-   tint layer. The page wrapper sets --accent / --accent-deep (brass). */
+   template's flag photo and its tint/grain overlays were removed (#6); the band
+   keeps the plain paper background and the accent bottom border. The page
+   wrapper sets --accent / --accent-deep (brass). */
 
 .hero {
-  position: relative;
+  /* overflow clips the rotated telegram card's postmark at the band edge. */
   overflow: hidden;
   border-bottom: 4px solid var(--accent);
   background: var(--paper);
 }
 
-.bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.bgImage {
-  object-fit: cover;
-  object-position: center 35%;
-  filter: sepia(0.32) saturate(0.85) contrast(1.05) brightness(0.92);
-}
-.bgTint {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to right,
-      var(--paper) 0%,
-      rgba(239, 228, 207, 0.92) 22%,
-      rgba(239, 228, 207, 0.35) 50%,
-      rgba(239, 228, 207, 0.15) 75%,
-      rgba(60, 40, 20, 0.25) 100%
-    ),
-    radial-gradient(ellipse at 70% 0%, rgba(0, 0, 0, 0) 60%, rgba(20, 12, 4, 0.4) 100%);
-}
-.bgTint::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1.4px),
-    radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1.2px);
-  background-size: 3px 3px, 7px 7px;
-  mix-blend-mode: multiply;
-  opacity: 0.5;
-}
-
 .grid {
-  position: relative;
-  z-index: 2;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 56px;
