@@ -18,7 +18,6 @@ export const HOME_PAGE_QUERY = defineQuery(`
           meta
         },
         signatureCard{
-          stamp,
           foreLabel,
           quote,
           body,

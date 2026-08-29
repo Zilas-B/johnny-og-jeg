@@ -58,13 +58,6 @@ export const hubHero = defineType({
       validation: (Rule) => Rule.required(),
       fields: [
         defineField({
-          name: 'stamp',
-          title: 'Stempel',
-          description: 'Cirkulært stempel-tekst, fx "Sign. JR Cash 1955—2003".',
-          type: 'string',
-          validation: (Rule) => Rule.required(),
-        }),
-        defineField({
           name: 'foreLabel',
           title: 'Fore-label',
           description: 'Lille label over titlen, fx "— Forord —".',

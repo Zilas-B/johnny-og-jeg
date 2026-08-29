@@ -54,7 +54,6 @@ export function HubHero({ hero, sig }: { hero: Hero; sig: Signature }) {
           </div>
 
           <aside className={styles.sigcard}>
-            <div className={styles.stamp}>{sig.stamp}</div>
             <div className={styles.foreLabel}>{sig.foreLabel}</div>
             <h2 className={styles.sigQuote}>{sig.quote}</h2>
             <div className={styles.sigBody}>
