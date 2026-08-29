@@ -7,33 +7,33 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 // new block type is a code deploy; the editor places/reorders/toggles existing
 // blocks. `homePage`/`landscape`/`kulturenPage` are untouched.
 const ACCENT_PRESETS = [
-  { title: 'Barn (rød)', value: 'barn' },
-  { title: 'Denim (blå)', value: 'denim' },
-  { title: 'Brass (gul)', value: 'brass' },
+  { title: 'Barn (red)', value: 'barn' },
+  { title: 'Denim (blue)', value: 'denim' },
+  { title: 'Brass (yellow)', value: 'brass' },
 ]
 
 export const page = defineType({
   name: 'page',
-  title: 'Side (essay)',
+  title: 'Page (essay)',
   type: 'document',
   icon: DocumentTextIcon,
   groups: [
-    { name: 'content', title: 'Indhold', default: true },
+    { name: 'content', title: 'Content', default: true },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({
       name: 'title',
-      title: 'Titel',
-      description: 'Intern titel (Studio-lister) og SEO-fallback, fx "Musikeren".',
+      title: 'Title',
+      description: 'Internal title (Studio lists) and SEO fallback, e.g. “Musikeren”.',
       type: 'string',
       group: 'content',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
-      title: 'URL-slug',
-      description: 'ASCII, fx "musikeren", "cash-og-jesus".',
+      title: 'URL slug',
+      description: 'ASCII, e.g. “musikeren”, “cash-og-jesus”.',
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
       group: 'content',
@@ -41,7 +41,7 @@ export const page = defineType({
     }),
     defineField({
       name: 'accentColor',
-      title: 'Accentfarve',
+      title: 'Accent colour',
       type: 'string',
       options: { list: ACCENT_PRESETS, layout: 'radio' },
       initialValue: 'barn',
@@ -50,8 +50,8 @@ export const page = defineType({
     }),
     defineField({
       name: 'blocks',
-      title: 'Blokke',
-      description: 'Sidens sektioner i visningsrækkefølge. Træk for at omarrangere.',
+      title: 'Blocks',
+      description: 'The page’s sections in display order. Drag to reorder.',
       type: 'array',
       of: [
         defineArrayMember({ type: 'vinylHero' }),
@@ -81,8 +81,8 @@ export const page = defineType({
   preview: {
     select: { title: 'title', blocks: 'blocks' },
     prepare: ({ title, blocks }) => ({
-      title: title || 'Side',
-      subtitle: `Side · ${blocks?.length ?? 0} blokke`,
+      title: title || 'Page',
+      subtitle: `Page · ${blocks?.length ?? 0} blocks`,
     }),
   },
 })

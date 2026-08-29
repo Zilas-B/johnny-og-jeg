@@ -7,18 +7,18 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 // six home-only block types, rendered through the shared `BlockRenderer`.
 export const homePage = defineType({
   name: 'homePage',
-  title: 'Forside — Johnny og jeg',
+  title: 'Home Page — Johnny og jeg',
   type: 'document',
   icon: HomeIcon,
   groups: [
-    { name: 'content', title: 'Indhold', default: true },
+    { name: 'content', title: 'Content', default: true },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({
       name: 'blocks',
-      title: 'Blokke',
-      description: 'Forsidens sektioner i visningsrækkefølge. Træk for at omarrangere.',
+      title: 'Blocks',
+      description: 'The front page’s sections in display order. Drag to reorder.',
       type: 'array',
       of: [
         defineArrayMember({ type: 'hubHero' }),
@@ -39,6 +39,6 @@ export const homePage = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: 'Forside — Johnny og jeg' }),
+    prepare: () => ({ title: 'Home Page — Johnny og jeg' }),
   },
 })

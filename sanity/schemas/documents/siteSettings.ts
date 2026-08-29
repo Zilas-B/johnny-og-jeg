@@ -3,7 +3,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const siteSettings = defineType({
   name: 'siteSettings',
-  title: 'Indstillinger for sitet',
+  title: 'Site Settings',
   type: 'document',
   icon: CogIcon,
   groups: [
@@ -30,22 +30,22 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: 'cta',
-      title: 'CTA-knap',
+      title: 'CTA button',
       type: 'cta',
       group: 'navigation',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'footerMark',
-      title: 'Footer-mark',
-      description: 'Tekst i øverste venstre hjørne af footeren, fx "Johnny & jeg".',
+      title: 'Footer mark',
+      description: 'Text in the top left corner of the footer, e.g. “Johnny & jeg”.',
       type: 'string',
       group: 'footer',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'footerBlurb',
-      title: 'Footer-blurb',
+      title: 'Footer blurb',
       type: 'text',
       rows: 3,
       group: 'footer',
@@ -53,14 +53,14 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: 'footerQuote',
-      title: 'Footer-citat',
+      title: 'Footer quote',
       type: 'footerQuote',
       group: 'footer',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'footerColumns',
-      title: 'Footer-kolonner',
+      title: 'Footer columns',
       type: 'array',
       group: 'footer',
       of: [defineArrayMember({ type: 'footerColumn' })],
@@ -68,30 +68,30 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: 'footerBottomCopyright',
-      title: 'Bundlinje — copyright',
-      description: 'Brug "✶" for at indsætte stjerne-separator (renderes med dæmpet styling).',
+      title: 'Bottom line — copyright',
+      description: 'Use “✶” to insert a star separator (rendered with muted styling).',
       type: 'string',
       group: 'footer',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'footerBottomTagline',
-      title: 'Bundlinje — tagline',
-      description: 'Brug "✶" for at indsætte stjerne-separator (renderes med dæmpet styling).',
+      title: 'Bottom line — tagline',
+      description: 'Use “✶” to insert a star separator (rendered with muted styling).',
       type: 'string',
       group: 'footer',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'seo',
-      title: 'SEO — sitewide standardværdier',
+      title: 'SEO — sitewide defaults',
       description:
-        'Bruges som standard <title>, beskrivelse og Open Graph-billede for sider, der ikke selv definerer metadata (fx /studio, /styleguide). Sider med egen SEO overrider disse.',
+        'Used as the default <title>, description and Open Graph image for pages that do not define their own metadata (e.g. /studio, /styleguide). Pages with their own SEO override these.',
       type: 'seo',
       group: 'seo',
     }),
   ],
   preview: {
-    prepare: () => ({ title: 'Indstillinger for sitet' }),
+    prepare: () => ({ title: 'Site Settings' }),
   },
 })

@@ -6,45 +6,45 @@ import { defineField, defineType } from 'sanity'
 // path is real and editors can start filling archives in later steps.
 export const archiveEntry = defineType({
   name: 'archiveEntry',
-  title: 'Arkiv-indlæg',
+  title: 'Archive Entry',
   type: 'document',
   icon: DocumentTextIcon,
   fields: [
     defineField({
       name: 'title',
-      title: 'Titel',
+      title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
-      title: 'URL-slug',
+      title: 'URL slug',
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'landscape',
-      title: 'Landskab',
+      title: 'Landscape',
       type: 'reference',
       to: [{ type: 'landscape' }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'publishedAt',
-      title: 'Udgivet',
+      title: 'Published',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'kind',
-      title: 'Type',
+      title: 'Kind',
       type: 'string',
       options: {
         list: [
-          { title: 'Anmeldelse', value: 'anmeldelse' },
-          { title: 'Fund', value: 'fund' },
-          { title: 'Fodnote', value: 'fodnote' },
+          { title: 'Review', value: 'anmeldelse' },
+          { title: 'Discovery', value: 'fund' },
+          { title: 'Footnote', value: 'fodnote' },
           { title: 'Note', value: 'note' },
         ],
         layout: 'radio',
@@ -53,7 +53,7 @@ export const archiveEntry = defineType({
     }),
     defineField({
       name: 'summary',
-      title: 'Resumé',
+      title: 'Summary',
       type: 'text',
       rows: 3,
     }),
@@ -62,7 +62,7 @@ export const archiveEntry = defineType({
     select: { title: 'title', kind: 'kind', landscape: 'landscape.romanNumeral' },
     prepare: ({ title, kind, landscape }) => ({
       title,
-      subtitle: [landscape ? `Landskab ${landscape}` : null, kind].filter(Boolean).join(' · '),
+      subtitle: [landscape ? `Landscape ${landscape}` : null, kind].filter(Boolean).join(' · '),
     }),
   },
 })

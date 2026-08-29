@@ -18,22 +18,22 @@ const proseBlock = defineArrayMember({
 // Reused action-button shape (mirrors kulturenPage / landscape `emptyActions`).
 const actionField = defineField({
   name: 'actions',
-  title: 'Knapper',
+  title: 'Buttons',
   type: 'array',
   of: [
     defineArrayMember({
       type: 'object',
       fields: [
-        defineField({ name: 'text', title: 'Tekst', type: 'string', validation: (Rule) => Rule.required() }),
-        defineField({ name: 'href', title: 'Sti', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'text', title: 'Text', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'href', title: 'Path', type: 'string', validation: (Rule) => Rule.required() }),
         defineField({
           name: 'style',
-          title: 'Stil',
+          title: 'Style',
           type: 'string',
           options: {
             list: [
-              { title: 'Primær', value: 'primary' },
-              { title: 'Sekundær', value: 'secondary' },
+              { title: 'Primary', value: 'primary' },
+              { title: 'Secondary', value: 'secondary' },
             ],
             layout: 'radio',
           },
@@ -55,7 +55,7 @@ export const historienPage = defineType({
   icon: BookIcon,
   groups: [
     { name: 'hero', title: 'Hero', default: true },
-    { name: 'eras', title: 'Epoker' },
+    { name: 'eras', title: 'Eras' },
     { name: 'outro', title: 'Outro' },
     { name: 'seo', title: 'SEO' },
   ],
@@ -71,43 +71,43 @@ export const historienPage = defineType({
         defineField({
           name: 'eyebrow',
           title: 'Eyebrow',
-          description: 'Fx "USA · Historien · Anno 1776 — nutid".',
+          description: 'E.g. “USA · Historien · Anno 1776 — nutid”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'title',
-          title: 'Titel',
-          description: 'Fx "Historien".',
+          title: 'Title',
+          description: 'E.g. “Historien”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'titleSub',
-          title: 'Titel — underlinje',
-          description: 'Poster-linjen under titlen, fx "en republik i seks akter".',
+          title: 'Title — sub-line',
+          description: 'The poster line under the title, e.g. “en republik i seks akter”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'deck',
           title: 'Deck',
-          description: 'Indledende afsnit (typisk to). Brug *kursiv* til fremhævning.',
+          description: 'Opening paragraphs (usually two). Use *italics* for emphasis.',
           type: 'array',
           of: [proseBlock],
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'sideLabel',
-          title: 'Side-boks — label',
-          description: 'Fx "— Bladre i —".',
+          title: 'Side box — label',
+          description: 'E.g. “— Bladre i —”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'sideHeading',
-          title: 'Side-boks — overskrift',
-          description: 'Fx "Seks epoker.". Selve listen genereres fra epokerne.',
+          title: 'Side box — heading',
+          description: 'E.g. “Seks epoker.”. The list itself is generated from the eras.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
@@ -117,8 +117,8 @@ export const historienPage = defineType({
     // ---- Eras ----
     defineField({
       name: 'eras',
-      title: 'Epoker',
-      description: 'Akterne i rækkefølge. Akt II, IV og VI vises mørke med spejlvendt foto.',
+      title: 'Eras',
+      description: 'The acts in order. Acts II, IV and VI are shown dark with a mirrored photo.',
       type: 'array',
       of: [defineArrayMember({ type: 'historienEra' })],
       group: 'eras',
@@ -141,15 +141,15 @@ export const historienPage = defineType({
         }),
         defineField({
           name: 'heading',
-          title: 'Overskrift',
-          description: 'Brug *kursiv* for det fremhævede ord.',
+          title: 'Heading',
+          description: 'Use *italics* for the emphasised word.',
           type: 'array',
           of: [inlineBlock],
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'body',
-          title: 'Brødtekst',
+          title: 'Body text',
           type: 'array',
           of: [proseBlock],
           validation: (Rule) => Rule.required(),
@@ -157,15 +157,15 @@ export const historienPage = defineType({
         actionField,
         defineField({
           name: 'cardHeading',
-          title: 'Kort — overskrift',
-          description: 'Fx "Hvor Cash møder historien.".',
+          title: 'Card — heading',
+          description: 'E.g. “Hvor Cash møder historien.”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'cardItems',
-          title: 'Kort — liste',
-          description: 'Sang + årstal. Sangtitlen med **fed**.',
+          title: 'Card — list',
+          description: 'Song + year. The song title in **bold**.',
           type: 'array',
           of: [
             defineArrayMember({
@@ -173,15 +173,15 @@ export const historienPage = defineType({
               fields: [
                 defineField({
                   name: 'text',
-                  title: 'Tekst',
-                  description: 'Fx "**Man in Black** — sort for de glemte".',
+                  title: 'Text',
+                  description: 'E.g. “**Man in Black** — sort for de glemte”.',
                   type: 'array',
                   of: [inlineBlock],
                   validation: (Rule) => Rule.required(),
                 }),
                 defineField({
                   name: 'year',
-                  title: 'Årstal',
+                  title: 'Year',
                   type: 'string',
                   validation: (Rule) => Rule.required(),
                 }),
@@ -196,7 +196,7 @@ export const historienPage = defineType({
                             (b.children ?? []).map((s) => s.text ?? '').join(''),
                           )
                           .join('')
-                      : '') || 'Linje',
+                      : '') || 'Line',
                   subtitle,
                 }),
               },
