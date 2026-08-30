@@ -20,9 +20,27 @@ _Avoid_: Hub Hero, Flag Hero, hero banner, header
 The signed quote card inside the front page's Hero Block.
 _Avoid_: forordskortet, foreword card, signature card
 
-**Song Carousel**:
-The horizontally scrolling strip of years and song titles.
-_Avoid_: Setlist Ticker, ticker, marquee
+**Vinyl Tile**:
+One of the three record-shaped cards on the front page, each presenting one side of the project.
+_Avoid_: Vinyl-felt, spor, rubrik, felt, side, tile, card
+
+**Milestone Carousel**:
+The horizontally scrolling strip pairing a year with one turning point in Cash's career. A Milestone is often a Song, but just as often an album, a concert or a label — which is why this is not a Song Carousel.
+_Avoid_: Song Carousel, Setlist Ticker, ticker, marquee
+
+**Teaser Overview**:
+A front-page Block that summarises one section page and sends the reader on to it — it teases another part of the site rather than holding the content itself. Each one is its own Block, so the editor adds one per section page; two of them cover Historien and Kulturen.
+_Avoid_: USA section, America Overview, Section Overview, Hub Overview, teaser card
+
+**Teaser Point**:
+One of the four items inside a Teaser Overview, naming one part of the section page it teases. Written on the front page by the Editor — a Teaser Point is not a reference to an Era or a Landscape, even when it names one, so its wording is free to differ from the page it points at.
+_Avoid_: teaser item, bullet, timeline event, era, landscape
+
+### Music
+
+**Song**:
+A Johnny Cash recording named on the site. A Vinyl Tile lists Songs by title alone — here a Song has no position on a record and no running time.
+_Avoid_: track, number, nummer, tune
 
 ### People
 
