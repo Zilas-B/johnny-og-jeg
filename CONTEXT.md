@@ -36,6 +36,12 @@ _Avoid_: USA section, America Overview, Section Overview, Hub Overview, teaser c
 One of the four items inside a Teaser Overview, naming one part of the section page it teases. Written on the front page by the Editor — a Teaser Point is not a reference to an Era or a Landscape, even when it names one, so its wording is free to differ from the page it points at.
 _Avoid_: teaser item, bullet, timeline event, era, landscape
 
+### Navigation
+
+**Nav Drawer**:
+The full-screen overlay that replaces the navigation bar's tab row on narrow screens, listing the whole navigation tree at once. Developer vocabulary — the Editor arranges the nav tree in Studio and never operates the Drawer as a separate thing.
+_Avoid_: hamburger menu, burger, mobile nav, off-canvas, mobilmenu
+
 ### Music
 
 **Song**:
