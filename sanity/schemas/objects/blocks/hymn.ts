@@ -7,7 +7,7 @@ import { inlineBlock } from './_shared'
 // from `Johnny og jeg.html`: a kicker, a blockquote, and an attribution line.
 export const hymn = defineType({
   name: 'hymn',
-  title: 'Forside — salme',
+  title: 'Front page — hymn',
   type: 'object',
   icon: BookIcon,
   fields: [
@@ -19,21 +19,21 @@ export const hymn = defineType({
     }),
     defineField({
       name: 'quote',
-      title: 'Citat',
+      title: 'Quote',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'attribution',
-      title: 'Attribuering',
-      description: 'Fx "Mads ✶ Forord til “Johnny og jeg” ✶ 2026".',
+      title: 'Attribution',
+      description: 'E.g. Mads ✶ Forord til “Johnny og jeg” ✶ 2026.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
     select: { attribution: 'attribution' },
-    prepare: ({ attribution }) => ({ title: 'Forside — salme', subtitle: attribution }),
+    prepare: ({ attribution }) => ({ title: 'Front page — hymn', subtitle: attribution }),
   },
 })

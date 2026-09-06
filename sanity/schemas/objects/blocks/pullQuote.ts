@@ -7,42 +7,42 @@ import { inlineBlock } from './_shared'
 // accent quote-marks (added by the renderer) and a star-separated attribution.
 export const pullQuote = defineType({
   name: 'pullQuote',
-  title: 'Citat-band',
+  title: 'Pull quote',
   type: 'object',
   icon: BlockquoteIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Et hørestykke —".',
+      description: 'E.g. “— Et hørestykke —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'quote',
-      title: 'Citat',
-      description: 'Hvert afsnit bliver en linje. Brug *kursiv* for fremhævning.',
+      title: 'Quote',
+      description: 'Each paragraph becomes one line. Use *italic* for emphasis.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'attribution',
-      title: 'Kildeangivelse',
-      description: 'Stykker adskilt af ✶, fx "Folsom Prison Blues", "1955", "skrevet i Tyskland".',
+      title: 'Attribution',
+      description: 'Pieces separated by ✶, e.g. “Folsom Prison Blues”, “1955”, “skrevet i Tyskland”.',
       type: 'array',
       of: [defineArrayMember({ type: 'string' })],
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'background',
-      title: 'Baggrund',
-      description: 'Bandets baggrundsfarve. Standard er mørk (ink).',
+      title: 'Background',
+      description: 'The band’s background colour. Defaults to dark (ink).',
       type: 'string',
       options: {
         list: [
-          { title: 'Ink (mørk)', value: 'ink' },
-          { title: 'Accent (dyb)', value: 'accentDeep' },
+          { title: 'Ink (dark)', value: 'ink' },
+          { title: 'Accent (deep)', value: 'accentDeep' },
         ],
         layout: 'radio',
       },
@@ -50,13 +50,13 @@ export const pullQuote = defineType({
     }),
     defineField({
       name: 'borderTone',
-      title: 'Kantfarve',
-      description: 'Farven på over- og underkant. Standard følger sidens accent.',
+      title: 'Border colour',
+      description: 'The colour of the top and bottom borders. Defaults to the page accent.',
       type: 'string',
       options: {
         list: [
           { title: 'Accent', value: 'accent' },
-          { title: 'Brass (gul)', value: 'brass' },
+          { title: 'Brass (yellow)', value: 'brass' },
         ],
         layout: 'radio',
       },
@@ -67,8 +67,8 @@ export const pullQuote = defineType({
     select: { quote: 'quote' },
     prepare: ({ quote }) => ({
       title:
-        (quote?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Citat-band',
-      subtitle: 'Citat-band',
+        (quote?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Pull quote',
+      subtitle: 'Pull quote',
     }),
   },
 })

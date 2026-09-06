@@ -10,41 +10,41 @@ import { inlineBlock } from './_shared'
 // reordered apart.
 export const hubHero = defineType({
   name: 'hubHero',
-  title: 'Forside — hero',
+  title: 'Front page — Hero Block',
   type: 'object',
   icon: HomeIcon,
   fields: [
     defineField({
       name: 'hero',
-      title: 'Hero',
+      title: 'Text column',
       type: 'object',
       validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: 'kicker',
           title: 'Kicker',
-          description: 'Valgfri linje over titlen. Designet på forsiden viser ingen kicker — lad være tom.',
+          description: 'Optional line above the title. The front page design shows no kicker — leave empty.',
           type: 'string',
         }),
         defineField({
           name: 'title',
-          title: 'Titel',
-          description: 'Skriv "Johnny og jeg" — "og" gengives med en rød ampersand.',
+          title: 'Title',
+          description: 'Write “Johnny og jeg” — “og” is rendered as a red ampersand.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'deck',
           title: 'Deck',
-          description: 'Italic intro-afsnit. Første bogstav får drop-cap.',
+          description: 'Italic intro paragraph. The first letter gets a drop cap.',
           type: 'array',
           of: [inlineBlock],
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'meta',
-          title: 'Meta-linjer',
-          description: 'Op til 3 metadata-strenge, fx "Et essay af Mads", "Læsetid ~12 min."',
+          title: 'Meta lines',
+          description: 'Up to 3 metadata strings, e.g. “Et essay af Mads”, “Læsetid ~12 min.”',
           type: 'array',
           of: [{ type: 'string' }],
           validation: (Rule) => Rule.max(3),
@@ -53,47 +53,47 @@ export const hubHero = defineType({
     }),
     defineField({
       name: 'signatureCard',
-      title: 'Signaturkort',
+      title: 'Hero Foreword',
       type: 'object',
       validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: 'foreLabel',
-          title: 'Fore-label',
-          description: 'Lille label over titlen, fx "— Forord —".',
+          title: 'Foreword label',
+          description: 'Small label above the title, e.g. “— Forord —”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'quote',
-          title: 'Titel-citat',
-          description: 'Fx "Hello. I’m Johnny Cash."',
+          title: 'Title quote',
+          description: 'E.g. “Hello. I’m Johnny Cash.”',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'body',
-          title: 'Brødtekst',
+          title: 'Body',
           type: 'array',
           of: [inlineBlock],
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'scripture',
-          title: 'Skriftsted',
-          description: 'Citat fra Bibelen + reference.',
+          title: 'Scripture',
+          description: 'A Bible quote plus its reference.',
           type: 'object',
           fields: [
             defineField({
               name: 'text',
-              title: 'Tekst',
+              title: 'Text',
               type: 'string',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'reference',
               title: 'Reference',
-              description: 'Fx "Rom. 1:16".',
+              description: 'E.g. “Rom. 1:16”.',
               type: 'string',
               validation: (Rule) => Rule.required(),
             }),
@@ -104,6 +104,6 @@ export const hubHero = defineType({
   ],
   preview: {
     select: { title: 'hero.title' },
-    prepare: ({ title }) => ({ title: title || 'Forside — hero', subtitle: 'Hero' }),
+    prepare: ({ title }) => ({ title: title || 'Front page — Hero Block', subtitle: 'Hero Block' }),
   },
 })

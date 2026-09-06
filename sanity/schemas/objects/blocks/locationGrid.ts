@@ -8,21 +8,21 @@ import { inlineBlock, proseBlock } from './_shared'
 // decorative star-rosette is rendered by the component.
 export const locationGrid = defineType({
   name: 'locationGrid',
-  title: 'Steds-gitter',
+  title: 'Location grid',
   type: 'object',
   icon: PinIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Et atlas i sange —".',
+      description: 'E.g. “— Et atlas i sange —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H2. Brug *kursiv* for fremhævet ord.',
+      title: 'Heading',
+      description: 'H2. Use *italic* for the emphasised word.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
@@ -36,18 +36,18 @@ export const locationGrid = defineType({
     }),
     defineField({
       name: 'cards',
-      title: 'Steder',
+      title: 'Locations',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'locationCard',
-          title: 'Sted',
+          title: 'Location',
           fields: [
-            defineField({ name: 'placeTag', title: 'Steds-tag', description: 'Fx "Mississippi River · AR".', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'name', title: 'Navn (H4)', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'coords', title: 'Koordinater', description: 'Fx "35.5870° N · 90.2090° W".', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'body', title: 'Beskrivelse', type: 'text', rows: 3, validation: (Rule) => Rule.required() }),
+            defineField({ name: 'placeTag', title: 'Place tag', description: 'E.g. “Mississippi River · AR”.', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'name', title: 'Name (H4)', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'coords', title: 'Coordinates', description: 'E.g. “35.5870° N · 90.2090° W”.', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'body', title: 'Description', type: 'text', rows: 3, validation: (Rule) => Rule.required() }),
           ],
           preview: { select: { title: 'name', subtitle: 'placeTag' } },
         }),
@@ -58,8 +58,8 @@ export const locationGrid = defineType({
   preview: {
     select: { heading: 'heading', cards: 'cards' },
     prepare: ({ heading, cards }) => ({
-      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Steds-gitter',
-      subtitle: `Steder · ${cards?.length ?? 0} stk.`,
+      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Location grid',
+      subtitle: `Location grid · ${cards?.length ?? 0} locations`,
     }),
   },
 })

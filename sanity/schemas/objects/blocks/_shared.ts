@@ -14,8 +14,8 @@ export const inlineBlock = defineArrayMember({
   lists: [],
   marks: {
     decorators: [
-      { title: 'Kursiv', value: 'em' },
-      { title: 'Fed', value: 'strong' },
+      { title: 'Italic', value: 'em' },
+      { title: 'Bold', value: 'strong' },
     ],
     annotations: [],
   },
@@ -27,8 +27,8 @@ export const proseBlock = defineArrayMember({
   lists: [],
   marks: {
     decorators: [
-      { title: 'Kursiv', value: 'em' },
-      { title: 'Fed', value: 'strong' },
+      { title: 'Italic', value: 'em' },
+      { title: 'Bold', value: 'strong' },
     ],
     annotations: [
       defineField({

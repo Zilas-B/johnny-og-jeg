@@ -9,7 +9,7 @@ import { inlineBlock } from './_shared'
 // authored — the form fields are functional UI hardcoded in `ContactSection`.
 export const contact = defineType({
   name: 'contact',
-  title: 'Forside — kontakt',
+  title: 'Front page — contact',
   type: 'object',
   icon: EnvelopeIcon,
   fields: [
@@ -21,7 +21,7 @@ export const contact = defineType({
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
+      title: 'Heading',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
@@ -34,38 +34,38 @@ export const contact = defineType({
     }),
     defineField({
       name: 'bookingLabel',
-      title: 'Foredrag — label',
+      title: 'Booking call-out — label',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'bookingHeading',
-      title: 'Foredrag — overskrift',
+      title: 'Booking call-out — heading',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'bookingBody',
-      title: 'Foredrag — tekst',
+      title: 'Booking call-out — text',
       type: 'text',
       rows: 3,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'bookingLinkText',
-      title: 'Foredrag — knaptekst',
+      title: 'Booking call-out — button text',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'bookingLinkHref',
-      title: 'Foredrag — knapsti',
+      title: 'Booking call-out — button path',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
     select: { title: 'heading' },
-    prepare: ({ title }) => ({ title: title || 'Forside — kontakt', subtitle: 'Kontakt' }),
+    prepare: ({ title }) => ({ title: title || 'Front page — contact', subtitle: 'Contact' }),
   },
 })

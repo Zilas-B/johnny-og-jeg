@@ -8,49 +8,49 @@ import { inlineBlock } from './_shared'
 // intrinsic to the band and distinct from the page accent.
 export const nextEssay = defineType({
   name: 'nextEssay',
-  title: 'Næste essay',
+  title: 'Next essay',
   type: 'object',
   icon: ArrowRightIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Vend pladen —".',
+      description: 'E.g. “— Vend pladen —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H2. Brug *kursiv* for fremhævet ord.',
+      title: 'Heading',
+      description: 'H2. Use *italic* for the emphasised word.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'cards',
-      title: 'Kort',
+      title: 'Cards',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'nextCard',
-          title: 'Kort',
+          title: 'Card',
           fields: [
-            defineField({ name: 'roman', title: 'Romertal', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'roman', title: 'Roman numeral', type: 'string', validation: (Rule) => Rule.required() }),
             defineField({ name: 'tag', title: 'Tag', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'cardHeading', title: 'Titel', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'cta', title: 'Handlingstekst', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'href', title: 'Sti', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'cardHeading', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'cta', title: 'Call to action', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'href', title: 'Path', type: 'string', validation: (Rule) => Rule.required() }),
             defineField({
               name: 'colorScheme',
-              title: 'Farve',
+              title: 'Colour',
               type: 'string',
               options: {
                 list: [
-                  { title: 'Barn (rød)', value: 'barn' },
-                  { title: 'Denim (blå)', value: 'denim' },
-                  { title: 'Brass (gul)', value: 'brass' },
+                  { title: 'Barn (red)', value: 'barn' },
+                  { title: 'Denim (blue)', value: 'denim' },
+                  { title: 'Brass (yellow)', value: 'brass' },
                 ],
                 layout: 'radio',
               },
@@ -67,8 +67,8 @@ export const nextEssay = defineType({
   preview: {
     select: { heading: 'heading', cards: 'cards' },
     prepare: ({ heading, cards }) => ({
-      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Næste essay',
-      subtitle: `Næste essay · ${cards?.length ?? 0} kort`,
+      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Next essay',
+      subtitle: `Next essay · ${cards?.length ?? 0} cards`,
     }),
   },
 })

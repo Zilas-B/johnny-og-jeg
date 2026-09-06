@@ -8,21 +8,21 @@ import { inlineBlock, proseBlock } from './_shared'
 // label / tag) and a right column of prose + a grid of "cut" link cards.
 export const steppedList = defineType({
   name: 'steppedList',
-  title: 'Trinliste (epoker)',
+  title: 'Stepped list (eras)',
   type: 'object',
   icon: OlistIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Fire epoker, én stemme —".',
+      description: 'E.g. “— Fire epoker, én stemme —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H2. Brug *kursiv* for fremhævet ord.',
+      title: 'Heading',
+      description: 'H2. Use *italic* for the emphasised word.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
@@ -36,27 +36,27 @@ export const steppedList = defineType({
     }),
     defineField({
       name: 'items',
-      title: 'Trin',
+      title: 'Steps',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'eraItem',
-          title: 'Trin',
+          title: 'Step',
           fields: [
-            defineField({ name: 'years', title: 'Årstal', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'label', title: 'Titel', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'years', title: 'Years', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'label', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
             defineField({
               name: 'tag',
-              title: 'Tag-linjer',
-              description: 'Hver linje: en label og en fremhævet værdi.',
+              title: 'Tag lines',
+              description: 'Each line: a label and a highlighted value.',
               type: 'array',
               of: [
                 defineArrayMember({
                   type: 'object',
                   fields: [
                     defineField({ name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required() }),
-                    defineField({ name: 'value', title: 'Fed værdi', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'value', title: 'Bold value', type: 'string', validation: (Rule) => Rule.required() }),
                   ],
                   preview: { select: { title: 'label', subtitle: 'value' } },
                 }),
@@ -64,24 +64,24 @@ export const steppedList = defineType({
             }),
             defineField({
               name: 'body',
-              title: 'Brødtekst',
+              title: 'Body',
               type: 'array',
               of: [proseBlock],
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'cuts',
-              title: 'Spor',
+              title: 'Songs',
               type: 'array',
               of: [
                 defineArrayMember({
                   type: 'object',
                   name: 'cutItem',
-                  title: 'Spor',
+                  title: 'Song',
                   fields: [
                     defineField({ name: 'cutLabel', title: 'Label', type: 'string', validation: (Rule) => Rule.required() }),
-                    defineField({ name: 'cutTitle', title: 'Titel', type: 'string', validation: (Rule) => Rule.required() }),
-                    defineField({ name: 'cutDuration', title: 'År · varighed', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'cutTitle', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'cutDuration', title: 'Year · duration', type: 'string', validation: (Rule) => Rule.required() }),
                     defineField({
                       name: 'cutHref',
                       title: 'Link',
@@ -103,8 +103,8 @@ export const steppedList = defineType({
   preview: {
     select: { heading: 'heading', items: 'items' },
     prepare: ({ heading, items }) => ({
-      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Trinliste',
-      subtitle: `Trinliste · ${items?.length ?? 0} trin`,
+      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Stepped list',
+      subtitle: `Stepped list · ${items?.length ?? 0} steps`,
     }),
   },
 })

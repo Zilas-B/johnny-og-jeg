@@ -6,13 +6,13 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 // objects) that `SetlistTicker` duplicates for a seamless loop.
 export const setlistTicker = defineType({
   name: 'setlistTicker',
-  title: 'Forside — ticker',
+  title: 'Front page — Milestone Carousel',
   type: 'object',
   icon: ClockIcon,
   fields: [
     defineField({
       name: 'items',
-      title: 'Elementer',
+      title: 'Milestones',
       type: 'array',
       of: [defineArrayMember({ type: 'tickerItem' })],
       validation: (Rule) => Rule.required().min(4),
@@ -21,8 +21,8 @@ export const setlistTicker = defineType({
   preview: {
     select: { items: 'items' },
     prepare: ({ items }) => ({
-      title: 'Forside — ticker',
-      subtitle: `Ticker · ${items?.length ?? 0} elementer`,
+      title: 'Front page — Milestone Carousel',
+      subtitle: `Milestone Carousel · ${items?.length ?? 0} milestones`,
     }),
   },
 })

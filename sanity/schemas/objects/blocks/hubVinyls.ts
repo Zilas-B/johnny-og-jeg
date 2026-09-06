@@ -6,20 +6,20 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 // vinyl tiles (existing `vinylTile` objects, one per "side" of the project).
 export const hubVinyls = defineType({
   name: 'hubVinyls',
-  title: 'Forside — vinyl-felter',
+  title: 'Front page — Vinyl Tiles',
   type: 'object',
   icon: PlayIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Tre rubrikker · Side A · Side B · Side C —".',
+      description: 'E.g. “— Tre rubrikker · Side A · Side B · Side C —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
+      title: 'Heading',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
@@ -32,8 +32,8 @@ export const hubVinyls = defineType({
     }),
     defineField({
       name: 'items',
-      title: 'Felter',
-      description: 'Tre felter — én for hver "side" af projektet.',
+      title: 'Vinyl Tiles',
+      description: 'Three Vinyl Tiles — one for each “side” of the project.',
       type: 'array',
       of: [defineArrayMember({ type: 'vinylTile' })],
       validation: (Rule) => Rule.required().length(3),
@@ -42,8 +42,8 @@ export const hubVinyls = defineType({
   preview: {
     select: { title: 'heading', items: 'items' },
     prepare: ({ title, items }) => ({
-      title: title || 'Forside — vinyl-felter',
-      subtitle: `Vinyl-felter · ${items?.length ?? 0} felter`,
+      title: title || 'Front page — Vinyl Tiles',
+      subtitle: `Vinyl Tiles · ${items?.length ?? 0} of 3`,
     }),
   },
 })

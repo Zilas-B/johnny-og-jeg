@@ -9,7 +9,7 @@ import { inlineBlock } from './_shared'
 // of four.
 export const historicalThread = defineType({
   name: 'historicalThread',
-  title: 'Forside — historisk tråd',
+  title: 'Front page — historical thread',
   type: 'object',
   icon: CalendarIcon,
   fields: [
@@ -21,8 +21,8 @@ export const historicalThread = defineType({
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'Brug *kursiv* for at fremhæve ord i rød.',
+      title: 'Heading',
+      description: 'Use *italic* to highlight a word in red.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
@@ -36,8 +36,8 @@ export const historicalThread = defineType({
     }),
     defineField({
       name: 'timeline',
-      title: 'Tidslinje',
-      description: 'Otte begivenheder — gengivet som to rækker à fire.',
+      title: 'Timeline',
+      description: 'Eight events — rendered as two rows of four.',
       type: 'array',
       of: [defineArrayMember({ type: 'timelineEvent' })],
       validation: (Rule) => Rule.required().length(8),
@@ -48,8 +48,8 @@ export const historicalThread = defineType({
     prepare: ({ heading, timeline }) => ({
       title:
         (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') ||
-        'Forside — historisk tråd',
-      subtitle: `Historisk tråd · ${timeline?.length ?? 0} begivenheder`,
+        'Front page — historical thread',
+      subtitle: `Historical thread · ${timeline?.length ?? 0} events`,
     }),
   },
 })

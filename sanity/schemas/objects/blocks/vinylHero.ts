@@ -8,51 +8,51 @@ import { inlineBlock, proseBlock } from './_shared'
 // decorative chrome of the hero, so it lives in this block (never relocated).
 export const vinylHero = defineType({
   name: 'vinylHero',
-  title: 'Vinyl-hero',
+  title: 'Hero Block (vinyl)',
   type: 'object',
   icon: PlayIcon,
   fields: [
     defineField({
       name: 'eyebrow',
       title: 'Eyebrow',
-      description: 'Fx "Side A · 33⅓ RPM".',
+      description: 'E.g. “Side A · 33⅓ RPM”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'romanNumeral',
-      title: 'Romertal',
-      description: 'Fx "I.".',
+      title: 'Roman numeral',
+      description: 'E.g. “I.”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H1. Brug *kursiv* for det røde ord, fx "*Musik*eren.".',
+      title: 'Heading',
+      description: 'H1. Use *italic* for the red word, e.g. “*Musik*eren.”.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'lede',
-      title: 'Indledning',
-      description: 'Første afsnit får drop-cap.',
+      title: 'Lede',
+      description: 'The first paragraph gets a drop cap.',
       type: 'array',
       of: [proseBlock],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'metaItems',
-      title: 'Meta-linje',
-      description: 'Vises adskilt af lodrette streger. Værdien fremhæves med fed.',
+      title: 'Meta line',
+      description: 'Shown separated by vertical bars. The value is highlighted in bold.',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Tekst', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'value', title: 'Fed værdi', type: 'string' }),
+            defineField({ name: 'label', title: 'Text', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'value', title: 'Bold value', type: 'string' }),
           ],
           preview: {
             select: { title: 'label', subtitle: 'value' },
@@ -63,29 +63,29 @@ export const vinylHero = defineType({
     }),
     defineField({
       name: 'vinylTop',
-      title: 'Vinyl-label — top',
-      description: 'Fx "— Sun Records —".',
+      title: 'Vinyl label — top',
+      description: 'E.g. “— Sun Records —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'vinylTitle',
-      title: 'Vinyl-label — titel',
-      description: 'Fx "Musikeren".',
+      title: 'Vinyl label — title',
+      description: 'E.g. “Musikeren”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'vinylBottom',
-      title: 'Vinyl-label — bund',
-      description: 'Fx "Memphis · TN".',
+      title: 'Vinyl label — bottom',
+      description: 'E.g. “Memphis · TN”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'tickerItems',
-      title: 'Sound-ticker',
-      description: 'Tekststykker i det rullende bånd. Adskilles automatisk af ✶ og gentages.',
+      title: 'Sound ticker',
+      description: 'Text pieces in the scrolling strip. Automatically separated by ✶ and repeated.',
       type: 'array',
       of: [defineArrayMember({ type: 'string' })],
       validation: (Rule) => Rule.required().min(1),
@@ -94,8 +94,8 @@ export const vinylHero = defineType({
   preview: {
     select: { heading: 'heading' },
     prepare: ({ heading }) => ({
-      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Vinyl-hero',
-      subtitle: 'Vinyl-hero',
+      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Hero Block (vinyl)',
+      subtitle: 'Hero Block (vinyl)',
     }),
   },
 })

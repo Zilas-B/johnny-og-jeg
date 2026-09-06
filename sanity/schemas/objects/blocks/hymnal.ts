@@ -8,21 +8,21 @@ import { inlineBlock, proseBlock } from './_shared'
 // has a header + subhead and a list of song rows linking out (YouTube etc.).
 export const hymnal = defineType({
   name: 'hymnal',
-  title: 'Salmebog',
+  title: 'Hymnal',
   type: 'object',
   icon: ThListIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Hymnal No. 14 · Cash & Jesus —".',
+      description: 'E.g. “— Hymnal No. 14 · Cash & Jesus —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H2. Brug *kursiv* for fremhævet ord.',
+      title: 'Heading',
+      description: 'H2. Use *italic* for the emphasised word.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
@@ -36,30 +36,30 @@ export const hymnal = defineType({
     }),
     defineField({
       name: 'columns',
-      title: 'Kolonner',
+      title: 'Columns',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'hymnalColumn',
-          title: 'Kolonne',
+          title: 'Column',
           fields: [
-            defineField({ name: 'header', title: 'Overskrift', description: 'Fx "Side B · Salmerne".', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'subhead', title: 'Underoverskrift', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'header', title: 'Header', description: 'E.g. “Side B · Salmerne”.', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'subhead', title: 'Subheading', type: 'string', validation: (Rule) => Rule.required() }),
             defineField({
               name: 'rows',
-              title: 'Sange',
+              title: 'Songs',
               type: 'array',
               of: [
                 defineArrayMember({
                   type: 'object',
                   name: 'hymnRow',
-                  title: 'Sang',
+                  title: 'Song',
                   fields: [
-                    defineField({ name: 'number', title: 'Nr.', description: 'Fx "B1".', type: 'string', validation: (Rule) => Rule.required() }),
-                    defineField({ name: 'title', title: 'Titel', type: 'string', validation: (Rule) => Rule.required() }),
-                    defineField({ name: 'sub', title: 'Album · år', description: 'Fx "Hymns · 1959".', type: 'string', validation: (Rule) => Rule.required() }),
-                    defineField({ name: 'duration', title: 'Varighed', description: 'Fx "4:11".', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'number', title: 'No.', description: 'E.g. “B1”.', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'sub', title: 'Album · year', description: 'E.g. “Hymns · 1959”.', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'duration', title: 'Duration', description: 'E.g. “4:11”.', type: 'string', validation: (Rule) => Rule.required() }),
                     defineField({
                       name: 'href',
                       title: 'Link',
@@ -82,8 +82,8 @@ export const hymnal = defineType({
   preview: {
     select: { heading: 'heading', columns: 'columns' },
     prepare: ({ heading, columns }) => ({
-      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Salmebog',
-      subtitle: `Salmebog · ${columns?.length ?? 0} kolonner`,
+      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Hymnal',
+      subtitle: `Hymnal · ${columns?.length ?? 0} columns`,
     }),
   },
 })

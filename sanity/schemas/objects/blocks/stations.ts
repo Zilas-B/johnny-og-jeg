@@ -9,21 +9,21 @@ import { inlineBlock, proseBlock } from './_shared'
 // optional blockquote (stations IV & V have none).
 export const stations = defineType({
   name: 'stations',
-  title: 'Stationer',
+  title: 'Stations',
   type: 'object',
   icon: BulbOutlineIcon,
   fields: [
     defineField({
       name: 'kicker',
       title: 'Kicker',
-      description: 'Fx "— Stationer på en faldet vej —".',
+      description: 'E.g. “— Stationer på en faldet vej —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H2. Brug *kursiv* for fremhævet ord.',
+      title: 'Heading',
+      description: 'H2. Use *italic* for the emphasised word.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
@@ -37,7 +37,7 @@ export const stations = defineType({
     }),
     defineField({
       name: 'items',
-      title: 'Stationer',
+      title: 'Stations',
       type: 'array',
       of: [
         defineArrayMember({
@@ -45,26 +45,26 @@ export const stations = defineType({
           name: 'stationItem',
           title: 'Station',
           fields: [
-            defineField({ name: 'roman', title: 'Romertal', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'years', title: 'Årstal', description: 'Fx "— 1935 —".', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'location', title: 'Sted (tag)', description: 'Fx "Dyess · AR".', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'heading', title: 'Titel (H3)', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'where', title: 'Hvor-linje', description: 'Fx "Dyess Baptist Church · Mississippi River Delta".', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'roman', title: 'Roman numeral', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'years', title: 'Years', description: 'E.g. “— 1935 —”.', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'location', title: 'Location (tag)', description: 'E.g. “Dyess · AR”.', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'heading', title: 'Title (H3)', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'where', title: 'Where line', description: 'E.g. “Dyess Baptist Church · Mississippi River Delta”.', type: 'string', validation: (Rule) => Rule.required() }),
             defineField({
               name: 'body',
-              title: 'Brødtekst',
+              title: 'Body',
               type: 'array',
               of: [proseBlock],
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'quote',
-              title: 'Citat (valgfrit)',
-              description: 'Blockquote med kildeangivelse. Udelades på stationer uden citat.',
+              title: 'Quote (optional)',
+              description: 'Blockquote with attribution. Leave empty on stations without a quote.',
               type: 'object',
               fields: [
-                defineField({ name: 'text', title: 'Citat', type: 'text', rows: 3, validation: (Rule) => Rule.required() }),
-                defineField({ name: 'attribution', title: 'Kildeangivelse', type: 'string', validation: (Rule) => Rule.required() }),
+                defineField({ name: 'text', title: 'Quote', type: 'text', rows: 3, validation: (Rule) => Rule.required() }),
+                defineField({ name: 'attribution', title: 'Attribution', type: 'string', validation: (Rule) => Rule.required() }),
               ],
             }),
           ],
@@ -77,8 +77,8 @@ export const stations = defineType({
   preview: {
     select: { heading: 'heading', items: 'items' },
     prepare: ({ heading, items }) => ({
-      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Stationer',
-      subtitle: `Stationer · ${items?.length ?? 0} stk.`,
+      title: (heading?.[0]?.children ?? []).map((s: { text?: string }) => s.text ?? '').join('') || 'Stations',
+      subtitle: `Stations · ${items?.length ?? 0} stations`,
     }),
   },
 })

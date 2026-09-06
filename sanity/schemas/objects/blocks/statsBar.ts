@@ -6,21 +6,21 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 // (`top`) above a larger italic value (`big`).
 export const statsBar = defineType({
   name: 'statsBar',
-  title: 'Statistik-bånd',
+  title: 'Stats bar',
   type: 'object',
   icon: BarChartIcon,
   fields: [
     defineField({
       name: 'cells',
-      title: 'Celler',
+      title: 'Cells',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'statCell',
           fields: [
-            defineField({ name: 'top', title: 'Label', description: 'Fx "Født i".', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'big', title: 'Værdi', description: 'Fx "Arkansas · Delta".', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'top', title: 'Label', description: 'E.g. “Født i”.', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'big', title: 'Value', description: 'E.g. “Arkansas · Delta”.', type: 'string', validation: (Rule) => Rule.required() }),
           ],
           preview: { select: { title: 'big', subtitle: 'top' } },
         }),
@@ -31,8 +31,8 @@ export const statsBar = defineType({
   preview: {
     select: { cells: 'cells' },
     prepare: ({ cells }) => ({
-      title: 'Statistik-bånd',
-      subtitle: `${cells?.length ?? 0} celler`,
+      title: 'Stats bar',
+      subtitle: `${cells?.length ?? 0} cells`,
     }),
   },
 })
