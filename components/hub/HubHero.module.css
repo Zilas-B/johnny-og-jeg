@@ -40,7 +40,11 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 156px;
+  /* Hand-tuned, not the standard max/12.8 formula (docs/TechStack.md allows the
+     deviation, this states it). The @media overrides this replaced were 96px at
+     1024 and 64px at 768 — a designer decision the generic curve overshot by
+     ~45%. This line is drawn through 156px@1280 and 64px@768 instead. */
+  font-size: clamp(51px, calc(17.97vw - 74px), 156px);
   line-height: 0.92;
   letter-spacing: -0.025em;
   color: var(--ink);
@@ -156,19 +160,11 @@
 }
 
 @media (max-width: 1024px) {
-  .title {
-    font-size: 96px;
-  }
   .grid {
     grid-template-columns: 1fr;
   }
   .sigcard {
     transform: none;
     margin: 32px auto 0;
-  }
-}
-@media (max-width: 768px) {
-  .title {
-    font-size: 64px;
   }
 }

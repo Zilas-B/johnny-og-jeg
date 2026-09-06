@@ -8,9 +8,9 @@
 }
 
 .wrap {
-  max-width: 1280px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 56px;
+  padding: 0 var(--gutter);
   position: relative;
 }
 

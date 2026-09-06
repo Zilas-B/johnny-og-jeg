@@ -15,7 +15,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 60px;
+  font-size: clamp(32px, 4.69vw, 60px);
   line-height: 1;
   margin: 0 0 8px;
   color: var(--ink);
@@ -44,7 +44,7 @@
 
 .yrs {
   font-family: var(--f-poster);
-  font-size: 56px;
+  font-size: clamp(31px, 4.38vw, 56px);
   color: var(--accent);
   line-height: 1;
   margin-bottom: 8px;

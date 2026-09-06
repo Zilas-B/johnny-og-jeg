@@ -3,7 +3,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 78px;
+  font-size: clamp(36px, 6.09vw, 78px);
   line-height: 0.85;
   padding: 6px 12px 0 0;
   color: var(--accent);

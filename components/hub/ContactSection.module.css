@@ -24,7 +24,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 60px;
+  font-size: clamp(32px, 4.69vw, 60px);
   line-height: 1;
   margin: 0 0 14px;
   color: var(--ink);
@@ -211,8 +211,5 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 32px;
-  }
-  .heading {
-    font-size: 44px;
   }
 }

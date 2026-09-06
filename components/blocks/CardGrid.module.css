@@ -18,7 +18,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 52px;
+  font-size: clamp(30px, 4.06vw, 52px);
   margin: 0 0 8px;
   color: var(--ink);
   line-height: 1;
@@ -48,7 +48,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 56px;
+  font-size: clamp(31px, 4.38vw, 56px);
   line-height: 0.85;
   color: var(--accent);
   margin-bottom: 4px;

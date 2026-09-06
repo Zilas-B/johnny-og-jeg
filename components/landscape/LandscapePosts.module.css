@@ -19,7 +19,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 48px;
+  font-size: clamp(30px, 3.75vw, 48px);
   margin: 0;
 }
 .head h2 em {
@@ -65,7 +65,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 44px;
+  font-size: clamp(29px, 3.44vw, 44px);
   margin: 0 0 14px;
   color: var(--ink);
   line-height: 1;

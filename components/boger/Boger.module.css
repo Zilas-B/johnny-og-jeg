@@ -38,7 +38,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 124px;
+  font-size: clamp(45px, 9.69vw, 124px);
   line-height: 0.92;
   letter-spacing: -0.02em;
   margin: 0 0 22px;
@@ -226,7 +226,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 56px;
+  font-size: clamp(31px, 4.38vw, 56px);
   line-height: 1;
   margin: 0;
   color: var(--ink);
@@ -376,7 +376,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 44px;
+  font-size: clamp(29px, 3.44vw, 44px);
   line-height: 1;
   margin: 0 0 6px;
   color: var(--ink);
@@ -528,7 +528,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 700;
-  font-size: 32px;
+  font-size: clamp(26px, 2.5vw, 32px);
   line-height: 1.1;
   margin: 0 0 8px;
   color: var(--ink);
@@ -618,7 +618,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 56px;
+  font-size: clamp(31px, 4.38vw, 56px);
   line-height: 1.02;
   margin: 0 0 16px;
   color: var(--paper);
@@ -690,7 +690,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 34px;
+  font-size: clamp(27px, 2.66vw, 34px);
   line-height: 1;
   margin: 0 0 10px;
   color: var(--ink);

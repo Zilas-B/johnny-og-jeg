@@ -33,9 +33,15 @@
     rgba(0, 0, 0, 0) 60%
   );
 }
+/* One of the three scoped `.wrap` copies — docs/TechStack.md, Responsive
+   conventions. This one never carried the container pair, so the quote below
+   ran edge-to-edge on narrow screens. */
 .wrap {
   position: relative;
   z-index: 2;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 .kicker {
   font-family: var(--f-mono);
@@ -50,7 +56,7 @@
   max-width: 940px;
   font-family: var(--f-display);
   font-style: italic;
-  font-size: 44px;
+  font-size: clamp(29px, 3.44vw, 44px);
   line-height: 1.2;
   color: var(--paper);
   text-wrap: balance;

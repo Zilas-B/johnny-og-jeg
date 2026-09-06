@@ -33,6 +33,22 @@
   --f-poster:     var(--font-bebas), "Oswald", "Impact", sans-serif;
   --f-mono:       var(--font-plex-mono), "Courier New", monospace;
   --f-body:       var(--font-crimson), "Georgia", serif;
+
+  /* Content container. --gutter is the side padding, stepped down at the three
+     breakpoints below; at a flat 56px a 375px screen left only 263px of content.
+     Both are read by all three `.wrap` rules — see docs/TechStack.md. */
+  --gutter:        56px;
+  --container-max: 1280px;
+}
+
+@media (max-width: 1024px) {
+  :root { --gutter: 40px; }
+}
+@media (max-width: 768px) {
+  :root { --gutter: 28px; }
+}
+@media (max-width: 560px) {
+  :root { --gutter: 20px; }
 }
 
 /* Paper grain — speckled overlay across the viewport */
@@ -63,11 +79,12 @@ body::after {
     radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0) 60%, rgba(20, 12, 4, 0.22) 100%);
 }
 
-/* Generic horizontal container used throughout the template */
+/* Generic horizontal container used throughout the template. Two more scoped
+   copies exist — see docs/TechStack.md, Responsive conventions. */
 .wrap {
-  max-width: 1280px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 56px;
+  padding: 0 var(--gutter);
   position: relative;
   z-index: 2;
 }

@@ -172,7 +172,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 42px;
+  font-size: clamp(28px, 3.28vw, 42px);
   line-height: 1;
   margin: 0 0 10px;
   color: var(--ink);

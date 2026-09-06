@@ -21,7 +21,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 400;
-  font-size: 48px;
+  font-size: clamp(30px, 3.75vw, 48px);
   line-height: 1.15;
   color: var(--ink);
   text-wrap: balance;
@@ -34,7 +34,7 @@
   content: '“';
   color: var(--barn);
   font-weight: 900;
-  font-size: 80px;
+  font-size: clamp(36px, 6.25vw, 80px);
   line-height: 0;
   vertical-align: -22px;
   margin-right: 6px;
@@ -43,7 +43,7 @@
   content: '”';
   color: var(--barn);
   font-weight: 900;
-  font-size: 80px;
+  font-size: clamp(36px, 6.25vw, 80px);
   line-height: 0;
   vertical-align: -22px;
   margin-left: 6px;
@@ -58,9 +58,6 @@
 }
 
 @media (max-width: 768px) {
-  .quote {
-    font-size: 32px;
-  }
   .hymn {
     padding: 64px 0;
   }

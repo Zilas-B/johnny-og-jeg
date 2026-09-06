@@ -47,7 +47,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 132px;
+  font-size: clamp(46px, 10.31vw, 132px);
   line-height: 0.92;
   letter-spacing: -0.02em;
   margin: 0 0 26px;
@@ -272,7 +272,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 60px;
+  font-size: clamp(32px, 4.69vw, 60px);
   line-height: 1.02;
   margin: 0 0 12px;
   color: var(--ink);
@@ -348,7 +348,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 36px;
+  font-size: clamp(27px, 2.81vw, 36px);
   line-height: 1;
   margin: 0 0 6px;
   color: var(--ink);
@@ -460,7 +460,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 56px;
+  font-size: clamp(31px, 4.38vw, 56px);
   line-height: 1.02;
   margin: 0;
   color: var(--paper);
@@ -494,7 +494,7 @@
 }
 .pcell .k {
   font-family: var(--f-poster);
-  font-size: 44px;
+  font-size: clamp(29px, 3.44vw, 44px);
   letter-spacing: 0.04em;
   color: var(--brass);
   line-height: 1;
@@ -582,7 +582,7 @@
   font-family: var(--f-display);
   font-style: italic;
   color: var(--barn);
-  font-size: 110px;
+  font-size: clamp(42px, 8.59vw, 110px);
   line-height: 0.7;
   position: absolute;
   top: 18px;
@@ -657,7 +657,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 60px;
+  font-size: clamp(32px, 4.69vw, 60px);
   line-height: 1;
   margin: 0 0 18px;
   color: var(--ink);

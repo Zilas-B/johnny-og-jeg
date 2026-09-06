@@ -71,7 +71,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 132px;
+  font-size: clamp(46px, 10.31vw, 132px);
   line-height: 0.88;
   letter-spacing: -0.025em;
   margin: 0 0 18px;
@@ -99,7 +99,7 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: 84px;
+  font-size: clamp(37px, 6.56vw, 84px);
   line-height: 0.85;
   padding: 6px 14px 0 0;
   color: var(--brass);
