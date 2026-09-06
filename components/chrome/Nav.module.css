@@ -133,3 +133,210 @@
   color: var(--barn);
   margin-right: 10px;
 }
+
+/* ── Nav Drawer (#29) ────────────────────────────────────────────────────
+   Below `max-width: 768px` the tab row is replaced by a menu button on the
+   left and the CTA on the right; the tree itself moves into a full-screen
+   overlay. The bar keeps its black face and 4px barn-red edge at full
+   weight — see the issue: it does not shrink to a strip. */
+
+.menuButton {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 14px;
+  margin-left: calc(var(--gutter) * -0.5);
+  background: transparent;
+  color: var(--paper);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Three bars drawn from one box: the middle is the element, the outer two
+   its pseudo-elements — no extra markup inside the button. */
+.menuIcon {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--paper);
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background: var(--paper);
+}
+
+.menuIcon::before { top: -7px; }
+.menuIcon::after  { top: 7px; }
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  /* Inside `.primary`'s own stacking context (z-index 50), so this only
+     orders the drawer above the bar it belongs to — the whole nav still sits
+     at 50 relative to the page. */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  color: var(--paper);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 var(--gutter) 32px;
+}
+
+.drawerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 4px solid var(--barn);
+}
+
+.drawerTitle {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.drawerClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 4px;
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.closeMark {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.drawerList {
+  flex: 1 1 auto;
+}
+
+/* Children are indented by margin, not padding, so the indent is visible in
+   the box itself and the touch target stays full width. */
+.drawerChildren {
+  margin-left: 22px;
+  border-left: 1px solid rgba(239, 228, 207, 0.18);
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--f-poster);
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px dashed rgba(239, 228, 207, 0.16);
+}
+
+.drawerChildren .drawerLink {
+  font-size: 17px;
+  color: var(--paper-2);
+}
+
+.drawerLinkActive {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* A parent with children is a label, not a link — the whole tree is visible
+   at once, so there is nothing for it to unfold. */
+.drawerGroup {
+  display: block;
+  padding: 18px 12px 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.drawerGroupActive {
+  color: var(--paper);
+  border-left: 3px solid var(--accent);
+  padding-left: 9px;
+}
+
+.drawerCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--paper);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .row {
+    align-items: center;
+    min-height: 60px;
+  }
+
+  .item {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .cta {
+    padding: 0;
+  }
+
+  /* Still a touch target next to the menu button: 44px tall even though the
+     type shrinks. */
+  .ctaLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}
+
+@media (max-width: 560px) {
+  .ctaLink {
+    padding: 9px 10px;
+    letter-spacing: 0.1em;
+  }
+}
