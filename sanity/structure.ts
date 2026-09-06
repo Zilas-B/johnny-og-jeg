@@ -12,10 +12,10 @@ const PINNED_SINGLETONS = [
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Indhold')
+    .title('Content')
     .items([
       S.listItem()
-        .title('Forside — Johnny og jeg')
+        .title('Front page — Johnny og jeg')
         .icon(HomeIcon)
         .child(
           S.document()
@@ -55,7 +55,7 @@ export const structure: StructureResolver = (S) =>
             .documentId('bogerPage'),
         ),
       S.listItem()
-        .title('Indstillinger for sitet')
+        .title('Site Settings')
         .icon(CogIcon)
         .child(
           S.document()

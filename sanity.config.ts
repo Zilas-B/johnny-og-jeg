@@ -22,6 +22,7 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     presentationTool({
+      title: 'Preview',
       previewUrl: {
         origin: typeof window === 'undefined' ? 'http://localhost:3000' : window.location.origin,
         preview: '/',
@@ -31,15 +32,15 @@ export default defineConfig({
       },
       resolve: {
         locations: {
-          homePage: { locations: [{ title: 'Forside', href: '/' }] },
-          siteSettings: { locations: [{ title: 'Forside', href: '/' }] },
+          homePage: { locations: [{ title: 'Front page', href: '/' }] },
+          siteSettings: { locations: [{ title: 'Front page', href: '/' }] },
           kulturenPage: { locations: [{ title: 'Kulturen', href: '/kulturen' }] },
           landscape: {
             select: { slug: 'slug.current' },
             resolve: (doc) => ({
               locations: [
                 { title: 'Kulturen', href: '/kulturen' },
-                ...(doc?.slug ? [{ title: 'Arkivside', href: `/${doc.slug}` }] : []),
+                ...(doc?.slug ? [{ title: 'Archive page', href: `/${doc.slug}` }] : []),
               ],
             }),
           },
@@ -47,7 +48,7 @@ export default defineConfig({
             select: { title: 'title', slug: 'slug.current' },
             resolve: (doc) => ({
               locations: doc?.slug
-                ? [{ title: (doc.title as string) ?? 'Side', href: `/${doc.slug}` }]
+                ? [{ title: (doc.title as string) ?? 'Page', href: `/${doc.slug}` }]
                 : [],
             }),
           },

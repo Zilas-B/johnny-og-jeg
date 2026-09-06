@@ -2,7 +2,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const navGroup = defineType({
   name: 'navGroup',
-  title: 'Navigationsgruppe',
+  title: 'Navigation group',
   type: 'object',
   fields: [
     defineField({
@@ -13,14 +13,14 @@ export const navGroup = defineType({
     }),
     defineField({
       name: 'href',
-      title: 'Sti (hvis simpelt link)',
-      description: 'Brug enten en sti her ELLER underpunkter nedenfor — ikke begge.',
+      title: 'Path (if a plain link)',
+      description: 'Use either a path here OR sub-items below — not both.',
       type: 'string',
     }),
     defineField({
       name: 'children',
-      title: 'Underpunkter',
-      description: 'Hvis udfyldt vises gruppen som dropdown.',
+      title: 'Sub-items',
+      description: 'If filled in, the group renders as a dropdown.',
       type: 'array',
       of: [defineArrayMember({ type: 'navLink' })],
     }),
@@ -31,10 +31,10 @@ export const navGroup = defineType({
       const hasHref = Boolean(v?.href?.trim())
       const hasChildren = Boolean(v?.children?.length)
       if (hasHref && hasChildren) {
-        return 'Vælg enten sti eller underpunkter — ikke begge.'
+        return 'Choose either a path or sub-items — not both.'
       }
       if (!hasHref && !hasChildren) {
-        return 'Gruppen skal enten have en sti eller mindst ét underpunkt.'
+        return 'The group needs either a path or at least one sub-item.'
       }
       return true
     }),
@@ -42,7 +42,7 @@ export const navGroup = defineType({
     select: { title: 'label', href: 'href', children: 'children' },
     prepare: ({ title, href, children }) => ({
       title,
-      subtitle: href || `${(children as unknown[] | undefined)?.length ?? 0} underpunkt(er)`,
+      subtitle: href || `${(children as unknown[] | undefined)?.length ?? 0} sub-item(s)`,
     }),
   },
 })

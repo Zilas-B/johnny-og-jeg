@@ -3,19 +3,19 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 // A `.lside` sidebar box that renders a year/note list (the "Knudepunkter" box).
 export const kulturenTimeline = defineType({
   name: 'kulturenTimeline',
-  title: 'Tidslinje-boks',
+  title: 'Timeline box',
   type: 'object',
   fields: [
     defineField({
       name: 'label',
       title: 'Label',
-      description: 'Boksens overskrift, fx "— Knudepunkter —".',
+      description: 'The box’s heading, e.g. “— Knudepunkter —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'entries',
-      title: 'Knudepunkter',
+      title: 'Entries',
       type: 'array',
       of: [defineArrayMember({ type: 'kulturenTimelineEntry' })],
       validation: (Rule) => Rule.required().min(1),
@@ -24,8 +24,8 @@ export const kulturenTimeline = defineType({
   preview: {
     select: { label: 'label', entries: 'entries' },
     prepare: ({ label, entries }) => ({
-      title: label ?? 'Tidslinje',
-      subtitle: `${(entries ?? []).length} knudepunkter`,
+      title: label ?? 'Timeline',
+      subtitle: `${(entries ?? []).length} entries`,
     }),
   },
 })

@@ -8,13 +8,13 @@ export const cta = defineType({
     defineField({
       name: 'label',
       title: 'Label',
-      description: 'Fx "Bestil foredrag →".',
+      description: 'E.g. “Bestil foredrag →”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'href',
-      title: 'Sti',
+      title: 'Path',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),

@@ -2,19 +2,19 @@ import { defineField, defineType } from 'sanity'
 
 export const tickerItem = defineType({
   name: 'tickerItem',
-  title: 'Ticker-element',
+  title: 'Milestone',
   type: 'object',
   fields: [
     defineField({
       name: 'year',
-      title: 'Årstal',
+      title: 'Year',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'milestone',
-      title: 'Milepæl',
-      description: 'Fx "I WALK THE LINE".',
+      title: 'Milestone',
+      description: 'E.g. “I WALK THE LINE”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),

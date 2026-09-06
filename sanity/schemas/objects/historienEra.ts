@@ -30,41 +30,41 @@ function plainText(blocks?: Array<{ children?: Array<{ text?: string }> }>): str
 // renderer (acts II/IV/VI), so it is not a stored field.
 export const historienEra = defineType({
   name: 'historienEra',
-  title: 'Epoke',
+  title: 'Era',
   type: 'object',
   fields: [
     defineField({
       name: 'romanNumeral',
-      title: 'Aktnummer (romertal)',
-      description: 'Fx "I". Bruges i "— Akt I —", stemplet og ankeret #era-1.',
+      title: 'Act number (Roman numeral)',
+      description: 'E.g. “I”. Used in “— Akt I —”, the stamp and the #era-1 anchor.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'period',
-      title: 'Periode',
-      description: 'Fx "1776 — 1830". Vises i stempel, års-chip, hero-liste og tidslinje.',
+      title: 'Period',
+      description: 'E.g. “1776 — 1830”. Shown in the stamp, the year chip, the hero list and the timeline.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'navName',
-      title: 'Navn — hero-liste',
-      description: 'Det fulde navn i "Bladre i"-listen, fx "Den unge republik".',
+      title: 'Name — hero list',
+      description: 'The full name in the “Bladre i” list, e.g. “Den unge republik”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'timelineName',
-      title: 'Navn — tidslinje',
-      description: 'Det komprimerede navn i tidslinjestriben, fx "Kløften & krigen".',
+      title: 'Name — timeline',
+      description: 'The condensed name in the timeline strip, e.g. “Kløften & krigen”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
-      description: 'H2 med *kursiv* for accent-ordet, fx "Den unge *republik*.".',
+      title: 'Heading',
+      description: 'H2. Use *italics* for the accent word, e.g. “Den unge *republik*.”.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
@@ -72,14 +72,14 @@ export const historienEra = defineType({
     defineField({
       name: 'deck',
       title: 'Deck',
-      description: 'Den kursiverede underrubrik, én sætning.',
+      description: 'The italicised subheading, one sentence.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'body',
-      title: 'Brødtekst',
-      description: 'Epokens afsnit. Brug **fed** og *kursiv* til fremhævning.',
+      title: 'Body text',
+      description: 'The era’s paragraphs. Use **bold** and *italics* for emphasis.',
       type: 'array',
       of: [proseBlock],
       validation: (Rule) => Rule.required(),
@@ -88,26 +88,26 @@ export const historienEra = defineType({
     // ---- Photo(s) ----
     defineField({
       name: 'image',
-      title: 'Foto',
+      title: 'Photo',
       type: 'image',
       options: { hotspot: true },
       fields: [
         defineField({
           name: 'alt',
-          title: 'Alt-tekst',
+          title: 'Alt text',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'shape',
-          title: 'Form',
-          description: 'Billedformat (ignoreres når der er et collage-foto).',
+          title: 'Shape',
+          description: 'Image format (ignored when a collage photo is set).',
           type: 'string',
           options: {
             list: [
-              { title: 'Bred (16/10)', value: 'wide' },
-              { title: 'Høj (3/4)', value: 'tall' },
-              { title: 'Kvadratisk (1/1)', value: 'sq' },
+              { title: 'Wide (16/10)', value: 'wide' },
+              { title: 'Tall (3/4)', value: 'tall' },
+              { title: 'Square (1/1)', value: 'sq' },
             ],
             layout: 'radio',
           },
@@ -118,14 +118,14 @@ export const historienEra = defineType({
     }),
     defineField({
       name: 'imageCollage',
-      title: 'Collage-foto (valgfrit)',
-      description: 'Når sat vises de to fotos som en skæv collage (som Akt IV).',
+      title: 'Collage photo (optional)',
+      description: 'When set, the two photos render as a tilted collage (as in Act IV).',
       type: 'image',
       options: { hotspot: true },
       fields: [
         defineField({
           name: 'alt',
-          title: 'Alt-tekst',
+          title: 'Alt text',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
@@ -133,15 +133,15 @@ export const historienEra = defineType({
     }),
     defineField({
       name: 'creditLeft',
-      title: 'Kredit — venstre',
-      description: 'Fx "Forfatningens fortale, 1787". Stjernen tilføjes automatisk.',
+      title: 'Credit — left',
+      description: 'E.g. “Forfatningens fortale, 1787”. The star is added automatically.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'creditRight',
-      title: 'Kredit — højre',
-      description: 'Fx "Public domain".',
+      title: 'Credit — right',
+      description: 'E.g. “Public domain”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
@@ -149,35 +149,35 @@ export const historienEra = defineType({
     // ---- Cash-note ----
     defineField({
       name: 'cashnote',
-      title: 'Cash-note',
+      title: 'Cash note',
       type: 'object',
       validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: 'label',
           title: 'Label',
-          description: 'Fx "— Cash om denne tid —".',
+          description: 'E.g. “— Cash om denne tid —”.',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'heading',
-          title: 'Overskrift',
+          title: 'Heading',
           type: 'string',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'song',
-          title: 'Sang-linje',
-          description: 'Sangtitler med **fed**. Fx "**Man in Black** · 1971".',
+          title: 'Song line',
+          description: 'Song titles in **bold**. E.g. “**Man in Black** · 1971”.',
           type: 'array',
           of: [inlineBlock],
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'body',
-          title: 'Brødtekst',
-          description: 'Det kursiverede afsnit. Brug *kursiv* til citater.',
+          title: 'Body text',
+          description: 'The italicised paragraph. Use *italics* for quotes.',
           type: 'array',
           of: [proseBlock],
           validation: (Rule) => Rule.required(),
@@ -188,18 +188,18 @@ export const historienEra = defineType({
     // ---- Archive posts (placeholders) ----
     defineField({
       name: 'posts',
-      title: 'Arkiv-indlæg',
-      description: 'Pladsholder-indlæg under epoken (typisk to).',
+      title: 'Archive entries',
+      description: 'Placeholder entries beneath the era (typically two).',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
           fields: [
-            defineField({ name: 'kind', title: 'Mærkat', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'title', title: 'Titel', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'date', title: 'Dato', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'href', title: 'Sti', type: 'string', initialValue: '#' }),
-            defineField({ name: 'empty', title: 'Tom (kommer-tilstand)', type: 'boolean', initialValue: true }),
+            defineField({ name: 'kind', title: 'Tag', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'date', title: 'Date', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'href', title: 'Path', type: 'string', initialValue: '#' }),
+            defineField({ name: 'empty', title: 'Empty (coming-soon state)', type: 'boolean', initialValue: true }),
           ],
           preview: { select: { title: 'title', subtitle: 'kind' } },
         }),
@@ -209,7 +209,7 @@ export const historienEra = defineType({
   preview: {
     select: { roman: 'romanNumeral', heading: 'heading', period: 'period', media: 'image' },
     prepare: ({ roman, heading, period, media }) => ({
-      title: `Akt ${roman ?? '—'} · ${plainText(heading) || ''}`.trim(),
+      title: `Act ${roman ?? '—'} · ${plainText(heading) || ''}`.trim(),
       subtitle: period ?? '',
       media,
     }),

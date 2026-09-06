@@ -7,25 +7,25 @@ export const seo = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Titel (override)',
-      description: 'Tom = brug sidens egen overskrift.',
+      title: 'Title (override)',
+      description: 'Empty = use the page’s own heading.',
       type: 'string',
     }),
     defineField({
       name: 'description',
-      title: 'Beskrivelse',
+      title: 'Description',
       type: 'text',
       rows: 3,
     }),
     defineField({
       name: 'ogImage',
-      title: 'Delingsbillede (Open Graph)',
+      title: 'Share image (Open Graph)',
       type: 'image',
       options: { hotspot: true },
       fields: [
         defineField({
           name: 'alt',
-          title: 'Alt-tekst',
+          title: 'Alt text',
           type: 'string',
         }),
       ],

@@ -31,7 +31,7 @@ export default async function SiteLayout({
     !settings.footerBottomTagline
   ) {
     throw new Error(
-      'siteSettings is missing or incomplete. Open /studio → "Indstillinger for sitet" and publish all required fields.',
+      'siteSettings is missing or incomplete. Open /studio → "Site Settings" and publish all required fields.',
     )
   }
 

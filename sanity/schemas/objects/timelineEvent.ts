@@ -2,31 +2,31 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const timelineEvent = defineType({
   name: 'timelineEvent',
-  title: 'Tidslinje-begivenhed',
+  title: 'Timeline event',
   type: 'object',
   fields: [
     defineField({
       name: 'year',
-      title: 'Årstal',
+      title: 'Year',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'place',
-      title: 'Sted',
-      description: 'Fx "Kingsland · Arkansas".',
+      title: 'Place',
+      description: 'E.g. “Kingsland · Arkansas”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heading',
-      title: 'Overskrift',
+      title: 'Heading',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
-      title: 'Beskrivelse',
+      title: 'Description',
       type: 'array',
       of: [defineArrayMember({ type: 'block', styles: [{ title: 'Normal', value: 'normal' }], lists: [] })],
       validation: (Rule) => Rule.required(),

@@ -18,20 +18,20 @@ function plainText(blocks?: Array<{ children?: Array<{ text?: string }> }>): str
 // One row in a `.lside` "Knudepunkter" timeline: year + a short inline note.
 export const kulturenTimelineEntry = defineType({
   name: 'kulturenTimelineEntry',
-  title: 'Knudepunkt',
+  title: 'Timeline entry',
   type: 'object',
   fields: [
     defineField({
       name: 'year',
-      title: 'Årstal',
-      description: 'Fx "1872", "1730s", "2020+".',
+      title: 'Year',
+      description: 'E.g. “1872”, “1730s”, “2020+”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'text',
-      title: 'Tekst',
-      description: 'Brug *kursiv* og **fed** til fremhævning.',
+      title: 'Text',
+      description: 'Use *italics* and **bold** for emphasis.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),

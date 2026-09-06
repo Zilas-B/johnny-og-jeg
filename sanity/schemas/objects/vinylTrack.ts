@@ -2,26 +2,26 @@ import { defineField, defineType } from 'sanity'
 
 export const vinylTrack = defineType({
   name: 'vinylTrack',
-  title: 'Spor',
+  title: 'Song',
   type: 'object',
   fields: [
     defineField({
       name: 'track',
-      title: 'Spor-nr.',
-      description: 'Fx "A1", "B2".',
+      title: 'Position',
+      description: 'On the record, e.g. “A1”, “B2”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'title',
-      title: 'Titel',
+      title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'duration',
-      title: 'Længde',
-      description: 'Fx "2:42".',
+      title: 'Duration',
+      description: 'E.g. “2:42”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),

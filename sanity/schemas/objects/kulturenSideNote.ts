@@ -22,33 +22,33 @@ function plainText(blocks?: Array<{ children?: Array<{ text?: string }> }>): str
 // barn/brass-bordered ".lside.cash" Johnny-Cash-crossing box.
 export const kulturenSideNote = defineType({
   name: 'kulturenSideNote',
-  title: 'Side-boks',
+  title: 'Side box',
   type: 'object',
   fields: [
     defineField({
       name: 'label',
       title: 'Label',
-      description: 'Boksens overskrift, fx "— Beboere —", "— Set herfra —".',
+      description: 'The box’s heading, e.g. “— Beboere —”, “— Set herfra —”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'value',
-      title: 'Tekst',
-      description: 'Brug *kursiv* og **fed** til fremhævning. Flere afsnit gengives adskilt.',
+      title: 'Text',
+      description: 'Use *italics* and **bold** for emphasis. Multiple paragraphs render separately.',
       type: 'array',
       of: [inlineBlock],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'emphasis',
-      title: 'Fremhævning',
-      description: '"Cash" giver den barn/brass-indrammede "Cash krydser her"-boks.',
+      title: 'Emphasis',
+      description: '“Cash” gives the barn/brass-bordered “Cash krydser her” box.',
       type: 'string',
       options: {
         list: [
-          { title: 'Standard', value: 'default' },
-          { title: 'Cash krydser her', value: 'cash' },
+          { title: 'Default', value: 'default' },
+          { title: 'Cash crosses here (“Cash krydser her”)', value: 'cash' },
         ],
         layout: 'radio',
       },
@@ -59,7 +59,7 @@ export const kulturenSideNote = defineType({
   preview: {
     select: { label: 'label', value: 'value', emphasis: 'emphasis' },
     prepare: ({ label, value, emphasis }) => ({
-      title: label ?? 'Side-boks',
+      title: label ?? 'Side box',
       subtitle: emphasis === 'cash' ? `Cash · ${plainText(value)}` : plainText(value),
     }),
   },

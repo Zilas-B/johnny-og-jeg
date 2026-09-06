@@ -8,7 +8,7 @@ export const navLink = defineType({
     defineField({
       name: 'mark',
       title: 'Mark',
-      description: 'Lille tegn foran labelen, fx "○", "I", "II", "A". Valgfri.',
+      description: 'Small mark before the label, e.g. “○”, “I”, “II”, “A”. Optional.',
       type: 'string',
     }),
     defineField({
@@ -19,8 +19,8 @@ export const navLink = defineType({
     }),
     defineField({
       name: 'href',
-      title: 'Sti',
-      description: 'Intern sti, fx "/musikeren".',
+      title: 'Path',
+      description: 'Internal path, e.g. “/musikeren”.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),

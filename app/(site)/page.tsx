@@ -31,7 +31,7 @@ export default async function HomePage() {
 
   if (!data?.blocks?.length) {
     throw new Error(
-      'homePage er ikke udfyldt eller udgivet. Åbn /studio → "Forside — Johnny og jeg" og tilføj mindst én blok.',
+      'homePage is missing or unpublished. Open /studio → "Front page — Johnny og jeg" and add at least one block.',
     )
   }
 

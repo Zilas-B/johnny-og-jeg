@@ -2,12 +2,12 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const footerColumn = defineType({
   name: 'footerColumn',
-  title: 'Footer-kolonne',
+  title: 'Footer column',
   type: 'object',
   fields: [
     defineField({
       name: 'title',
-      title: 'Overskrift',
+      title: 'Heading',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
