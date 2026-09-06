@@ -121,21 +121,26 @@ export default function StyleguidePage() {
           AKTIV ACCENT (via --accent)
         </h2>
         <div
-          className="bg-accent text-paper"
-          style={{ padding: 24, marginTop: 16, fontFamily: 'var(--f-body)' }}
+          style={{
+            background: 'var(--accent)',
+            color: 'var(--paper)',
+            padding: 24,
+            marginTop: 16,
+            fontFamily: 'var(--f-body)',
+          }}
         >
-          <code>bg-accent</code> + <code>text-paper</code>
+          <code>--accent</code> + <code>--paper</code>
         </div>
         <div
-          className="text-accent"
           style={{
+            color: 'var(--accent)',
             padding: 24,
             border: '2px solid var(--accent)',
             marginTop: 8,
             fontFamily: 'var(--f-body)',
           }}
         >
-          <code>text-accent</code> + <code>border-accent</code>
+          <code>--accent</code> as text + border
         </div>
       </section>
     </div>

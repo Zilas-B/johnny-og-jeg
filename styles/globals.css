@@ -1,33 +1,5 @@
-@import "tailwindcss";
 @import "./tokens.css";
 @import "./reset.css";
-
-@theme {
-  /* Color utilities (bg-paper, text-ink, border-rule, etc.) */
-  --color-paper: #efe4cf;
-  --color-paper-2: #e6d8bb;
-  --color-paper-3: #d8c69e;
-  --color-ink: #0e0d0c;
-  --color-ink-2: #1a1714;
-  --color-ink-soft: #2b2620;
-  --color-barn: #a4282b;
-  --color-barn-deep: #76181b;
-  --color-denim: #2c3e58;
-  --color-denim-deep: #1c2a3e;
-  --color-brass: #c89b3c;
-  --color-brass-deep: #8e6a1f;
-
-  /* Per-page accent (bg-accent, text-accent, border-accent).
-     The runtime value comes from --accent in tokens.css; pages override it. */
-  --color-accent: var(--accent);
-  --color-accent-deep: var(--accent-deep);
-
-  /* Font utilities (font-display, font-poster, font-mono, font-body) */
-  --font-display: var(--font-playfair), "Hoefler Text", Georgia, serif;
-  --font-poster: var(--font-bebas), "Oswald", "Impact", sans-serif;
-  --font-mono: var(--font-plex-mono), "Courier New", monospace;
-  --font-body: var(--font-crimson), Georgia, serif;
-}
 
 body {
   background: var(--paper);
@@ -38,6 +10,7 @@ body {
   min-height: 100vh;
   position: relative;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 

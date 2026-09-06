@@ -5,4 +5,3 @@ allowBuilds:
 onlyBuiltDependencies:
   - sharp
   - unrs-resolver
-  - '@tailwindcss/oxide'

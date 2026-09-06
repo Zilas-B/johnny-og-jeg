@@ -1,8 +1,8 @@
 /* Hand-written CSS reset.
  *
  * Stands in for Tailwind's Preflight, which every CSS Module in this site was
- * written against (ADR 0005). While Tailwind is still installed the two overlap
- * rule for rule; once Tailwind is removed this file carries the load alone.
+ * written against (ADR 0005). Tailwind is gone; this file carries the load
+ * alone.
  *
  * Derived from tailwindcss v4 `preflight.css` (MIT) and trimmed to the rules
  * the site actually leans on; rules for elements the site never renders (hr,

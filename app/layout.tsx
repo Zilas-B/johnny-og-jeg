@@ -54,8 +54,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="da" className={`${fontVariables} h-full antialiased`}>
-      <body className="min-h-full">{children}</body>
+    <html lang="da" className={fontVariables}>
+      <body>{children}</body>
     </html>
   )
 }
