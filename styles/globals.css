@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./reset.css";
 
 @theme {
   /* Color utilities (bg-paper, text-ink, border-rule, etc.) */
@@ -26,16 +27,6 @@
   --font-poster: var(--font-bebas), "Oswald", "Impact", sans-serif;
   --font-mono: var(--font-plex-mono), "Courier New", monospace;
   --font-body: var(--font-crimson), Georgia, serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
 }
 
 body {

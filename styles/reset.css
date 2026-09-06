@@ -1,0 +1,148 @@
+/* Hand-written CSS reset.
+ *
+ * Stands in for Tailwind's Preflight, which every CSS Module in this site was
+ * written against (ADR 0005). While Tailwind is still installed the two overlap
+ * rule for rule; once Tailwind is removed this file carries the load alone.
+ *
+ * Derived from tailwindcss v4 `preflight.css` (MIT) and trimmed to the rules
+ * the site actually leans on; rules for elements the site never renders (hr,
+ * table, sub/sup, details, date/file inputs …) were left out on purpose. If a
+ * new element shows up looking like the browser default, add its rule here —
+ * deliberately, like an accent preset.
+ *
+ * Lives in `@layer base` so unlayered CSS Modules beat it by cascade order,
+ * exactly as they beat Preflight today. Do not move rules out of the layer:
+ * an unlayered `a { color: inherit }` would override globals.css.
+ */
+
+@layer base {
+  /* Border-box everywhere; zero margins and padding so every CSS Module owns its
+     own spacing (headings, paragraphs, lists, blockquotes, figures, dl/dd).
+     `border: 0 solid` lets a CSS Module set only `border-width`/`border-color`. */
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%; /* no font inflation on iOS rotation */
+    tab-size: 4;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Headings carry no size or weight of their own; CSS Modules set both. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  /* Links are styled opt-in. globals.css sets the site-wide colour. */
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--f-mono);
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 80%;
+  }
+
+  ol,
+  ul,
+  menu {
+    list-style: none;
+  }
+
+  /* Replaced elements are blocks — no descender gap under images. */
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+    vertical-align: middle;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Form controls inherit the surrounding typography instead of the system
+     font, and drop the browser's background, radius and disabled dimming. */
+  button,
+  input,
+  select,
+  optgroup,
+  textarea {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+
+  ::placeholder {
+    opacity: 1;
+  }
+
+  /* Guard copied from Preflight: Safari < 17 crashes on color-mix with currentcolor. */
+  @supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: color-mix(in oklab, currentcolor 50%, transparent);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  /* iOS Safari otherwise refuses border-radius on buttons. */
+  button,
+  input:where([type='button'], [type='reset'], [type='submit']) {
+    appearance: button;
+  }
+
+  :-moz-focusring {
+    outline: auto;
+  }
+
+  /* Firefox paints a red glow on invalid required fields (booking form). */
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  [hidden]:where(:not([hidden='until-found'])) {
+    display: none !important;
+  }
+}

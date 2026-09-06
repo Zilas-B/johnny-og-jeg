@@ -65,8 +65,9 @@ johnny-og-jeg/
 │   ├── client.ts                     # Sanity client + image URL builder
 │   └── env.ts                        # Validated env config
 ├── styles/
-│   ├── globals.css                   # Tailwind directives, paper grain, root vars
-│   └── tokens.css                    # Design tokens (colors, typography scale)
+│   ├── globals.css                   # Tailwind directives, body base styles, skip-link
+│   ├── reset.css                     # Hand-written reset; takes over from Preflight when Tailwind goes (ADR 0005)
+│   └── tokens.css                    # Design tokens (colors, typography scale), paper grain, focus ring
 ├── public/                           # Static assets (favicons, OG images)
 ├── tests/viewport/                   # Playwright viewport smoke tests (routes from sitemap)
 ├── playwright.config.ts              # One Chromium project per width; webServer = dev locally, start in CI
