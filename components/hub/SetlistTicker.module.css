@@ -52,3 +52,43 @@
     animation: none;
   }
 }
+
+/* Reader-driven below the tablet breakpoint (#32). Auto-scroll is content in
+   motion the reader cannot stop, catch up with or rewind, and on a phone it
+   competes with the page's own vertical scroll under the same thumb. The
+   animation stops and the strip becomes horizontal scroll that snaps one
+   Milestone at a time; each card is 85% of the strip, so the next one shows
+   ~15% at the right edge — without that peek a static strip does not read as
+   scrollable. `overflow-x: auto` also clips the track, so the strip's own
+   horizontal scroll never reaches the document. */
+@media (max-width: 768px) {
+  .setlist {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+
+  .track {
+    animation: none;
+    /* Definite width, so the cards' 85% has something to resolve against. */
+    width: 100%;
+    gap: 0;
+    white-space: normal;
+  }
+
+  .track > span {
+    flex: 0 0 85%;
+    flex-wrap: wrap;
+    scroll-snap-align: start;
+    padding-right: 16px;
+    padding-left: var(--gutter);
+  }
+
+  /* The second copy of the list exists only so the keyframe can translate -50%
+     and loop seamlessly. There is no animation to loop here, so the reader
+     swipes each Milestone once. Selected through `.track >` to outrank the
+     `display` on `.track > span`. */
+  .track > .loopCopy {
+    display: none;
+  }
+}
