@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { widthOf } from './viewport'
+import { expectTappable, MIN_TARGET_PX, widthOf } from './viewport'
 
 // Nav Drawer (#29) — the full-screen overlay that replaces the navigation
 // bar's tab row on narrow screens. See CONTEXT.md for the term.
@@ -170,7 +170,7 @@ test.describe('narrow: menu button replaces the tab row', () => {
       .getByRole('navigation', { name: 'Primær' })
       .getByRole('link', { name: /Bestil foredrag/ })
       .boundingBox()
-    expect(box!.height).toBeGreaterThanOrEqual(44)
+    expect(box!.height).toBeGreaterThanOrEqual(MIN_TARGET_PX)
   })
 
   test('every touch target in the drawer is at least 44×44px', async ({ page }) => {
@@ -178,14 +178,7 @@ test.describe('narrow: menu button replaces the tab row', () => {
     const drawer = page.getByRole('dialog', { name: 'Menu' })
     await expect(drawer).toBeVisible()
 
-    const small = await page.evaluate(() => {
-      const root = document.getElementById('nav-drawer')!
-      return Array.from(root.querySelectorAll('a, button'))
-        .map((el) => ({ el, r: el.getBoundingClientRect() }))
-        .filter(({ r }) => r.height < 44 || r.width < 44)
-        .map(({ el, r }) => `${el.textContent?.trim()} → ${Math.round(r.width)}×${Math.round(r.height)}`)
-    })
-    expect(small, `targets under 44×44:\n${small.join('\n')}`).toEqual([])
+    await expectTappable(page.locator('#nav-drawer').locator('a, button'))
   })
 
   test('the menu button itself is at least 44×44px', async ({ page }) => {
@@ -193,8 +186,8 @@ test.describe('narrow: menu button replaces the tab row', () => {
       .getByRole('navigation', { name: 'Primær' })
       .getByRole('button', { name: 'Menu' })
       .boundingBox()
-    expect(box!.width).toBeGreaterThanOrEqual(44)
-    expect(box!.height).toBeGreaterThanOrEqual(44)
+    expect(box!.width).toBeGreaterThanOrEqual(MIN_TARGET_PX)
+    expect(box!.height).toBeGreaterThanOrEqual(MIN_TARGET_PX)
   })
 })
 

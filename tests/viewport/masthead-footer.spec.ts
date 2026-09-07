@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { layoutWidth, widthOf } from './viewport'
+import { expectTappable, layoutWidth, widthOf } from './viewport'
 
 // Masthead and Colophon on mobile (#30). Both are in every page's chrome, so
 // the rules here have site-wide effect and are worth pinning down once.
@@ -80,14 +80,7 @@ test.describe('narrow: masthead reduced to its wordmark, colophon stacked', () =
   })
 
   test('every colophon link is at least a 44×44px touch target', async ({ page }) => {
-    const small = await page.evaluate(() => {
-      const root = document.querySelector('footer')!
-      return Array.from(root.querySelectorAll('a'))
-        .map((el) => ({ el, r: el.getBoundingClientRect() }))
-        .filter(({ r }) => r.height < 44 || r.width < 44)
-        .map(({ el, r }) => `${el.textContent?.trim()} → ${Math.round(r.width)}×${Math.round(r.height)}`)
-    })
-    expect(small, `targets under 44×44:\n${small.join('\n')}`).toEqual([])
+    await expectTappable(page.locator('footer a'))
   })
 })
 

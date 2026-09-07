@@ -37,11 +37,11 @@ export function LandSection({ data, isLast }: { data: Landscape; isLast: boolean
   const tail = isLast ? 'Otte landskaber, én republik' : `Slut på Landskab ${data.romanNumeral}`
 
   return (
-    <section className={sectionClass} id={data.slug ?? undefined} style={style}>
+    <section className={sectionClass} data-kulturen-land id={data.slug ?? undefined} style={style}>
       <div className="wrap">
-        <div className={styles.landHead}>
-          <div className={styles.landRn}>{data.romanNumeral}</div>
-          <div className={styles.landTitles}>
+        <div className={styles.landHead} data-kulturen-land-head>
+          <div className={styles.landRn} data-kulturen-land-rn>{data.romanNumeral}</div>
+          <div className={styles.landTitles} data-kulturen-land-titles>
             <div className={styles.landEyebrow}>
               Landskab {data.romanNumeral}
               <span className={styles.sep}>·</span>
@@ -56,12 +56,12 @@ export function LandSection({ data, isLast }: { data: Landscape; isLast: boolean
           </div>
         </div>
 
-        <div className={styles.landBody}>
-          <div className={styles.essay}>
+        <div className={styles.landBody} data-kulturen-land-body>
+          <div className={styles.essay} data-kulturen-land-essay>
             <PortableText value={data.kulturenEssay} withDropCap />
           </div>
 
-          <aside className={styles.side}>
+          <aside className={styles.side} data-kulturen-land-side>
             {sidebar.map((box: SidebarBox) =>
               box._type === 'kulturenTimeline' ? (
                 <div className={styles.lside} key={box._key}>

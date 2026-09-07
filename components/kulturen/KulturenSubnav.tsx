@@ -46,6 +46,7 @@ export function KulturenSubnav({ items }: { items: SubnavItem[] }) {
     <div
       className={`${styles.subnav} ${visible ? styles.visible : ''}`}
       aria-label="Landskaberne"
+      data-kulturen-subnav
     >
       <div className={`wrap ${styles.subnavInner}`}>
         <div className={styles.label}>— Landskaberne —</div>
@@ -55,6 +56,7 @@ export function KulturenSubnav({ items }: { items: SubnavItem[] }) {
               <a
                 href={`#${i.slug}`}
                 className={active === i.slug ? styles.active : undefined}
+                data-kulturen-subnav-item
                 aria-current={active === i.slug ? 'true' : undefined}
               >
                 <span className={styles.rn}>{i.romanNumeral}</span>

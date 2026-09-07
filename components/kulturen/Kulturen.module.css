@@ -307,7 +307,10 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: clamp(60px, 15.63vw, 200px);
+  /* Hand-tuned min, per docs/TechStack.md's escape clause. The formula gives
+     20px + 0.2×200 = 60px, but Landskab VIII is four wide italic glyphs and
+     'VIII' at 60px measures 324px — wider than a 320px screen. 50px fits. */
+  font-size: clamp(50px, 15.63vw, 200px);
   line-height: 0.78;
   letter-spacing: -0.04em;
   color: var(--accent);
@@ -334,7 +337,10 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: clamp(37px, 6.56vw, 84px);
+  /* Hand-tuned min, same clause and same cause as .landRn: the formula's 37px
+     min renders 'Drømmefabrikken' — one unbreakable 15-letter compound — at
+     313px, past the right edge of a 320px screen. */
+  font-size: clamp(32px, 6.56vw, 84px);
   line-height: 0.92;
   margin: 4px 0 8px;
   letter-spacing: -0.018em;
@@ -708,7 +714,10 @@
 /* ============== STICKY SUB-NAV (TOC) ============== */
 .subnav {
   position: sticky;
-  top: 56px;
+  /* The primary nav's own height, measured: 56.8px of link plus its 4px barn
+     edge. The 56px this used to carry left the bar sliding 5px under the nav.
+     kulturen.spec.ts asserts the clearance at all four widths. */
+  top: 61px;
   z-index: 40;
   background: var(--ink-2);
   color: var(--paper);
@@ -789,4 +798,162 @@
 }
 .subnav ol li a.active .rn {
   color: var(--paper);
+}
+
+/* ================================================================
+   NARROW — #34. The four-column chip grid unfolds, the page's four
+   splits stack, and the sticky sub-nav becomes a swipeable strip.
+   ================================================================ */
+
+@media (max-width: 1024px) {
+  /* Four chips across leaves ~200px each here, which the 30px display name
+     already crowds. Two, and one below 560px. */
+  .chipsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chipsHead {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  .kintroGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* The 220px numeral column cannot hold on a phone, and 1fr next to it is
+     what pushed `.landTitles` past the right edge (docs/responsive-overflow.md).
+     The numeral becomes the section's opening line instead of its margin. */
+  .landHead {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+  .landBody {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .outroGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Eight poster-cased entries never fit one row below the desktop breakpoint,
+     and squeezing them to 1fr each ellipsised every name. The reader swipes the
+     table of contents instead. Unlike the Milestone Carousel (#32) it neither
+     snaps nor leaves a peek: a table of contents is read by its first entry and
+     scanned sideways, not stepped through one card at a time. */
+  .subnav ol {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+  .subnav ol::-webkit-scrollbar {
+    display: none;
+  }
+  .subnav ol li {
+    flex: 0 0 auto;
+  }
+  .subnav ol li a {
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .khero {
+    padding: 44px 0 40px;
+  }
+  .eyebrow {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    letter-spacing: 0.26em;
+    margin-bottom: 18px;
+  }
+  .subhead {
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    margin-bottom: 22px;
+  }
+  .deck {
+    font-size: 19px;
+  }
+  .deck :global(p + p) {
+    font-size: 17px;
+  }
+
+  .chips {
+    padding: 40px 0 48px;
+  }
+  .chipsHead .lab {
+    letter-spacing: 0.24em;
+  }
+
+  .kintro {
+    padding: 56px 0 52px;
+  }
+  .land {
+    padding: 56px 0 52px;
+    /* Clears the primary nav plus the sub-nav strip resting under it, so a
+       tapped entry does not land behind the chrome. */
+    scroll-margin-top: 116px;
+  }
+  .landTail {
+    margin-top: 40px;
+    letter-spacing: 0.28em;
+  }
+  .outro {
+    padding: 56px 0 48px;
+  }
+
+  /* The bar is 60px tall plus its 4px barn edge at this width — see
+     Nav.module.css. */
+  .subnav {
+    top: 64px;
+  }
+  /* The label is a caption for a strip that now announces itself by scrolling;
+     on a phone its 10px/0.28em costs more width than it earns. */
+  .subnav .label {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Two chips leave ~130px of content each — narrower than the 30px name they
+     carry. One column, full width. */
+  .chipsGrid {
+    grid-template-columns: 1fr;
+  }
+  .chip {
+    padding: 18px 18px 16px;
+  }
+  .ckName {
+    font-size: 26px;
+  }
+
+  .lside {
+    padding: 16px 16px 14px;
+  }
+  .timeline li {
+    grid-template-columns: 52px 1fr;
+    gap: 8px;
+  }
+
+  .outroCard {
+    padding: 20px 18px;
+  }
+  .outroCard li {
+    grid-template-columns: 22px 1fr;
+    gap: 4px 10px;
+    font-size: 15px;
+  }
+  /* Third in a 22px + 1fr + auto row is what pushed the card out; on its own
+     line under the name it costs nothing. */
+  .outroCard li .kind {
+    grid-column: 2;
+  }
 }

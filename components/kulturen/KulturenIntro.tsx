@@ -11,15 +11,15 @@ export function KulturenIntro({ intro }: { intro: Intro }) {
   return (
     <section className={styles.kintro}>
       <div className="wrap">
-        <div className={styles.kintroGrid}>
-          <div>
+        <div className={styles.kintroGrid} data-kulturen-intro>
+          <div data-kulturen-column>
             {intro.kicker ? <div className={styles.kicker}>{intro.kicker}</div> : null}
             <h2 className={styles.kintroHeading}>
               <InlineText value={intro.heading} />
             </h2>
             {intro.signature ? <div className={styles.signature}>{intro.signature}</div> : null}
           </div>
-          <div>
+          <div data-kulturen-column>
             <PortableText value={intro.body} className={styles.kintroBody} />
           </div>
         </div>

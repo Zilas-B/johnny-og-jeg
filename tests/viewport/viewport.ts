@@ -41,3 +41,28 @@ export function expectStacked(boxes: Box[]) {
     expect(boxes[i].top).toBeGreaterThanOrEqual(boxes[i - 1].bottom)
   }
 }
+
+/** WCAG 2.5.8, pulled into #24 from #14: every interactive box is 44x44 or more. */
+export const MIN_TARGET_PX = 44
+
+/**
+ * Asserts every matched element is a finger-sized target, naming the ones that
+ * are not. `locator` should match the interactive elements themselves — a link
+ * or a button — not their container.
+ */
+export async function expectTappable(locator: Locator) {
+  const small = await locator.evaluateAll(
+    (els, min) =>
+      els
+        .map((el) => ({ el, r: el.getBoundingClientRect() }))
+        .filter(({ r }) => r.height < min || r.width < min)
+        .map(({ el, r }) => `${el.textContent?.trim()} → ${Math.round(r.width)}×${Math.round(r.height)}`),
+    MIN_TARGET_PX,
+  )
+  expect(small, `targets under ${MIN_TARGET_PX}×${MIN_TARGET_PX}:\n${small.join('\n')}`).toEqual([])
+}
+
+/** The tracks a `grid-template-columns` computed to, as used-value strings. */
+export function tracksOf(locator: Locator): Promise<string[]> {
+  return locator.evaluate((el) => getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/))
+}

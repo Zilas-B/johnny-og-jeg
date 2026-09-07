@@ -26,9 +26,9 @@ export function KulturenChips({
             <InlineText value={chips.count} />
           </div>
         </div>
-        <div className={styles.chipsGrid}>
+        <div className={styles.chipsGrid} data-kulturen-chips>
           {landscapes.map((l) => (
-            <a className={styles.chip} href={`#${l.slug}`} key={l.slug}>
+            <a className={styles.chip} data-kulturen-chip href={`#${l.slug}`} key={l.slug}>
               <div className={styles.ckTop}>
                 <span className={styles.rn}>{l.romanNumeral}</span>
                 <span>{l.toponym}</span>

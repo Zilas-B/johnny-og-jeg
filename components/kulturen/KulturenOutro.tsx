@@ -19,8 +19,8 @@ export function KulturenOutro({
   return (
     <section className={styles.outro}>
       <div className="wrap">
-        <div className={styles.outroGrid}>
-          <div>
+        <div className={styles.outroGrid} data-kulturen-outro>
+          <div data-kulturen-column>
             {outro.kicker ? <div className={styles.kicker}>{outro.kicker}</div> : null}
             <h2 className={styles.outroHeading}>
               <InlineText value={outro.heading} />
@@ -41,7 +41,7 @@ export function KulturenOutro({
             ) : null}
           </div>
 
-          <aside className={styles.outroCard}>
+          <aside className={styles.outroCard} data-kulturen-column>
             {outro.cardLead ? <div className={styles.lead}>{outro.cardLead}</div> : null}
             {outro.cardHeading ? <h4>{outro.cardHeading}</h4> : null}
             <ul>
