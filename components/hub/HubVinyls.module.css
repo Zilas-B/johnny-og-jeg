@@ -60,3 +60,13 @@
     gap: 56px;
   }
 }
+
+@media (max-width: 768px) {
+  .sectHead {
+    padding: 48px 0 20px;
+  }
+  .row {
+    padding: 28px 0 56px;
+    gap: 40px;
+  }
+}

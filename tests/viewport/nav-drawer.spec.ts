@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { widthOf } from './viewport'
+
 // Nav Drawer (#29) — the full-screen overlay that replaces the navigation
 // bar's tab row on narrow screens. See CONTEXT.md for the term.
 //
@@ -15,11 +17,6 @@ import { expect, test } from '@playwright/test'
 // this file is the first of them.
 
 const DRAWER_MAX_WIDTH = 768
-
-function widthOf(width: number | undefined): number {
-  if (!width) throw new Error('project has no viewport width')
-  return width
-}
 
 test.describe('narrow: menu button replaces the tab row', () => {
   test.beforeEach(async ({ page }, testInfo) => {

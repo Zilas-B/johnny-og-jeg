@@ -53,7 +53,7 @@ export function HubHero({ hero, sig }: { hero: Hero; sig: Signature }) {
             ) : null}
           </div>
 
-          <aside className={styles.sigcard}>
+          <aside className={styles.sigcard} data-hero-foreword>
             <div className={styles.foreLabel}>{sig.foreLabel}</div>
             <h2 className={styles.sigQuote}>{sig.quote}</h2>
             <div className={styles.sigBody}>

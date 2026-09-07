@@ -213,3 +213,62 @@
     gap: 32px;
   }
 }
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 56px 0 48px;
+  }
+  .booking {
+    padding: 20px 22px;
+  }
+  /* Touch targets. The inputs' 10px padding around 16px text lands at ~41px —
+     just under the 44px minimum the Colophon links were held to in #30. */
+  .field input,
+  .field select,
+  .send,
+  .bookingBtn {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    gap: 28px;
+  }
+  .form {
+    padding: 20px 18px;
+  }
+  /* "Kontaktformular" is one unbreakable word, so the head's true minimum is
+     that word plus the flag. Shrinking both keeps the heading/stamp/flag
+     grouping the design pairs them in; wrapping the flag under the heading
+     would break it. `anywhere` is the guard for a viewport narrower than 320. */
+  .formHead {
+    gap: 12px;
+  }
+  .formHead h3 {
+    font-size: 20px;
+    overflow-wrap: anywhere;
+  }
+  /* Radius follows the size: 60px on a flag two-thirds as tall reads as a
+     semicircle, not the rounded fly-end the desktop flag has. */
+  .formFlag {
+    width: 26%;
+    max-width: 96px;
+    height: auto;
+    aspect-ratio: 130 / 96;
+    border-radius: 3px 44px 44px 3px;
+  }
+  /* Two 16px inputs side by side leave ~110px each — below a usable field. */
+  .row2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .submitRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .send {
+    width: 100%;
+  }
+}

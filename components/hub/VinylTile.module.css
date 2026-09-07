@@ -243,6 +243,23 @@
   color: var(--barn);
 }
 
+@media (max-width: 560px) {
+  .tile {
+    padding: 24px 20px 28px;
+  }
+  /* The stage was a fixed 280px square; at 320px it plus the tile's padding is
+     wider than the screen. It becomes fluid instead — and reserves 44px on the
+     right, because the sleeve overhangs the stage by 28px and its 2deg rotation
+     adds ~10px more. Left-aligned rather than centred so that reserve is all on
+     the side the overhang uses. */
+  .stage {
+    width: min(280px, calc(100% - 44px));
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 32px 0 22px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vinyl {
     transition: none;

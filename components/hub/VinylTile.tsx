@@ -17,6 +17,7 @@ export function VinylTile({ vinyl }: { vinyl: Vinyl }) {
       href={vinyl.linkHref ?? '#'}
       className={styles.tile}
       data-accent={accent}
+      data-vinyl-tile
     >
       <div className={styles.cornerNum}>{vinyl.cornerNumber}</div>
       <div className={styles.cornerTag}>{vinyl.cornerTag}</div>

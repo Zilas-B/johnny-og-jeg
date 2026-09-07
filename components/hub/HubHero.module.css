@@ -168,3 +168,40 @@
     margin: 32px auto 0;
   }
 }
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 0 56px;
+  }
+  .eyebrow {
+    margin-bottom: 16px;
+  }
+  .deck {
+    font-size: 19px;
+  }
+  .meta {
+    margin-top: 24px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* The Hero Foreword's 360px cap is wider than the content column here, so the
+     cap stops doing anything and the card's own padding is what has to give —
+     and the dashed inner border, which is positioned off that padding. */
+  .sigcard {
+    padding: 20px 20px 18px;
+  }
+  .sigcard::before {
+    left: 12px;
+    right: 12px;
+    top: 10px;
+    bottom: 10px;
+  }
+  .sigQuote {
+    font-size: 26px;
+  }
+  .sigBody {
+    font-size: 16px;
+  }
+}

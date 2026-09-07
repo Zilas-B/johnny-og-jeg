@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { layoutWidth, widthOf } from './viewport'
+
 // Masthead and Colophon on mobile (#30). Both are in every page's chrome, so
 // the rules here have site-wide effect and are worth pinning down once.
 //
@@ -11,11 +13,6 @@ import { expect, test } from '@playwright/test'
 // one width; 320/375/768 exercise it and 1280 asserts the desktop form.
 
 const MOBILE_MAX_WIDTH = 768
-
-function widthOf(width: number | undefined): number {
-  if (!width) throw new Error('project has no viewport width')
-  return width
-}
 
 test.describe('narrow: masthead reduced to its wordmark, colophon stacked', () => {
   test.beforeEach(async ({ page }, testInfo) => {
@@ -35,12 +32,10 @@ test.describe('narrow: masthead reduced to its wordmark, colophon stacked', () =
   test('the wordmark is centred and reduced in size', async ({ page }) => {
     const name = page.getByRole('banner').getByText('Johnny & jeg')
     const box = (await name.boundingBox())!
-    // clientWidth, not viewportSize: it excludes a classic scrollbar, which
-    // shifts the true centre. overflow.spec.ts measures the same way.
-    const layoutWidth = await page.evaluate(() => document.documentElement.clientWidth)
+    const layout = await layoutWidth(page)
 
     // Centred within a pixel or two of the layout viewport's middle.
-    expect(Math.abs(box.x + box.width / 2 - layoutWidth / 2)).toBeLessThan(2)
+    expect(Math.abs(box.x + box.width / 2 - layout / 2)).toBeLessThan(2)
 
     // Reduced from the 52px desktop size.
     const size = await name.evaluate((el) => parseFloat(getComputedStyle(el).fontSize))

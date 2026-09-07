@@ -150,3 +150,30 @@
     border-right: none;
   }
 }
+
+@media (max-width: 768px) {
+  .thread {
+    padding: 56px 0;
+  }
+  /* Two columns of Teaser Points are ~150px wide here — the year, the place
+     line and the description all break apart. One column, and the vertical
+     rule between them becomes a horizontal one. */
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+  .ev {
+    padding: 24px 0 26px;
+    border-right: none;
+    border-bottom: 1px solid rgba(239, 228, 207, 0.12);
+  }
+  .ev:last-child {
+    border-bottom: none;
+  }
+  .evPlace {
+    margin-bottom: 12px;
+    min-height: 0;
+  }
+  .dot {
+    left: 0;
+  }
+}

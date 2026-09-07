@@ -36,7 +36,9 @@
   font-weight: 900;
   font-size: clamp(36px, 6.25vw, 80px);
   line-height: 0;
-  vertical-align: -22px;
+  /* -22px at the mark's 80px maximum. In em it tracks the clamp instead of
+     dropping below the first line once the mark shrinks. */
+  vertical-align: -0.275em;
   margin-right: 6px;
 }
 .quote::after {
@@ -45,7 +47,7 @@
   font-weight: 900;
   font-size: clamp(36px, 6.25vw, 80px);
   line-height: 0;
-  vertical-align: -22px;
+  vertical-align: -0.275em;
   margin-left: 6px;
 }
 .attrib {
@@ -60,5 +62,17 @@
 @media (max-width: 768px) {
   .hymn {
     padding: 64px 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .hymn {
+    padding: 48px 0;
+  }
+  .kicker {
+    margin-bottom: 16px;
+  }
+  .attrib {
+    margin-top: 20px;
   }
 }
