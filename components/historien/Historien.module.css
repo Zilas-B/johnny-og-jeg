@@ -680,3 +680,177 @@
   color: var(--barn);
   white-space: nowrap;
 }
+
+/* ================================================================
+   NARROW — #33. The page's spreads stack; the timeline is rebuilt.
+   ================================================================ */
+
+@media (max-width: 1024px) {
+  .hheroGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+  /* The stamped era list is centred in its own column at this width, so the
+     tilt no longer reads as a card laid on the page — just as a crooked one. */
+  .side {
+    transform: none;
+  }
+
+  .eraRow {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  /* Acts II/IV/VI mirror the spread on desktop. Stacked, `order` would put the
+     text above its own photo on half the acts and the photo above it on the
+     other half — the same DOM in two reading orders. Photo first, always. */
+  .eraRow.reverse > .eraPhoto,
+  .eraRow.reverse > .eraText {
+    order: 0;
+  }
+
+  /* Six 1fr columns are ~150px each by 1024px and ~70px by 768 — too narrow to
+     read a sequence in. The strip becomes a true vertical list instead: the
+     brass connector turns into a rail down the left gutter, the dots thread
+     onto it, and each year sits beside its era rather than above it. */
+  .tline {
+    padding: 16px 0;
+  }
+  .tlineGrid {
+    grid-template-columns: 1fr;
+  }
+  .tlineGrid::before {
+    left: 6px;
+    right: auto;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    height: auto;
+  }
+  .tcell {
+    padding: 0;
+    text-align: left;
+  }
+  .tcell a {
+    display: grid;
+    grid-template-columns: 14px minmax(0, auto) minmax(0, 1fr);
+    column-gap: 14px;
+    align-items: start;
+    /* 20px of name plus 2×13px clears the 44px touch target (#24 / #14). */
+    padding: 13px 0;
+  }
+  /* Optical nudges onto the first text line — the dot and the mono year are
+     both shorter than the 17px display name they sit beside. */
+  .tcell .dot {
+    margin: 4px 0 0;
+  }
+  .tcell .tyr {
+    /* 10.5px of letter-spaced mono is a desktop caption under a name, not a
+       label to be read beside one. */
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    margin: 4px 0 0;
+    white-space: nowrap;
+  }
+  .tcell .tname {
+    font-size: 17px;
+  }
+
+  .outroGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hhero {
+    padding: 44px 0 48px;
+  }
+  .eyebrow {
+    flex-wrap: wrap;
+    letter-spacing: 0.26em;
+    row-gap: 6px;
+  }
+  .h1Sub {
+    font-size: 22px;
+    letter-spacing: 0.14em;
+  }
+  .heroDeck p {
+    font-size: 19px;
+  }
+  .heroDeck p + p {
+    font-size: 17px;
+  }
+
+  .era {
+    padding: 56px 0 48px;
+  }
+  /* The tilted collage frames stick out past the wrap on a phone — a rotated
+     box's bounding rect is wider than the box. Squared up, they stay inside. */
+  .collage {
+    gap: 12px;
+  }
+  .collage .t1,
+  .collage .t2 {
+    transform: none;
+  }
+  .collage .t2 {
+    margin-bottom: 0;
+  }
+  .eraDeck {
+    font-size: 20px;
+  }
+
+  .outro {
+    padding: 64px 0;
+  }
+  .actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .h1Sub {
+    font-size: 19px;
+  }
+  .eyebrow {
+    letter-spacing: 0.2em;
+  }
+  .side {
+    padding: 20px 18px;
+  }
+  .side::before {
+    inset: 6px;
+  }
+
+  /* The year keeps its 12px; only the tracking gives, so the name column
+     stays wide enough for a word like "amerikanske" at 320px. */
+  .tcell .tyr {
+    letter-spacing: 0.08em;
+  }
+
+  /* The stamp hangs off the photo's top-left corner; at a 20px gutter its
+     -14px offset is most of the margin the page has left. */
+  .stamp {
+    left: 0;
+    font-size: 12px;
+    padding: 6px 10px;
+    letter-spacing: 0.16em;
+  }
+  .cashnote {
+    padding: 18px 18px 16px;
+  }
+  /* Two Teaser Posts side by side leave ~130px per title, and the arrow is
+     absolutely positioned over the last line of it. */
+  .posts {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 22px 20px;
+  }
+  .card li {
+    font-size: 15px;
+    gap: 10px;
+  }
+}

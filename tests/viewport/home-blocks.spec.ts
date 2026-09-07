@@ -1,6 +1,6 @@
-import { expect, test, type Locator } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
-import { layoutWidth, widthOf } from './viewport'
+import { boxesOf, expectStacked, layoutWidth, widthOf } from './viewport'
 
 // The front page's Blocks on mobile (#31): Hero Block with its Hero Foreword,
 // the three Vinyl Tiles, the Teaser Overviews and the contact section. See
@@ -21,27 +21,6 @@ import { layoutWidth, widthOf } from './viewport'
 
 const COLUMN_MAX_WIDTH = 1024
 const STACK_MAX_WIDTH = 768
-
-type Box = { x: number; top: number; bottom: number }
-
-/** Rounded boxes for every match, in document order. */
-function boxesOf(locator: Locator): Promise<Box[]> {
-  return locator.evaluateAll((els) =>
-    els.map((el) => {
-      const r = el.getBoundingClientRect()
-      return { x: Math.round(r.x), top: Math.round(r.top), bottom: Math.round(r.bottom) }
-    }),
-  )
-}
-
-/** One column: a shared left edge, and each box starting below the last. */
-function expectStacked(boxes: Box[]) {
-  const [first] = boxes
-  for (const box of boxes) expect(box.x).toBe(first.x)
-  for (let i = 1; i < boxes.length; i++) {
-    expect(boxes[i].top).toBeGreaterThanOrEqual(boxes[i - 1].bottom)
-  }
-}
 
 test.describe('narrow: the Hero Block, the Vinyl Tiles and the contact section are one column', () => {
   test.beforeEach(async ({ page }, testInfo) => {

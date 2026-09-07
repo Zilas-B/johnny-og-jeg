@@ -67,13 +67,13 @@ function HistorienTimeline({ eras }: { eras: Era[] }) {
   return (
     <div className={styles.tline}>
       <div className="wrap">
-        <div className={styles.tlineGrid}>
+        <div className={styles.tlineGrid} data-timeline>
           {eras.map((era, i) => (
-            <div className={styles.tcell} key={i}>
+            <div className={styles.tcell} data-timeline-point key={i}>
               <a href={`#era-${i + 1}`}>
                 <div className={styles.dot} />
-                <div className={styles.tyr}>{era.period}</div>
-                <div className={styles.tname}>{era.timelineName}</div>
+                <div className={styles.tyr} data-timeline-year>{era.period}</div>
+                <div className={styles.tname} data-timeline-name>{era.timelineName}</div>
               </a>
             </div>
           ))}
@@ -91,10 +91,10 @@ function HistorienEra({ era, index }: { era: Era; index: number }) {
   const shapeClass = SHAPE[era.image?.shape ?? 'wide'] ?? styles.wide
 
   return (
-    <section className={sectionClass} id={`era-${index + 1}`}>
+    <section className={sectionClass} data-era id={`era-${index + 1}`}>
       <div className="wrap">
         <div className={rowClass}>
-          <div className={styles.eraPhoto}>
+          <div className={styles.eraPhoto} data-era-photo>
             <div className={styles.stamp}>
               Akt {era.romanNumeral} · {era.period}
             </div>
@@ -117,7 +117,7 @@ function HistorienEra({ era, index }: { era: Era; index: number }) {
             </div>
           </div>
 
-          <div className={styles.eraText}>
+          <div className={styles.eraText} data-era-text>
             <div className={styles.roman}>— Akt {era.romanNumeral} —</div>
             <span className={styles.yrChip}>{era.period}</span>
             <h2 className={styles.h2}>
