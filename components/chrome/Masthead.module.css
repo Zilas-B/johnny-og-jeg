@@ -76,3 +76,41 @@
   margin: 0 12px;
   color: var(--brass);
 }
+
+/* Mobile masthead (#30). The two flanking side blocks are dropped rather
+   than shrunk — 11px uppercase at 0.18em is already at the edge of legible, and
+   scaling it down to fit a phone would keep the gesture at the cost of the
+   words. The wordmark centres alone under the double rule, which stays as the
+   page's opening. The masthead is deliberately not sticky: only the navigation
+   bar is, so this scrolls away and gives the screen height back. */
+@media (max-width: 768px) {
+  .masthead {
+    padding: 20px 0 14px;
+  }
+
+  .mastSide {
+    display: none;
+  }
+
+  .mastGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  /* The kicker and the sub-line are the two tracked-out mono lines left; at
+     0.4em / 0.32em they run past a 320px screen. Tightened, not resized. */
+  .kicker {
+    letter-spacing: 0.28em;
+  }
+
+  .sub {
+    letter-spacing: 0.2em;
+  }
+
+  .sub::before,
+  .sub::after {
+    margin: 0 8px;
+  }
+}

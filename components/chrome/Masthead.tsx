@@ -11,7 +11,7 @@ export function Masthead({ data }: { data: MastheadData }) {
     <header className={styles.masthead}>
       <div className="wrap">
         <div className={styles.mastGrid}>
-          <div className={styles.mastSide}>
+          <div className={styles.mastSide} data-masthead-side>
             {data.leftLine1}
             <br />
             {data.leftLine2}
@@ -23,7 +23,7 @@ export function Masthead({ data }: { data: MastheadData }) {
               <div className={styles.sub}>{data.sub}</div>
             </Link>
           </div>
-          <div className={`${styles.mastSide} ${styles.mastSideRight}`}>
+          <div className={`${styles.mastSide} ${styles.mastSideRight}`} data-masthead-side>
             {data.rightLine1}
             <br />
             {data.rightLine2}

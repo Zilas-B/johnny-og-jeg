@@ -31,7 +31,7 @@ export function Footer({ data }: { data: FooterData }) {
     <footer className={styles.colophon}>
       <div className="wrap">
         <div className={styles.grid}>
-          <div>
+          <div className={styles.brandColumn} data-colophon-column>
             <div className={styles.mark}>
               {wrapDelimiter(data.footerMark, '&', styles.amp)}
             </div>
@@ -42,7 +42,7 @@ export function Footer({ data }: { data: FooterData }) {
           </div>
 
           {data.footerColumns.map((column) => (
-            <div key={column._key}>
+            <div key={column._key} className={styles.linkColumn} data-colophon-column>
               <h2 className={styles.heading}>{column.title}</h2>
               <ul className={styles.list}>
                 {column.links?.map((link) => (

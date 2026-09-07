@@ -89,3 +89,58 @@
   color: var(--accent);
   margin: 0 10px;
 }
+
+/* The grid gives all four columns their width; `min-width: 0` only stops a
+   long word from pushing a track wider than its share. The classes exist so
+   the breakpoints below can address the brand block by name, not by position. */
+.brandColumn,
+.linkColumn {
+  min-width: 0;
+}
+
+/* The 1.4fr 1fr 1fr 1fr row had no breakpoint of its own (#30). It collapses
+   toward two columns at 1024px and stacks at 768px, per the breakpoint intents
+   in docs/TechStack.md; source order — brand block, then the three link
+   columns — is the stacking order. */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+  }
+
+  /* The brand block carries the blurb and the quote; it keeps the full width
+     rather than being squeezed into a link column. */
+  .brandColumn {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Below the breakpoint every link is a touch target: a 44px-tall band, with
+     the bands flush against each other so the column stays a column. Above it
+     the pointer is a mouse and the tighter 15px list is kept. */
+  .list li {
+    margin-bottom: 0;
+  }
+
+  .link {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Two mono lines at 0.26em tracking do not fit side by side on a phone. */
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
