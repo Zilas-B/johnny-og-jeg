@@ -743,3 +743,72 @@
   color: var(--ink-soft);
   margin-top: 12px;
 }
+
+/* NARROW — #39. Same 1024px split threshold as the other pages (docs/
+   TechStack.md's breakpoint ladder): every two/three-track spread the ticket
+   lists — .lheroGrid, .indexGrid, .entry, .inviteGrid — becomes one column,
+   and the 240px cover/button/meta widths become fluid caps (same shape as
+   HymnHero's .glass, #35) so they shrink below 240px instead of forcing the
+   viewport wide. */
+@media (max-width: 1024px) {
+  .lheroGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .indexGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    align-items: stretch;
+  }
+  .indexGrid .rhs {
+    text-align: left;
+  }
+  .metaRow {
+    flex-wrap: wrap;
+    gap: 10px 28px;
+  }
+  .filters {
+    flex-wrap: wrap;
+  }
+  .filter {
+    flex: 1 1 auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .bookCover {
+    width: min(240px, 100%);
+    height: auto;
+    aspect-ratio: 2 / 3;
+  }
+  .saxoBtn,
+  .coverMeta {
+    width: min(240px, 100%);
+    max-width: 100%;
+  }
+
+  .inviteGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Verdict's own "1fr auto" spread folds a step later than the splits above —
+   at 768px there is still room beside the recommendation badge; below it
+   there is not, same shape as Stations' 110px column (#36). */
+@media (max-width: 768px) {
+  .verdict {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+  }
+}

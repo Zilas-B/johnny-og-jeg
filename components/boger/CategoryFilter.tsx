@@ -28,15 +28,16 @@ export function CategoryFilter({
   return (
     <>
       <div className={styles.indexBar}>
-        <div className={`wrap ${styles.indexGrid}`}>
+        <div className={`wrap ${styles.indexGrid}`} data-boger-index-grid>
           <div className={styles.lhs}>{lhs}</div>
-          <div className={styles.filters} role="tablist">
+          <div className={styles.filters} role="tablist" data-boger-filters>
             {tabs.map((t) => (
               <button
                 key={t.cat}
                 type="button"
                 className={`${styles.filter} ${active === t.cat ? styles.active : ''}`}
                 onClick={() => setActive(t.cat)}
+                data-boger-filter
               >
                 {t.label}
                 {t.count ? <span className={styles.count}>{t.count}</span> : null}

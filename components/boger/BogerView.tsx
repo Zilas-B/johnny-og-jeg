@@ -26,15 +26,16 @@ function Stars({ rating }: { rating?: number | null }) {
 
 function BookEntry({ book }: { book: Book }) {
   return (
-    <article className={styles.entry}>
+    <article className={styles.entry} data-boger-entry>
       <div className={styles.coverCol}>
         <a
           className={styles.bookCover}
           href={book.buyHref ?? '#'}
           target="_blank"
           rel="noopener noreferrer"
+          data-boger-cover
         >
-          <SanityImage image={book.coverImage} fill sizes="240px" />
+          <SanityImage image={book.coverImage} fill sizes="(max-width: 1024px) 60vw, 240px" />
           <div className={styles.frame} />
         </a>
         <a className={styles.saxoBtn} href={book.buyHref ?? '#'} target="_blank" rel="noopener noreferrer">
@@ -70,7 +71,7 @@ function BookEntry({ book }: { book: Book }) {
         </div>
         <p className={styles.lead}>{book.lead}</p>
         <PortableText value={book.body} className={styles.body} />
-        <div className={styles.verdict}>
+        <div className={styles.verdict} data-boger-verdict>
           <div>
             <div className={styles.vlabel}>— Min dom —</div>
             <div className={styles.vline}>{book.verdictLine}</div>
@@ -146,7 +147,7 @@ export function BogerView({ data }: { data: Data }) {
       {hero ? (
         <section className={styles.lhero}>
           <div className="wrap">
-            <div className={styles.lheroGrid}>
+            <div className={styles.lheroGrid} data-boger-hero-grid>
               <div>
                 <div className={styles.eyebrow}>
                   <span className={styles.bar} />
@@ -196,7 +197,7 @@ export function BogerView({ data }: { data: Data }) {
       {/* INVITATION */}
       {invite ? (
         <section className={styles.invite}>
-          <div className={`wrap ${styles.inviteGrid}`}>
+          <div className={`wrap ${styles.inviteGrid}`} data-boger-invite-grid>
             <div>
               <div className={styles.kicker}>{invite.kicker}</div>
               <h2>
