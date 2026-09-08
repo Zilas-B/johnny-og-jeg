@@ -731,6 +731,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 14px;
+  min-width: 0;
 }
 .bform label {
   font-family: var(--f-mono);
@@ -751,6 +752,8 @@
   font-size: 17px;
   color: var(--ink);
   outline: none;
+  width: 100%;
+  min-width: 0;
 }
 .bform input:focus,
 .bform select:focus,
@@ -808,6 +811,18 @@
   text-transform: uppercase;
 }
 
+/* Touch targets (#38): every field and button is at least 44px tall — the
+   fields already read at 16px+ so iOS Safari never auto-zooms on focus. */
+.bform input,
+.bform select,
+.bform textarea {
+  min-height: 44px;
+}
+.send {
+  min-height: 44px;
+  min-width: 44px;
+}
+
 /* ============== FAQ ============== */
 .faq {
   padding: 96px 0;
@@ -833,4 +848,75 @@
   line-height: 1.55;
   border-top: 1px solid var(--rule);
   padding-top: 10px;
+}
+
+/* ================================================================
+   RESPONSIVE (#38) — breakpoint ladder from docs/TechStack.md.
+   ================================================================ */
+
+@media (max-width: 1024px) {
+  .fheroGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .ticket {
+    margin-left: 0;
+  }
+  .practicalHead {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .venuesGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .bookingGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .posters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pgrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .posters {
+    grid-template-columns: 1fr;
+  }
+  .pgrid {
+    grid-template-columns: 1fr;
+  }
+  .pcell {
+    border-right: none;
+    border-bottom: 1px solid rgba(239, 228, 207, 0.12);
+  }
+  .pcell:last-child {
+    border-bottom: none;
+  }
+  /* Unfolds a breakpoint earlier than .metaStack below: its 60px/140px tracks
+     carry venue names and city names, not short k/v labels, so it runs out of
+     room first — .venuesGrid has already gone one column by 1024px. */
+  .venuesList li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .venuesList li .city {
+    text-align: left;
+  }
+  .row2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .metaStack {
+    grid-template-columns: 1fr;
+  }
 }

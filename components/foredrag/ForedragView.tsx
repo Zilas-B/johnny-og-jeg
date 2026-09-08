@@ -54,7 +54,7 @@ export function ForedragView({ data }: { data: Data }) {
       {hero ? (
         <section className={styles.fhero}>
           <div className="wrap">
-            <div className={styles.fheroGrid}>
+            <div className={styles.fheroGrid} data-foredrag-hero-grid>
               <div>
                 <div className={styles.eyebrow}>
                   <span className={styles.bar} />
@@ -65,7 +65,7 @@ export function ForedragView({ data }: { data: Data }) {
                   <span className={styles.h1Small}>{hero.titleSmall}</span>
                 </h1>
                 <PortableText value={hero.deck} className={styles.deck} />
-                <div className={styles.metaStack}>
+                <div className={styles.metaStack} data-foredrag-meta-stack>
                   {(hero.metaCells ?? []).map((cell, i) => (
                     <div className={styles.metaCell} key={i}>
                       <div className={styles.k}>{cell.k}</div>
@@ -118,9 +118,9 @@ export function ForedragView({ data }: { data: Data }) {
       {/* PROGRAMS */}
       <div className="wrap">
         {programsHead ? <SectionHead head={programsHead} ornament /> : null}
-        <div className={styles.posters}>
+        <div className={styles.posters} data-foredrag-posters>
           {(programs ?? []).map((p, i) => (
-            <article className={styles.poster} key={i}>
+            <article className={styles.poster} data-foredrag-poster key={i}>
               <div className={styles.posterTop}>
                 <span>{p.side}</span>
                 <span className={styles.roman}>{p.roman}</span>
@@ -160,7 +160,7 @@ export function ForedragView({ data }: { data: Data }) {
       {practical ? (
         <section className={styles.practical}>
           <div className="wrap">
-            <div className={styles.practicalHead}>
+            <div className={styles.practicalHead} data-foredrag-practical-head>
               <div>
                 <div className={styles.kicker}>{practical.kicker}</div>
                 <h2>
@@ -169,7 +169,7 @@ export function ForedragView({ data }: { data: Data }) {
               </div>
               <p>{practical.intro}</p>
             </div>
-            <div className={styles.pgrid}>
+            <div className={styles.pgrid} data-foredrag-pgrid>
               {(practical.cells ?? []).map((cell, i) => (
                 <div className={styles.pcell} key={i}>
                   <div className={styles.k}>{cell.k}</div>
@@ -187,10 +187,10 @@ export function ForedragView({ data }: { data: Data }) {
       <section className={styles.venues}>
         <div className="wrap">
           {venuesHead ? <SectionHead head={venuesHead} ornament flush /> : null}
-          <div className={styles.venuesGrid}>
-            <ul className={styles.venuesList}>
+          <div className={styles.venuesGrid} data-foredrag-venues-grid>
+            <ul className={styles.venuesList} data-foredrag-venues-list>
               {(venues ?? []).map((v, i) => (
-                <li key={i}>
+                <li data-foredrag-venue-item key={i}>
                   <span className={styles.yr}>{v.yr}</span>
                   <span className={styles.place}>{v.place}</span>
                   <span className={styles.city}>{v.city}</span>
@@ -227,7 +227,7 @@ export function ForedragView({ data }: { data: Data }) {
       {booking ? (
         <section className={styles.bookingBlock} id="book">
           <div className="wrap">
-            <div className={styles.bookingGrid}>
+            <div className={styles.bookingGrid} data-foredrag-booking-grid>
               <div>
                 <div className={styles.kicker}>{booking.kicker}</div>
                 <h2>
@@ -254,7 +254,7 @@ export function ForedragView({ data }: { data: Data }) {
       <section className={styles.faq}>
         <div className="wrap">
           {faqHead ? <SectionHead head={faqHead} ornament flush /> : null}
-          <dl className={styles.faqGrid}>
+          <dl className={styles.faqGrid} data-foredrag-faq-grid>
             {(faq ?? []).map((item, i) => (
               <div key={i}>
                 <dt>{item.q}</dt>
