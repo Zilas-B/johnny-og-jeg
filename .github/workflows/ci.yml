@@ -48,7 +48,8 @@ jobs:
         run: pnpm build
 
       # Viewport smoke tests (#25). Blocking since #40: horizontal overflow
-      # and sub-44px touch targets fail the build, on every route × width.
+      # fails the build on every route × width; sub-44px touch targets fail
+      # it wherever a per-area spec checks them (tests/viewport/*.spec.ts).
       - name: Install Playwright browser
         run: pnpm exec playwright install --with-deps chromium
 
