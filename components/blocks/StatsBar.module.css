@@ -35,3 +35,27 @@
   line-height: 1.1;
   color: var(--paper);
 }
+
+/* Five squeezed columns are unreadable on a phone — a stacked ledger row per
+   cell instead, label left, value right, ruled off like an accounts book. */
+@media (max-width: 768px) {
+  .grid {
+    display: block;
+  }
+  .cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    text-align: left;
+    border-right: none;
+    border-bottom: 1px solid rgba(239, 228, 207, 0.18);
+    padding: 12px 0;
+  }
+  .cell:last-child {
+    border-bottom: none;
+  }
+  .top {
+    margin-bottom: 0;
+  }
+}

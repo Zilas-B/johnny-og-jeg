@@ -26,6 +26,12 @@
   grid-template-columns: 1fr 1fr;
   gap: 28px;
 }
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
 .card {
   border: 1px solid var(--ink);
   background: var(--paper-2);

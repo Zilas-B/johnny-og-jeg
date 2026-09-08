@@ -38,6 +38,12 @@
   border-top: 1px solid var(--rule);
   position: relative;
 }
+@media (max-width: 1024px) {
+  .theme {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
 .theme:last-of-type {
   border-bottom: 1px solid var(--rule);
 }

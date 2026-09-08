@@ -37,6 +37,12 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
 }
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
 .col {
   background: var(--paper);
   border: 1px solid var(--ink);

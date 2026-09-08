@@ -49,6 +49,22 @@
   padding-right: 24px;
   text-align: center;
 }
+@media (max-width: 560px) {
+  .station {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .numBlock {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+    border-right: none;
+    border-bottom: 1px dashed var(--rule-strong);
+    padding-right: 0;
+    padding-bottom: 12px;
+    text-align: left;
+  }
+}
 .num {
   font-family: var(--f-display);
   font-style: italic;
