@@ -78,3 +78,17 @@
   line-height: 1.1;
   transition: color 120ms;
 }
+
+/* NARROW — #37. Same fold as Kulturen's chip grid (#34): two across leaves
+   each cell readable to 1024px, and one column the rest of the way down. */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

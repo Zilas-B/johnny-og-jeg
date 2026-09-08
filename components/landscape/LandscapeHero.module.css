@@ -61,7 +61,11 @@
   font-family: var(--f-display);
   font-style: italic;
   font-weight: 900;
-  font-size: clamp(39px, 7.5vw, 96px);
+  /* Hand-tuned min, per docs/TechStack.md's escape clause — same cause as
+     Kulturen's .landName (docs/responsive-overflow.md): the formula's 39px min
+     renders 'Drømmefabrikken', one unbreakable 15-letter compound, past a
+     320px screen's right edge. 34px fits. */
+  font-size: clamp(34px, 7.5vw, 96px);
   line-height: 0.9;
   letter-spacing: -0.02em;
   margin: 0 0 12px;
@@ -113,4 +117,15 @@
 .tags b {
   color: var(--accent);
   font-weight: 500;
+}
+
+/* NARROW — #37. Same shape and same fix as Kulturen's .landHead (#34): the
+   fixed numeral column cannot hold on a phone, so it becomes the section's
+   opening line instead of a margin beside the title. */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    align-items: start;
+  }
 }

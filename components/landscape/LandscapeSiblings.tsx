@@ -17,7 +17,7 @@ export function LandscapeSiblings({
         <div className={styles.lab}>
           — Hop til et andet <b>arkiv</b> —
         </div>
-        <div className={styles.grid}>
+        <div className={styles.grid} data-landscape-siblings-grid>
           {siblings.map((s) => {
             const isCurrent = s.slug === currentSlug
             return (
@@ -26,6 +26,7 @@ export function LandscapeSiblings({
                 href={`/${s.slug}`}
                 className={`${styles.cell} ${isCurrent ? styles.current : ''}`}
                 aria-current={isCurrent ? 'page' : undefined}
+                data-landscape-sibling-cell
               >
                 <div className={styles.srn}>{s.romanNumeral}</div>
                 <div className={styles.sname}>{s.shortName}</div>

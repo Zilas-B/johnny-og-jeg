@@ -37,7 +37,7 @@ export function LandscapePosts({ data }: { data: Landscape }) {
             ))}
           </div>
         ) : (
-          <div className={styles.empty}>
+          <div className={styles.empty} data-landscape-empty>
             {data.emptyLabel ? <div className={styles.emptyLab}>{data.emptyLabel}</div> : null}
             {data.emptyHeading ? (
               <h3 className={styles.emptyHeading}>

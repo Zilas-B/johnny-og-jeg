@@ -26,9 +26,11 @@ export function LandscapeHero({ data }: { data: Landscape }) {
           ) : null}
           {trail}
         </div>
-        <div className={styles.grid}>
-          <div className={styles.rn}>{data.romanNumeral}</div>
-          <div>
+        <div className={styles.grid} data-landscape-hero-grid>
+          <div className={styles.rn} data-landscape-hero-rn>
+            {data.romanNumeral}
+          </div>
+          <div data-landscape-hero-titles>
             {data.eyebrow ? <div className={styles.eyebrow}>{data.eyebrow}</div> : null}
             <h1 className={styles.title}>
               <InlineText value={data.name} />
