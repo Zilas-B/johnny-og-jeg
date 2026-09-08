@@ -47,18 +47,13 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # Viewport smoke tests (#25). Report mode: the run is uploaded as an
-      # artefact, but a failing overflow does not block merge yet — #40 makes
-      # it blocking once the mobile work has landed.
-      # Also non-blocking: a flaky browser download must not gate merge on a
-      # report-only suite.
+      # Viewport smoke tests (#25). Blocking since #40: horizontal overflow
+      # and sub-44px touch targets fail the build, on every route × width.
       - name: Install Playwright browser
-        continue-on-error: true
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Viewport smoke tests (report only)
+      - name: Viewport smoke tests
         id: viewport
-        continue-on-error: true
         run: pnpm test:viewport
 
       - name: Upload viewport report
