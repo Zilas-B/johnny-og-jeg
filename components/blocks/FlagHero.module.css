@@ -194,3 +194,15 @@
   letter-spacing: 0;
   margin: 2px 0;
 }
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  /* .postmark still oversets the card by up to 24px; .hero's own overflow:
+     hidden (see top of file) clips it rather than this rule reserving space. */
+  .telegram {
+    transform: none;
+    margin: 32px auto 0;
+  }
+}

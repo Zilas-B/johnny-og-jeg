@@ -261,6 +261,18 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .bigVinyl {
+    width: min(460px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 32px auto 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bigVinyl,
   .tk {

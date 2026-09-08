@@ -232,3 +232,21 @@
   margin-bottom: 6px;
   font-weight: 400;
 }
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  /* .glass keeps its own overflow: hidden, so the fixed-inset ::before border
+     and the fixed-height glassArt panel stay clipped to whatever height
+     aspect-ratio computes at any width. */
+  .glass {
+    width: min(380px, 100%);
+    height: auto;
+    aspect-ratio: 380 / 520;
+    margin: 32px auto 0;
+  }
+  .glassArt {
+    height: 61.5%;
+  }
+}
